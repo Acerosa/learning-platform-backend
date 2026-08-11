@@ -10,9 +10,21 @@ import sys
 from pathlib import Path
 
 
+IMPORT_DIR = Path(__file__).resolve().parents[1] / "import"
+sys.path.insert(0, str(IMPORT_DIR))
+
+from hub_manifest import (  # noqa: E402
+    REQUIRED_TOP_LEVEL_KEYS,
+    SEMVER_PATTERN,
+    STANDARD_MANIFEST_NAME,
+    TOP_LEVEL_KEYS,
+    conflict_url,
+    validate_manifest,
+)
+
+
 ROOT = Path(__file__).resolve().parents[2]
 MIGRATION_PATTERN = re.compile(r"^(\d{14})_[a-z0-9_]+\.sql$")
-SEMVER_PATTERN = re.compile(r"^\d+\.\d+\.\d+$")
 STABLE_KEY_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
 REQUIRED_PATHS = (
@@ -33,7 +45,11 @@ REQUIRED_PATHS = (
     "docs/rls.md",
     "docs/migrations.md",
     "docs/admin-api.md",
+    "docs/hub-registration.md",
     "docs/release-process.md",
+    "supabase/data/manifests/schemas/learning-platform-hub.schema.json",
+    "scripts/import/validate-hub-manifest.py",
+    "scripts/import/generate-hub-registration-migration.py",
 )
 
 
@@ -92,6 +108,7 @@ def validate_hub_registry(failures: list[str]) -> None:
         "features",
         "status",
         "active",
+        "manifestPath",
     }
     seen: set[str] = set()
     for index, hub in enumerate(hubs):
@@ -112,11 +129,79 @@ def validate_hub_registry(failures: list[str]) -> None:
             value = hub.get(key)
             if not isinstance(value, str) or not SEMVER_PATTERN.fullmatch(value):
                 fail(f"invalid {key} for {code or index}: {value!r}", failures)
+        relative = hub.get("manifestPath")
+        if not isinstance(relative, str):
+            fail(f"invalid manifest path at item {index}: {relative!r}", failures)
+            continue
+        target = path.parent / relative
+        if not target.is_file() or target.name != STANDARD_MANIFEST_NAME:
+            fail(f"missing standard hub manifest for {code or index}: {relative}", failures)
+            continue
+        manifest = load_json(target, failures)
+        if not isinstance(manifest, dict):
+            continue
+        comparisons = {
+            "hubId": (manifest.get("hubId"), code),
+            "name": (manifest.get("name"), hub.get("hubName")),
+            "version": (manifest.get("version"), hub.get("hubVersion")),
+            "coreVersion": (
+                manifest.get("compatibility", {}).get("required", {}).get("coreVersion"),
+                hub.get("platformVersion"),
+            ),
+        }
+        for label, (standard_value, legacy_value) in comparisons.items():
+            if standard_value != legacy_value:
+                fail(f"hub registry {label} mismatch for {code}: {relative}", failures)
+        for label, standard_key, legacy_key in (
+            ("repository", "repositoryUrl", "repository"),
+            ("deployment", "deploymentUrl", "deploymentUrl"),
+        ):
+            standard_url = manifest.get(standard_key)
+            legacy_url = hub.get(legacy_key)
+            if (
+                not isinstance(standard_url, str)
+                or not isinstance(legacy_url, str)
+                or conflict_url(standard_url) != conflict_url(legacy_url)
+            ):
+                fail(f"hub registry {label} URL mismatch for {code}: {relative}", failures)
+        activities = manifest.get("capabilities", {}).get("activities")
+        if not isinstance(activities, list) or set(activities) != set(hub.get("activityTypes", [])):
+            fail(f"hub registry activity capability mismatch for {code}: {relative}", failures)
+        if manifest.get("featureFlags") != hub.get("features"):
+            fail(f"hub registry feature flag mismatch for {code}: {relative}", failures)
 
 
 def validate_json_files(failures: list[str]) -> None:
-    for path in sorted((ROOT / "supabase" / "data" / "manifests").glob("*.json")):
+    for path in sorted((ROOT / "supabase" / "data" / "manifests").rglob("*.json")):
         load_json(path, failures)
+
+
+def validate_hub_manifests(failures: list[str]) -> None:
+    hub_root = ROOT / "supabase" / "data" / "manifests" / "hubs"
+    paths = sorted(hub_root.rglob(STANDARD_MANIFEST_NAME))
+    if not paths:
+        fail("no reviewed learning-platform-hub.json manifests found", failures)
+        return
+    for path in paths:
+        report = validate_manifest(path)
+        for issue in report.issues:
+            fail(f"{path.relative_to(ROOT)}: {issue.render()}", failures)
+
+
+def validate_hub_schema_alignment(failures: list[str]) -> None:
+    path = (
+        ROOT
+        / "supabase/data/manifests/schemas/learning-platform-hub.schema.json"
+    )
+    schema = load_json(path, failures)
+    if not isinstance(schema, dict):
+        return
+    properties = schema.get("properties")
+    required = schema.get("required")
+    if not isinstance(properties, dict) or set(properties) != TOP_LEVEL_KEYS:
+        fail("hub JSON Schema properties do not match the validator contract", failures)
+    if not isinstance(required, list) or set(required) != REQUIRED_TOP_LEVEL_KEYS:
+        fail("hub JSON Schema required fields do not match the validator contract", failures)
 
 
 def validate_config(failures: list[str]) -> None:
@@ -148,6 +233,8 @@ def main() -> int:
     validate_migrations(failures)
     validate_json_files(failures)
     validate_hub_registry(failures)
+    validate_hub_manifests(failures)
+    validate_hub_schema_alignment(failures)
     validate_config(failures)
     validate_forbidden_files(failures)
 
@@ -157,7 +244,7 @@ def main() -> int:
         return 1
 
     migration_count = len(list((ROOT / "supabase" / "migrations").glob("*.sql")))
-    manifest_count = len(list((ROOT / "supabase" / "data" / "manifests").glob("*.json")))
+    manifest_count = len(list((ROOT / "supabase" / "data" / "manifests").rglob("*.json")))
     print(f"Repository validation passed: {migration_count} migrations, {manifest_count} manifests.")
     return 0
 

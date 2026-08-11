@@ -86,7 +86,7 @@ select is(
 
 select is(
   (select count(*) from admin_api.platform_contracts),
-  3::bigint,
+  5::bigint,
   'the platform administrator can inspect active and draft contracts'
 );
 

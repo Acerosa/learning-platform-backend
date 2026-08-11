@@ -13,10 +13,10 @@ Database migration timestamps are independent from package/release versions.
 ## Required gates
 
 1. Working tree reviewed and free from credentials or learner exports.
-2. `python3 scripts/validation/validate_repository.py` passes.
+2. Repository, standard hub-manifest and import-tool unit validation passes.
 3. A clean `supabase db reset` succeeds.
 4. `supabase test db` passes database, RLS, API and integration suites.
-5. Active hub API/submission compatibility is reviewed.
+5. Active hub manifest/core/API/submission compatibility is reviewed.
 6. Security, privacy and RLS changes are reviewed.
 7. `CHANGELOG.md` and contract versions are updated.
 8. Migration and rollback plans are documented.

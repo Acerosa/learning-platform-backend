@@ -38,10 +38,11 @@ Completed attempts and responses are immutable.
 
 ## Platform data
 
-- `platform.hubs`: authoritative hub registration metadata.
+- `platform.hubs`: authoritative hub registration metadata, required contract
+  versions, capabilities, canonical manifest and provenance hash.
 - `platform.hub_course_links`: explicit hub-to-course relationships.
-- `platform.contract_versions`: learner, submission and admin compatibility
-  versions.
+- `platform.contract_versions`: hub manifest, core, learner, submission and
+  admin compatibility versions.
 - `platform.staff_roles`: platform-wide staff authorisation distinct from
   teaching-group access.
 - `platform.audit_events`: protected, append-only event records.
@@ -57,6 +58,12 @@ dedicated RLS test transaction. `.invalid` email addresses prevent accidental
 delivery.
 
 Production learner/staff exports must never be committed as fixtures.
+
+Repository and deployment URLs have case-insensitive, trailing-slash-normalised
+unique indexes. A compatibility trigger rejects hub rows that reference
+inactive manifest, core, learner API or submission contracts. Legacy `subject`
+and `curriculum_model` fields remain readable for existing registrations but
+are optional for standard manifest-driven registration.
 
 ## Identifiers and deletion
 

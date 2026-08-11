@@ -24,7 +24,8 @@
       },
       "status": "testing",
       "active": true,
-      "certified": false
+      "certified": false,
+      "manifestPath": "hubs/unit-3-cyber-security/learning-platform-hub.json"
     },
     {
       "hubCode": "tlevel-software-development",
@@ -48,7 +49,8 @@
       },
       "status": "testing",
       "active": true,
-      "certified": false
+      "certified": false,
+      "manifestPath": "hubs/tlevel-software-development/learning-platform-hub.json"
     }
   ]
 }

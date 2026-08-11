@@ -169,6 +169,11 @@ Reviewed manifests live in `supabase/data/manifests/`. They are source
 artefacts, not runtime database reads. Production data changes must be converted
 to reviewed migrations.
 
+Every learner hub uses the LHDS root manifest `learning-platform-hub.json`.
+The schema, validation report and deterministic registration-migration workflow
+are documented in [docs/hub-registration.md](docs/hub-registration.md). GitHub
+is an onboarding source, never a runtime dependency.
+
 The initial hub registry contains draft/testing metadata for:
 
 - Unit 3 Cyber Security Hub
@@ -208,6 +213,7 @@ Neither hub is marked certified by this repository.
 - [RLS and trust model](docs/rls.md)
 - [Migration ownership](docs/migrations.md)
 - [Central Admin Portal API](docs/admin-api.md)
+- [Repository-driven hub registration](docs/hub-registration.md)
 - [Release process](docs/release-process.md)
 
 ## Release policy

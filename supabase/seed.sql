@@ -307,22 +307,35 @@ insert into platform.hubs (
   id,
   hub_code,
   hub_name,
+  description,
   hub_version,
   platform_version,
+  manifest_version,
+  core_version,
+  learner_api_version,
+  submission_contract_version,
   subject,
   repository_url,
   deployment_url,
   curriculum_model,
   activity_types,
+  evidence_capabilities,
   features,
+  compatibility,
   status,
   active,
-  manifest
+  manifest,
+  manifest_sha256
 ) values
   (
     '33000000-0000-4000-8000-000000000001',
     'unit-3-cyber-security',
     'Unit 3 Cyber Security Hub',
+    'Learner hub for OCR Level 3 IT Unit 3 Cyber Security.',
+    '0.1.0',
+    '0.1.0',
+    '1.0.0',
+    '0.1.0',
     '0.1.0',
     '0.1.0',
     'OCR Level 3 IT Unit 3 Cyber Security',
@@ -330,15 +343,23 @@ insert into platform.hubs (
     'https://acerosa.github.io/unit-3-Cyber-Security-Hub/',
     'course/unit/week/session/activity/learning-outcome',
     array['retrieval-quiz', 'classification', 'matching', 'reflection'],
+    array['question-level'],
     '{"authentication":true,"onboarding":true,"progress":true}'::jsonb,
+    '{"required":{"coreVersion":"0.1.0","learnerApiContractVersion":"0.1.0","submissionContractVersion":"0.1.0"},"testedCombinations":[{"coreVersion":"0.1.0","learnerApiContractVersion":"0.1.0","submissionContractVersion":"0.1.0"}]}'::jsonb,
     'testing',
     true,
-    '{"fixture":true,"certified":false}'::jsonb
+    '{"capabilities":{"activities":["classification","matching","reflection","retrieval-quiz"],"evidence":["question-level"]},"compatibility":{"required":{"coreVersion":"0.1.0","learnerApiContractVersion":"0.1.0","submissionContractVersion":"0.1.0"},"testedCombinations":[{"coreVersion":"0.1.0","learnerApiContractVersion":"0.1.0","submissionContractVersion":"0.1.0"}]},"courses":["ocr-level-3-it"],"deploymentUrl":"https://acerosa.github.io/unit-3-Cyber-Security-Hub","description":"Learner hub for OCR Level 3 IT Unit 3 Cyber Security.","featureFlags":{"authentication":true,"onboarding":true,"progress":true},"hubId":"unit-3-cyber-security","manifestVersion":"1.0.0","name":"Unit 3 Cyber Security Hub","repositoryUrl":"https://github.com/Acerosa/unit-3-Cyber-Security-Hub","version":"0.1.0"}'::jsonb,
+    'a70bfff2a97134de8d534344612e2d48fa1a8ba68b95fc9390469e674a733bb2'
   ),
   (
     '33000000-0000-4000-8000-000000000002',
     'tlevel-software-development',
     'T Level Digital Software Development Hub',
+    'Learner hub for T Level Digital Software Development.',
+    '0.1.0',
+    '0.1.0',
+    '1.0.0',
+    '0.1.0',
     '0.1.0',
     '0.1.0',
     'T Level Digital Software Development',
@@ -346,10 +367,13 @@ insert into platform.hubs (
     'https://acerosa.github.io/tlevel-software-development-hub/',
     'course/unit/week/session/activity/learning-outcome',
     array['diagnostic', 'classification', 'coding-exercise'],
+    array['question-level'],
     '{"authentication":true,"onboarding":true,"progress":true,"codingExercises":true}'::jsonb,
+    '{"required":{"coreVersion":"0.1.0","learnerApiContractVersion":"0.1.0","submissionContractVersion":"0.1.0"},"testedCombinations":[{"coreVersion":"0.1.0","learnerApiContractVersion":"0.1.0","submissionContractVersion":"0.1.0"}]}'::jsonb,
     'testing',
     true,
-    '{"fixture":true,"certified":false}'::jsonb
+    '{"capabilities":{"activities":["classification","coding-exercise","diagnostic"],"evidence":["question-level"]},"compatibility":{"required":{"coreVersion":"0.1.0","learnerApiContractVersion":"0.1.0","submissionContractVersion":"0.1.0"},"testedCombinations":[{"coreVersion":"0.1.0","learnerApiContractVersion":"0.1.0","submissionContractVersion":"0.1.0"}]},"courses":["t-level-digital-software-development"],"deploymentUrl":"https://acerosa.github.io/tlevel-software-development-hub","description":"Learner hub for T Level Digital Software Development.","featureFlags":{"authentication":true,"codingExercises":true,"onboarding":true,"progress":true},"hubId":"tlevel-software-development","manifestVersion":"1.0.0","name":"T Level Digital Software Development Hub","repositoryUrl":"https://github.com/Acerosa/tlevel-software-development-hub","version":"0.1.0"}'::jsonb,
+    'e6e99790906b111616d25a9dace84d308671fa6a0a16915604fa3f041aec4c57'
   )
 on conflict (hub_code) do nothing;
 

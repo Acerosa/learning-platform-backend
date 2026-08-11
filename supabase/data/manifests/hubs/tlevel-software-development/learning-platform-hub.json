@@ -1,0 +1,42 @@
+{
+  "manifestVersion": "1.0.0",
+  "hubId": "tlevel-software-development",
+  "name": "T Level Digital Software Development Hub",
+  "description": "Learner hub for T Level Digital Software Development.",
+  "version": "0.1.0",
+  "repositoryUrl": "https://github.com/Acerosa/tlevel-software-development-hub",
+  "deploymentUrl": "https://acerosa.github.io/tlevel-software-development-hub",
+  "courses": [
+    "t-level-digital-software-development"
+  ],
+  "compatibility": {
+    "required": {
+      "coreVersion": "0.1.0",
+      "learnerApiContractVersion": "0.1.0",
+      "submissionContractVersion": "0.1.0"
+    },
+    "testedCombinations": [
+      {
+        "coreVersion": "0.1.0",
+        "learnerApiContractVersion": "0.1.0",
+        "submissionContractVersion": "0.1.0"
+      }
+    ]
+  },
+  "capabilities": {
+    "evidence": [
+      "question-level"
+    ],
+    "activities": [
+      "classification",
+      "coding-exercise",
+      "diagnostic"
+    ]
+  },
+  "featureFlags": {
+    "authentication": true,
+    "codingExercises": true,
+    "onboarding": true,
+    "progress": true
+  }
+}

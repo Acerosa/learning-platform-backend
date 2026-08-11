@@ -80,6 +80,11 @@ The original backend migration history remains unchanged so a future transfer
 can preserve database objects, stable identifiers and learner history. New
 changes are appended as forward migrations.
 
+Hub repositories own their root `learning-platform-hub.json`. A reviewed copy
+can be validated and converted to migration SQL here, but runtime registry
+access terminates at the database and never reaches GitHub. See
+`docs/hub-registration.md` for the controlled registration boundary.
+
 Version 0.1.0 keeps every established learner API signature. The only behaviour
 correction is assignment-aware multi-course submission resolution. A learner
 with multiple active enrolments can submit when exactly one enrolled group owns

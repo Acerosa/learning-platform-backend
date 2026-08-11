@@ -30,10 +30,17 @@ change. A migration must:
 Generated curriculum SQL must be reviewed before it becomes a migration.
 Runtime code does not read JSON manifests directly.
 
+Generated hub-registration SQL follows the same rule. Validate the repository
+root `learning-platform-hub.json`, generate into `supabase/data/generated/`,
+review the compatibility assertions and lifecycle decision, then add it as a
+new migration. The generator does not modify a database or deploy anything.
+See `docs/hub-registration.md`.
+
 ## Local validation
 
 ```bash
 python3 scripts/validation/validate_repository.py
+python3 -m unittest discover -s scripts/import/tests -p 'test_*.py'
 supabase db reset
 supabase test db
 ```

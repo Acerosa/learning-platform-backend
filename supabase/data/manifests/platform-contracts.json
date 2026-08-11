@@ -2,6 +2,18 @@
   "schemaVersion": "0.1.0",
   "contracts": [
     {
+      "contractKey": "hub-manifest",
+      "version": "1.0.0",
+      "status": "active",
+      "schema": "learning-platform-hub.schema.json"
+    },
+    {
+      "contractKey": "learning-platform-core",
+      "version": "0.1.0",
+      "status": "active",
+      "compatibility": "Exact version compatibility for Phase 1 hub registration"
+    },
+    {
       "contractKey": "learner-api",
       "version": "0.1.0",
       "status": "active",

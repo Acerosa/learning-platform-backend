@@ -65,7 +65,7 @@ matching assignment returns `ACTIVITY_ASSIGNMENT_AMBIGUOUS`.
 
 - `api.registered_hubs()` returns active, non-retired hub metadata.
 - `api.platform_contract_versions()` returns active/deprecated client contract
-  versions.
+  versions, including the hub-manifest and core compatibility authorities.
 - `api.platform_health()` returns current health summaries explicitly marked
   public, never protected diagnostics.
 

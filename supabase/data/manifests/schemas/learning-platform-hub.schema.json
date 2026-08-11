@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "learning-platform-hub.schema.json",
+  "title": "Learning Platform Hub Manifest",
+  "description": "Repository-owned descriptive metadata and compatibility requirements for a Learning Platform learner hub.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifestVersion",
+    "hubId",
+    "name",
+    "description",
+    "version",
+    "repositoryUrl",
+    "deploymentUrl",
+    "courses",
+    "compatibility",
+    "capabilities",
+    "featureFlags"
+  ],
+  "properties": {
+    "manifestVersion": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "hubId": {
+      "$ref": "#/$defs/stableKey"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "version": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "repositoryUrl": {
+      "$ref": "#/$defs/httpsUrl"
+    },
+    "deploymentUrl": {
+      "$ref": "#/$defs/httpsUrl"
+    },
+    "courses": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/stableKey"
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "testedCombinations"],
+      "properties": {
+        "required": {
+          "$ref": "#/$defs/platformVersions"
+        },
+        "testedCombinations": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/platformVersions"
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence", "activities"],
+      "properties": {
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/stableKey"
+          }
+        },
+        "activities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/stableKey"
+          }
+        }
+      }
+    },
+    "featureFlags": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z][A-Za-z0-9]*$",
+        "maxLength": 128
+      },
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "certification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["standard", "version", "status"],
+      "properties": {
+        "standard": {
+          "const": "LHDS"
+        },
+        "version": {
+          "$ref": "#/$defs/semanticVersion"
+        },
+        "status": {
+          "enum": [
+            "not-certified",
+            "in-review",
+            "certified",
+            "expired",
+            "revoked"
+          ]
+        },
+        "reviewedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reviewer": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "evidenceUrls": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/httpsUrl"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "stableKey": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"
+    },
+    "httpsUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://\\S+$",
+      "maxLength": 2048
+    },
+    "platformVersions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coreVersion",
+        "learnerApiContractVersion",
+        "submissionContractVersion"
+      ],
+      "properties": {
+        "coreVersion": {
+          "$ref": "#/$defs/semanticVersion"
+        },
+        "learnerApiContractVersion": {
+          "$ref": "#/$defs/semanticVersion"
+        },
+        "submissionContractVersion": {
+          "$ref": "#/$defs/semanticVersion"
+        }
+      }
+    }
+  }
+}

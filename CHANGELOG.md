@@ -4,6 +4,24 @@ All notable changes to the Learning Platform Backend are documented here.
 
 The project follows Semantic Versioning.
 
+## [Unreleased]
+
+### Added
+
+- LHDS `learning-platform-hub.json` schema and reviewed manifests for both
+  current learner hubs.
+- Dependency-free hub validation with conflict, course, naming, Semantic
+  Versioning and platform compatibility checks.
+- Deterministic, inactive-by-default hub registration migration generation.
+- First-class manifest/core/API/submission compatibility metadata, provenance
+  hashes, URL uniqueness and database enforcement for hub registrations.
+
+### Changed
+
+- The legacy aggregate hub metadata entries now link to and are cross-validated
+  against the standard hub manifests without breaking their existing shape.
+- Platform contract fixtures include active hub-manifest and core versions.
+
 ## [0.1.0] - 2026-08-11
 
 ### Added

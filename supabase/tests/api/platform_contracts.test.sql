@@ -38,8 +38,8 @@ select is(
     from platform.contract_versions
     where status = 'active'
   ),
-  2::bigint,
-  'learner API and submission contracts are active at foundation version'
+  4::bigint,
+  'hub manifest, core, learner API and submission contracts are active'
 );
 
 select is(
@@ -87,7 +87,7 @@ select is(
 
 select is(
   (select count(*) from api.platform_contract_versions()),
-  2::bigint,
+  4::bigint,
   'anonymous clients can negotiate active platform contract versions'
 );
 
