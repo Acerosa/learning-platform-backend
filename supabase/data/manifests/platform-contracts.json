@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "0.1.0",
+  "contracts": [
+    {
+      "contractKey": "learner-api",
+      "version": "0.1.0",
+      "status": "active",
+      "boundary": "Approved api schema views and RPCs only"
+    },
+    {
+      "contractKey": "submission",
+      "version": "0.1.0",
+      "status": "active",
+      "rpc": "api.submit_attempt",
+      "identity": "auth.uid()",
+      "idempotent": true
+    },
+    {
+      "contractKey": "admin-api",
+      "version": "0.1.0",
+      "status": "draft",
+      "schema": "admin_api",
+      "readOnly": true
+    }
+  ]
+}

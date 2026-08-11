@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "draft",
+  "hubs": [
+    {
+      "hubCode": "unit-3-cyber-security",
+      "hubName": "Unit 3 Cyber Security Hub",
+      "hubVersion": "0.1.0",
+      "platformVersion": "0.1.0",
+      "subject": "OCR Level 3 IT Unit 3 Cyber Security",
+      "repository": "https://github.com/Acerosa/unit-3-Cyber-Security-Hub",
+      "deploymentUrl": "https://acerosa.github.io/unit-3-Cyber-Security-Hub/",
+      "curriculumModel": "course/unit/week/session/activity/learning-outcome",
+      "activityTypes": [
+        "retrieval-quiz",
+        "classification",
+        "matching",
+        "reflection"
+      ],
+      "features": {
+        "authentication": true,
+        "onboarding": true,
+        "progress": true
+      },
+      "status": "testing",
+      "active": true,
+      "certified": false
+    },
+    {
+      "hubCode": "tlevel-software-development",
+      "hubName": "T Level Digital Software Development Hub",
+      "hubVersion": "0.1.0",
+      "platformVersion": "0.1.0",
+      "subject": "T Level Digital Software Development",
+      "repository": "https://github.com/Acerosa/tlevel-software-development-hub",
+      "deploymentUrl": "https://acerosa.github.io/tlevel-software-development-hub/",
+      "curriculumModel": "course/unit/week/session/activity/learning-outcome",
+      "activityTypes": [
+        "diagnostic",
+        "classification",
+        "coding-exercise"
+      ],
+      "features": {
+        "authentication": true,
+        "onboarding": true,
+        "progress": true,
+        "codingExercises": true
+      },
+      "status": "testing",
+      "active": true,
+      "certified": false
+    }
+  ]
+}

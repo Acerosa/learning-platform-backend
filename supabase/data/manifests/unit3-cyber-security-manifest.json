@@ -1,0 +1,5428 @@
+{
+  "schemaVersion": "1.0",
+  "course": {
+    "stableKey": "ocr-level-3-it",
+    "code": "OCR-L3-IT",
+    "title": "OCR Level 3 IT",
+    "qualificationLevel": "Level 3"
+  },
+  "module": {
+    "stableKey": "unit-3-cyber-security",
+    "title": "Unit 3 Cyber Security",
+    "sortOrder": 3
+  },
+  "activities": [
+    {
+      "stableKey": "U3-W01-BASELINE",
+      "title": "Baseline Knowledge Check",
+      "version": "1.0",
+      "maximumScore": 10,
+      "questionCount": 10,
+      "delivery": {
+        "weekNumber": 1,
+        "sessionNumber": 1
+      },
+      "sourceFile": null,
+      "questions": []
+    },
+    {
+      "stableKey": "U3-W01-CIA",
+      "title": "CIA Triad Learning",
+      "version": "1.0",
+      "maximumScore": 15,
+      "questionCount": 12,
+      "delivery": {
+        "weekNumber": 1,
+        "sessionNumber": 1
+      },
+      "sourceFile": null,
+      "questions": []
+    },
+    {
+      "stableKey": "U3-W01-GLOSSARY",
+      "title": "Cyber Security Glossary",
+      "version": "1.0",
+      "maximumScore": 12,
+      "questionCount": 12,
+      "delivery": {
+        "weekNumber": 1,
+        "sessionNumber": 1
+      },
+      "sourceFile": null,
+      "questions": []
+    },
+    {
+      "stableKey": "U3-W01-INCIDENTS",
+      "title": "Incident Classification",
+      "version": "1.0",
+      "maximumScore": 12,
+      "questionCount": 12,
+      "delivery": {
+        "weekNumber": 1,
+        "sessionNumber": 1
+      },
+      "sourceFile": null,
+      "questions": []
+    },
+    {
+      "stableKey": "U3-W01-COMMAND-WORDS",
+      "title": "OCR Command-Word Guide",
+      "version": "1.0",
+      "maximumScore": 12,
+      "questionCount": 6,
+      "delivery": {
+        "weekNumber": 1,
+        "sessionNumber": 2
+      },
+      "sourceFile": null,
+      "questions": []
+    },
+    {
+      "stableKey": "U3-W01-OCR-PRACTICE",
+      "title": "OCR-Style Question Practice",
+      "version": "1.0",
+      "maximumScore": 20,
+      "questionCount": 5,
+      "delivery": {
+        "weekNumber": 1,
+        "sessionNumber": 2
+      },
+      "sourceFile": null,
+      "questions": []
+    },
+    {
+      "stableKey": "U3-W01-PEER-IMPROVEMENT",
+      "title": "Peer Marking and Answer Improvement",
+      "version": "1.0",
+      "maximumScore": 7,
+      "questionCount": 7,
+      "delivery": {
+        "weekNumber": 1,
+        "sessionNumber": 2
+      },
+      "sourceFile": null,
+      "questions": []
+    },
+    {
+      "stableKey": "U3-W01-RETRIEVAL",
+      "title": "Session 2 Retrieval Quiz",
+      "version": "1.0",
+      "maximumScore": 15,
+      "questionCount": 10,
+      "delivery": {
+        "weekNumber": 1,
+        "sessionNumber": 2
+      },
+      "sourceFile": null,
+      "questions": []
+    },
+    {
+      "stableKey": "week2-malware-symptoms",
+      "title": "Malware Categories and Symptoms",
+      "version": "1.0",
+      "maximumScore": 10,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 2,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-2/Week2MalwareSymptomsData.gs",
+      "questions": [
+        {
+          "stableKey": "MW-Q1",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "MW-Q1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MW-Q2",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "MW-Q2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MW-Q3",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "MW-Q3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MW-Q4",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "MW-Q4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MW-Q5",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "MW-Q5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MW-Q6",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "MW-Q6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MW-Q7",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "MW-Q7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MW-Q8",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "MW-Q8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MW-Q9",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "MW-Q9",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MW-Q10",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "MW-Q10",
+          "ordinal": 10,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week2-session1-retrieval",
+      "title": "Session 1 Retrieval Quiz",
+      "version": "1.0",
+      "maximumScore": 10,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 2,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-2/Week2Session1RetrievalData.gs",
+      "questions": [
+        {
+          "stableKey": "S1-Q1",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S1-Q1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1-Q2",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S1-Q2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1-Q3",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S1-Q3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1-Q4",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S1-Q4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1-Q5",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S1-Q5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1-Q6",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S1-Q6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1-Q7",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S1-Q7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1-Q8",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S1-Q8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1-Q9",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S1-Q9",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1-Q10",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S1-Q10",
+          "ordinal": 10,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week2-threat-vulnerability-learning",
+      "title": "Threats and Vulnerabilities Learning",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 2,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-2/Week2ThreatVulnerabilityLearningData.gs",
+      "questions": [
+        {
+          "stableKey": "TV-Q1",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "TV-Q1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TV-Q2",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "TV-Q2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TV-Q3",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "TV-Q3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TV-Q4",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "TV-Q4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TV-Q5",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "TV-Q5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TV-Q6",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "TV-Q6",
+          "ordinal": 6,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week2-threat-vulnerability-sort",
+      "title": "Threat or Vulnerability Sort",
+      "version": "1.0",
+      "maximumScore": 12,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 2,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-2/Week2ThreatVulnerabilitySortData.gs",
+      "questions": [
+        {
+          "stableKey": "SORT-01",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "SORT-01",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SORT-02",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "SORT-02",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SORT-03",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "SORT-03",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SORT-04",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "SORT-04",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SORT-05",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "SORT-05",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SORT-06",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "SORT-06",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SORT-07",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "SORT-07",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SORT-08",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "SORT-08",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SORT-09",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "SORT-09",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SORT-10",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "SORT-10",
+          "ordinal": 10,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SORT-11",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "SORT-11",
+          "ordinal": 11,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SORT-12",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "SORT-12",
+          "ordinal": 12,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week2-vulnerabilities101-reflection",
+      "title": "TryHackMe: Vulnerabilities 101",
+      "version": "1.0",
+      "maximumScore": 2,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 2,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-2/Week2Vulnerabilities101Data.gs",
+      "questions": [
+        {
+          "stableKey": "W2V101-Q01",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "W2V101-Q01",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "W2V101-Q02",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "W2V101-Q02",
+          "ordinal": 2,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week2-northbank-vulnerability-analysis",
+      "title": "Northbank Vulnerability Analysis",
+      "version": "1.0",
+      "maximumScore": 5,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 2,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-2/Week2NorthbankAnalysisData.gs",
+      "questions": [
+        {
+          "stableKey": "NBA-1",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "NBA-1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "NBA-2",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "NBA-2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "NBA-3",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "NBA-3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "NBA-4",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "NBA-4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "NBA-5",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "NBA-5",
+          "ordinal": 5,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week2-northbank-vulnerability-register",
+      "title": "Northbank Vulnerability Register",
+      "version": "1.0",
+      "maximumScore": 5,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 2,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-2/Week2VulnerabilityRegisterData.gs",
+      "questions": [
+        {
+          "stableKey": "W2REG-E1",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "W2REG-E1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "W2REG-E2",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "W2REG-E2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "W2REG-E3",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "W2REG-E3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "W2REG-E4",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "W2REG-E4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "W2REG-E5",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "W2REG-E5",
+          "ordinal": 5,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week2-ocr-question-practice",
+      "title": "OCR-Style Question Practice",
+      "version": "1.0",
+      "maximumScore": 20,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 2,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-2/Week2OcrPracticeData.gs",
+      "questions": [
+        {
+          "stableKey": "W2OCR-Q01",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "W2OCR-Q01",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "W2OCR-Q02",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "W2OCR-Q02",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "W2OCR-Q03",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "W2OCR-Q03",
+          "ordinal": 3,
+          "maxScore": 2
+        },
+        {
+          "stableKey": "W2OCR-Q04",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "W2OCR-Q04",
+          "ordinal": 4,
+          "maxScore": 4
+        },
+        {
+          "stableKey": "W2OCR-Q05",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "W2OCR-Q05",
+          "ordinal": 5,
+          "maxScore": 3
+        },
+        {
+          "stableKey": "W2OCR-Q06",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "W2OCR-Q06",
+          "ordinal": 6,
+          "maxScore": 3
+        },
+        {
+          "stableKey": "W2OCR-Q07",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "W2OCR-Q07",
+          "ordinal": 7,
+          "maxScore": 6
+        }
+      ]
+    },
+    {
+      "stableKey": "week2-peer-marking-answer-improvement",
+      "title": "Peer Marking and Answer Improvement",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 2,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-2/Week2PeerMarkingData.gs",
+      "questions": [
+        {
+          "stableKey": "CHK-THREAT",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "CHK-THREAT",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "CHK-VULNERABILITY",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "CHK-VULNERABILITY",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "CHK-RELATIONSHIP",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "CHK-RELATIONSHIP",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "CHK-NORTHBANK",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "CHK-NORTHBANK",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "CHK-CONSEQUENCE",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "CHK-CONSEQUENCE",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "CHK-COMMAND",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "CHK-COMMAND",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "W2PM-STRENGTH",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "W2PM-STRENGTH",
+          "ordinal": 7,
+          "maxScore": 0
+        },
+        {
+          "stableKey": "W2PM-IMPROVE",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "W2PM-IMPROVE",
+          "ordinal": 8,
+          "maxScore": 0
+        },
+        {
+          "stableKey": "W2PM-REWRITE",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "W2PM-REWRITE",
+          "ordinal": 9,
+          "maxScore": 0
+        }
+      ]
+    },
+    {
+      "stableKey": "week2-session2-retrieval",
+      "title": "Session 2 Retrieval Quiz",
+      "version": "1.0",
+      "maximumScore": 10,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 2,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-2/Week2Session2RetrievalData.gs",
+      "questions": [
+        {
+          "stableKey": "S2-Q1",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S2-Q1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2-Q2",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S2-Q2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2-Q3",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S2-Q3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2-Q4",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S2-Q4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2-Q5",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S2-Q5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2-Q6",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S2-Q6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2-Q7",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S2-Q7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2-Q8",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S2-Q8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2-Q9",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S2-Q9",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2-Q10",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "S2-Q10",
+          "ordinal": 10,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week2-six-mark-response-guide",
+      "title": "Six-Mark Response Guide",
+      "version": "1.0",
+      "maximumScore": 3,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 2,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-2/Week2SixMarkGuideData.gs",
+      "questions": [
+        {
+          "stableKey": "PEC-Q1",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "PEC-Q1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "PEC-Q2",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "PEC-Q2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "PEC-Q3",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "PEC-Q3",
+          "ordinal": 3,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week3-attacker-case-matching",
+      "title": "Attacker Case Study Matching",
+      "version": "1.0",
+      "maximumScore": 8,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 3,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-3/Week3AttackerCaseMatchingData.gs",
+      "questions": [
+        {
+          "stableKey": "C1",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "C1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C2",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "C2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C3",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "C3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C4",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "C4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C5",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "C5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C6",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "C6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C7",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "C7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C8",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "C8",
+          "ordinal": 8,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week3-attacker-types-learning",
+      "title": "Attacker Types Learning",
+      "version": "1.0",
+      "maximumScore": 8,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 3,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-3/Week3AttackerTypesLearningData.gs",
+      "questions": [
+        {
+          "stableKey": "KC1",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "KC1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "KC2",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "KC2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "KC3",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "KC3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "KC4",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "KC4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "KC5",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "KC5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "KC6",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "KC6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "KC7",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "KC7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "KC8",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "KC8",
+          "ordinal": 8,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week3-justified-identification",
+      "title": "Justified Identification Practice",
+      "version": "1.0",
+      "maximumScore": 12,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 3,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-3/Week3JustifiedIdentificationData.gs",
+      "questions": [
+        {
+          "stableKey": "J1",
+          "sectionKey": "scenarios",
+          "sectionTitle": "Scenarios",
+          "questionType": "text",
+          "analyticsTitle": "J1",
+          "ordinal": 1,
+          "maxScore": 3
+        },
+        {
+          "stableKey": "J2",
+          "sectionKey": "scenarios",
+          "sectionTitle": "Scenarios",
+          "questionType": "text",
+          "analyticsTitle": "J2",
+          "ordinal": 2,
+          "maxScore": 3
+        },
+        {
+          "stableKey": "J3",
+          "sectionKey": "scenarios",
+          "sectionTitle": "Scenarios",
+          "questionType": "text",
+          "analyticsTitle": "J3",
+          "ordinal": 3,
+          "maxScore": 3
+        },
+        {
+          "stableKey": "J4",
+          "sectionKey": "scenarios",
+          "sectionTitle": "Scenarios",
+          "questionType": "text",
+          "analyticsTitle": "J4",
+          "ordinal": 4,
+          "maxScore": 3
+        }
+      ]
+    },
+    {
+      "stableKey": "week3-session1-retrieval",
+      "title": "Session 1 Retrieval Quiz",
+      "version": "1.0",
+      "maximumScore": 10,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 3,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-3/Week3Session1RetrievalData.gs",
+      "questions": [
+        {
+          "stableKey": "S1Q1",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S1Q1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q2",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S1Q2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q3",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S1Q3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q4",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S1Q4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q5",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S1Q5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q6",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S1Q6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q7",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S1Q7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q8",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S1Q8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q9",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S1Q9",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q10",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S1Q10",
+          "ordinal": 10,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week3-ocr-question-practice",
+      "title": "OCR-Style Question Practice",
+      "version": "1.0",
+      "maximumScore": 20,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 3,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-3/Week3OcrPracticeData.gs",
+      "questions": [
+        {
+          "stableKey": "O1",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "O1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "O2",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "single",
+          "analyticsTitle": "O2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "O3",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "O3",
+          "ordinal": 3,
+          "maxScore": 4
+        },
+        {
+          "stableKey": "O4",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "O4",
+          "ordinal": 4,
+          "maxScore": 4
+        },
+        {
+          "stableKey": "O5",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "O5",
+          "ordinal": 5,
+          "maxScore": 4
+        },
+        {
+          "stableKey": "O6",
+          "sectionKey": "questions",
+          "sectionTitle": "Questions",
+          "questionType": "text",
+          "analyticsTitle": "O6",
+          "ordinal": 6,
+          "maxScore": 6
+        }
+      ]
+    },
+    {
+      "stableKey": "week3-peer-marking",
+      "title": "Peer Marking and Answer Improvement",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 3,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-3/Week3PeerMarkingData.gs",
+      "questions": [
+        {
+          "stableKey": "PEER1",
+          "sectionKey": "peer-marking-tasks",
+          "sectionTitle": "Peer marking tasks",
+          "questionType": "text",
+          "analyticsTitle": "PEER1",
+          "ordinal": 1,
+          "maxScore": 6
+        }
+      ]
+    },
+    {
+      "stableKey": "week3-session2-retrieval",
+      "title": "Session 2 Retrieval Quiz",
+      "version": "1.0",
+      "maximumScore": 12,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 3,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-3/Week3Session2RetrievalData.gs",
+      "questions": [
+        {
+          "stableKey": "S2Q1",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S2Q1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q2",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S2Q2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q3",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S2Q3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q4",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S2Q4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q5",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S2Q5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q6",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S2Q6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q7",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S2Q7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q8",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S2Q8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q9",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S2Q9",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q10",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S2Q10",
+          "ordinal": 10,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q11",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S2Q11",
+          "ordinal": 11,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q12",
+          "sectionKey": "assessment",
+          "sectionTitle": "Assessment",
+          "questionType": "single",
+          "analyticsTitle": "S2Q12",
+          "ordinal": 12,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week4-motivations-learning",
+      "title": "Motivations for Attack",
+      "version": "1.0",
+      "maximumScore": 8,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 4,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-4/Week4MotivationsLearningData.gs",
+      "questions": [
+        {
+          "stableKey": "MOTKC1",
+          "sectionKey": "motivation-knowledge-check",
+          "sectionTitle": "Motivation knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "MOTKC1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MOTKC2",
+          "sectionKey": "motivation-knowledge-check",
+          "sectionTitle": "Motivation knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "MOTKC2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MOTKC3",
+          "sectionKey": "motivation-knowledge-check",
+          "sectionTitle": "Motivation knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "MOTKC3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MOTKC4",
+          "sectionKey": "motivation-knowledge-check",
+          "sectionTitle": "Motivation knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "MOTKC4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MOTKC5",
+          "sectionKey": "motivation-knowledge-check",
+          "sectionTitle": "Motivation knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "MOTKC5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MOTKC6",
+          "sectionKey": "motivation-knowledge-check",
+          "sectionTitle": "Motivation knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "MOTKC6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MOTKC7",
+          "sectionKey": "motivation-knowledge-check",
+          "sectionTitle": "Motivation knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "MOTKC7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MOTKC8",
+          "sectionKey": "motivation-knowledge-check",
+          "sectionTitle": "Motivation knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "MOTKC8",
+          "ordinal": 8,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week4-northbank-exposure",
+      "title": "Northbank Passive-Exposure Reflection",
+      "version": "1.0",
+      "maximumScore": 3,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 4,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-4/Week4NorthbankExposureData.gs",
+      "questions": [
+        {
+          "stableKey": "NB1",
+          "sectionKey": "passive-exposure-reflection",
+          "sectionTitle": "Passive-exposure reflection",
+          "questionType": "text",
+          "analyticsTitle": "NB1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "NB2",
+          "sectionKey": "passive-exposure-reflection",
+          "sectionTitle": "Passive-exposure reflection",
+          "questionType": "text",
+          "analyticsTitle": "NB2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "NB3",
+          "sectionKey": "passive-exposure-reflection",
+          "sectionTitle": "Passive-exposure reflection",
+          "questionType": "text",
+          "analyticsTitle": "NB3",
+          "ordinal": 3,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week4-session1-retrieval",
+      "title": "Session 1 Retrieval and Homework Harvest",
+      "version": "1.0",
+      "maximumScore": 10,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 4,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-4/Week4Session1RetrievalData.gs",
+      "questions": [
+        {
+          "stableKey": "S1Q1",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q2",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q3",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q4",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q5",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q6",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q7",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q8",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q9",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q9",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q10",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q10",
+          "ordinal": 10,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week4-targets-methods",
+      "title": "Targets and Methods",
+      "version": "1.0",
+      "maximumScore": 8,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 4,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-4/Week4TargetsMethodsData.gs",
+      "questions": [
+        {
+          "stableKey": "TM1",
+          "sectionKey": "classification-check",
+          "sectionTitle": "Classification check",
+          "questionType": "single",
+          "analyticsTitle": "TM1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TM2",
+          "sectionKey": "classification-check",
+          "sectionTitle": "Classification check",
+          "questionType": "single",
+          "analyticsTitle": "TM2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TM3",
+          "sectionKey": "classification-check",
+          "sectionTitle": "Classification check",
+          "questionType": "single",
+          "analyticsTitle": "TM3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TM4",
+          "sectionKey": "classification-check",
+          "sectionTitle": "Classification check",
+          "questionType": "single",
+          "analyticsTitle": "TM4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TM5",
+          "sectionKey": "classification-check",
+          "sectionTitle": "Classification check",
+          "questionType": "single",
+          "analyticsTitle": "TM5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TM6",
+          "sectionKey": "classification-check",
+          "sectionTitle": "Classification check",
+          "questionType": "single",
+          "analyticsTitle": "TM6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TM7",
+          "sectionKey": "classification-check",
+          "sectionTitle": "Classification check",
+          "questionType": "single",
+          "analyticsTitle": "TM7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TM8",
+          "sectionKey": "classification-check",
+          "sectionTitle": "Classification check",
+          "questionType": "single",
+          "analyticsTitle": "TM8",
+          "ordinal": 8,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week4-analyse-practice",
+      "title": "From Describe to Analyse",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 4,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-4/Week4AnalysePracticeData.gs",
+      "questions": [
+        {
+          "stableKey": "AN1",
+          "sectionKey": "self-assessment-checklist",
+          "sectionTitle": "Self-assessment checklist",
+          "questionType": "text",
+          "analyticsTitle": "AN1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AN2",
+          "sectionKey": "self-assessment-checklist",
+          "sectionTitle": "Self-assessment checklist",
+          "questionType": "text",
+          "analyticsTitle": "AN2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AN3",
+          "sectionKey": "self-assessment-checklist",
+          "sectionTitle": "Self-assessment checklist",
+          "questionType": "text",
+          "analyticsTitle": "AN3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AN4",
+          "sectionKey": "self-assessment-checklist",
+          "sectionTitle": "Self-assessment checklist",
+          "questionType": "text",
+          "analyticsTitle": "AN4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AN5",
+          "sectionKey": "self-assessment-checklist",
+          "sectionTitle": "Self-assessment checklist",
+          "questionType": "text",
+          "analyticsTitle": "AN5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AN6",
+          "sectionKey": "self-assessment-checklist",
+          "sectionTitle": "Self-assessment checklist",
+          "questionType": "text",
+          "analyticsTitle": "AN6",
+          "ordinal": 6,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week4-answer-improvement",
+      "title": "Marking and Answer Improvement",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 4,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-4/Week4AnswerImprovementData.gs",
+      "questions": [
+        {
+          "stableKey": "AI1",
+          "sectionKey": "improvement-tasks",
+          "sectionTitle": "Improvement tasks",
+          "questionType": "text",
+          "analyticsTitle": "AI1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI2",
+          "sectionKey": "improvement-tasks",
+          "sectionTitle": "Improvement tasks",
+          "questionType": "text",
+          "analyticsTitle": "AI2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI3",
+          "sectionKey": "improvement-tasks",
+          "sectionTitle": "Improvement tasks",
+          "questionType": "text",
+          "analyticsTitle": "AI3",
+          "ordinal": 3,
+          "maxScore": 2
+        },
+        {
+          "stableKey": "AI4",
+          "sectionKey": "improvement-tasks",
+          "sectionTitle": "Improvement tasks",
+          "questionType": "text",
+          "analyticsTitle": "AI4",
+          "ordinal": 4,
+          "maxScore": 2
+        }
+      ]
+    },
+    {
+      "stableKey": "week4-ethical-review",
+      "title": "Ethical Review Discussion",
+      "version": "1.0",
+      "maximumScore": 2,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 4,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-4/Week4EthicalReviewData.gs",
+      "questions": [
+        {
+          "stableKey": "ETH1",
+          "sectionKey": "ethical-review-responses",
+          "sectionTitle": "Ethical review responses",
+          "questionType": "text",
+          "analyticsTitle": "ETH1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "ETH2",
+          "sectionKey": "ethical-review-responses",
+          "sectionTitle": "Ethical review responses",
+          "questionType": "text",
+          "analyticsTitle": "ETH2",
+          "ordinal": 2,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week4-mtm-mapping",
+      "title": "Motivation, Target and Method Mapping",
+      "version": "1.0",
+      "maximumScore": 8,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 4,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-4/Week4MtmMappingData.gs",
+      "questions": [
+        {
+          "stableKey": "MAP1MOT",
+          "sectionKey": "independent-mapping-scenarios",
+          "sectionTitle": "Independent mapping scenarios",
+          "questionType": "single",
+          "analyticsTitle": "MAP1MOT",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MAP1TGT",
+          "sectionKey": "independent-mapping-scenarios",
+          "sectionTitle": "Independent mapping scenarios",
+          "questionType": "single",
+          "analyticsTitle": "MAP1TGT",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MAP2MOT",
+          "sectionKey": "independent-mapping-scenarios",
+          "sectionTitle": "Independent mapping scenarios",
+          "questionType": "single",
+          "analyticsTitle": "MAP2MOT",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MAP2TGT",
+          "sectionKey": "independent-mapping-scenarios",
+          "sectionTitle": "Independent mapping scenarios",
+          "questionType": "single",
+          "analyticsTitle": "MAP2TGT",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MAP3MOT",
+          "sectionKey": "independent-mapping-scenarios",
+          "sectionTitle": "Independent mapping scenarios",
+          "questionType": "single",
+          "analyticsTitle": "MAP3MOT",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MAP3TGT",
+          "sectionKey": "independent-mapping-scenarios",
+          "sectionTitle": "Independent mapping scenarios",
+          "questionType": "single",
+          "analyticsTitle": "MAP3TGT",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MAP4MOT",
+          "sectionKey": "independent-mapping-scenarios",
+          "sectionTitle": "Independent mapping scenarios",
+          "questionType": "single",
+          "analyticsTitle": "MAP4MOT",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MAP4TGT",
+          "sectionKey": "independent-mapping-scenarios",
+          "sectionTitle": "Independent mapping scenarios",
+          "questionType": "single",
+          "analyticsTitle": "MAP4TGT",
+          "ordinal": 8,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week4-ocr-question-practice",
+      "title": "OCR-Style Question Practice",
+      "version": "1.0",
+      "maximumScore": 20,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 4,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-4/Week4OcrPracticeData.gs",
+      "questions": [
+        {
+          "stableKey": "OCR1",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "single",
+          "analyticsTitle": "OCR1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OCR2",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "single",
+          "analyticsTitle": "OCR2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OCR3",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR3",
+          "ordinal": 3,
+          "maxScore": 2
+        },
+        {
+          "stableKey": "OCR4",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR4",
+          "ordinal": 4,
+          "maxScore": 4
+        },
+        {
+          "stableKey": "OCR5",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR5",
+          "ordinal": 5,
+          "maxScore": 4
+        },
+        {
+          "stableKey": "OCR6",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR6",
+          "ordinal": 6,
+          "maxScore": 8
+        }
+      ]
+    },
+    {
+      "stableKey": "week4-session2-retrieval",
+      "title": "Session 2 Retrieval Quiz",
+      "version": "1.0",
+      "maximumScore": 12,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 4,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-4/Week4Session2RetrievalData.gs",
+      "questions": [
+        {
+          "stableKey": "S2Q1",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q2",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q3",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q4",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q5",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q6",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q7",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q8",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q9",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q9",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q10",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q10",
+          "ordinal": 10,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q11",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q11",
+          "ordinal": 11,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q12",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q12",
+          "ordinal": 12,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week5-exercise-debrief",
+      "title": "Exercise Debrief",
+      "version": "1.0",
+      "maximumScore": 4,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 5,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-5/Week5ExerciseDebriefData.gs",
+      "questions": [
+        {
+          "stableKey": "DB1",
+          "sectionKey": "debrief-responses",
+          "sectionTitle": "Debrief responses",
+          "questionType": "text",
+          "analyticsTitle": "DB1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DB2",
+          "sectionKey": "debrief-responses",
+          "sectionTitle": "Debrief responses",
+          "questionType": "text",
+          "analyticsTitle": "DB2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DB3",
+          "sectionKey": "debrief-responses",
+          "sectionTitle": "Debrief responses",
+          "questionType": "text",
+          "analyticsTitle": "DB3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DB4",
+          "sectionKey": "debrief-responses",
+          "sectionTitle": "Debrief responses",
+          "questionType": "text",
+          "analyticsTitle": "DB4",
+          "ordinal": 4,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week5-impact-classification",
+      "title": "Loss, Disruption and Safety Classification",
+      "version": "1.0",
+      "maximumScore": 8,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 5,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-5/Week5ImpactClassificationData.gs",
+      "questions": [
+        {
+          "stableKey": "C1",
+          "sectionKey": "classify-the-statements",
+          "sectionTitle": "Classify the statements",
+          "questionType": "single",
+          "analyticsTitle": "C1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C2",
+          "sectionKey": "classify-the-statements",
+          "sectionTitle": "Classify the statements",
+          "questionType": "single",
+          "analyticsTitle": "C2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C3",
+          "sectionKey": "classify-the-statements",
+          "sectionTitle": "Classify the statements",
+          "questionType": "single",
+          "analyticsTitle": "C3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C4",
+          "sectionKey": "classify-the-statements",
+          "sectionTitle": "Classify the statements",
+          "questionType": "single",
+          "analyticsTitle": "C4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C5",
+          "sectionKey": "classify-the-statements",
+          "sectionTitle": "Classify the statements",
+          "questionType": "single",
+          "analyticsTitle": "C5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C6",
+          "sectionKey": "classify-the-statements",
+          "sectionTitle": "Classify the statements",
+          "questionType": "single",
+          "analyticsTitle": "C6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C7",
+          "sectionKey": "classify-the-statements",
+          "sectionTitle": "Classify the statements",
+          "questionType": "single",
+          "analyticsTitle": "C7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C8",
+          "sectionKey": "classify-the-statements",
+          "sectionTitle": "Classify the statements",
+          "questionType": "single",
+          "analyticsTitle": "C8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "C2R",
+          "sectionKey": "classify-the-statements",
+          "sectionTitle": "Classify the statements",
+          "questionType": "text",
+          "analyticsTitle": "C2R",
+          "ordinal": 9,
+          "maxScore": 0
+        },
+        {
+          "stableKey": "C3R",
+          "sectionKey": "classify-the-statements",
+          "sectionTitle": "Classify the statements",
+          "questionType": "text",
+          "analyticsTitle": "C3R",
+          "ordinal": 10,
+          "maxScore": 0
+        },
+        {
+          "stableKey": "C6R",
+          "sectionKey": "classify-the-statements",
+          "sectionTitle": "Classify the statements",
+          "questionType": "text",
+          "analyticsTitle": "C6R",
+          "ordinal": 11,
+          "maxScore": 0
+        },
+        {
+          "stableKey": "C7R",
+          "sectionKey": "classify-the-statements",
+          "sectionTitle": "Classify the statements",
+          "questionType": "text",
+          "analyticsTitle": "C7R",
+          "ordinal": 12,
+          "maxScore": 0
+        },
+        {
+          "stableKey": "C8R",
+          "sectionKey": "classify-the-statements",
+          "sectionTitle": "Classify the statements",
+          "questionType": "text",
+          "analyticsTitle": "C8R",
+          "ordinal": 13,
+          "maxScore": 0
+        }
+      ]
+    },
+    {
+      "stableKey": "week5-impacts-learning",
+      "title": "Impacts Learning: Loss, Disruption and Safety",
+      "version": "1.0",
+      "maximumScore": 9,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 5,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-5/Week5ImpactsLearningData.gs",
+      "questions": [
+        {
+          "stableKey": "K1",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "K1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "K2",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "K2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "K3",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "K3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "K4",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "K4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "K5",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "K5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "K6",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "K6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "K7",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "K7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "K8",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "K8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "K9",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "K9",
+          "ordinal": 9,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week5-ransomware-companion",
+      "title": "Northbank Ransomware Exercise Companion",
+      "version": "1.0",
+      "maximumScore": 4,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 5,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-5/Week5RansomwareCompanionData.gs",
+      "questions": [
+        {
+          "stableKey": "RC1",
+          "sectionKey": "role-preparation-and-decision-record",
+          "sectionTitle": "Role preparation and decision record",
+          "questionType": "single",
+          "analyticsTitle": "RC1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RC2",
+          "sectionKey": "role-preparation-and-decision-record",
+          "sectionTitle": "Role preparation and decision record",
+          "questionType": "text",
+          "analyticsTitle": "RC2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RC3",
+          "sectionKey": "role-preparation-and-decision-record",
+          "sectionTitle": "Role preparation and decision record",
+          "questionType": "text",
+          "analyticsTitle": "RC3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RC4",
+          "sectionKey": "role-preparation-and-decision-record",
+          "sectionTitle": "Role preparation and decision record",
+          "questionType": "text",
+          "analyticsTitle": "RC4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RC5",
+          "sectionKey": "role-preparation-and-decision-record",
+          "sectionTitle": "Role preparation and decision record",
+          "questionType": "text",
+          "analyticsTitle": "RC5",
+          "ordinal": 5,
+          "maxScore": 0
+        }
+      ]
+    },
+    {
+      "stableKey": "week5-session1-retrieval",
+      "title": "Session 1 Retrieval and Homework Harvest",
+      "version": "1.0",
+      "maximumScore": 8,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 5,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-5/Week5Session1RetrievalData.gs",
+      "questions": [
+        {
+          "stableKey": "S1Q1",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q2",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q3",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q4",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q5",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q6",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q7",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1Q8",
+          "sectionKey": "session-1-retrieval-questions",
+          "sectionTitle": "Session 1 retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1Q8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1H1",
+          "sectionKey": "consequence-harvest",
+          "sectionTitle": "Consequence harvest",
+          "questionType": "text",
+          "analyticsTitle": "S1H1",
+          "ordinal": 9,
+          "maxScore": 0
+        },
+        {
+          "stableKey": "S1H2",
+          "sectionKey": "consequence-harvest",
+          "sectionTitle": "Consequence harvest",
+          "questionType": "text",
+          "analyticsTitle": "S1H2",
+          "ordinal": 10,
+          "maxScore": 0
+        },
+        {
+          "stableKey": "S1H3",
+          "sectionKey": "consequence-harvest",
+          "sectionTitle": "Consequence harvest",
+          "questionType": "text",
+          "analyticsTitle": "S1H3",
+          "ordinal": 11,
+          "maxScore": 0
+        }
+      ]
+    },
+    {
+      "stableKey": "week5-answer-improvement",
+      "title": "Marking and Answer Improvement",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 5,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-5/Week5AnswerImprovementData.gs",
+      "questions": [
+        {
+          "stableKey": "AI1",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI2",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI3",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI4",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI5",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI6",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI6",
+          "ordinal": 6,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week5-impact-analysis",
+      "title": "Analysing Rather Than Listing Impacts",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 5,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-5/Week5ImpactAnalysisData.gs",
+      "questions": [
+        {
+          "stableKey": "IA1",
+          "sectionKey": "annotation-and-writing",
+          "sectionTitle": "Annotation and writing",
+          "questionType": "text",
+          "analyticsTitle": "IA1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "IA2",
+          "sectionKey": "annotation-and-writing",
+          "sectionTitle": "Annotation and writing",
+          "questionType": "text",
+          "analyticsTitle": "IA2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "IA3",
+          "sectionKey": "annotation-and-writing",
+          "sectionTitle": "Annotation and writing",
+          "questionType": "text",
+          "analyticsTitle": "IA3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "IA4",
+          "sectionKey": "annotation-and-writing",
+          "sectionTitle": "Annotation and writing",
+          "questionType": "text",
+          "analyticsTitle": "IA4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "IA5",
+          "sectionKey": "annotation-and-writing",
+          "sectionTitle": "Annotation and writing",
+          "questionType": "text",
+          "analyticsTitle": "IA5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "IA6",
+          "sectionKey": "annotation-and-writing",
+          "sectionTitle": "Annotation and writing",
+          "questionType": "single",
+          "analyticsTitle": "IA6",
+          "ordinal": 6,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week5-ocr-question-practice",
+      "title": "OCR-Style Impact Questions",
+      "version": "1.0",
+      "maximumScore": 20,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 5,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-5/Week5OcrPracticeData.gs",
+      "questions": [
+        {
+          "stableKey": "OCR1",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "single",
+          "analyticsTitle": "OCR1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OCR2",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "single",
+          "analyticsTitle": "OCR2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OCR3",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "single",
+          "analyticsTitle": "OCR3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OCR4",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR4",
+          "ordinal": 4,
+          "maxScore": 2
+        },
+        {
+          "stableKey": "OCR5",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR5",
+          "ordinal": 5,
+          "maxScore": 2
+        },
+        {
+          "stableKey": "OCR6",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR6",
+          "ordinal": 6,
+          "maxScore": 3
+        },
+        {
+          "stableKey": "OCR7",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR7",
+          "ordinal": 7,
+          "maxScore": 4
+        },
+        {
+          "stableKey": "OCR8",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR8",
+          "ordinal": 8,
+          "maxScore": 6
+        }
+      ]
+    },
+    {
+      "stableKey": "week5-session2-retrieval",
+      "title": "Session 2 Retrieval Quiz",
+      "version": "1.0",
+      "maximumScore": 12,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 5,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-5/Week5Session2RetrievalData.gs",
+      "questions": [
+        {
+          "stableKey": "S2Q1",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q2",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q3",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q4",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q5",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q6",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q7",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q8",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q9",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q9",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q10",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q10",
+          "ordinal": 10,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q11",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q11",
+          "ordinal": 11,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2Q12",
+          "sectionKey": "session-2-retrieval",
+          "sectionTitle": "Session 2 retrieval",
+          "questionType": "single",
+          "analyticsTitle": "S2Q12",
+          "ordinal": 12,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week5-stakeholder-grid",
+      "title": "Stakeholder Impact Grid",
+      "version": "1.0",
+      "maximumScore": 10,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 5,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-5/Week5StakeholderGridData.gs",
+      "questions": [
+        {
+          "stableKey": "SG1",
+          "sectionKey": "stakeholder-grid-and-reflection",
+          "sectionTitle": "Stakeholder grid and reflection",
+          "questionType": "text",
+          "analyticsTitle": "SG1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SG2",
+          "sectionKey": "stakeholder-grid-and-reflection",
+          "sectionTitle": "Stakeholder grid and reflection",
+          "questionType": "text",
+          "analyticsTitle": "SG2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SG3",
+          "sectionKey": "stakeholder-grid-and-reflection",
+          "sectionTitle": "Stakeholder grid and reflection",
+          "questionType": "text",
+          "analyticsTitle": "SG3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SG4",
+          "sectionKey": "stakeholder-grid-and-reflection",
+          "sectionTitle": "Stakeholder grid and reflection",
+          "questionType": "text",
+          "analyticsTitle": "SG4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SG5",
+          "sectionKey": "stakeholder-grid-and-reflection",
+          "sectionTitle": "Stakeholder grid and reflection",
+          "questionType": "text",
+          "analyticsTitle": "SG5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SG6",
+          "sectionKey": "stakeholder-grid-and-reflection",
+          "sectionTitle": "Stakeholder grid and reflection",
+          "questionType": "text",
+          "analyticsTitle": "SG6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SG7",
+          "sectionKey": "stakeholder-grid-and-reflection",
+          "sectionTitle": "Stakeholder grid and reflection",
+          "questionType": "text",
+          "analyticsTitle": "SG7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SG8",
+          "sectionKey": "stakeholder-grid-and-reflection",
+          "sectionTitle": "Stakeholder grid and reflection",
+          "questionType": "text",
+          "analyticsTitle": "SG8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SG9",
+          "sectionKey": "stakeholder-grid-and-reflection",
+          "sectionTitle": "Stakeholder grid and reflection",
+          "questionType": "text",
+          "analyticsTitle": "SG9",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SG10",
+          "sectionKey": "stakeholder-grid-and-reflection",
+          "sectionTitle": "Stakeholder grid and reflection",
+          "questionType": "text",
+          "analyticsTitle": "SG10",
+          "ordinal": 10,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-ethical-classification",
+      "title": "Ethical, Unlawful, Both or Neither",
+      "version": "1.0",
+      "maximumScore": 8,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-6/Week6EthicalClassificationData.gs",
+      "questions": [
+        {
+          "stableKey": "E1",
+          "sectionKey": "classify-the-scenarios",
+          "sectionTitle": "Classify the scenarios",
+          "questionType": "single",
+          "analyticsTitle": "E1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "E2",
+          "sectionKey": "classify-the-scenarios",
+          "sectionTitle": "Classify the scenarios",
+          "questionType": "single",
+          "analyticsTitle": "E2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "E3",
+          "sectionKey": "classify-the-scenarios",
+          "sectionTitle": "Classify the scenarios",
+          "questionType": "single",
+          "analyticsTitle": "E3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "E4",
+          "sectionKey": "classify-the-scenarios",
+          "sectionTitle": "Classify the scenarios",
+          "questionType": "single",
+          "analyticsTitle": "E4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "E5",
+          "sectionKey": "classify-the-scenarios",
+          "sectionTitle": "Classify the scenarios",
+          "questionType": "single",
+          "analyticsTitle": "E5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "E6",
+          "sectionKey": "classify-the-scenarios",
+          "sectionTitle": "Classify the scenarios",
+          "questionType": "single",
+          "analyticsTitle": "E6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "E7",
+          "sectionKey": "classify-the-scenarios",
+          "sectionTitle": "Classify the scenarios",
+          "questionType": "single",
+          "analyticsTitle": "E7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "E8",
+          "sectionKey": "classify-the-scenarios",
+          "sectionTitle": "Classify the scenarios",
+          "questionType": "single",
+          "analyticsTitle": "E8",
+          "ordinal": 8,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-ethical-learning",
+      "title": "Ethical Considerations Learning",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-6/Week6EthicalLearningData.gs",
+      "questions": [
+        {
+          "stableKey": "DISCLOSURE_CHECK",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "DISCLOSURE_CHECK",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "MONITORING_CHECK",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "MONITORING_CHECK",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AUTH_CHECK",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "AUTH_CHECK",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "ETHICS_LAW_CHECK",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "ETHICS_LAW_CHECK",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "EK1",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "EK1",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "EK2",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "EK2",
+          "ordinal": 6,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-exercise-decision-record",
+      "title": "Exercise Decision Record",
+      "version": "1.0",
+      "maximumScore": 5,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-6/Week6ExerciseDecisionRecordData.gs",
+      "questions": [
+        {
+          "stableKey": "ED1",
+          "sectionKey": "record-your-decisions",
+          "sectionTitle": "Record your decisions",
+          "questionType": "text",
+          "analyticsTitle": "ED1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "ED2",
+          "sectionKey": "record-your-decisions",
+          "sectionTitle": "Record your decisions",
+          "questionType": "text",
+          "analyticsTitle": "ED2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "ED3",
+          "sectionKey": "record-your-decisions",
+          "sectionTitle": "Record your decisions",
+          "questionType": "text",
+          "analyticsTitle": "ED3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "ED4",
+          "sectionKey": "record-your-decisions",
+          "sectionTitle": "Record your decisions",
+          "questionType": "text",
+          "analyticsTitle": "ED4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "ED5",
+          "sectionKey": "record-your-decisions",
+          "sectionTitle": "Record your decisions",
+          "questionType": "text",
+          "analyticsTitle": "ED5",
+          "ordinal": 5,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-government-initiatives",
+      "title": "Government Cyber Security Initiatives",
+      "version": "1.0",
+      "maximumScore": 4,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-6/Week6GovernmentInitiativesData.gs",
+      "questions": [
+        {
+          "stableKey": "GI1",
+          "sectionKey": "initiative-comparison",
+          "sectionTitle": "Initiative comparison",
+          "questionType": "single",
+          "analyticsTitle": "GI1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "GI2",
+          "sectionKey": "initiative-comparison",
+          "sectionTitle": "Initiative comparison",
+          "questionType": "single",
+          "analyticsTitle": "GI2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "GI3",
+          "sectionKey": "initiative-comparison",
+          "sectionTitle": "Initiative comparison",
+          "questionType": "single",
+          "analyticsTitle": "GI3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "GI4",
+          "sectionKey": "initiative-comparison",
+          "sectionTitle": "Initiative comparison",
+          "questionType": "single",
+          "analyticsTitle": "GI4",
+          "ordinal": 4,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-legislation-learning",
+      "title": "United Kingdom Legislation Learning",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-6/Week6LegislationLearningData.gs",
+      "questions": [
+        {
+          "stableKey": "LK1",
+          "sectionKey": "legislation-knowledge-check",
+          "sectionTitle": "Legislation knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "LK1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "LK2",
+          "sectionKey": "legislation-knowledge-check",
+          "sectionTitle": "Legislation knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "LK2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "LK3",
+          "sectionKey": "legislation-knowledge-check",
+          "sectionTitle": "Legislation knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "LK3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "LK4",
+          "sectionKey": "legislation-knowledge-check",
+          "sectionTitle": "Legislation knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "LK4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "LK5",
+          "sectionKey": "legislation-knowledge-check",
+          "sectionTitle": "Legislation knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "LK5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "LK6",
+          "sectionKey": "legislation-knowledge-check",
+          "sectionTitle": "Legislation knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "LK6",
+          "ordinal": 6,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-legislation-matching",
+      "title": "Legislation Scenario Matching",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-6/Week6LegislationMatchingData.gs",
+      "questions": [
+        {
+          "stableKey": "M1",
+          "sectionKey": "legislation-matching",
+          "sectionTitle": "Legislation matching",
+          "questionType": "single",
+          "analyticsTitle": "M1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "M2",
+          "sectionKey": "legislation-matching",
+          "sectionTitle": "Legislation matching",
+          "questionType": "single",
+          "analyticsTitle": "M2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "M3",
+          "sectionKey": "legislation-matching",
+          "sectionTitle": "Legislation matching",
+          "questionType": "single",
+          "analyticsTitle": "M3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "M4",
+          "sectionKey": "legislation-matching",
+          "sectionTitle": "Legislation matching",
+          "questionType": "single",
+          "analyticsTitle": "M4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "M5",
+          "sectionKey": "legislation-matching",
+          "sectionTitle": "Legislation matching",
+          "questionType": "single",
+          "analyticsTitle": "M5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "M6",
+          "sectionKey": "legislation-matching",
+          "sectionTitle": "Legislation matching",
+          "questionType": "single",
+          "analyticsTitle": "M6",
+          "ordinal": 6,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-lo2-diagnostic",
+      "title": "LO2 Diagnostic Retrieval",
+      "version": "1.0",
+      "maximumScore": 12,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-6/Week6Lo2DiagnosticData.gs",
+      "questions": [
+        {
+          "stableKey": "D1",
+          "sectionKey": "lo2-diagnostic-questions",
+          "sectionTitle": "LO2 diagnostic questions",
+          "questionType": "single",
+          "analyticsTitle": "D1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "D2",
+          "sectionKey": "lo2-diagnostic-questions",
+          "sectionTitle": "LO2 diagnostic questions",
+          "questionType": "single",
+          "analyticsTitle": "D2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "D3",
+          "sectionKey": "lo2-diagnostic-questions",
+          "sectionTitle": "LO2 diagnostic questions",
+          "questionType": "single",
+          "analyticsTitle": "D3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "D4",
+          "sectionKey": "lo2-diagnostic-questions",
+          "sectionTitle": "LO2 diagnostic questions",
+          "questionType": "single",
+          "analyticsTitle": "D4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "D5",
+          "sectionKey": "lo2-diagnostic-questions",
+          "sectionTitle": "LO2 diagnostic questions",
+          "questionType": "single",
+          "analyticsTitle": "D5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "D6",
+          "sectionKey": "lo2-diagnostic-questions",
+          "sectionTitle": "LO2 diagnostic questions",
+          "questionType": "single",
+          "analyticsTitle": "D6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "D7",
+          "sectionKey": "lo2-diagnostic-questions",
+          "sectionTitle": "LO2 diagnostic questions",
+          "questionType": "single",
+          "analyticsTitle": "D7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "D8",
+          "sectionKey": "lo2-diagnostic-questions",
+          "sectionTitle": "LO2 diagnostic questions",
+          "questionType": "single",
+          "analyticsTitle": "D8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "D9",
+          "sectionKey": "lo2-diagnostic-questions",
+          "sectionTitle": "LO2 diagnostic questions",
+          "questionType": "single",
+          "analyticsTitle": "D9",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "D10",
+          "sectionKey": "lo2-diagnostic-questions",
+          "sectionTitle": "LO2 diagnostic questions",
+          "questionType": "single",
+          "analyticsTitle": "D10",
+          "ordinal": 10,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "D11",
+          "sectionKey": "lo2-diagnostic-questions",
+          "sectionTitle": "LO2 diagnostic questions",
+          "questionType": "single",
+          "analyticsTitle": "D11",
+          "ordinal": 11,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "D12",
+          "sectionKey": "lo2-diagnostic-questions",
+          "sectionTitle": "LO2 diagnostic questions",
+          "questionType": "single",
+          "analyticsTitle": "D12",
+          "ordinal": 12,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-ncsc-guidance",
+      "title": "NCSC Exercise in a Box Guidance",
+      "version": "1.0",
+      "maximumScore": 4,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-6/Week6NcscGuidanceData.gs",
+      "questions": [
+        {
+          "stableKey": "NC1",
+          "sectionKey": "exercise-checklist",
+          "sectionTitle": "Exercise checklist",
+          "questionType": "text",
+          "analyticsTitle": "NC1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "NC2",
+          "sectionKey": "exercise-checklist",
+          "sectionTitle": "Exercise checklist",
+          "questionType": "text",
+          "analyticsTitle": "NC2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "NC3",
+          "sectionKey": "exercise-checklist",
+          "sectionTitle": "Exercise checklist",
+          "questionType": "text",
+          "analyticsTitle": "NC3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "NC4",
+          "sectionKey": "exercise-checklist",
+          "sectionTitle": "Exercise checklist",
+          "questionType": "text",
+          "analyticsTitle": "NC4",
+          "ordinal": 4,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-operational-considerations",
+      "title": "Operational Considerations",
+      "version": "1.0",
+      "maximumScore": 7,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-6/Week6OperationalConsiderationsData.gs",
+      "questions": [
+        {
+          "stableKey": "OC1",
+          "sectionKey": "operational-analysis",
+          "sectionTitle": "Operational analysis",
+          "questionType": "text",
+          "analyticsTitle": "OC1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OC2",
+          "sectionKey": "operational-analysis",
+          "sectionTitle": "Operational analysis",
+          "questionType": "text",
+          "analyticsTitle": "OC2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OC3",
+          "sectionKey": "operational-analysis",
+          "sectionTitle": "Operational analysis",
+          "questionType": "text",
+          "analyticsTitle": "OC3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OC4",
+          "sectionKey": "operational-analysis",
+          "sectionTitle": "Operational analysis",
+          "questionType": "text",
+          "analyticsTitle": "OC4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OC5",
+          "sectionKey": "operational-analysis",
+          "sectionTitle": "Operational analysis",
+          "questionType": "text",
+          "analyticsTitle": "OC5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OC6",
+          "sectionKey": "operational-analysis",
+          "sectionTitle": "Operational analysis",
+          "questionType": "text",
+          "analyticsTitle": "OC6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OC7",
+          "sectionKey": "operational-analysis",
+          "sectionTitle": "Operational analysis",
+          "questionType": "text",
+          "analyticsTitle": "OC7",
+          "ordinal": 7,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-session1-review",
+      "title": "Session 1 Review",
+      "version": "1.0",
+      "maximumScore": 3,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-6/Week6Session1ReviewData.gs",
+      "questions": [
+        {
+          "stableKey": "R1",
+          "sectionKey": "review-questions",
+          "sectionTitle": "Review questions",
+          "questionType": "single",
+          "analyticsTitle": "R1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "R2",
+          "sectionKey": "review-questions",
+          "sectionTitle": "Review questions",
+          "questionType": "single",
+          "analyticsTitle": "R2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "R3",
+          "sectionKey": "review-questions",
+          "sectionTitle": "Review questions",
+          "questionType": "single",
+          "analyticsTitle": "R3",
+          "ordinal": 3,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-answer-improvement",
+      "title": "Marking and Answer Improvement",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-6/Week6AnswerImprovementData.gs",
+      "questions": [
+        {
+          "stableKey": "AI1",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI2",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI3",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI4",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI5",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI6",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI6",
+          "ordinal": 6,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-discuss-learning",
+      "title": "Balanced Discuss Response Learning",
+      "version": "1.0",
+      "maximumScore": 5,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-6/Week6DiscussLearningData.gs",
+      "questions": [
+        {
+          "stableKey": "DL1",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "DL1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DL2",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "DL2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DL3",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "DL3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DL4",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "DL4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DL5",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "DL5",
+          "ordinal": 5,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-discuss-planner",
+      "title": "Discuss Response Planner",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-6/Week6DiscussPlannerData.gs",
+      "questions": [
+        {
+          "stableKey": "DP1",
+          "sectionKey": "plan-your-discuss-answer",
+          "sectionTitle": "Plan your Discuss answer",
+          "questionType": "text",
+          "analyticsTitle": "DP1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DP2",
+          "sectionKey": "plan-your-discuss-answer",
+          "sectionTitle": "Plan your Discuss answer",
+          "questionType": "text",
+          "analyticsTitle": "DP2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DP3",
+          "sectionKey": "plan-your-discuss-answer",
+          "sectionTitle": "Plan your Discuss answer",
+          "questionType": "text",
+          "analyticsTitle": "DP3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DP4",
+          "sectionKey": "plan-your-discuss-answer",
+          "sectionTitle": "Plan your Discuss answer",
+          "questionType": "text",
+          "analyticsTitle": "DP4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DP5",
+          "sectionKey": "plan-your-discuss-answer",
+          "sectionTitle": "Plan your Discuss answer",
+          "questionType": "text",
+          "analyticsTitle": "DP5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DP6",
+          "sectionKey": "plan-your-discuss-answer",
+          "sectionTitle": "Plan your Discuss answer",
+          "questionType": "text",
+          "analyticsTitle": "DP6",
+          "ordinal": 6,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-employee-monitoring",
+      "title": "Northbank Employee Monitoring Scenario",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-6/Week6EmployeeMonitoringData.gs",
+      "questions": [
+        {
+          "stableKey": "EM0",
+          "sectionKey": "stakeholder-position",
+          "sectionTitle": "Stakeholder position",
+          "questionType": "single",
+          "analyticsTitle": "EM0",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "EM1",
+          "sectionKey": "stakeholder-position",
+          "sectionTitle": "Stakeholder position",
+          "questionType": "text",
+          "analyticsTitle": "EM1",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "EM2",
+          "sectionKey": "stakeholder-position",
+          "sectionTitle": "Stakeholder position",
+          "questionType": "text",
+          "analyticsTitle": "EM2",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "EM3",
+          "sectionKey": "stakeholder-position",
+          "sectionTitle": "Stakeholder position",
+          "questionType": "text",
+          "analyticsTitle": "EM3",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "EM4",
+          "sectionKey": "stakeholder-position",
+          "sectionTitle": "Stakeholder position",
+          "questionType": "text",
+          "analyticsTitle": "EM4",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "EM5",
+          "sectionKey": "stakeholder-position",
+          "sectionTitle": "Stakeholder position",
+          "questionType": "text",
+          "analyticsTitle": "EM5",
+          "ordinal": 6,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-legislation-retrieval",
+      "title": "Legislation Retrieval Quiz",
+      "version": "1.0",
+      "maximumScore": 10,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-6/Week6LegislationRetrievalData.gs",
+      "questions": [
+        {
+          "stableKey": "LR1",
+          "sectionKey": "legislation-retrieval-questions",
+          "sectionTitle": "Legislation retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "LR1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "LR2",
+          "sectionKey": "legislation-retrieval-questions",
+          "sectionTitle": "Legislation retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "LR2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "LR3",
+          "sectionKey": "legislation-retrieval-questions",
+          "sectionTitle": "Legislation retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "LR3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "LR4",
+          "sectionKey": "legislation-retrieval-questions",
+          "sectionTitle": "Legislation retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "LR4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "LR5",
+          "sectionKey": "legislation-retrieval-questions",
+          "sectionTitle": "Legislation retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "LR5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "LR6",
+          "sectionKey": "legislation-retrieval-questions",
+          "sectionTitle": "Legislation retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "LR6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "LR7",
+          "sectionKey": "legislation-retrieval-questions",
+          "sectionTitle": "Legislation retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "LR7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "LR8",
+          "sectionKey": "legislation-retrieval-questions",
+          "sectionTitle": "Legislation retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "LR8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "LR9",
+          "sectionKey": "legislation-retrieval-questions",
+          "sectionTitle": "Legislation retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "LR9",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "LR10",
+          "sectionKey": "legislation-retrieval-questions",
+          "sectionTitle": "Legislation retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "LR10",
+          "ordinal": 10,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-ocr-question-practice",
+      "title": "OCR-Style Timed Questions",
+      "version": "1.0",
+      "maximumScore": 20,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-6/Week6OcrPracticeData.gs",
+      "questions": [
+        {
+          "stableKey": "OCR6_1",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "single",
+          "analyticsTitle": "OCR6_1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OCR6_2",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "single",
+          "analyticsTitle": "OCR6_2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OCR6_3",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR6_3",
+          "ordinal": 3,
+          "maxScore": 2
+        },
+        {
+          "stableKey": "OCR6_4",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR6_4",
+          "ordinal": 4,
+          "maxScore": 2
+        },
+        {
+          "stableKey": "OCR6_5",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR6_5",
+          "ordinal": 5,
+          "maxScore": 3
+        },
+        {
+          "stableKey": "OCR6_6",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR6_6",
+          "ordinal": 6,
+          "maxScore": 4
+        },
+        {
+          "stableKey": "OCR6_7",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR6_7",
+          "ordinal": 7,
+          "maxScore": 7
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-revision-organiser",
+      "title": "LO2 Revision Organiser",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-6/Week6RevisionOrganiserData.gs",
+      "questions": [
+        {
+          "stableKey": "RO1",
+          "sectionKey": "revision-organiser",
+          "sectionTitle": "Revision organiser",
+          "questionType": "text",
+          "analyticsTitle": "RO1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RO2",
+          "sectionKey": "revision-organiser",
+          "sectionTitle": "Revision organiser",
+          "questionType": "text",
+          "analyticsTitle": "RO2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RO3",
+          "sectionKey": "revision-organiser",
+          "sectionTitle": "Revision organiser",
+          "questionType": "text",
+          "analyticsTitle": "RO3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RO4",
+          "sectionKey": "revision-organiser",
+          "sectionTitle": "Revision organiser",
+          "questionType": "text",
+          "analyticsTitle": "RO4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RO5",
+          "sectionKey": "revision-organiser",
+          "sectionTitle": "Revision organiser",
+          "questionType": "text",
+          "analyticsTitle": "RO5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RO6",
+          "sectionKey": "revision-organiser",
+          "sectionTitle": "Revision organiser",
+          "questionType": "text",
+          "analyticsTitle": "RO6",
+          "ordinal": 6,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week6-stakeholder-debate",
+      "title": "Stakeholder Debate Preparation",
+      "version": "1.0",
+      "maximumScore": 10,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 6,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-6/Week6StakeholderDebateData.gs",
+      "questions": [
+        {
+          "stableKey": "SD0",
+          "sectionKey": "debate-preparation",
+          "sectionTitle": "Debate preparation",
+          "questionType": "text",
+          "analyticsTitle": "SD0",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SD1",
+          "sectionKey": "debate-preparation",
+          "sectionTitle": "Debate preparation",
+          "questionType": "text",
+          "analyticsTitle": "SD1",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SD2",
+          "sectionKey": "debate-preparation",
+          "sectionTitle": "Debate preparation",
+          "questionType": "text",
+          "analyticsTitle": "SD2",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SD3",
+          "sectionKey": "debate-preparation",
+          "sectionTitle": "Debate preparation",
+          "questionType": "text",
+          "analyticsTitle": "SD3",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SD4",
+          "sectionKey": "debate-preparation",
+          "sectionTitle": "Debate preparation",
+          "questionType": "text",
+          "analyticsTitle": "SD4",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SD5",
+          "sectionKey": "debate-preparation",
+          "sectionTitle": "Debate preparation",
+          "questionType": "text",
+          "analyticsTitle": "SD5",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SD6",
+          "sectionKey": "debate-preparation",
+          "sectionTitle": "Debate preparation",
+          "questionType": "text",
+          "analyticsTitle": "SD6",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SD7",
+          "sectionKey": "debate-preparation",
+          "sectionTitle": "Debate preparation",
+          "questionType": "text",
+          "analyticsTitle": "SD7",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SD8",
+          "sectionKey": "debate-preparation",
+          "sectionTitle": "Debate preparation",
+          "questionType": "text",
+          "analyticsTitle": "SD8",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SD9",
+          "sectionKey": "debate-preparation",
+          "sectionTitle": "Debate preparation",
+          "questionType": "text",
+          "analyticsTitle": "SD9",
+          "ordinal": 10,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week7-detection-prevention",
+      "title": "Detection and Prevention Comparison",
+      "version": "1.0",
+      "maximumScore": 8,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 7,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-7/Week7DetectionPreventionData.gs",
+      "questions": [
+        {
+          "stableKey": "DP1",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "DP1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DP2",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "DP2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DP3",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "DP3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DP4",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "DP4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DP5",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "DP5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DP6",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "DP6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DP7",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "DP7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "DP8",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "DP8",
+          "ordinal": 8,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week7-heightened-threat",
+      "title": "NCSC Heightened Cyber Threat Decision Log",
+      "version": "1.0",
+      "maximumScore": 5,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 7,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-7/Week7HeightenedThreatData.gs",
+      "questions": [
+        {
+          "stableKey": "HT1",
+          "sectionKey": "record-your-decisions",
+          "sectionTitle": "Record your decisions",
+          "questionType": "text",
+          "analyticsTitle": "HT1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "HT2",
+          "sectionKey": "record-your-decisions",
+          "sectionTitle": "Record your decisions",
+          "questionType": "text",
+          "analyticsTitle": "HT2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "HT3",
+          "sectionKey": "record-your-decisions",
+          "sectionTitle": "Record your decisions",
+          "questionType": "text",
+          "analyticsTitle": "HT3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "HT4",
+          "sectionKey": "record-your-decisions",
+          "sectionTitle": "Record your decisions",
+          "questionType": "text",
+          "analyticsTitle": "HT4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "HT5",
+          "sectionKey": "record-your-decisions",
+          "sectionTitle": "Record your decisions",
+          "questionType": "text",
+          "analyticsTitle": "HT5",
+          "ordinal": 5,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week7-northbank-risk-register",
+      "title": "Northbank Risk Register",
+      "version": "1.0",
+      "maximumScore": 10,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 7,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-7/Week7NorthbankRiskRegisterData.gs",
+      "questions": [
+        {
+          "stableKey": "RR1",
+          "sectionKey": "complete-the-register",
+          "sectionTitle": "Complete the register",
+          "questionType": "text",
+          "analyticsTitle": "RR1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RR2",
+          "sectionKey": "complete-the-register",
+          "sectionTitle": "Complete the register",
+          "questionType": "text",
+          "analyticsTitle": "RR2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RR3",
+          "sectionKey": "complete-the-register",
+          "sectionTitle": "Complete the register",
+          "questionType": "text",
+          "analyticsTitle": "RR3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RR4",
+          "sectionKey": "complete-the-register",
+          "sectionTitle": "Complete the register",
+          "questionType": "text",
+          "analyticsTitle": "RR4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RR5",
+          "sectionKey": "complete-the-register",
+          "sectionTitle": "Complete the register",
+          "questionType": "text",
+          "analyticsTitle": "RR5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RR6",
+          "sectionKey": "complete-the-register",
+          "sectionTitle": "Complete the register",
+          "questionType": "text",
+          "analyticsTitle": "RR6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RR7",
+          "sectionKey": "complete-the-register",
+          "sectionTitle": "Complete the register",
+          "questionType": "text",
+          "analyticsTitle": "RR7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RR8",
+          "sectionKey": "complete-the-register",
+          "sectionTitle": "Complete the register",
+          "questionType": "text",
+          "analyticsTitle": "RR8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RR9",
+          "sectionKey": "complete-the-register",
+          "sectionTitle": "Complete the register",
+          "questionType": "text",
+          "analyticsTitle": "RR9",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RR10",
+          "sectionKey": "complete-the-register",
+          "sectionTitle": "Complete the register",
+          "questionType": "text",
+          "analyticsTitle": "RR10",
+          "ordinal": 10,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week7-risk-management-learning",
+      "title": "Cyber Security Risk Management Learning",
+      "version": "1.0",
+      "maximumScore": 8,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 7,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-7/Week7RiskManagementLearningData.gs",
+      "questions": [
+        {
+          "stableKey": "RM1",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "RM1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RM2",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "RM2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RM3",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "RM3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RM4",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "RM4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RM5",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "RM5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RM6",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "RM6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RM7",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "RM7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "RM8",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "RM8",
+          "ordinal": 8,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week7-sandbox-observation",
+      "title": "Safe Sandboxing Demonstration Record",
+      "version": "1.0",
+      "maximumScore": 4,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 7,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-7/Week7SandboxObservationData.gs",
+      "questions": [
+        {
+          "stableKey": "SB1",
+          "sectionKey": "observation-record",
+          "sectionTitle": "Observation record",
+          "questionType": "text",
+          "analyticsTitle": "SB1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SB2",
+          "sectionKey": "observation-record",
+          "sectionTitle": "Observation record",
+          "questionType": "text",
+          "analyticsTitle": "SB2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SB3",
+          "sectionKey": "observation-record",
+          "sectionTitle": "Observation record",
+          "questionType": "text",
+          "analyticsTitle": "SB3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "SB4",
+          "sectionKey": "observation-record",
+          "sectionTitle": "Observation record",
+          "questionType": "text",
+          "analyticsTitle": "SB4",
+          "ordinal": 4,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week7-session1-retrieval",
+      "title": "Session 1 Retrieval and Prior Learning",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 7,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-7/Week7Session1RetrievalData.gs",
+      "questions": [
+        {
+          "stableKey": "S1R1",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1R1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1R2",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1R2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1R3",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1R3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1R4",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S1R4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1R5",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "text",
+          "analyticsTitle": "S1R5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S1R6",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "text",
+          "analyticsTitle": "S1R6",
+          "ordinal": 6,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week7-testing-methods",
+      "title": "Vulnerability Testing Methods",
+      "version": "1.0",
+      "maximumScore": 8,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 7,
+        "sessionNumber": 1
+      },
+      "sourceFile": "apps-script/week-7/Week7TestingMethodsData.gs",
+      "questions": [
+        {
+          "stableKey": "TM1",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "TM1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TM2",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "TM2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TM3",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "TM3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TM4",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "TM4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TM5",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "TM5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TM6",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "TM6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TM7",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "TM7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "TM8",
+          "sectionKey": "knowledge-check",
+          "sectionTitle": "Knowledge check",
+          "questionType": "single",
+          "analyticsTitle": "TM8",
+          "ordinal": 8,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week7-answer-improvement",
+      "title": "Marking and Answer Improvement",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 7,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-7/Week7AnswerImprovementData.gs",
+      "questions": [
+        {
+          "stableKey": "AI1",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI2",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI3",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI4",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI5",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "AI6",
+          "sectionKey": "mark-and-improve",
+          "sectionTitle": "Mark and improve",
+          "questionType": "text",
+          "analyticsTitle": "AI6",
+          "ordinal": 6,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week7-ocr-question-practice",
+      "title": "OCR-Style Timed Questions",
+      "version": "1.0",
+      "maximumScore": 20,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 7,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-7/Week7OcrPracticeData.gs",
+      "questions": [
+        {
+          "stableKey": "OCR7_1",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "single",
+          "analyticsTitle": "OCR7_1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OCR7_2",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "single",
+          "analyticsTitle": "OCR7_2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "OCR7_3",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR7_3",
+          "ordinal": 3,
+          "maxScore": 2
+        },
+        {
+          "stableKey": "OCR7_4",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR7_4",
+          "ordinal": 4,
+          "maxScore": 2
+        },
+        {
+          "stableKey": "OCR7_5",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR7_5",
+          "ordinal": 5,
+          "maxScore": 2
+        },
+        {
+          "stableKey": "OCR7_6",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR7_6",
+          "ordinal": 6,
+          "maxScore": 2
+        },
+        {
+          "stableKey": "OCR7_7",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR7_7",
+          "ordinal": 7,
+          "maxScore": 4
+        },
+        {
+          "stableKey": "OCR7_8",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR7_8",
+          "ordinal": 8,
+          "maxScore": 3
+        },
+        {
+          "stableKey": "OCR7_9",
+          "sectionKey": "ocr-style-questions",
+          "sectionTitle": "OCR-style questions",
+          "questionType": "text",
+          "analyticsTitle": "OCR7_9",
+          "ordinal": 9,
+          "maxScore": 3
+        }
+      ]
+    },
+    {
+      "stableKey": "week7-recommendation-practice",
+      "title": "Justified Recommendation Practice",
+      "version": "1.0",
+      "maximumScore": 6,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 7,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-7/Week7RecommendationPracticeData.gs",
+      "questions": [
+        {
+          "stableKey": "REC1",
+          "sectionKey": "build-your-recommendation",
+          "sectionTitle": "Build your recommendation",
+          "questionType": "text",
+          "analyticsTitle": "REC1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "REC2",
+          "sectionKey": "build-your-recommendation",
+          "sectionTitle": "Build your recommendation",
+          "questionType": "text",
+          "analyticsTitle": "REC2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "REC3",
+          "sectionKey": "build-your-recommendation",
+          "sectionTitle": "Build your recommendation",
+          "questionType": "text",
+          "analyticsTitle": "REC3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "REC4",
+          "sectionKey": "build-your-recommendation",
+          "sectionTitle": "Build your recommendation",
+          "questionType": "text",
+          "analyticsTitle": "REC4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "REC5",
+          "sectionKey": "build-your-recommendation",
+          "sectionTitle": "Build your recommendation",
+          "questionType": "text",
+          "analyticsTitle": "REC5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "REC6",
+          "sectionKey": "build-your-recommendation",
+          "sectionTitle": "Build your recommendation",
+          "questionType": "text",
+          "analyticsTitle": "REC6",
+          "ordinal": 6,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week7-session2-retrieval",
+      "title": "Session 2 Retrieval Quiz",
+      "version": "1.0",
+      "maximumScore": 10,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 7,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-7/Week7Session2RetrievalData.gs",
+      "questions": [
+        {
+          "stableKey": "S2R1",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S2R1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2R2",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S2R2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2R3",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S2R3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2R4",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S2R4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2R5",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S2R5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2R6",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S2R6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2R7",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S2R7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2R8",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S2R8",
+          "ordinal": 8,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2R9",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S2R9",
+          "ordinal": 9,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "S2R10",
+          "sectionKey": "retrieval-questions",
+          "sectionTitle": "Retrieval questions",
+          "questionType": "single",
+          "analyticsTitle": "S2R10",
+          "ordinal": 10,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "stableKey": "week7-testing-matching",
+      "title": "Testing and Monitoring Matching",
+      "version": "1.0",
+      "maximumScore": 8,
+      "questionCount": null,
+      "delivery": {
+        "weekNumber": 7,
+        "sessionNumber": 2
+      },
+      "sourceFile": "apps-script/week-7/Week7TestingMatchingData.gs",
+      "questions": [
+        {
+          "stableKey": "M1",
+          "sectionKey": "matching-scenarios",
+          "sectionTitle": "Matching scenarios",
+          "questionType": "single",
+          "analyticsTitle": "M1",
+          "ordinal": 1,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "M2",
+          "sectionKey": "matching-scenarios",
+          "sectionTitle": "Matching scenarios",
+          "questionType": "single",
+          "analyticsTitle": "M2",
+          "ordinal": 2,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "M3",
+          "sectionKey": "matching-scenarios",
+          "sectionTitle": "Matching scenarios",
+          "questionType": "single",
+          "analyticsTitle": "M3",
+          "ordinal": 3,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "M4",
+          "sectionKey": "matching-scenarios",
+          "sectionTitle": "Matching scenarios",
+          "questionType": "single",
+          "analyticsTitle": "M4",
+          "ordinal": 4,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "M5",
+          "sectionKey": "matching-scenarios",
+          "sectionTitle": "Matching scenarios",
+          "questionType": "single",
+          "analyticsTitle": "M5",
+          "ordinal": 5,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "M6",
+          "sectionKey": "matching-scenarios",
+          "sectionTitle": "Matching scenarios",
+          "questionType": "single",
+          "analyticsTitle": "M6",
+          "ordinal": 6,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "M7",
+          "sectionKey": "matching-scenarios",
+          "sectionTitle": "Matching scenarios",
+          "questionType": "single",
+          "analyticsTitle": "M7",
+          "ordinal": 7,
+          "maxScore": 1
+        },
+        {
+          "stableKey": "M8",
+          "sectionKey": "matching-scenarios",
+          "sectionTitle": "Matching scenarios",
+          "questionType": "single",
+          "analyticsTitle": "M8",
+          "ordinal": 8,
+          "maxScore": 1
+        }
+      ]
+    }
+  ]
+}

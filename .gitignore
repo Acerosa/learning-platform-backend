@@ -1,0 +1,10 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+*.log
+.supabase/
+supabase/.branches/
+supabase/.temp/
+supabase/data/generated/*
+!supabase/data/generated/.gitkeep
