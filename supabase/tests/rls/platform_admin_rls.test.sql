@@ -57,7 +57,7 @@ insert into platform.staff_roles (
   role,
   granted_at
 ) values (
-  '32000000-0000-4000-8000-000000000001',
+  '32000000-0000-4000-8000-000000000002',
   '31000000-0000-4000-8000-000000000001',
   'platform_admin',
   '2026-08-11T00:00:00Z'
@@ -74,7 +74,7 @@ select ok(
 
 select is(
   (select count(*) from admin_api.learners),
-  2::bigint,
+  3::bigint,
   'the platform administrator can read all synthetic learner profiles'
 );
 
@@ -86,8 +86,8 @@ select is(
 
 select is(
   (select count(*) from admin_api.platform_contracts),
-  5::bigint,
-  'the platform administrator can inspect active and draft contracts'
+  6::bigint,
+  'the platform administrator can inspect active, retired and draft contracts'
 );
 
 select throws_like(

@@ -153,11 +153,11 @@ protected schemas directly.
 
 ## Administrative foundation
 
-`admin_api` currently provides read-only views for hubs, contracts, staff
-roles, audit events, operational health, learners, groups, enrolments,
-assignments and attempts. Access requires an active staff profile and the
-appropriate role in `platform.staff_roles`; learner Auth sessions return no
-administrative data.
+`admin_api` currently provides read-only views for current staff context, hubs,
+contracts, staff roles, audit events, operational health, learners, groups,
+enrolments, assignments, attempts, dashboard counts and activity-performance
+aggregates. Access requires an active staff profile and the appropriate role in
+`platform.staff_roles`; learner Auth sessions return no administrative data.
 
 Administrative mutation RPCs are deliberately excluded from 0.1.0. They need
 workflow, authorisation, validation and audit specifications before being

@@ -9,6 +9,10 @@ insert into auth.users (
   email,
   encrypted_password,
   email_confirmed_at,
+  confirmation_token,
+  recovery_token,
+  email_change_token_new,
+  email_change,
   raw_app_meta_data,
   raw_user_meta_data,
   created_at,
@@ -22,6 +26,10 @@ insert into auth.users (
     'student.a@local.invalid',
     null,
     now(),
+    '',
+    '',
+    '',
+    '',
     '{"provider":"email","providers":["email"]}'::jsonb,
     '{"synthetic":true,"fixture":"student-a"}'::jsonb,
     now(),
@@ -35,8 +43,29 @@ insert into auth.users (
     'student.b@local.invalid',
     null,
     now(),
+    '',
+    '',
+    '',
+    '',
     '{"provider":"email","providers":["email"]}'::jsonb,
     '{"synthetic":true,"fixture":"student-b"}'::jsonb,
+    now(),
+    now()
+  ),
+  (
+    '00000000-0000-0000-0000-000000000000',
+    '10000000-0000-4000-8000-000000000003',
+    'authenticated',
+    'authenticated',
+    'demo.learner@local.invalid',
+    null,
+    now(),
+    '',
+    '',
+    '',
+    '',
+    '{"provider":"email","providers":["email"]}'::jsonb,
+    '{"synthetic":true,"fixture":"phase-2-demo-learner"}'::jsonb,
     now(),
     now()
   ),
@@ -48,6 +77,10 @@ insert into auth.users (
     'teacher.a@local.invalid',
     null,
     now(),
+    '',
+    '',
+    '',
+    '',
     '{"provider":"email","providers":["email"]}'::jsonb,
     '{"synthetic":true,"fixture":"teacher-a"}'::jsonb,
     now(),
@@ -61,8 +94,29 @@ insert into auth.users (
     'teacher.b@local.invalid',
     null,
     now(),
+    '',
+    '',
+    '',
+    '',
     '{"provider":"email","providers":["email"]}'::jsonb,
     '{"synthetic":true,"fixture":"teacher-b"}'::jsonb,
+    now(),
+    now()
+  ),
+  (
+    '00000000-0000-0000-0000-000000000000',
+    '20000000-0000-4000-8000-000000000003',
+    'authenticated',
+    'authenticated',
+    'platform.admin@local.invalid',
+    null,
+    now(),
+    '',
+    '',
+    '',
+    '',
+    '{"provider":"email","providers":["email"]}'::jsonb,
+    '{"synthetic":true,"fixture":"platform-admin"}'::jsonb,
     now(),
     now()
   )
@@ -99,6 +153,16 @@ insert into auth.identities (
     now()
   ),
   (
+    '10000000-0000-4000-8000-000000000003',
+    'demo.learner@local.invalid',
+    '10000000-0000-4000-8000-000000000003',
+    '{"sub":"10000000-0000-4000-8000-000000000003","email":"demo.learner@local.invalid","synthetic":true}'::jsonb,
+    'email',
+    now(),
+    now(),
+    now()
+  ),
+  (
     '20000000-0000-4000-8000-000000000001',
     'teacher.a@local.invalid',
     '20000000-0000-4000-8000-000000000001',
@@ -113,6 +177,16 @@ insert into auth.identities (
     'teacher.b@local.invalid',
     '20000000-0000-4000-8000-000000000002',
     '{"sub":"20000000-0000-4000-8000-000000000002","email":"teacher.b@local.invalid","synthetic":true}'::jsonb,
+    'email',
+    now(),
+    now(),
+    now()
+  ),
+  (
+    '20000000-0000-4000-8000-000000000003',
+    'platform.admin@local.invalid',
+    '20000000-0000-4000-8000-000000000003',
+    '{"sub":"20000000-0000-4000-8000-000000000003","email":"platform.admin@local.invalid","synthetic":true}'::jsonb,
     'email',
     now(),
     now(),
@@ -162,6 +236,17 @@ insert into learning.groups (
     'Year 2',
     'synthetic-year-2-b',
     false
+  ),
+  (
+    '60000000-0000-4000-8000-000000000003',
+    '40000000-0000-4000-8000-000000000001',
+    '50000000-0000-4000-8000-000000000001',
+    'DEMO-GROUP',
+    'Phase 2 Demonstration Group',
+    true,
+    'Year 1',
+    'phase-2-demonstration',
+    false
   );
 
 insert into learning.students (
@@ -184,6 +269,15 @@ insert into learning.students (
     'Student B',
     'Synthetic Student B',
     true
+  ),
+  (
+    '30000000-0000-4000-8000-000000000003',
+    '10000000-0000-4000-8000-000000000003',
+    'SYNTH-DEMO',
+    'Phase 2',
+    'Learner',
+    'Phase 2 Demonstration Learner',
+    true
   );
 
 insert into learning.teachers (
@@ -201,6 +295,13 @@ insert into learning.teachers (
     '20000000-0000-4000-8000-000000000002',
     'SYNTH-TEACHER-B',
     'Synthetic Teacher B',
+    true
+  ),
+  (
+    '31000000-0000-4000-8000-000000000003',
+    '20000000-0000-4000-8000-000000000003',
+    'SYNTH-PLATFORM-ADMIN',
+    'Synthetic Platform Administrator',
     true
   );
 
@@ -220,6 +321,13 @@ insert into learning.enrolments (
     '60000000-0000-4000-8000-000000000002',
     '2026-09-01',
     'active'
+  ),
+  (
+    '70000000-0000-4000-8000-000000000003',
+    '30000000-0000-4000-8000-000000000003',
+    '60000000-0000-4000-8000-000000000003',
+    '2026-09-01',
+    'active'
   );
 
 insert into learning.teacher_group_access (
@@ -237,6 +345,22 @@ insert into learning.teacher_group_access (
     'teacher',
     '2026-09-01T00:00:00Z'
   );
+
+-- Separate synthetic local-only platform administrator used to demonstrate the
+-- authenticated Central Admin Portal vertical slice. Authentication still
+-- happens through Supabase Auth; this row is the backend authority.
+insert into platform.staff_roles (
+  id,
+  teacher_id,
+  role,
+  granted_at
+) values (
+  '32000000-0000-4000-8000-000000000001',
+  '31000000-0000-4000-8000-000000000003',
+  'platform_admin',
+  '2026-08-11T14:58:37Z'
+)
+on conflict (teacher_id, role) where revoked_at is null do nothing;
 
 insert into learning.activity_assignments (
   id, group_id, activity_version_id, required, active
@@ -260,6 +384,52 @@ cross join learning.activity_versions as activity_version
 where learner_group.code in ('TEST-GROUP-A', 'TEST-GROUP-B')
   and activity_version.published_at is not null
   and activity_version.retired_at is null;
+
+-- A single isolated local-only attempt gives the Phase 2 portal repeatable
+-- Attempts and Analytics data without changing the established A/B RLS cases.
+insert into learning.activity_assignments (
+  id, group_id, activity_version_id, required, active
+) values (
+  '92000000-0000-4000-8000-000000000003',
+  '60000000-0000-4000-8000-000000000003',
+  '91000000-0000-4000-8000-000000000001',
+  true,
+  true
+);
+
+insert into learning.attempts (
+  id,
+  client_attempt_id,
+  student_id,
+  enrolment_id,
+  assignment_id,
+  activity_version_id,
+  attempt_number,
+  status,
+  score,
+  max_score,
+  marking_source,
+  evidence_level,
+  submission_hash,
+  received_at,
+  completed_at
+) values (
+  '93000000-0000-4000-8000-000000000003',
+  'phase-2-demo-attempt',
+  '30000000-0000-4000-8000-000000000003',
+  '70000000-0000-4000-8000-000000000003',
+  '92000000-0000-4000-8000-000000000003',
+  '91000000-0000-4000-8000-000000000001',
+  1,
+  'completed',
+  8,
+  10,
+  'server',
+  'summary_only',
+  repeat('d', 64),
+  clock_timestamp() - interval '1 hour',
+  clock_timestamp() - interval '55 minutes'
+);
 
 -- Local catalogue delivery rows for the imported Unit 3 activity metadata.
 insert into learning.activity_delivery (

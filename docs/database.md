@@ -51,11 +51,13 @@ Completed attempts and responses are immutable.
 
 ## Seed policy
 
-`supabase/seed.sql` is local-only. It contains four synthetic Auth users,
-synthetic learners/staff, test groups, assignments, two draft hub registrations
-and local health data. Platform-admin authority is created only inside the
-dedicated RLS test transaction. `.invalid` email addresses prevent accidental
-delivery.
+`supabase/seed.sql` is local-only. It contains six synthetic Auth users,
+synthetic learners/staff, test groups, assignments, one isolated demonstration
+attempt, two draft hub registrations and local health data. A separate
+Synthetic Platform Administrator has a local-only `platform_admin` role so the
+Central Admin Portal authentication slice can be demonstrated; Synthetic
+Teachers A and B remain ordinary teachers for scoped-access and denial tests.
+`.invalid` email addresses prevent accidental delivery.
 
 Production learner/staff exports must never be committed as fixtures.
 

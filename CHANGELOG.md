@@ -8,6 +8,13 @@ The project follows Semantic Versioning.
 
 ### Added
 
+- Phase 2 staff-session, dashboard and activity-performance read models for the
+  first authenticated Central Admin Portal vertical slice.
+- Backend-derived learner/group summary fields and safe group context on the
+  administrative attempt list.
+- A synthetic local-only platform-administrator role for end-to-end portal
+  demonstration without weakening hosted authorization, plus an isolated
+  learner/group/attempt fixture for repeatable Attempts and Analytics screens.
 - LHDS `learning-platform-hub.json` schema and reviewed manifests for both
   current learner hubs.
 - Dependency-free hub validation with conflict, course, naming, Semantic
@@ -18,6 +25,9 @@ The project follows Semantic Versioning.
 
 ### Changed
 
+- The draft admin API contract advances to `0.2.0` for the new read-only views.
+- The learner administration projection now excludes contact details and
+  returns only the fields required by the Phase 2 list.
 - The legacy aggregate hub metadata entries now link to and are cross-validated
   against the standard hub manifests without breaking their existing shape.
 - Platform contract fixtures include active hub-manifest and core versions.

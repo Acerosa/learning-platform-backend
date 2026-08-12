@@ -2,7 +2,7 @@
 
 ## Status
 
-The admin API contract is version `0.1.0` and **draft**. It is read-only.
+The admin API contract is version `0.2.0` and **draft**. It is read-only.
 
 ## Authentication and roles
 
@@ -15,6 +15,7 @@ platform roles.
 
 `admin_api` currently exposes:
 
+- `current_staff_context`
 - `hubs`
 - `hub_course_links`
 - `platform_contracts`
@@ -26,15 +27,30 @@ platform roles.
 - `enrolments`
 - `assignments`
 - `attempts`
+- `dashboard_summary`
+- `activity_performance`
 
 All views use `security_invoker = true`; underlying RLS remains authoritative.
 Only `platform_admin` can read platform-wide learner, enrolment, assignment and
 attempt views in this release.
 
+`current_staff_context` is the browser-safe session projection used by the
+portal after Supabase Auth restores a session. It returns only the current
+active staff profile and active backend roles. It does not accept an identity
+or role from the browser.
+
+`dashboard_summary` and `activity_performance` are platform-admin-only,
+backend-derived aggregates. The analytics view contains summary scores and
+timestamps only; it does not expose learner response payloads.
+
 `admin_api.hubs` now includes the reviewed manifest version and hash, exact
 core/learner-API/submission requirements, declared capabilities and structured
 compatibility metadata. This supports a future validation/approval screen
 without making the portal fetch GitHub during normal operation.
+
+The learner projection is deliberately minimised to student number, display
+name, active state and aggregate group/enrolment context. Contact details are
+not part of the Phase 2 list.
 
 ## Mutations
 

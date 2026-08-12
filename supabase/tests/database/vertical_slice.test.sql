@@ -148,8 +148,8 @@ select no_plan();
 
 select is(
   (select count(*) from auth.users where raw_user_meta_data ->> 'synthetic' = 'true'),
-  4::bigint,
-  'four synthetic Supabase Auth users are present'
+  6::bigint,
+  'six synthetic Supabase Auth users are present'
 );
 
 set local role anon;
