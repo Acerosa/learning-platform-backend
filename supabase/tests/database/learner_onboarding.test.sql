@@ -90,8 +90,21 @@ insert into learning.groups (
 
 select is(
   (select count(*) from api.registration_options()),
-  1::bigint,
+  2::bigint,
   'registration options include only explicitly open active choices'
+);
+
+select ok(
+  exists (
+    select 1
+    from api.registration_options()
+    where registration_option = 'cyber-year-1-test'
+      and academic_year = '2026-27'
+      and year_group = 'Year 1'
+      and course_key = 'ocr-level-3-it'
+      and group_code = 'CYBER-TEST-A'
+  ),
+  'registration options include the activated Cyber Security test group'
 );
 
 select ok(

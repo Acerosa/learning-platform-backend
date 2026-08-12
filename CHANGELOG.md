@@ -8,6 +8,14 @@ The project follows Semantic Versioning.
 
 ### Added
 
+- Cyber Security Hub backend activation: publish the 68 grounded Weeks 2–7
+  Unit 3 activity versions, open a synthetic `CYBER-TEST-A` registration group,
+  and assign those published versions for shared-backend smoke testing. Week 1
+  remains unpublished because it has no imported question rows and still relies
+  on Apps Script `markSection`.
+- Focused Cyber activation pgTAP coverage for registration, onboarding,
+  assignment visibility, representative Week 2 submission, progress reads,
+  idempotency and cross-learner isolation.
 - Phase 2 staff-session, dashboard and activity-performance read models for the
   first authenticated Central Admin Portal vertical slice.
 - Backend-derived learner/group summary fields and safe group context on the
@@ -25,6 +33,9 @@ The project follows Semantic Versioning.
 
 ### Changed
 
+- Local seed assignment generation is scoped to each group's course so
+  publishing Cyber versions does not attach them to T Level synthetic groups.
+- Academic year seed insert is conflict-safe with the Cyber activation migration.
 - The draft admin API contract advances to `0.2.0` for the new read-only views.
 - The learner administration projection now excludes contact details and
   returns only the fields required by the Phase 2 list.

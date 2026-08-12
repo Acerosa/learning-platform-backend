@@ -202,7 +202,8 @@ insert into learning.academic_years (
   '2026-09-01',
   '2027-08-31',
   true
-);
+)
+on conflict (code) do nothing;
 
 insert into learning.groups (
   id,
@@ -380,8 +381,14 @@ select
   true,
   true
 from learning.groups as learner_group
-cross join learning.activity_versions as activity_version
+join learning.activity_versions as activity_version
+  on true
+join learning.activities as activity
+  on activity.id = activity_version.activity_id
+join learning.modules as module
+  on module.id = activity.module_id
 where learner_group.code in ('TEST-GROUP-A', 'TEST-GROUP-B')
+  and module.course_id = learner_group.course_id
   and activity_version.published_at is not null
   and activity_version.retired_at is null;
 
