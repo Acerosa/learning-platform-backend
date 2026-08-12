@@ -2,7 +2,8 @@
 
 ## Status
 
-The admin API contract is version `0.2.0` and **draft**. It is read-only.
+The admin API contract is version `0.2.0` and **draft**. It exposes read models
+plus the single-use initial administrator bootstrap described below.
 
 ## Authentication and roles
 
@@ -52,6 +53,22 @@ The learner projection is deliberately minimised to student number, display
 name, active state and aggregate group/enrolment context. Contact details are
 not part of the Phase 2 list.
 
+## Initial administrator bootstrap
+
+`admin_api.claim_initial_platform_admin` is the single narrow exception to the
+otherwise read-only Phase 2 contract. It accepts only an expiring, out-of-band
+bootstrap token. The protected implementation derives the confirmed Auth
+identity from `auth.uid()`, creates or reuses that identity's active teacher
+profile, grants the fixed `platform_admin` role, records an audit event and
+atomically consumes the credential. It cannot accept an Auth user ID or role
+from the browser, is idempotent only for the successful caller, and cannot be
+used by another account after the first claim.
+
+The credential table is private, RLS-enabled and inaccessible through the Data
+API. This mechanism exists only to establish the first production
+administrator; subsequent staff administration must use a separately reviewed
+administrator-only mutation.
+
 ## Mutations
 
 Direct browser writes to protected tables are denied, including for platform
@@ -66,8 +83,9 @@ administrators. Future mutations must be narrow RPCs with:
 - RLS and integration tests.
 
 Planned areas include hub registration, group admission, enrolment changes,
-assignments, activity lifecycle and staff-role management. None is claimed as
-implemented in 0.1.0.
+assignments, activity lifecycle and staff-role management. No general mutation
+surface is implemented in 0.2.0. The one-time initial administrator bootstrap
+documented above is not a general staff-role management endpoint.
 
 Phase 1 hub registration is deliberately an offline reviewed-manifest and
 migration workflow; it is not an administrative mutation RPC.
