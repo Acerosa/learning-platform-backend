@@ -12,7 +12,8 @@ The project follows Semantic Versioning.
   Unit 3 activity versions, open a synthetic `CYBER-TEST-A` registration group,
   and assign those published versions for shared-backend smoke testing. Week 1
   remains unpublished because it has no imported question rows and still relies
-  on Apps Script `markSection`.
+  on Apps Script `markSection`. Publish updates only affect unpublished rows so
+  already-published hosted versions stay immutable.
 - Focused Cyber activation pgTAP coverage for registration, onboarding,
   assignment visibility, representative Week 2 submission, progress reads,
   idempotency and cross-learner isolation.

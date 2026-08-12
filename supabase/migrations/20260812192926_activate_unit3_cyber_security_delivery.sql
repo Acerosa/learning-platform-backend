@@ -6,6 +6,10 @@
 -- Week 1 versions remain unpublished: they have no imported question rows and
 -- continue to rely on Apps Script markSection. Learner identities are not
 -- created here.
+--
+-- Publish updates only touch unpublished rows so already-published hosted
+-- versions remain immutable. Group creation binds to an existing active
+-- academic year when present.
 
 insert into learning.academic_years (
   id,
@@ -14,23 +18,28 @@ insert into learning.academic_years (
   ends_on,
   active
 )
-values (
+select
   '40000000-0000-4000-8000-000000000001',
   '2026-27',
-  '2026-09-01',
-  '2027-08-31',
+  '2026-09-01'::date,
+  '2027-08-31'::date,
   true
+where not exists (
+  select 1
+  from learning.academic_years as academic_year
+  where academic_year.active
 )
 on conflict (code) do nothing;
 
 update learning.activity_versions as version
-set published_at = coalesce(version.published_at, '2026-08-12T12:00:00Z'::timestamptz)
+set published_at = '2026-08-12T12:00:00Z'::timestamptz
 from learning.activities as activity
 join learning.modules as module
   on module.id = activity.module_id
 where version.activity_id = activity.id
   and module.stable_key = 'unit-3-cyber-security'
   and activity.stable_key not like 'u3-w01-%'
+  and version.published_at is null
   and version.retired_at is null;
 
 insert into learning.groups (
@@ -54,11 +63,15 @@ select
   'Year 1',
   'cyber-year-1-test',
   true
-from learning.academic_years as academic_year
-cross join learning.courses as course
-where academic_year.code = '2026-27'
-  and academic_year.active
-  and course.stable_key = 'ocr-level-3-it'
+from learning.courses as course
+join lateral (
+  select candidate.id
+  from learning.academic_years as candidate
+  where candidate.active
+  order by candidate.code
+  limit 1
+) as academic_year on true
+where course.stable_key = 'ocr-level-3-it'
   and course.active
 on conflict (academic_year_id, course_id, code) do update
 set
