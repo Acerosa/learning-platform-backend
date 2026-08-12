@@ -29,6 +29,16 @@ select ok(
   'the bootstrap credential table has RLS enabled'
 );
 
+select ok(
+  (
+    select credential.token_hash
+      <> '7e33adc820a85ed2d28acc86bce70b82dcca7eca19836fc1b6b99e84d88ec4b9'
+    from platform.admin_bootstrap_credentials as credential
+    where credential.bootstrap_key = 'initial-platform-admin'
+  ),
+  'the previously exposed bootstrap credential is invalid after rotation'
+);
+
 insert into auth.users (
   instance_id,
   id,
@@ -191,13 +201,11 @@ select is(
 set local "request.jwt.claim.sub" = '22000000-0000-4000-8000-000000000002';
 set local "request.jwt.claims" = '{"sub":"22000000-0000-4000-8000-000000000002","role":"authenticated"}';
 set local role authenticated;
-select is(
-  (
-    select idempotent
-    from admin_api.claim_initial_platform_admin(repeat('a', 64))
-  ),
-  true,
-  'an identical retry is idempotent'
+select throws_ok(
+  $$select * from admin_api.claim_initial_platform_admin(repeat('a', 64))$$,
+  '28000',
+  'BOOTSTRAP_UNAVAILABLE',
+  'the successful caller cannot reuse the consumed credential'
 );
 reset role;
 

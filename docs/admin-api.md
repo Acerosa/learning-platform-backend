@@ -61,8 +61,7 @@ bootstrap token. The protected implementation derives the confirmed Auth
 identity from `auth.uid()`, creates or reuses that identity's active teacher
 profile, grants the fixed `platform_admin` role, records an audit event and
 atomically consumes the credential. It cannot accept an Auth user ID or role
-from the browser, is idempotent only for the successful caller, and cannot be
-used by another account after the first claim.
+from the browser and cannot be reused by any account after the first claim.
 
 The credential table is private, RLS-enabled and inaccessible through the Data
 API. This mechanism exists only to establish the first production
