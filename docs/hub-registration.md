@@ -24,6 +24,12 @@ This backend phase does not modify learner-hub repositories. The reviewed
 copies establish the shared contract; adding the matching root file to each
 existing hub is a separate, hub-owned adoption change.
 
+Unit 14 is registered locally as testing/active from
+`supabase/data/manifests/hubs/unit-14-software-engineering-for-business/learning-platform-hub.json`.
+Curriculum catalogue data is a separate content-package publication; see
+[content-publication.md](content-publication.md). Hub Manifest 1.0.0 still
+cannot hold a curriculum pointer.
+
 ## Manifest contract 1.0.0
 
 | Field | Meaning |

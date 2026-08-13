@@ -196,9 +196,11 @@ None of these hubs is marked certified by this repository.
 
 ## Current limitations
 
-- Persisted marks remain compatible with the existing client-marked formative
-  response contract. Server-authoritative marking rules are future contract
-  work and must be introduced without breaking historical attempts.
+- `api.submit_attempt` still accepts client-marked items when both
+  `awarded_score` and `is_correct` are present (Unit 3 / T Level). Core
+  evidence-only items omit both fields and are server-marked from protected
+  `learning.question_marking`. Rejecting client marks on questions that have
+  marking specs is later contract work; do not break historical attempts.
 - The admin API is read-only and version `0.1.0` remains draft.
 - Audit and health tables/functions are foundations; no external monitoring or
   event pipeline is configured.
