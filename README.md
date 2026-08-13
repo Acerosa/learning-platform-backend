@@ -158,13 +158,16 @@ protected schemas directly.
 
 `admin_api` currently provides read-only views for current staff context, hubs,
 contracts, staff roles, audit events, operational health, learners, groups,
-enrolments, assignments, attempts, dashboard counts and activity-performance
-aggregates. Access requires an active staff profile and the appropriate role in
-`platform.staff_roles`; learner Auth sessions return no administrative data.
+enrolments, assignments, attempts, dashboard counts, activity-performance
+aggregates and curriculum publication history. Access requires an active staff
+profile and the appropriate role in `platform.staff_roles`; learner Auth
+sessions return no administrative data.
 
-Administrative mutation RPCs are deliberately excluded from 0.1.0. They need
-workflow, authorisation, validation and audit specifications before being
-introduced.
+Curriculum publication is the second narrow `admin_api` mutation:
+`admin_api.publish_curriculum`. It accepts only Approved or Published snapshots,
+re-validates them on the server and stores an immutable catalogue row. See
+[Backend publication](docs/backend-publication.md). Other administrative
+mutations remain unspecified.
 
 ## Curriculum and hub manifests
 
@@ -221,6 +224,7 @@ None of these hubs is marked certified by this repository.
 - [Central Admin Portal API](docs/admin-api.md)
 - [Repository-driven hub registration](docs/hub-registration.md)
 - [Content package publication](docs/content-publication.md)
+- [Backend curriculum publication](docs/backend-publication.md)
 - [Release process](docs/release-process.md)
 
 ## Release policy

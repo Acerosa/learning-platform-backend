@@ -49,6 +49,9 @@ Completed attempts and responses are immutable.
 - `platform.audit_events`: protected, append-only event records.
 - `platform.operational_health`: current public status and protected diagnostic
   detail.
+- `platform.curriculum_publications`: immutable published `lp.content` snapshots
+  with version, schema, author, reviewer and publication notes. See
+  [Backend publication](backend-publication.md).
 
 ## Seed policy
 
