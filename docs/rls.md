@@ -48,6 +48,11 @@ authenticated role can mutate protected tables directly.
 Inserts occur only through `admin_api.publish_curriculum`. Published rows are
 immutable except for the controlled supersede transition.
 
+Hub registration inserts occur only through `admin_api.register_hub`. The
+minimum role is `platform_admin`. Learners, anonymous clients and staff without
+that role cannot register hubs. Direct inserts into `platform.hubs` remain
+denied.
+
 ## SECURITY DEFINER requirements
 
 Every SECURITY DEFINER function must:

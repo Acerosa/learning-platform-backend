@@ -118,12 +118,40 @@ Hub repository
 generated migration; a hub manifest cannot create or alter platform contract
 versions.
 
-## Future Central Admin integration
+## Central Admin registration
 
-Phase 1 exposes contracts and a JSON validation report but does not implement
-remote fetching, approval persistence or a mutation RPC. A later trusted
-server-side workflow may accept a repository URL, fetch the root manifest once,
-display this validation report, record administrator approval and prepare the
-same reviewed migration data. It must use an allow-listed fetcher with timeout,
-size and redirect limits and must never make GitHub part of normal learner or
-admin runtime reads.
+Authorised `platform_admin` staff can register a hub through
+`admin_api.register_hub` without writing protected tables from the browser.
+
+```text
+Admin Hub Registry
+  -> reviewed learning-platform-hub.json or equivalent form fields
+  -> client diagnostics
+  -> confirm
+  -> admin_api.register_hub(manifest, status, active)
+  -> platform.hubs + platform.hub_course_links
+  -> audit event hub.registration.registered
+  -> admin_api.hubs refresh
+```
+
+The RPC:
+
+- derives staff identity from `auth.uid()`;
+- requires an active teacher profile and active `platform_admin` role;
+- validates the LHDS 1.0.0 manifest;
+- rejects unsupported contract versions, malformed URLs and unknown courses;
+- rejects duplicate hub codes, repository URLs and deployment URLs without
+  overwriting existing rows;
+- creates declared course links in the same transaction;
+- records a minimised audit event containing action, staff reference, hub code
+  and timestamp.
+
+This is not curriculum publication. Registering a hub does not import weeks,
+activities or questions. GitHub is not fetched. Duplicate registration of an
+already-registered hub, including Unit 14, is rejected.
+
+The migration generator remains the offline reviewed path. Both paths consume
+the same `learning-platform-hub.json` contract.
+
+A later workflow may accept a repository URL and fetch the root manifest once
+through an allow-listed fetcher. That fetcher is not part of this RPC.

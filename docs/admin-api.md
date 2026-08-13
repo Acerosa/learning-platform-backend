@@ -3,7 +3,8 @@
 ## Status
 
 The admin API contract is version `0.2.0` and **draft**. It exposes read models,
-the single-use initial administrator bootstrap, and curriculum publication.
+the single-use initial administrator bootstrap, hub registration, and curriculum
+publication.
 
 ## Authentication and roles
 
@@ -82,15 +83,25 @@ administrators. Future mutations must be narrow RPCs with:
 - stable error codes;
 - RLS and integration tests.
 
-Planned areas include hub registration, group admission, enrolment changes,
-assignments, activity lifecycle and staff-role management. Curriculum
-publication is the second narrow exception: `admin_api.publish_curriculum`
-accepts only Approved or Published snapshots, re-validates them on the server,
+Planned areas include group admission, enrolment changes, assignments, activity
+lifecycle and staff-role management.
+
+Hub registration is a reviewed administrative write, not curriculum
+publication. `admin_api.register_hub` accepts a `learning-platform-hub.json`
+object plus lifecycle status. It requires an active `platform_admin` role,
+re-validates the manifest on the server, rejects duplicate hub codes, creates
+`platform.hubs` and declared `platform.hub_course_links` in one transaction,
+and records a minimised audit event. The browser never writes `platform.hubs`
+directly. See [Hub registration](hub-registration.md).
+
+Curriculum publication remains a separate mutation:
+`admin_api.publish_curriculum` accepts only Approved or Published snapshots
 and stores an immutable catalogue row. See
 [Backend publication](backend-publication.md).
 
-Phase 1 hub registration is deliberately an offline reviewed-manifest and
-migration workflow; it is not an administrative mutation RPC.
+The offline reviewed-manifest and migration generator remains available for
+repository-driven registration. The Admin RPC is the staff-facing path for the
+same LHDS contract.
 
 ## Data minimisation
 
