@@ -25,6 +25,13 @@ select has_function(
   'the admin API exposes the curriculum publication RPC'
 );
 
+select has_function(
+  'admin_api',
+  'register_hub',
+  array['jsonb', 'text', 'boolean'],
+  'the admin API exposes the hub registration RPC'
+);
+
 select ok(
   (
     select relation.relrowsecurity

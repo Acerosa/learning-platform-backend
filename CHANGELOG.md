@@ -12,6 +12,10 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Administrative hub registration through `admin_api.register_hub`. Authorised
+  `platform_admin` staff can register a reviewed `learning-platform-hub.json`
+  into `platform.hubs` with course links and an audit event. Duplicate hub
+  codes are rejected. This is not curriculum publication.
 - Controlled curriculum publication pipeline: immutable
   `platform.curriculum_publications` catalogue, server-side package validation,
   `admin_api.publish_curriculum`, staff publication history, and learner-safe
