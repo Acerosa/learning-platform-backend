@@ -5,6 +5,9 @@ learner hubs and the future Central Admin Portal.
 
 Version: **0.1.0 (foundation)**
 
+Curriculum Engine MVP baseline: git tag `curriculum-engine-mvp`. See
+[docs/content-publication.md](docs/content-publication.md).
+
 ## Purpose
 
 This repository owns shared backend data and behaviour:

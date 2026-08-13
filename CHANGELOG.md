@@ -4,6 +4,10 @@ All notable changes to the Learning Platform Backend are documented here.
 
 The project follows Semantic Versioning.
 
+Git tag `curriculum-engine-mvp` (2026-08-13) is the Unit 14 Curriculum Engine
+MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
+`api.submit_attempt`. It is not a hosted production release.
+
 ## [Unreleased]
 
 ### Added

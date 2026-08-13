@@ -49,6 +49,12 @@ already-published versions. Published rows raise
 `PUBLISHED_ACTIVITY_VERSION_IMMUTABLE` /
 `PUBLISHED_QUESTION_MARKING_IMMUTABLE` if mutated.
 
+## MVP baseline
+
+Git tag `curriculum-engine-mvp` marks this Unit 14 publication path as the
+Curriculum Engine MVP. Later weeks start from `main` at that tag. Client-marked
+`submit_attempt` items remain accepted for Unit 3 / T Level compatibility.
+
 ## Tests
 
 ```bash
