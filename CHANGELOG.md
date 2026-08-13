@@ -12,6 +12,11 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Controlled curriculum publication pipeline: immutable
+  `platform.curriculum_publications` catalogue, server-side package validation,
+  `admin_api.publish_curriculum`, staff publication history, and learner-safe
+  `api.published_curriculum()` metadata. Published rows cannot be edited;
+  a newer version supersedes the previous current row and keeps audit history.
 - Unit 14 hub registration and Week 1 content-package publication: 19 week
   metadata records, four hub-owned OCR assignment artefacts, 11 published Week 1
   activity versions, protected formative marking specs, and a closed

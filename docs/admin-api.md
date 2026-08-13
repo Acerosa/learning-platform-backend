@@ -2,8 +2,8 @@
 
 ## Status
 
-The admin API contract is version `0.2.0` and **draft**. It exposes read models
-plus the single-use initial administrator bootstrap described below.
+The admin API contract is version `0.2.0` and **draft**. It exposes read models,
+the single-use initial administrator bootstrap, and curriculum publication.
 
 ## Authentication and roles
 
@@ -30,6 +30,7 @@ platform roles.
 - `attempts`
 - `dashboard_summary`
 - `activity_performance`
+- `curriculum_publications`
 
 All views use `security_invoker = true`; underlying RLS remains authoritative.
 Only `platform_admin` can read platform-wide learner, enrolment, assignment and
@@ -82,9 +83,11 @@ administrators. Future mutations must be narrow RPCs with:
 - RLS and integration tests.
 
 Planned areas include hub registration, group admission, enrolment changes,
-assignments, activity lifecycle and staff-role management. No general mutation
-surface is implemented in 0.2.0. The one-time initial administrator bootstrap
-documented above is not a general staff-role management endpoint.
+assignments, activity lifecycle and staff-role management. Curriculum
+publication is the second narrow exception: `admin_api.publish_curriculum`
+accepts only Approved or Published snapshots, re-validates them on the server,
+and stores an immutable catalogue row. See
+[Backend publication](backend-publication.md).
 
 Phase 1 hub registration is deliberately an offline reviewed-manifest and
 migration workflow; it is not an administrative mutation RPC.
