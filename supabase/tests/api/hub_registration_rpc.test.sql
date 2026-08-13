@@ -373,7 +373,7 @@ select throws_like(
     array['question-level'], '{}'::jsonb, '{}'::jsonb, 'planned', false,
     '{}'::jsonb, repeat('a', 64)
   )$$,
-  '%violates row-level security policy%',
+  '%permission denied%',
   'authenticated staff cannot insert into platform.hubs directly'
 );
 
