@@ -75,7 +75,12 @@ select is(
 );
 
 select is(
-  (select count(*) from learning.topics),
+  (
+    select count(*)
+    from learning.topics as topic
+    join learning.modules as module on module.id = topic.module_id
+    where module.stable_key = 'software-development-foundations'
+  ),
   21::bigint,
   'the manifest creates one grounded topic per reviewed activity section'
 );
@@ -109,7 +114,14 @@ select is(
 );
 
 select is(
-  (select count(*) from learning.activity_version_languages),
+  (
+    select count(*)
+    from learning.activity_version_languages as version_language
+    join learning.activity_versions as activity_version
+      on activity_version.id = version_language.activity_version_id
+    join learning.activities as activity on activity.id = activity_version.activity_id
+    where activity.stable_key like 'foundations-%'
+  ),
   3::bigint,
   'only Programming Diagnostic declares selectable languages'
 );
@@ -134,8 +146,8 @@ select ok(
 
 select is(
   (select count(*) from learning.activity_assignments),
-  79::bigint,
-  'local fixtures include 11 T Level assignments plus 68 Cyber activation assignments'
+  90::bigint,
+  'local fixtures include 11 T Level assignments, 68 Cyber assignments and 11 Unit 14 Week 1 assignments'
 );
 
 set local role anon;
