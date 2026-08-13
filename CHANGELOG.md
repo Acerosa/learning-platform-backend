@@ -8,6 +8,14 @@ The project follows Semantic Versioning.
 
 ### Added
 
+- Unit 14 hub registration and Week 1 content-package publication: 19 week
+  metadata records, four hub-owned OCR assignment artefacts, 11 published Week 1
+  activity versions, protected formative marking specs, and a closed
+  `UNIT14-TEST-A` delivery group.
+- Deterministic `lp.content` package generator with validation and idempotent SQL.
+- Compatible evidence-only `api.submit_attempt` path: Core payloads without
+  `awarded_score` / `is_correct` are server-marked; client-marked Unit 3 / T Level
+  payloads are unchanged.
 - Cyber Security Hub backend activation: publish the 68 grounded Weeks 2–7
   Unit 3 activity versions, open a synthetic `CYBER-TEST-A` registration group,
   and assign those published versions for shared-backend smoke testing. Week 1

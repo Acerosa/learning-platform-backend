@@ -15,10 +15,10 @@ JSON from a repository at runtime.
 The canonical JSON Schema is
 `supabase/data/manifests/schemas/learning-platform-hub.schema.json`. It is the
 Phase 1 Hub Manifest part of the Learning Hub Development Standard (LHDS).
-Reviewed copies of the two current manifests live under
+Reviewed copies of the current manifests live under
 `supabase/data/manifests/hubs/`; the legacy `hub-registry.json` snapshot links
-to those copies and is cross-validated for compatibility. Neither current hub
-is represented as certified.
+to those copies and is cross-validated for compatibility. None of the current
+hubs are represented as certified.
 
 This backend phase does not modify learner-hub repositories. The reviewed
 copies establish the shared contract; adding the matching root file to each

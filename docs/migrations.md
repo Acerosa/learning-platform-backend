@@ -33,8 +33,10 @@ Runtime code does not read JSON manifests directly.
 Generated hub-registration SQL follows the same rule. Validate the repository
 root `learning-platform-hub.json`, generate into `supabase/data/generated/`,
 review the compatibility assertions and lifecycle decision, then add it as a
-new migration. The generator does not modify a database or deploy anything.
-See `docs/hub-registration.md`.
+new migration. Canonical `lp.content` packages use
+`generate-content-package-migration.py` the same way; see
+`docs/content-publication.md`. The generators do not modify a database or
+deploy anything.
 
 ## Local validation
 

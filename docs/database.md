@@ -15,15 +15,16 @@
 ## Curriculum and delivery
 
 - `learning.modules`, `topics`, `skills`, `curriculum_weeks`
-- `learning.activities`, `activity_versions`, `questions`
+- `learning.activities`, `activity_versions`, `questions`, `question_marking`
 - `learning.question_topics`, `question_skills`
 - `learning.coding_languages`, `activity_version_languages`
 - `learning.activity_delivery`: curriculum availability metadata.
 - `learning.activity_assignments`: group-specific assigned activity versions.
 
-Published activity versions, questions and their mappings are immutable. Stable
-keys and semantic versions allow independently deployed hubs to retain their
-contracts.
+Published activity versions, questions, marking specifications and their
+mappings are immutable. Stable keys and semantic versions allow independently
+deployed hubs to retain their contracts. `learning.question_marking` is not
+granted to authenticated learners.
 
 ## Evidence and progress
 

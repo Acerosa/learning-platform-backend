@@ -178,8 +178,9 @@ The initial hub registry contains draft/testing metadata for:
 
 - Unit 3 Cyber Security Hub
 - T Level Digital Software Development Hub
+- Unit 14 Software Engineering for Business Hub
 
-Neither hub is marked certified by this repository.
+None of these hubs is marked certified by this repository.
 
 ## Security rules
 
@@ -214,6 +215,7 @@ Neither hub is marked certified by this repository.
 - [Migration ownership](docs/migrations.md)
 - [Central Admin Portal API](docs/admin-api.md)
 - [Repository-driven hub registration](docs/hub-registration.md)
+- [Content package publication](docs/content-publication.md)
 - [Release process](docs/release-process.md)
 
 ## Release policy
