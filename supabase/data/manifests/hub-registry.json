@@ -51,6 +51,31 @@
       "active": true,
       "certified": false,
       "manifestPath": "hubs/tlevel-software-development/learning-platform-hub.json"
+    },
+    {
+      "hubCode": "unit-14-software-engineering-for-business",
+      "hubName": "Unit 14 Software Engineering for Business Hub",
+      "hubVersion": "0.1.0",
+      "platformVersion": "0.1.0",
+      "subject": "OCR Level 3 IT Unit 14 Software Engineering for Business",
+      "repository": "https://github.com/Acerosa/unit-14-software-engineering-for-business-hub",
+      "deploymentUrl": "https://acerosa.github.io/unit-14-software-engineering-for-business-hub/",
+      "curriculumModel": "course/unit/week/session/activity/learning-outcome",
+      "activityTypes": [
+        "classification",
+        "coding-exercise",
+        "diagnostic",
+        "reflection"
+      ],
+      "features": {
+        "authentication": true,
+        "onboarding": true,
+        "progress": true
+      },
+      "status": "testing",
+      "active": true,
+      "certified": false,
+      "manifestPath": "hubs/unit-14-software-engineering-for-business/learning-platform-hub.json"
     }
   ]
 }

@@ -80,7 +80,7 @@ select is(
 
 select is(
   (select count(*) from admin_api.hubs),
-  2::bigint,
+  3::bigint,
   'the platform administrator can read the complete local hub registry'
 );
 

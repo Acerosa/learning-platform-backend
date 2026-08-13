@@ -54,7 +54,7 @@ select is(
       and submission_contract_version = '0.1.0'
       and manifest_sha256 ~ '^[0-9a-f]{64}$'
   ),
-  2::bigint,
+  3::bigint,
   'local hub fixtures carry complete manifest provenance and compatibility metadata'
 );
 

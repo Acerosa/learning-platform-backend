@@ -81,7 +81,7 @@ set local role anon;
 
 select is(
   (select count(*) from api.registered_hubs()),
-  2::bigint,
+  3::bigint,
   'anonymous clients can discover active local hub fixtures through the safe RPC'
 );
 

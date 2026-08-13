@@ -1,0 +1,47 @@
+{
+  "manifestVersion": "1.0.0",
+  "hubId": "unit-14-software-engineering-for-business",
+  "name": "Unit 14 Software Engineering for Business Hub",
+  "description": "Learner hub for OCR Level 3 IT Unit 14 Software Engineering for Business (H/507/5017). Draft foundation; not a certified production hub.",
+  "version": "0.1.0",
+  "repositoryUrl": "https://github.com/Acerosa/unit-14-software-engineering-for-business-hub",
+  "deploymentUrl": "https://acerosa.github.io/unit-14-software-engineering-for-business-hub",
+  "courses": [
+    "ocr-level-3-it"
+  ],
+  "compatibility": {
+    "required": {
+      "coreVersion": "0.1.0",
+      "learnerApiContractVersion": "0.1.0",
+      "submissionContractVersion": "0.1.0"
+    },
+    "testedCombinations": [
+      {
+        "coreVersion": "0.1.0",
+        "learnerApiContractVersion": "0.1.0",
+        "submissionContractVersion": "0.1.0"
+      }
+    ]
+  },
+  "capabilities": {
+    "evidence": [
+      "question-level"
+    ],
+    "activities": [
+      "classification",
+      "coding-exercise",
+      "diagnostic",
+      "reflection"
+    ]
+  },
+  "featureFlags": {
+    "authentication": true,
+    "onboarding": true,
+    "progress": true
+  },
+  "certification": {
+    "standard": "LHDS",
+    "version": "1.0.0",
+    "status": "not-certified"
+  }
+}
