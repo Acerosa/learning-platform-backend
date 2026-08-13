@@ -55,7 +55,7 @@ select is(
         where option_name = 'security_invoker'
       ), false)
   ),
-  14::bigint,
+  15::bigint,
   'all staff API views use invoker security'
 );
 

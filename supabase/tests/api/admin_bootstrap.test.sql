@@ -15,7 +15,14 @@ select has_function(
   'admin_api',
   'claim_initial_platform_admin',
   array['text'],
-  'the admin API exposes only the narrow bootstrap claim RPC'
+  'the admin API exposes the narrow bootstrap claim RPC'
+);
+
+select has_function(
+  'admin_api',
+  'publish_curriculum',
+  array['text', 'text', 'text', 'text', 'text', 'text', 'jsonb', 'text', 'text', 'text'],
+  'the admin API exposes the curriculum publication RPC'
 );
 
 select ok(
