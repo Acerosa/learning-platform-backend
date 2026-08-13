@@ -1,0 +1,13 @@
+[
+  {
+    "schema": "lp.content.assignment",
+    "schemaVersion": "0.1.0",
+    "id": "A1",
+    "version": "0.1.0",
+    "metadata": {
+      "title": "Programming Constructs Technical Guide",
+      "key": "assignment-1"
+    },
+    "relationships": { "learningOutcomes": ["LO1"], "weeks": ["week-1"] }
+  }
+]

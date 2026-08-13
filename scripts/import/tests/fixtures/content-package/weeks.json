@@ -1,0 +1,36 @@
+[
+  {
+    "schema": "lp.content.week",
+    "schemaVersion": "0.1.0",
+    "id": "week-1",
+    "version": "0.1.0",
+    "metadata": {
+      "teachingWeek": 1,
+      "title": "Variables",
+      "weekCommencing": null
+    },
+    "relationships": {
+      "curriculum": "u14-fixture-curriculum",
+      "learningOutcomes": ["LO1"],
+      "assignment": "A1",
+      "sessions": ["week-1-session-1"]
+    }
+  },
+  {
+    "schema": "lp.content.week",
+    "schemaVersion": "0.1.0",
+    "id": "week-2",
+    "version": "0.1.0",
+    "metadata": {
+      "teachingWeek": 2,
+      "title": "Conversion",
+      "weekCommencing": null
+    },
+    "relationships": {
+      "curriculum": "u14-fixture-curriculum",
+      "learningOutcomes": ["LO1"],
+      "assignment": "A1",
+      "sessions": []
+    }
+  }
+]

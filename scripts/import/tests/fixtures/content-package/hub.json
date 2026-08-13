@@ -1,0 +1,11 @@
+{
+  "schema": "lp.content.hub",
+  "schemaVersion": "0.1.0",
+  "id": "fixture-unit-14",
+  "version": "0.1.0",
+  "metadata": {
+    "name": "Fixture Unit 14 Hub",
+    "description": "Synthetic package used only by generator tests."
+  },
+  "relationships": { "curriculum": "u14-fixture-curriculum" }
+}

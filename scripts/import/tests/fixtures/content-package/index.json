@@ -1,0 +1,16 @@
+{
+  "schema": "lp.content.package",
+  "schemaVersion": "0.1.0",
+  "id": "fixture-unit-14-content",
+  "version": "0.1.0",
+  "metadata": { "title": "Fixture curriculum package" },
+  "relationships": {
+    "hub": "hub.json",
+    "curriculum": "curriculum.json",
+    "learningOutcomes": "learning-outcomes.json",
+    "assignments": "assignments.json",
+    "weeks": "weeks.json",
+    "sessions": "sessions.json",
+    "activities": "activities.json"
+  }
+}

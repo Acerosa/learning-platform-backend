@@ -1,0 +1,15 @@
+{
+  "schema": "lp.content.curriculum",
+  "schemaVersion": "0.1.0",
+  "id": "u14-fixture-curriculum",
+  "version": "0.1.0",
+  "metadata": {
+    "title": "Fixture OCR Unit 14",
+    "course": "ocr-level-3-it"
+  },
+  "relationships": {
+    "learningOutcomes": ["LO1"],
+    "assignments": ["A1"],
+    "weeks": ["week-1", "week-2"]
+  }
+}

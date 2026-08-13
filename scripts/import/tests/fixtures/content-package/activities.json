@@ -1,0 +1,62 @@
+[
+  {
+    "schema": "lp.content.activity",
+    "schemaVersion": "0.1.0",
+    "id": "week-1-baseline-diagnostic",
+    "version": "0.1.0",
+    "metadata": { "title": "Baseline programming diagnostic" },
+    "relationships": { "learningOutcomes": ["LO1"], "assignment": "A1" },
+    "blocks": [
+      {
+        "schema": "lp.content.block",
+        "schemaVersion": "0.1.0",
+        "id": "q1",
+        "version": "0.1.0",
+        "metadata": {},
+        "relationships": {},
+        "type": "single-choice",
+        "content": {
+          "questionId": "u14-w1-base-q1",
+          "prompt": "Which value is a Boolean?",
+          "options": [{ "id": "a", "label": "True" }, { "id": "b", "label": "17" }],
+          "correctOptionId": "a"
+        }
+      },
+      {
+        "schema": "lp.content.block",
+        "schemaVersion": "0.1.0",
+        "id": "class1",
+        "version": "0.1.0",
+        "metadata": {},
+        "relationships": {},
+        "type": "classification",
+        "content": {
+          "questionId": "u14-w1-biz-class",
+          "items": [
+            { "id": "customer-name", "label": "Customer name", "correctCategoryId": "string" }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "schema": "lp.content.activity",
+    "schemaVersion": "0.1.0",
+    "id": "week-1-assignment-1-guide",
+    "version": "0.1.0",
+    "metadata": { "title": "Assignment 1 notes" },
+    "relationships": { "learningOutcomes": ["LO1"], "assignment": "A1" },
+    "blocks": [
+      {
+        "schema": "lp.content.block",
+        "schemaVersion": "0.1.0",
+        "id": "note",
+        "version": "0.1.0",
+        "metadata": {},
+        "relationships": {},
+        "type": "reflection",
+        "content": { "questionId": "u14-w1-a1-notes", "prompt": "Start your notes." }
+      }
+    ]
+  }
+]

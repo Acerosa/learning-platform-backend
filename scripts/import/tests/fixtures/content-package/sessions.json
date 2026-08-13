@@ -1,0 +1,13 @@
+[
+  {
+    "schema": "lp.content.session",
+    "schemaVersion": "0.1.0",
+    "id": "week-1-session-1",
+    "version": "0.1.0",
+    "metadata": { "title": "Session 1", "kind": "session", "sortOrder": 1 },
+    "relationships": {
+      "week": "week-1",
+      "activities": ["week-1-baseline-diagnostic", "week-1-assignment-1-guide"]
+    }
+  }
+]

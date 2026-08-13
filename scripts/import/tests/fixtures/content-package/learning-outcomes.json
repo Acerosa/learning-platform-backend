@@ -1,0 +1,10 @@
+[
+  {
+    "schema": "lp.content.learning-outcome",
+    "schemaVersion": "0.1.0",
+    "id": "LO1",
+    "version": "0.1.0",
+    "metadata": { "title": "Understand universal programming constructs." },
+    "relationships": {}
+  }
+]
