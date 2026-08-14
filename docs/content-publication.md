@@ -35,7 +35,7 @@ For Unit 14:
 - module `unit-14-software-engineering-for-business`
 - topics `lo1`–`lo4`
 - 19 week metadata rows (planner dates null)
-- Week 1 activities, versions `0.1.0`, questions, marking specs, delivery
+- 24 Week 1 and Week 2 activities, versions `0.1.0`, questions, marking specs, delivery
 - closed synthetic group `UNIT14-TEST-A` for local authenticated tests
 
 OCR Assignments 1–4 stay hub-owned. `learning.activity_assignments` is group

@@ -73,8 +73,8 @@ select is(
     join learning.modules as module on module.id = activity.module_id
     where module.stable_key = 'unit-14-software-engineering-for-business'
   ),
-  11,
-  'Week 1 registers 11 activities with canonical ids'
+  24,
+  'Weeks 1–2 register 24 activities with canonical ids'
 );
 
 select is(
@@ -88,30 +88,41 @@ select is(
       and version.published_at is not null
       and version.retired_at is null
   ),
-  11,
-  'Week 1 activity versions 0.1.0 are published and not retired'
+  24,
+  'Week 1 and Week 2 activity versions 0.1.0 are published and not retired'
 );
 
-select ok(
+select is(
   (
-    select bool_and(activity.stable_key in (
-      'week-1-baseline-diagnostic',
-      'week-1-business-data-explorer',
-      'week-1-variables-and-data-types',
-      'week-1-input-and-output',
-      'week-1-github-classroom-guidance',
-      'week-1-review',
-      'week-1-guided-business-data',
-      'week-1-first-commits',
-      'week-1-first-python-business-program',
-      'week-1-assignment-1-guide',
-      'week-1-homework-extension'
-    ))
+    select count(*)::int
     from learning.activities as activity
     join learning.modules as module on module.id = activity.module_id
     where module.stable_key = 'unit-14-software-engineering-for-business'
+      and activity.stable_key like 'week-1-%'
   ),
-  'registered activity keys preserve the canonical Week 1 identifiers'
+  11,
+  'Week 1 canonical activity keys remain registered'
+);
+
+select is(
+  (
+    select count(*)::int
+    from learning.activities as activity
+    join learning.modules as module on module.id = activity.module_id
+    where module.stable_key = 'unit-14-software-engineering-for-business'
+      and activity.stable_key like 'week-2-%'
+  ),
+  13,
+  'Week 2 canonical activity keys are registered'
+);
+
+select ok(
+  exists (
+    select 1
+    from learning.activities as activity
+    where activity.stable_key = 'week-2-conversion-debugging'
+  ),
+  'Week 2 conversion debugging activity is registered'
 );
 
 select is(
@@ -164,8 +175,8 @@ select is(
     where learner_group.code = 'UNIT14-TEST-A'
       and assignment.active
   ),
-  11,
-  'UNIT14-TEST-A has the 11 published Week 1 activity assignments'
+  24,
+  'UNIT14-TEST-A has the 24 published Week 1 and Week 2 activity assignments'
 );
 
 select ok(

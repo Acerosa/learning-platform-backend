@@ -119,25 +119,38 @@ class ContentPackageTests(unittest.TestCase):
         self.assertEqual(len(registration["weeks"]), 19)
         self.assertEqual(len(registration["assignments"]), 4)
         self.assertTrue(all(item["hubOnly"] for item in registration["assignments"]))
-        self.assertEqual(len(registration["activities"]), 11)
-        self.assertEqual(
-            [item["id"] for item in registration["activities"]],
-            sorted(
-                [
-                    "week-1-baseline-diagnostic",
-                    "week-1-business-data-explorer",
-                    "week-1-variables-and-data-types",
-                    "week-1-input-and-output",
-                    "week-1-github-classroom-guidance",
-                    "week-1-review",
-                    "week-1-guided-business-data",
-                    "week-1-first-commits",
-                    "week-1-first-python-business-program",
-                    "week-1-assignment-1-guide",
-                    "week-1-homework-extension",
-                ]
-            ),
-        )
+        self.assertEqual(len(registration["activities"]), 24)
+        activity_ids = [item["id"] for item in registration["activities"]]
+        week1 = [
+            "week-1-baseline-diagnostic",
+            "week-1-business-data-explorer",
+            "week-1-variables-and-data-types",
+            "week-1-input-and-output",
+            "week-1-github-classroom-guidance",
+            "week-1-review",
+            "week-1-guided-business-data",
+            "week-1-first-commits",
+            "week-1-first-python-business-program",
+            "week-1-assignment-1-guide",
+            "week-1-homework-extension",
+        ]
+        week2 = [
+            "week-2-week-1-retrieval",
+            "week-2-conversion-problem",
+            "week-2-conversion-demonstration",
+            "week-2-predefined-subroutines",
+            "week-2-formatted-output",
+            "week-2-gitignore",
+            "week-2-review",
+            "week-2-conversion-debugging",
+            "week-2-customer-data-cleaning",
+            "week-2-business-calculation",
+            "week-2-git-branch-guidance",
+            "week-2-assignment-1-guide",
+            "week-2-homework",
+        ]
+        self.assertEqual(activity_ids, sorted(week1 + week2))
+        self.assertTrue(all(item["version"] == "0.1.0" for item in registration["activities"]))
         first = generate_sql(registration)
         second = generate_sql(build_registration(load_package(UNIT14)))
         self.assertEqual(first, second)
