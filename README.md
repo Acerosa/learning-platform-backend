@@ -163,11 +163,12 @@ aggregates and curriculum publication history. Access requires an active staff
 profile and the appropriate role in `platform.staff_roles`; learner Auth
 sessions return no administrative data.
 
-Hub registration is a narrow `admin_api` mutation: `admin_api.register_hub`.
-It accepts a reviewed `learning-platform-hub.json` object plus lifecycle
-status, requires `platform_admin`, and writes `platform.hubs` plus declared
-course links. Duplicate hub codes are rejected. See
-[Hub registration](docs/hub-registration.md).
+Hub registration is a narrow `admin_api` mutation: `admin_api.register_hub`
+and `admin_api.update_hub`. Register accepts a reviewed
+`learning-platform-hub.json` object plus lifecycle status, requires
+`platform_admin`, and writes `platform.hubs` plus declared course links.
+Updates keep the hub code and synchronise course links. Duplicate hub codes
+are rejected on register. See [Hub registration](docs/hub-registration.md).
 
 Curriculum publication is a separate mutation:
 `admin_api.publish_curriculum`. It accepts only Approved or Published snapshots,

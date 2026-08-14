@@ -91,8 +91,11 @@ publication. `admin_api.register_hub` accepts a `learning-platform-hub.json`
 object plus lifecycle status. It requires an active `platform_admin` role,
 re-validates the manifest on the server, rejects duplicate hub codes, creates
 `platform.hubs` and declared `platform.hub_course_links` in one transaction,
-and records a minimised audit event. The browser never writes `platform.hubs`
-directly. See [Hub registration](hub-registration.md).
+and records a minimised audit event. `admin_api.update_hub` updates an existing
+row, synchronises course links, and records `hub.registration.updated`.
+`admin_api.courses` is a staff-only course catalogue for validation. The
+browser never writes `platform.hubs` directly. See
+[Hub registration](hub-registration.md).
 
 Curriculum publication remains a separate mutation:
 `admin_api.publish_curriculum` accepts only Approved or Published snapshots

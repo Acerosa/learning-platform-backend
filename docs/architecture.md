@@ -82,7 +82,8 @@ changes are appended as forward migrations.
 
 Hub repositories own their root `learning-platform-hub.json`. A reviewed copy
 can be validated and converted to migration SQL here, or registered by an
-authorised `platform_admin` through `admin_api.register_hub`. Runtime registry
+authorised `platform_admin` through `admin_api.register_hub`, or updated
+through `admin_api.update_hub`. Runtime registry
 access terminates at the database and never reaches GitHub. See
 `docs/hub-registration.md` for the controlled registration boundary.
 

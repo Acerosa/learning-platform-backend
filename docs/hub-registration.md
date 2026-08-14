@@ -129,8 +129,9 @@ Admin Hub Registry
   -> client diagnostics
   -> confirm
   -> admin_api.register_hub(manifest, status, active)
+  -> or admin_api.update_hub(hub_code, manifest, status, active)
   -> platform.hubs + platform.hub_course_links
-  -> audit event hub.registration.registered
+  -> audit event hub.registration.registered or hub.registration.updated
   -> admin_api.hubs refresh
 ```
 
@@ -146,9 +147,18 @@ The RPC:
 - records a minimised audit event containing action, staff reference, hub code
   and timestamp.
 
-This is not curriculum publication. Registering a hub does not import weeks,
-activities or questions. GitHub is not fetched. Duplicate registration of an
-already-registered hub, including Unit 14, is rejected.
+Authorised `platform_admin` staff can update an existing registration through
+`admin_api.update_hub`. The hub code cannot change. Duplicate repository and
+deployment URLs are still rejected against other hubs. Course links are
+synchronised in the same transaction. Inactive or unknown courses are rejected.
+The browser never writes `platform.hubs` directly.
+
+This is not curriculum publication. Registering or updating a hub does not
+import weeks, activities or questions. GitHub is not fetched. Duplicate
+registration of an already-registered hub, including Unit 14, is rejected.
+
+`admin_api.courses` exposes the course catalogue so Admin can validate
+associations against active courses, not only existing hub links.
 
 The migration generator remains the offline reviewed path. Both paths consume
 the same `learning-platform-hub.json` contract.
