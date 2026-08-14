@@ -163,7 +163,14 @@ aggregates and curriculum publication history. Access requires an active staff
 profile and the appropriate role in `platform.staff_roles`; learner Auth
 sessions return no administrative data.
 
-Curriculum publication is the second narrow `admin_api` mutation:
+Hub registration is a narrow `admin_api` mutation: `admin_api.register_hub`
+and `admin_api.update_hub`. Register accepts a reviewed
+`learning-platform-hub.json` object plus lifecycle status, requires
+`platform_admin`, and writes `platform.hubs` plus declared course links.
+Updates keep the hub code and synchronise course links. Duplicate hub codes
+are rejected on register. See [Hub registration](docs/hub-registration.md).
+
+Curriculum publication is a separate mutation:
 `admin_api.publish_curriculum`. It accepts only Approved or Published snapshots,
 re-validates them on the server and stores an immutable catalogue row. See
 [Backend publication](docs/backend-publication.md). Other administrative
