@@ -1,8 +1,9 @@
 # Content package publication
 
-Canonical curriculum JSON stays in the learner hub. This repository consumes a
-validated package and produces a reviewed catalogue migration. Runtime never
-reads GitHub or hub files.
+Canonical curriculum is published into `platform.curriculum_publications`.
+This repository can still generate a reviewed catalogue migration from a
+validated package for historical imports. Runtime never reads GitHub or hub
+files. Admin publication projects the delivery catalogue automatically.
 
 ## Generator
 
@@ -35,7 +36,7 @@ For Unit 14:
 - module `unit-14-software-engineering-for-business`
 - topics `lo1`–`lo4`
 - 19 week metadata rows (planner dates null)
-- Week 1 activities, versions `0.1.0`, questions, marking specs, delivery
+- 24 Week 1 and Week 2 activities, versions `0.1.0`, questions, marking specs, delivery
 - closed synthetic group `UNIT14-TEST-A` for local authenticated tests
 
 OCR Assignments 1–4 stay hub-owned. `learning.activity_assignments` is group
@@ -56,8 +57,9 @@ Curriculum Engine MVP. Later weeks start from `main` at that tag. Client-marked
 `submit_attempt` items remain accepted for Unit 3 / T Level compatibility.
 
 Admin-authored `lp.content` snapshots enter the backend through
-`admin_api.publish_curriculum`, not this generator. That catalogue is separate
-from activity-version rows. See [Backend publication](backend-publication.md).
+`admin_api.publish_curriculum`. That RPC stores the canonical package and
+projects the delivery catalogue. The generator remains for reviewed historical
+imports. See [Backend publication](backend-publication.md).
 
 ## Tests
 

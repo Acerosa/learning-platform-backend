@@ -176,8 +176,8 @@ set local role authenticated;
 
 select is(
   (select count(*)::int from api.my_assignments),
-  11,
-  'the Unit 14 learner can see the 11 assigned Week 1 activities'
+  24,
+  'the Unit 14 learner can see the 24 assigned Week 1 and Week 2 activities'
 );
 
 select ok(

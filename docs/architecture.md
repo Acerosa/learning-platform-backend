@@ -14,15 +14,16 @@ realises them and where implementation is intentionally incomplete.
 
 | Platform backend owns | Learner hubs own |
 | --- | --- |
-| Auth linkage and identity derivation | Curriculum content |
-| Learner and staff profiles | Subject-specific activities and renderers |
-| Courses, groups and enrolments | Hub presentation, routes and branding |
-| Assignments and activity delivery | Learning resources and subject guidance |
-| Attempts, responses and progress | Browser drafts and harmless UI preferences |
-| Analytics and reporting data | Hub manifests supplied for registration |
-| RLS, API/RPC contracts and migrations | Integration with approved APIs |
-| Hub registry and platform contracts | Declared platform compatibility |
-| Administrative data boundary | No backend infrastructure |
+| Auth linkage and identity derivation | Subject-specific activities and renderers |
+| Learner and staff profiles | Hub presentation, routes and branding |
+| Courses, groups and enrolments | Activity engine code and executable behaviour |
+| Published curriculum packages and delivery catalogue | Bundled fallback snapshots and static assets |
+| Assignments and activity delivery | Browser drafts and harmless UI preferences |
+| Attempts, responses and progress | Hub manifests supplied for registration |
+| Analytics and reporting data | Integration with approved APIs |
+| RLS, API/RPC contracts and migrations | Declared platform compatibility |
+| Hub registry and platform contracts | No backend infrastructure |
+| Administrative data boundary |  |
 
 ## Layers and schemas
 

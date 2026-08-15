@@ -9,6 +9,10 @@ shape into a deterministic SQL migration. Generate into
 package (Unit 14) and writes the same reviewable SQL/JSON pair. It does not
 replace the Unit 3 importer. See `docs/content-publication.md`.
 
+`generate-curriculum-publication-seed.py` assembles the same package into a
+local `platform.curriculum_publications` seed. Runtime publication uses
+`admin_api.publish_curriculum`, which projects the delivery catalogue.
+
 `validate-hub-manifest.py` validates the LHDS root
 `learning-platform-hub.json`, including conflicts, course identities and active
 compatibility versions. `generate-hub-registration-migration.py` converts a

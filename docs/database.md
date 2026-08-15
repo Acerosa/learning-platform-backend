@@ -26,6 +26,10 @@ mappings are immutable. Stable keys and semantic versions allow independently
 deployed hubs to retain their contracts. `learning.question_marking` is not
 granted to authenticated learners.
 
+Canonical published teaching packages live in
+`platform.curriculum_publications`. Catalogue tables are projections used for
+delivery and submissions, not a second authoring source.
+
 ## Evidence and progress
 
 - `learning.attempts`: one server-numbered learner attempt with idempotency,

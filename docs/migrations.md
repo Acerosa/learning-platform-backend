@@ -47,6 +47,12 @@ supabase db reset
 supabase test db
 ```
 
+Forward migration `20260815190000_add_runtime_curriculum_delivery.sql` adds
+the learner package RPC and catalogue projection. The Unit 14 `0.2.0` package
+seed is local-only (`supabase/data/generated/seed-unit14-publication.sql`).
+Hosted publication of that package is an Admin **Publish to Platform** (or an
+equivalent reviewed SQL insert using a real hosted administrator identity).
+
 ## Hosted handoff warning
 
 The existing hosted Supabase project already contains platform objects created

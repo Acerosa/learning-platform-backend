@@ -80,12 +80,17 @@ The submission contract version remains 0.1.0.
 These RPCs are callable before authentication because they expose configuration
 and service availability only.
 
-## Published curriculum metadata
+## Published curriculum
 
 `api.published_curriculum()` returns hub, course, version and timestamp
 metadata for currently published curriculum packages. It is available to
-authenticated learners and staff. It does not return package bodies. Learner
-hubs must not read Admin storage. See
+anonymous clients, authenticated learners and staff. It does not return
+package bodies.
+
+`api.published_curriculum_package(hub_code, course_key)` returns the current
+published canonical teaching package for one hub and course. It never returns
+drafts, superseded rows, staff publication fields or `learning.question_marking`.
+Learner hubs must not read Admin storage. See
 [Backend publication](backend-publication.md).
 
 ## Error model

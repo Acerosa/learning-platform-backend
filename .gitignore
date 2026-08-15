@@ -10,3 +10,4 @@ supabase/.branches/
 supabase/.temp/
 supabase/data/generated/*
 !supabase/data/generated/.gitkeep
+!supabase/data/generated/seed-unit14-publication.sql
