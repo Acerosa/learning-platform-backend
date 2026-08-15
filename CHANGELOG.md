@@ -12,6 +12,23 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Learner-safe `api.published_curriculum_package(hub, course)` returning the
+  current published canonical teaching package. Drafts, superseded rows, staff
+  publication fields and `learning.question_marking` are not exposed. Anonymous
+  read is allowed for published teaching content.
+- Server-side, transactional, idempotent catalogue projection from a published
+  `lp.content` package into delivery tables. Published activity versions remain
+  immutable. OCR assignment briefs stay inside the package.
+- Local seed of the reviewed Unit 14 curriculum package `0.2.0` for
+  database-first learner delivery.
+
+### Changed
+
+- `admin_api.publish_curriculum` now projects the delivery catalogue in the
+  same transaction as the immutable publication row.
+- `api.published_curriculum()` is also callable by anonymous clients.
+- Canonical published packages are the runtime source of truth for Unit 14.
+  The generator SQL path remains for reviewed historical imports.
 - Administrative hub registration through `admin_api.register_hub` and updates
   through `admin_api.update_hub`. Authorised `platform_admin` staff can register
   or maintain a reviewed `learning-platform-hub.json` in `platform.hubs` with

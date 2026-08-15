@@ -243,5 +243,39 @@ select throws_ok(
   'published formative marking specifications remain immutable'
 );
 
+select is(
+  (
+    select package_version
+    from platform.curriculum_publications
+    where hub_code = 'unit-14-software-engineering-for-business'
+      and course_key = 'ocr-level-3-it'
+      and status = 'published'
+  ),
+  '0.2.0',
+  'the current Unit 14 canonical package is published'
+);
+select is(
+  (
+    select jsonb_array_length(package->'activities')
+    from api.published_curriculum_package(
+      'unit-14-software-engineering-for-business',
+      'ocr-level-3-it'
+    )
+  ),
+  24,
+  'the learner package RPC returns the 24 published Unit 14 activities'
+);
+select is(
+  (
+    select package->>'version'
+    from api.published_curriculum_package(
+      'unit-14-software-engineering-for-business',
+      'ocr-level-3-it'
+    )
+  ),
+  '0.2.0',
+  'the learner package carries the curriculum package version'
+);
+
 select * from finish();
 rollback;

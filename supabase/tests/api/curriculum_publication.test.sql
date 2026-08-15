@@ -73,6 +73,34 @@ as $$
             'metadata', jsonb_build_object(),
             'relationships', jsonb_build_object(),
             'content', jsonb_build_object('text', 'Published locally then to the platform.')
+          ),
+          jsonb_build_object(
+            'schema', 'lp.content.block',
+            'schemaVersion', '0.1.0',
+            'id', 'pub-activity-teacher-note',
+            'version', '0.1.0',
+            'type', 'teacher-note',
+            'metadata', jsonb_build_object(),
+            'relationships', jsonb_build_object(),
+            'content', jsonb_build_object('text', 'Staff only marking guidance.')
+          ),
+          jsonb_build_object(
+            'schema', 'lp.content.block',
+            'schemaVersion', '0.1.0',
+            'id', 'pub-activity-choice',
+            'version', '0.1.0',
+            'type', 'single-choice',
+            'metadata', jsonb_build_object(),
+            'relationships', jsonb_build_object(),
+            'content', jsonb_build_object(
+              'questionId', 'pub-activity-q1',
+              'prompt', 'Which snapshot is live?',
+              'options', jsonb_build_array(
+                jsonb_build_object('id', 'a', 'label', 'Published'),
+                jsonb_build_object('id', 'b', 'label', 'Draft')
+              ),
+              'correctOptionId', 'a'
+            )
           )
         )
       )
@@ -94,6 +122,12 @@ select has_function(
   'published_curriculum',
   array[]::text[],
   'learner-safe published curriculum metadata RPC exists'
+);
+select has_function(
+  'api',
+  'published_curriculum_package',
+  array['text', 'text'],
+  'learner-safe published curriculum package RPC exists'
 );
 select has_view('admin_api', 'curriculum_publications', 'staff publication history view exists');
 
@@ -347,15 +381,32 @@ select is(
 );
 
 select is(
-  (select count(*) from admin_api.curriculum_publications),
+  (
+    select count(*)
+    from admin_api.curriculum_publications
+    where hub_code = 'unit-3-cyber-security'
+  ),
   2::bigint,
   'staff can read publication history including superseded versions'
 );
 
 select is(
-  (select package_version from api.published_curriculum()),
+  (
+    select package_version
+    from api.published_curriculum()
+    where hub_code = 'unit-3-cyber-security'
+  ),
   '0.1.1',
   'learner-safe metadata exposes only the current published version'
+);
+
+select is(
+  (
+    select package->'curriculum'->'metadata'->>'title'
+    from api.published_curriculum_package('unit-3-cyber-security', 'ocr-level-3-it')
+  ),
+  'Second snapshot',
+  'a newer published package becomes the learner runtime source without a git commit'
 );
 
 select throws_like(
@@ -407,7 +458,11 @@ set local "request.jwt.claim.sub" = '10000000-0000-4000-8000-000000000001';
 set local "request.jwt.claims" = '{"sub":"10000000-0000-4000-8000-000000000001","role":"authenticated"}';
 set local role authenticated;
 select is(
-  (select package_version from api.published_curriculum()),
+  (
+    select package_version
+    from api.published_curriculum()
+    where hub_code = 'unit-3-cyber-security'
+  ),
   '0.1.1',
   'authenticated learners can read published curriculum metadata'
 );
@@ -420,7 +475,115 @@ select ok(
   ),
   'learner consumption is an RPC, not a package-body table'
 );
+select is(
+  (
+    select package_version
+    from api.published_curriculum_package('unit-3-cyber-security', 'ocr-level-3-it')
+  ),
+  '0.1.1',
+  'authenticated learners can read the current published package body'
+);
+select ok(
+  exists (
+    select 1
+    from api.published_curriculum_package('unit-3-cyber-security', 'ocr-level-3-it') as published,
+      jsonb_array_elements(published.package->'activities') as activity,
+      jsonb_array_elements(activity->'blocks') as block
+    where block->>'type' = 'single-choice'
+      and block->'content'->>'questionId' = 'pub-activity-q1'
+  ),
+  'the learner package keeps published teaching activities'
+);
+select ok(
+  (
+    select not coalesce(package::text, '') like '%teacher-note%'
+      and not coalesce(package::text, '') like '%Staff only marking guidance%'
+      and not coalesce(package::text, '') like '%Ada Author%'
+      and not coalesce(package::text, '') like '%Riley Reviewer%'
+    from api.published_curriculum_package('unit-3-cyber-security', 'ocr-level-3-it')
+  ),
+  'the learner package omits teacher-notes and staff publication metadata'
+);
+select throws_like(
+  $$select spec from learning.question_marking limit 1$$,
+  '%permission denied%',
+  'authenticated learners cannot read protected marking specs'
+);
 reset role;
+
+set local role anon;
+select is(
+  (
+    select package_version
+    from api.published_curriculum()
+    where hub_code = 'unit-3-cyber-security'
+  ),
+  '0.1.1',
+  'anonymous clients can read published curriculum metadata'
+);
+select is(
+  (
+    select package->>'version'
+    from api.published_curriculum_package('unit-3-cyber-security', 'ocr-level-3-it')
+  ),
+  '0.1.1',
+  'anonymous clients can read the current published teaching package'
+);
+select throws_ok(
+  $$select * from api.published_curriculum_package('missing-hub', 'ocr-level-3-it')$$,
+  '22023',
+  'HUB_NOT_FOUND',
+  'an unknown hub is rejected'
+);
+select throws_ok(
+  $$select * from api.published_curriculum_package('unit-3-cyber-security', 'missing-course')$$,
+  '22023',
+  'COURSE_NOT_FOUND',
+  'an unknown course is rejected'
+);
+reset role;
+
+select ok(
+  exists (
+    select 1
+    from learning.activities as activity
+    join learning.activity_versions as version on version.activity_id = activity.id
+    where activity.stable_key = 'pub-activity'
+      and version.version = '0.1.0'
+      and version.published_at is not null
+  ),
+  'publication projects interactive activities into the delivery catalogue'
+);
+select is(
+  (
+    select count(*)::int
+    from learning.activity_versions as version
+    join learning.activities as activity on activity.id = version.activity_id
+    where activity.stable_key = 'pub-activity'
+      and version.version = '0.1.0'
+  ),
+  1,
+  'catalogue projection is idempotent for an unchanged activity version'
+);
+select ok(
+  exists (
+    select 1
+    from learning.activity_versions as version
+    join learning.activities as activity on activity.id = version.activity_id
+    where activity.stable_key = 'week-1-baseline-diagnostic'
+      and version.version = '0.1.0'
+      and version.published_at is not null
+  ),
+  'historical Unit 14 Week 1 activity versions remain published'
+);
+select ok(
+  not exists (
+    select 1
+    from platform.curriculum_publications
+    where status not in ('published', 'superseded')
+  ),
+  'draft and in-review snapshots are never stored in the publication catalogue'
+);
 
 select * from finish();
 rollback;
