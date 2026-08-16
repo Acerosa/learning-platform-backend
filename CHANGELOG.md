@@ -12,6 +12,13 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Teacher review mutation `admin_api.review_response` with feedback persistence,
+  attempt total recalculation, completed-row review bypass, and audit events.
+- Additive response columns `feedback_summary` and `feedback_next_step`, plus
+  `teacher` marking source.
+
+### Added
+
 - Additive `admin_api.responses` staff evidence/marks projection and attempt
   summary fields `requires_review` and `question_count` for Results / Markbook.
 

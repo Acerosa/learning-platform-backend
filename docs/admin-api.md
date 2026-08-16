@@ -50,7 +50,8 @@ timestamps only.
 `admin_api.responses` is the staff Results/Markbook evidence projection. It
 exposes question-level payloads, marks, review flags, and optional topic/skill
 keys. Interpretation remains in `@learning-platform/results`. Teacher feedback
-editing is not part of this contract.
+is readable here when present. Staff complete reviews through
+`admin_api.review_response`.
 
 `admin_api.hubs` now includes the reviewed manifest version and hash, exact
 core/learner-API/submission requirements, declared capabilities and structured
@@ -107,6 +108,14 @@ Curriculum publication remains a separate mutation:
 `admin_api.publish_curriculum` accepts only Approved or Published snapshots
 and stores an immutable catalogue row. See
 [Backend publication](backend-publication.md).
+
+Teacher review is a separate mutation: `admin_api.review_response` accepts a
+response id, awarded score, optional correctness, feedback summary and optional
+next step. Identity comes from `auth.uid()`. Authorisation requires
+`platform_admin` or group-scoped teacher access to the attempt’s group. The
+RPC updates marks and feedback only, never `response_payload`, recalculates the
+attempt total, clears `requires_review`, and records
+`learning.response.reviewed` with before/after mark context.
 
 The offline reviewed-manifest and migration generator remains available for
 repository-driven registration. The Admin RPC is the staff-facing path for the

@@ -44,15 +44,17 @@ These are one domain with three meanings. They are not three table families.
 **Result** is how that evidence was evaluated:
 
 - `learning.responses.awarded_score`, `max_score`, `is_correct`,
-  `requires_review`, `marking_source`, `marked_at`
+  `requires_review`, `marking_source`, `marked_at`, `feedback_summary`,
+  `feedback_next_step`
 - `learning.attempts.score`, `max_score`, `status`, `marking_source`,
   `evidence_level`
 - protected `learning.question_marking` for server-side formative specs
   (never learner-readable)
 
 `requires_review = true` with `is_correct` null is the existing hook for
-teacher-reviewed written/code/reflection evidence. A future markbook reads
-these columns; it does not need a second response table.
+teacher-reviewed written/code/reflection evidence. Staff complete reviews
+through `admin_api.review_response`, which updates mark/feedback fields only
+and never changes `response_payload`.
 
 **Progress** is what the result means for the journey:
 
@@ -63,12 +65,12 @@ these columns; it does not need a second response table.
 - attempt summaries now include `requires_review` and `question_count`
 - no browser-authoritative progress table
 
-Completed attempts and responses are immutable. Historical attempts stay
-attached to the activity version that was current at submission.
-
-Future Admin Results/Markbook work should add views and RPCs over this model
-(group markbook, question diagnostics, topic/skill aggregates via
-`question_topics` / `question_skills`), not duplicate attempt rows.
+Completed attempts and responses remain immutable for ordinary clients.
+The security-definer review path may update mark and feedback columns only.
+Historical attempts stay attached to the activity version that was current at
+submission. Group markbook, question diagnostics and topic/skill aggregates use
+existing `question_topics` / `question_skills` mappings rather than duplicate
+attempt rows.
 
 ## Platform data
 
