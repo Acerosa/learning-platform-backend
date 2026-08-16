@@ -12,6 +12,16 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Additive `admin_api.responses` staff evidence/marks projection and attempt
+  summary fields `requires_review` and `question_count` for Results / Markbook.
+
+### Changed
+- Hub Registry Core generation aligned to `0.2.0` for Unit 14, Unit 3 and
+  T Level. `learning-platform-core` contract `0.2.0` is registered; `0.1.0`
+  remains for historical migrations.
+
+### Added
+
 - Learner-safe `api.published_curriculum_package(hub, course)` returning the
   current published canonical teaching package. Drafts, superseded rows, staff
   publication fields and `learning.question_marking` are not exposed. Anonymous

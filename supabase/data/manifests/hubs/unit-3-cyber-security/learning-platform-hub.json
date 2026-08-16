@@ -3,7 +3,7 @@
   "hubId": "unit-3-cyber-security",
   "name": "Unit 3 Cyber Security Hub",
   "description": "Learner hub for OCR Level 3 IT Unit 3 Cyber Security.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "repositoryUrl": "https://github.com/Acerosa/unit-3-Cyber-Security-Hub",
   "deploymentUrl": "https://acerosa.github.io/unit-3-Cyber-Security-Hub",
   "courses": [
@@ -11,13 +11,13 @@
   ],
   "compatibility": {
     "required": {
-      "coreVersion": "0.1.0",
+      "coreVersion": "0.2.0",
       "learnerApiContractVersion": "0.1.0",
       "submissionContractVersion": "0.1.0"
     },
     "testedCombinations": [
       {
-        "coreVersion": "0.1.0",
+        "coreVersion": "0.2.0",
         "learnerApiContractVersion": "0.1.0",
         "submissionContractVersion": "0.1.0"
       }

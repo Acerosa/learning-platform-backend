@@ -30,16 +30,45 @@ Canonical published teaching packages live in
 `platform.curriculum_publications`. Catalogue tables are projections used for
 delivery and submissions, not a second authoring source.
 
-## Evidence and progress
+## Evidence, results and progress
 
-- `learning.attempts`: one server-numbered learner attempt with idempotency,
-  assignment, activity version and timing context.
-- `learning.responses`: question-level structured evidence linked to an
-  attempt.
-- Progress and analytics are derived through API views; there is no separate
-  browser-authoritative progress table.
+These are one domain with three meanings. They are not three table families.
 
-Completed attempts and responses are immutable.
+**Evidence** is what the learner submitted:
+
+- `learning.responses.response_payload` (selected answers, written text, code,
+  reflections, classifications, structured artefacts)
+- attempt context: `client_attempt_id`, `source_page`, timestamps,
+  optional programming language
+
+**Result** is how that evidence was evaluated:
+
+- `learning.responses.awarded_score`, `max_score`, `is_correct`,
+  `requires_review`, `marking_source`, `marked_at`
+- `learning.attempts.score`, `max_score`, `status`, `marking_source`,
+  `evidence_level`
+- protected `learning.question_marking` for server-side formative specs
+  (never learner-readable)
+
+`requires_review = true` with `is_correct` null is the existing hook for
+teacher-reviewed written/code/reflection evidence. A future markbook reads
+these columns; it does not need a second response table.
+
+**Progress** is what the result means for the journey:
+
+- derived views such as `api.my_activity_progress` (completion, attempt
+  counts, first/latest/best where the view defines them)
+- `admin_api.dashboard_summary` and `activity_performance` for staff
+- `admin_api.responses` for staff question-level evidence and marks
+- attempt summaries now include `requires_review` and `question_count`
+- no browser-authoritative progress table
+
+Completed attempts and responses are immutable. Historical attempts stay
+attached to the activity version that was current at submission.
+
+Future Admin Results/Markbook work should add views and RPCs over this model
+(group markbook, question diagnostics, topic/skill aggregates via
+`question_topics` / `question_skills`), not duplicate attempt rows.
 
 ## Platform data
 

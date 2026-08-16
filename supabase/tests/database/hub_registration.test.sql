@@ -40,8 +40,8 @@ select is(
     where contract_key in ('hub-manifest', 'learning-platform-core')
       and status = 'active'
   ),
-  2::bigint,
-  'manifest and core compatibility versions are active'
+  3::bigint,
+  'manifest 1.0.0 and Core 0.1.0/0.2.0 contract versions are active'
 );
 
 select is(
@@ -49,7 +49,7 @@ select is(
     select count(*)
     from platform.hubs
     where manifest_version = '1.0.0'
-      and core_version = '0.1.0'
+      and core_version = '0.2.0'
       and learner_api_version = '0.1.0'
       and submission_contract_version = '0.1.0'
       and manifest_sha256 ~ '^[0-9a-f]{64}$'

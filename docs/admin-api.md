@@ -8,7 +8,7 @@ publication.
 
 ## Authentication and roles
 
-The Central Admin Portal will use Supabase Auth. An authenticated user must map
+The Central Admin Portal uses Supabase Auth. An authenticated user must map
 to an active `learning.teachers` profile and an active
 `platform.staff_roles` record. Auth claims supplied by the browser do not grant
 platform roles.
@@ -32,6 +32,7 @@ platform roles.
 - `dashboard_summary`
 - `activity_performance`
 - `curriculum_publications`
+- `responses`
 
 All views use `security_invoker = true`; underlying RLS remains authoritative.
 Only `platform_admin` can read platform-wide learner, enrolment, assignment and
@@ -44,7 +45,12 @@ or role from the browser.
 
 `dashboard_summary` and `activity_performance` are platform-admin-only,
 backend-derived aggregates. The analytics view contains summary scores and
-timestamps only; it does not expose learner response payloads.
+timestamps only.
+
+`admin_api.responses` is the staff Results/Markbook evidence projection. It
+exposes question-level payloads, marks, review flags, and optional topic/skill
+keys. Interpretation remains in `@learning-platform/results`. Teacher feedback
+editing is not part of this contract.
 
 `admin_api.hubs` now includes the reviewed manifest version and hash, exact
 core/learner-API/submission requirements, declared capabilities and structured
