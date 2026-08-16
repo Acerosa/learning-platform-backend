@@ -181,6 +181,30 @@ select is(
   'activity analytics are aggregated in the backend'
 );
 
+select is(
+  (select requires_review from admin_api.attempts where attempt_id = '93000000-0000-4000-8000-000000000001'),
+  false,
+  'attempt summaries expose a backend-derived review flag'
+);
+
+reset role;
+
+select has_view(
+  'admin_api',
+  'responses',
+  'the admin API exposes question-level results for staff inspection'
+);
+
+set local "request.jwt.claim.sub" = '10000000-0000-4000-8000-000000000001';
+set local "request.jwt.claims" = '{"sub":"10000000-0000-4000-8000-000000000001","role":"authenticated"}';
+set local role authenticated;
+
+select is(
+  (select count(*) from admin_api.responses),
+  0::bigint,
+  'a learner session cannot read staff response evidence'
+);
+
 reset role;
 
 select * from finish();

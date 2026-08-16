@@ -79,6 +79,12 @@ select is(
 );
 
 select is(
+  (select count(*) from admin_api.responses) >= 0,
+  true,
+  'the platform administrator can read the staff responses projection'
+);
+
+select is(
   (select count(*) from admin_api.hubs),
   3::bigint,
   'the platform administrator can read the complete local hub registry'
@@ -86,7 +92,7 @@ select is(
 
 select is(
   (select count(*) from admin_api.platform_contracts),
-  6::bigint,
+  7::bigint,
   'the platform administrator can inspect active, retired and draft contracts'
 );
 

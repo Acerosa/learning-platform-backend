@@ -1,7 +1,7 @@
 # Learning Platform Backend
 
 The single authoritative Supabase backend repository for all Learning Platform
-learner hubs and the future Central Admin Portal.
+learner hubs and the Central Admin Portal.
 
 Version: **0.1.0 (foundation)**
 
@@ -20,7 +20,8 @@ This repository owns shared backend data and behaviour:
 - learner registration and onboarding;
 - Row Level Security and approved API boundaries;
 - hub registration and platform contract versions;
-- staff roles and the read-only Central Admin Portal API foundation;
+- staff roles and the Central Admin Portal `admin_api` (reads plus reviewed
+  hub-register, hub-update and curriculum-publication mutations);
 - audit-event and operational-health foundations;
 - backend tests, fixtures and release controls.
 
@@ -62,7 +63,9 @@ or attempt numbers. Learner identity derives from `auth.uid()` and protected
 relationships. Privileged credentials must never be committed or placed in a
 browser application.
 
-See [docs/architecture.md](docs/architecture.md) for the complete boundary.
+See [docs/architecture.md](docs/architecture.md) for the platform architecture
+(Contract-First Modular Hub Architecture) and this repository's backend
+boundary.
 
 ## Repository structure
 
@@ -156,7 +159,7 @@ protected schemas directly.
 
 ## Administrative foundation
 
-`admin_api` currently provides read-only views for current staff context, hubs,
+`admin_api` provides staff views for current staff context, hubs,
 contracts, staff roles, audit events, operational health, learners, groups,
 enrolments, assignments, attempts, dashboard counts, activity-performance
 aggregates and curriculum publication history. Access requires an active staff
@@ -214,12 +217,14 @@ None of these hubs is marked certified by this repository.
   evidence-only items omit both fields and are server-marked from protected
   `learning.question_marking`. Rejecting client marks on questions that have
   marking specs is later contract work; do not break historical attempts.
-- The admin API is read-only and version `0.1.0` remains draft.
+- The admin API contract is `0.2.0` (draft). It is not read-only: hub
+  registration, hub updates and curriculum publication are reviewed mutations.
+  Other staff writes remain pending.
 - Audit and health tables/functions are foundations; no external monitoring or
   event pipeline is configured.
-- Hosted migration history has not been reconciled to this new repository.
-- No hosted Supabase deployment, link, push or remote migration is performed by
-  this foundation.
+- The hosted Supabase project is in use for Unit 14 runtime curriculum. Do not
+  blindly `db push` extracted history; reconcile migration history before any
+  further hosted schema change.
 
 ## Documentation
 

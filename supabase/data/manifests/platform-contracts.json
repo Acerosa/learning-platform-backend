@@ -11,7 +11,13 @@
       "contractKey": "learning-platform-core",
       "version": "0.1.0",
       "status": "active",
-      "compatibility": "Exact version compatibility for Phase 1 hub registration"
+      "compatibility": "Historical Core generation retained for existing migrations"
+    },
+    {
+      "contractKey": "learning-platform-core",
+      "version": "0.2.0",
+      "status": "active",
+      "compatibility": "Supported Core runtime generation for learner hubs"
     },
     {
       "contractKey": "learner-api",

@@ -38,8 +38,8 @@ select is(
     from platform.contract_versions
     where status = 'active'
   ),
-  4::bigint,
-  'hub manifest, core, learner API and submission contracts are active'
+  5::bigint,
+  'hub manifest, core 0.1/0.2, learner API and submission contracts are active'
 );
 
 select is(
@@ -55,7 +55,7 @@ select is(
         where option_name = 'security_invoker'
       ), false)
   ),
-  16::bigint,
+  17::bigint,
   'all staff API views use invoker security'
 );
 
@@ -87,7 +87,7 @@ select is(
 
 select is(
   (select count(*) from api.platform_contract_versions()),
-  4::bigint,
+  5::bigint,
   'anonymous clients can negotiate active platform contract versions'
 );
 
