@@ -4,17 +4,18 @@ This document records the static-to-database curriculum migration for **Unit 3
 Cyber Security** and **T Level Digital Software Development**. It complements
 `docs/content-publication.md` and Core `docs/curriculum-runtime.md`.
 
-## Status (local)
+## Status (hosted 2026-08-18)
 
-| Hub | hubCode | courseKey | Initial publication | Runtime wiring | Local seed | Hosted production |
-| --- | --- | --- | --- | --- | --- | --- |
-| Unit 3 Cyber Security | `unit-3-cyber-security` | `ocr-level-3-it` | `0.2.0` (76 activities, 7 weeks) | `platform.curriculum.loadLatest()` | yes | **not migrated** |
-| T Level Software Development | `tlevel-software-development` | `t-level-digital-software-development` | `0.2.0` (5 activities, 1 week) | `platform.curriculum.loadLatest()` | yes | **not migrated** |
-| Unit 14 (reference) | `unit-14-software-engineering-for-business` | `ocr-level-3-it` | existing | unchanged | yes | separate process |
+| Hub | hubCode | courseKey | Hosted publication | Runtime wiring | Classification |
+| --- | --- | --- | --- | --- | --- |
+| Unit 3 Cyber Security | `unit-3-cyber-security` | `ocr-level-3-it` | current `0.2.1` (`0.2.0` superseded) | `platform.curriculum.loadLatest()` | **DATABASE_DRIVEN** |
+| T Level Software Development | `tlevel-software-development` | `t-level-digital-software-development` | current `0.2.2` (first hosted package `0.2.1` superseded) | `platform.curriculum.loadLatest()` | **DATABASE_DRIVEN** |
+| Unit 14 (reference) | `unit-14-software-engineering-for-business` | `ocr-level-3-it` | `0.2.2` | unchanged | **DATABASE_DRIVEN** |
 
-Both migrated hubs are **runtime-ready** and **locally seeded**. Classify a hub
-as **DATABASE_DRIVEN** only after a live reload proves teaching copy comes from
-`api.published_curriculum_package`, not the Git snapshot.
+Hosted verification: both learner hubs loaded `api.published_curriculum_package`
+with `data-curriculum-source=published`. Admin edited a field and republished
+without a Git commit, GitHub Action or Pages deploy. Git/static fallback was
+not used while a publication existed.
 
 ## Architecture after migration
 
@@ -157,12 +158,13 @@ Post-migration acceptance (each hub):
 
 ## Hosted deployment steps
 
-1. Merge backend migration `20260817223000_fix_curriculum_projection_activity_ids.sql` (catalogue projection id resolution).
-2. Deploy backend to hosted Supabase (migrations only — no production seed SQL unless reviewed).
-3. In Admin, publish Unit 3 package `0.2.0` via `admin_api.publish_curriculum`.
-4. In Admin, publish T Level package `0.2.0` the same way.
-5. Deploy learner hub **application code** (runtime wiring) — one-time; subsequent teaching copy changes do not require redeploy.
-6. Smoke test each hub against hosted Supabase URL (see below).
+Completed 2026-08-18:
+
+1. Hosted backend migrations including `fix_curriculum_projection_activity_ids`.
+2. Admin Portal deployed (drafts, editing, publication; Unit 3, T Level and Unit 14 visible).
+3. Unit 3 and T Level learner runtimes deployed (curriculum from Supabase, not Git).
+4. Admin published Unit 3 (`0.2.0` then smoke `0.2.1`) and T Level (first hosted `0.2.1`, smoke `0.2.2`) through `admin_api.publish_curriculum`.
+5. Smoke tests: `data-curriculum-source=published`; Admin edit visible after reload; no Git/Pages deploy for teaching copy.
 
 ## Smoke test procedure
 
@@ -182,7 +184,23 @@ If publication is missing, hubs fall back to the explicit Git/static snapshot (o
 
 ## Remaining gaps
 
-- Hosted production publications not created by this work
-- Unit 3 Week 1 Apps Script teaching copy not fully in package
-- Catalogue projection during local `--publication-only` seeds is skipped; full Admin publish on hosted should use `admin_api.publish_curriculum` (projection fix migration included)
-- Manual browser smoke test against hosted environment not executed in this migration branch
+- Unit 3 Week 1 Apps Script teaching copy is not fully in the package (see Week 1 plan below)
+- Git/static fallback remains in hub runtime by design; remove it in a dedicated follow-up after several further production publications
+- Hosted T Level first publication is version `0.2.1` (canonical package body); Admin’s shared next-version field had already seen Unit 3 `0.2.0`
+
+### Week 1 Apps Script extraction (plan only)
+
+There is no `apps-script/week-1/` project in the hub. Week 1 still runs through
+`activities/activity.html` and the Activity API (`U3-W01-*` / `u3-w01-*`),
+including `markSection`. The canonical package includes eight Week 1 activity
+ids with scaffolding reflection blocks so the package validates.
+
+Extraction is possible but **not low-risk during cutover**:
+
+1. Export current Activity API banks (prompts, options, feedback) into Admin.
+2. Replace scaffolding blocks with real `lp.content` questions.
+3. Keep `markSection` on Apps Script until a learner-API equivalent exists.
+4. Publish a new package version; do not change Week 1 renderer in the same PR.
+
+Do not rush this into a production cutover. Git remains authoritative for that
+Week 1 copy until those steps complete.

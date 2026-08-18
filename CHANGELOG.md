@@ -10,6 +10,12 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ## [Unreleased]
 
+### Changed
+
+- Hosted production cutover: Unit 3 and T Level classified **DATABASE_DRIVEN**
+  after Admin publication and live hub verification
+  (`data-curriculum-source=published`). Unit 14 remains **DATABASE_DRIVEN**.
+
 ### Added
 
 - Optional `api.published_curriculum_package(hub, course, version)` for explicit
