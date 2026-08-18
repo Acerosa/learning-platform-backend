@@ -3,8 +3,8 @@
 ## Status
 
 The admin API contract is version `0.2.0` and **draft**. It exposes read models,
-the single-use initial administrator bootstrap, hub registration, and curriculum
-publication.
+the single-use initial administrator bootstrap, hub registration, curriculum
+publication, teacher response review, and assessment analytics aggregates.
 
 ## Authentication and roles
 
@@ -31,12 +31,21 @@ platform roles.
 - `attempts`
 - `dashboard_summary`
 - `activity_performance`
+- `assessment_overview`
+- `group_performance`
+- `learner_performance`
+- `activity_analytics`
+- `question_performance`
+- `topic_performance`
+- `skill_performance`
 - `curriculum_publications`
 - `responses`
 
 All views use `security_invoker = true`; underlying RLS remains authoritative.
-Only `platform_admin` can read platform-wide learner, enrolment, assignment and
-attempt views in this release.
+Only `platform_admin` can read platform-wide learner, enrolment, assignment,
+attempt and assessment-analytics views in this release. Group-scoped teacher
+analytics reads are not opened yet; teacher review mutations remain separately
+authorised through `admin_api.review_response`.
 
 `current_staff_context` is the browser-safe session projection used by the
 portal after Supabase Auth restores a session. It returns only the current
@@ -44,8 +53,25 @@ active staff profile and active backend roles. It does not accept an identity
 or role from the browser.
 
 `dashboard_summary` and `activity_performance` are platform-admin-only,
-backend-derived aggregates. The analytics view contains summary scores and
-timestamps only.
+backend-derived operational aggregates. Assessment analytics views add
+staff-facing educational aggregates without a warehouse:
+
+| View | Purpose |
+| --- | --- |
+| `assessment_overview` | Platform KPIs: learners, groups, attempts, completion, average result, review backlog, participation, topic/skill metadata coverage counts |
+| `group_performance` | Per-group participation, completion, average/best/latest performance, review backlog |
+| `learner_performance` | Per-learner assigned/completed activities, first/latest/best/average scores, review counts |
+| `activity_analytics` | Per-assignment assigned vs attempted learners, completion, score distribution, review backlog |
+| `question_performance` | Per-question response counts, correctness, awarded score averages, review counts, topic/skill keys |
+| `topic_performance` / `skill_performance` | Existing `topic_keys` / `skill_keys` rollups only; incomplete metadata is visible as sparse coverage |
+
+These aggregates expose summary scores and counts only. They do not include
+response payloads or answer keys. Intervention/“needs attention” interpretation
+remains in `@learning-platform/results`.
+
+**Query note:** topic/skill/question aggregates join curriculum metadata to
+responses. At larger scale they may need materialised follow-ups; MVP computes
+from authoritative records.
 
 `admin_api.responses` is the staff Results/Markbook evidence projection. It
 exposes question-level payloads, marks, review flags, and optional topic/skill
@@ -106,7 +132,10 @@ browser never writes `platform.hubs` directly. See
 
 Curriculum publication remains a separate mutation:
 `admin_api.publish_curriculum` accepts only Approved or Published snapshots
-and stores an immutable catalogue row. See
+and stores an immutable catalogue row. Staff drafts use
+`admin_api.save_curriculum_draft` / `get_curriculum_draft` /
+`discard_curriculum_draft`. Opening live teaching copy for editing uses
+`admin_api.current_curriculum_package`. See
 [Backend publication](backend-publication.md).
 
 Teacher review is a separate mutation: `admin_api.review_response` accepts a

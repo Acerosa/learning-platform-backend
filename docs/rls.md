@@ -46,7 +46,9 @@ authenticated role can mutate protected tables directly.
 
 `platform.curriculum_publications` is readable by authorised staff roles.
 Inserts occur only through `admin_api.publish_curriculum`. Published rows are
-immutable except for the controlled supersede transition. Learners and
+immutable except for the controlled supersede transition. Staff drafts live in
+`platform.curriculum_drafts` and are readable/writable only through the
+`admin_api` draft RPCs (`platform_admin` or `curriculum_admin`). Learners and
 anonymous clients read current published teaching content only through
 `api.published_curriculum()` and `api.published_curriculum_package()`. They
 cannot read drafts, superseded bodies, staff publication fields or

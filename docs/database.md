@@ -27,8 +27,10 @@ deployed hubs to retain their contracts. `learning.question_marking` is not
 granted to authenticated learners.
 
 Canonical published teaching packages live in
-`platform.curriculum_publications`. Catalogue tables are projections used for
-delivery and submissions, not a second authoring source.
+`platform.curriculum_publications`. Staff working copies live in
+`platform.curriculum_drafts` and are never learner-visible. Catalogue tables
+are projections used for delivery and submissions, not a second authoring
+source.
 
 ## Evidence, results and progress
 

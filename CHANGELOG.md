@@ -12,6 +12,17 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Optional `api.published_curriculum_package(hub, course, version)` for explicit
+  historical/superseded package reads. Two-argument latest-published behaviour
+  is unchanged.
+
+- Assessment analytics read models: `assessment_overview`, `group_performance`,
+  `learner_performance`, `activity_analytics`, `question_performance`,
+  `topic_performance`, and `skill_performance` (platform-admin aggregates; no
+  payloads or answer keys).
+
+### Added
+
 - Teacher review mutation `admin_api.review_response` with feedback persistence,
   attempt total recalculation, completed-row review bypass, and audit events.
 - Additive response columns `feedback_summary` and `feedback_next_step`, plus
