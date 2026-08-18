@@ -49,13 +49,13 @@ select is(
     join pg_namespace as namespace on namespace.oid = relation.relnamespace
     where namespace.nspname = 'admin_api'
       and relation.relkind = 'v'
-      and coalesce((
+      and not coalesce((
         select option_value = 'true'
         from pg_options_to_table(relation.reloptions)
         where option_name = 'security_invoker'
       ), false)
   ),
-  17::bigint,
+  0::bigint,
   'all staff API views use invoker security'
 );
 

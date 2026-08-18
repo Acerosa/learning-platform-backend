@@ -23,6 +23,51 @@ This is not a microservice architecture. Domains are isolated enough that a
 capability could later be extracted if there is a genuine scaling or
 organisational reason. Extraction is not a current requirement.
 
+## Content ownership
+
+| Layer | Owns |
+| --- | --- |
+| GitHub repositories | Application code: hubs, Core, UI, Admin shell, renderers, contracts |
+| Supabase | Authoritative **published** curriculum packages, catalogue projections, learner evidence |
+| Admin Portal | Curriculum/content **authoring**: drafts, preview, validation, publication requests |
+
+Teaching-content changes (wording, questions, hints, starter code, marking
+metadata, resources, differentiated variants) are published through
+`admin_api.publish_curriculum`. They do **not** require a Git commit, GitHub
+Action, Vite rebuild or GitHub Pages redeploy.
+
+GitHub deployment is still required for application-code changes: new React
+components, activity renderers, shared Core, new block types, navigation,
+platform contracts and infrastructure.
+
+## Hub curriculum loading
+
+| Hub | Runtime class |
+| --- | --- |
+| Unit 14 Software Engineering for Business | **DATABASE_DRIVEN** — `platform.curriculum` / `api.published_curriculum_package` |
+| Unit 3 Cyber Security | **MIGRATION_READY** — runtime uses shared `platform.curriculum.loadLatest()`; local seed `0.2.0`; classify **DATABASE_DRIVEN** after hosted publish + live reload verification |
+| T Level Software Development | **MIGRATION_READY** — runtime uses shared `platform.curriculum.loadLatest()`; local seed `0.2.0`; classify **DATABASE_DRIVEN** after hosted publish + live reload verification |
+
+Every hub consumes `@learning-platform/core/curriculum-runtime`. Hubs supply
+`hubCode` and `courseKey` only. They must not implement publication lookup,
+cache keys or schema validation. See Core `docs/curriculum-runtime.md`.
+
+## Difficulty variants
+
+Activities keep a unique stable `id` (the catalogue `stable_key`). Variants
+use `metadata.familyId` for the shared family and
+`metadata.difficulty` of `foundation` | `standard` | `challenge`. Typical ids
+are `{family}-{difficulty}` when that key is free. Optional `metadata.support`
+(`scaffolded` | `independent` | `extension`) is reserved and is not a
+substitute for difficulty.
+
+## Drafts versus publication
+
+`platform.curriculum_drafts` holds staff working copies with optimistic
+`revision` tokens. Learners never read drafts. Live teaching content remains
+the current `published` row in `platform.curriculum_publications`. Historic
+`learning.attempts` keep the `activity_version_id` used at submission time.
+
 ## Polyrepo map
 
 | Repository | Role |
@@ -115,8 +160,8 @@ separates the concepts:
 | **Progress** | What does that mean for the journey? | Derived views (`api.my_activity_progress`), not a write model |
 
 Teacher review, written/code evidence, first/latest/best, group markbook and
-topic/skill analytics can extend these columns and views. See
-[Database model](database.md).
+topic/skill analytics extend these columns and additive `admin_api` aggregate
+views. See [Admin API](admin-api.md) and [Database model](database.md).
 
 ## Future extraction (design for, do not build)
 
@@ -154,8 +199,8 @@ or Kubernetes unless a concrete requirement appears.
 | Hub | Class | Notes |
 | --- | --- | --- |
 | Unit 14 | **Current generation** (reference) | React + TypeScript + Vite MPA, Core 0.2, UI, Content, runtime published package |
-| Unit 3 Cyber | **Current generation** | Core 0.2 + UI shell; classic week engines and Week 1 Apps Script retained; no Content package |
-| T Level | **Current generation** | Core 0.2 + UI shell; classic Foundations engines retained; frozen historical `supabase/` copy must not be applied |
+| Unit 3 Cyber | **Current generation** | Core 0.2 + UI shell; database-first runtime wired; Week 1 Apps Script copy partially outside package |
+| T Level | **Current generation** | Core 0.2 + UI shell; database-first runtime wired; Foundations mapped to single canonical week |
 
 Do not migrate a hub solely for visual consistency. Classic engines are retained on purpose.
 
@@ -270,8 +315,9 @@ claimed in this release.
   fully server-authoritative marking needs a stronger marking contract.
 - Curriculum metadata does not yet implement every LHDS lifecycle and learning
   outcome field.
-- Administrative writes other than hub register/update and curriculum
-  publication still require separately designed, audited RPCs.
+- Administrative writes other than hub register/update, curriculum
+  publication and staff curriculum drafts still require separately designed,
+  audited RPCs.
 - Teacher markbook, first/latest/best result views and topic/skill analytics
   now have staff read models (`admin_api.attempts` review flag,
   `admin_api.responses`). Interpretation lives in `@learning-platform/results`.

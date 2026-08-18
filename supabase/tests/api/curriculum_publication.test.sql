@@ -280,7 +280,7 @@ select is(
       'published',
       'unit-3-cyber-security',
       'ocr-level-3-it',
-      '0.1.0',
+      '0.3.0',
       '0.1.0',
       '0.1.0',
       pg_temp.publication_package(),
@@ -289,7 +289,7 @@ select is(
       'First platform snapshot.'
     )
   ),
-  '0.1.0',
+  '0.3.0',
   'an authorised administrator can publish a valid snapshot'
 );
 
@@ -300,7 +300,7 @@ select is(
       'published',
       'unit-3-cyber-security',
       'ocr-level-3-it',
-      '0.1.0',
+      '0.3.0',
       '0.1.0',
       '0.1.0',
       pg_temp.publication_package(),
@@ -316,7 +316,7 @@ select is(
 select throws_ok(
   format(
     $sql$select * from admin_api.publish_curriculum(
-      'published', 'unit-3-cyber-security', 'ocr-level-3-it', '0.1.0', '0.1.0', '0.1.0',
+      'published', 'unit-3-cyber-security', 'ocr-level-3-it', '0.3.0', '0.1.0', '0.1.0',
       %L::jsonb, 'Ada Author', 'Riley Reviewer', 'Changed body'
     )$sql$,
     pg_temp.publication_package('Changed title')::text
@@ -333,7 +333,7 @@ select is(
       'approved',
       'unit-3-cyber-security',
       'ocr-level-3-it',
-      '0.1.1',
+      '0.3.1',
       '0.1.0',
       '0.1.0',
       pg_temp.publication_package('Second snapshot'),
@@ -342,7 +342,7 @@ select is(
       'Superseding snapshot.'
     )
   ),
-  '0.1.1',
+  '0.3.1',
   'publishing a newer version succeeds'
 );
 
@@ -350,7 +350,7 @@ select is(
   (
     select status
     from platform.curriculum_publications
-    where package_version = '0.1.0'
+    where package_version = '0.3.0'
       and hub_code = 'unit-3-cyber-security'
   ),
   'superseded',
@@ -386,7 +386,7 @@ select is(
     from admin_api.curriculum_publications
     where hub_code = 'unit-3-cyber-security'
   ),
-  2::bigint,
+  3::bigint,
   'staff can read publication history including superseded versions'
 );
 
@@ -396,7 +396,7 @@ select is(
     from api.published_curriculum()
     where hub_code = 'unit-3-cyber-security'
   ),
-  '0.1.1',
+  '0.3.1',
   'learner-safe metadata exposes only the current published version'
 );
 
@@ -412,13 +412,13 @@ select is(
 select throws_like(
   $$update platform.curriculum_publications
     set author = 'mutated'
-    where package_version = '0.1.1'$$,
+    where package_version = '0.3.1'$$,
   '%permission denied%',
   'authenticated administrators cannot update publication rows directly'
 );
 
 select throws_like(
-  $$delete from platform.curriculum_publications where package_version = '0.1.1'$$,
+  $$delete from platform.curriculum_publications where package_version = '0.3.1'$$,
   '%permission denied%',
   'authenticated administrators cannot delete publication rows directly'
 );
@@ -441,14 +441,14 @@ reset role;
 select throws_ok(
   $$update platform.curriculum_publications
     set author = 'mutated'
-    where package_version = '0.1.1'$$,
+    where package_version = '0.3.1'$$,
   '22023',
   'PUBLISHED_CURRICULUM_IMMUTABLE',
   'published catalogue rows cannot be edited even by the table owner'
 );
 
 select throws_ok(
-  $$delete from platform.curriculum_publications where package_version = '0.1.1'$$,
+  $$delete from platform.curriculum_publications where package_version = '0.3.1'$$,
   '22023',
   'PUBLISHED_CURRICULUM_IMMUTABLE',
   'published catalogue rows cannot be deleted even by the table owner'
@@ -463,7 +463,7 @@ select is(
     from api.published_curriculum()
     where hub_code = 'unit-3-cyber-security'
   ),
-  '0.1.1',
+  '0.3.1',
   'authenticated learners can read published curriculum metadata'
 );
 select ok(
@@ -480,8 +480,32 @@ select is(
     select package_version
     from api.published_curriculum_package('unit-3-cyber-security', 'ocr-level-3-it')
   ),
-  '0.1.1',
+  '0.3.1',
   'authenticated learners can read the current published package body'
+);
+select is(
+  (
+    select package_version
+    from api.published_curriculum_package('unit-3-cyber-security', 'ocr-level-3-it', '0.3.0')
+  ),
+  '0.3.0',
+  'authenticated learners can read an explicit historical package version'
+);
+select is(
+  (
+    select package_version
+    from api.published_curriculum_package('unit-3-cyber-security', 'ocr-level-3-it', '0.2.0')
+  ),
+  '0.2.0',
+  'the migrated publication remains readable after a later staff publish'
+);
+select is(
+  (
+    select package_version
+    from api.published_curriculum_package('unit-3-cyber-security', 'ocr-level-3-it', null)
+  ),
+  '0.3.1',
+  'a null package version still returns the current published package'
 );
 select ok(
   exists (
@@ -518,7 +542,7 @@ select is(
     from api.published_curriculum()
     where hub_code = 'unit-3-cyber-security'
   ),
-  '0.1.1',
+  '0.3.1',
   'anonymous clients can read published curriculum metadata'
 );
 select is(
@@ -526,7 +550,7 @@ select is(
     select package->>'version'
     from api.published_curriculum_package('unit-3-cyber-security', 'ocr-level-3-it')
   ),
-  '0.1.1',
+  '0.3.1',
   'anonymous clients can read the current published teaching package'
 );
 select throws_ok(

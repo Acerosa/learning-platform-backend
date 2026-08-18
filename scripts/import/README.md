@@ -10,8 +10,23 @@ package (Unit 14) and writes the same reviewable SQL/JSON pair. It does not
 replace the Unit 3 importer. See `docs/content-publication.md`.
 
 `generate-curriculum-publication-seed.py` assembles the same package into a
-local `platform.curriculum_publications` seed. Runtime publication uses
+local `platform.curriculum_publications` seed. Use `--publication-only` when the
+hub catalogue is already grounded (Unit 3, T Level). Runtime publication uses
 `admin_api.publish_curriculum`, which projects the delivery catalogue.
+
+`convert_static_hubs.mjs` converts Unit 3 / T Level Git teaching snapshots into
+canonical `lp.content` packages in each hub's `content/` directory. Pair with
+the publication seed generator above for local database-first testing.
+
+```bash
+node scripts/import/convert_static_hubs.mjs
+python3 scripts/import/generate-curriculum-publication-seed.py --publication-only \
+  ../unit-3-Cyber-Security-Hub/content/unit-3-cyber-security \
+  supabase/data/generated/seed-unit3-publication.sql
+node scripts/import/tests/test_static_hub_packages.mjs
+```
+
+See `docs/curriculum-migration-unit3-tlevel.md` for the full migration record.
 
 `validate-hub-manifest.py` validates the LHDS root
 `learning-platform-hub.json`, including conflicts, course identities and active

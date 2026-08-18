@@ -40,8 +40,14 @@ Rejected: `draft`, `ready-for-review`, `in-review`, and any other status.
 | `platform.project_curriculum_package` | Idempotent catalogue projection |
 | `admin_api.publish_curriculum` | Browser-safe wrapper |
 | `admin_api.curriculum_publications` | Staff history (no package body) |
+| `admin_api.curriculum_drafts` | Staff draft metadata (no package body) |
+| `admin_api.save_curriculum_draft` | Create/update staff draft with revision checks |
+| `admin_api.get_curriculum_draft` | Load a staff draft including package body |
+| `admin_api.discard_curriculum_draft` | Delete a staff draft |
+| `admin_api.current_curriculum_package` | Staff read of the live published package body |
 | `api.published_curriculum()` | Public current metadata |
 | `api.published_curriculum_package(hub, course)` | Public current teaching package |
+| `api.published_curriculum_package(hub, course, version)` | Public teaching package for an explicit version, including superseded rows |
 
 The canonical package is the source of truth. `learning.activities`,
 `learning.activity_versions` and related tables are projections used for
@@ -54,6 +60,12 @@ assignment catalogue.
 `api.published_curriculum_package(p_hub_code, p_course_key)`:
 
 - returns only the current `published` row
+
+`api.published_curriculum_package(p_hub_code, p_course_key, p_package_version)`:
+
+- returns that package version for the hub/course when it exists, including
+  superseded historical rows
+- with a null/blank version behaves as the two-argument latest-published read
 - rejects unknown or unlinked hub/course values
 - never returns drafts, in-review snapshots or superseded packages
 - omits teacher-note blocks and staff publication fields
@@ -69,6 +81,8 @@ RLS-protected.
 - Edit Drafts only.
 - Run local validation and review before local Publish.
 - Call the RPC only after a local Approved/Published snapshot exists.
+- Save drafts through `admin_api.save_curriculum_draft`. Open live content
+  through `admin_api.current_curriculum_package`.
 - Never send service-role keys. Never query `learning` or `platform` schemas.
 - Display Pending / Publishing / Published / Failed for the platform call.
 
@@ -94,7 +108,10 @@ Historical activity versions and attempts are not rewritten.
 ## Audit
 
 Each successful publish writes `curriculum.publication.published`. Catalogue
-projection writes `curriculum.catalogue.projected`. History is not removed.
+projection writes `curriculum.catalogue.projected`. Draft saves write
+`curriculum.draft.saved` or `curriculum.draft.updated`. Discards write
+`curriculum.draft.discarded`. Audit context stores hub, course, versions and
+ids, not full package bodies. History is not removed.
 
 ## Security
 

@@ -88,8 +88,10 @@ anonymous clients, authenticated learners and staff. It does not return
 package bodies.
 
 `api.published_curriculum_package(hub_code, course_key)` returns the current
-published canonical teaching package for one hub and course. It never returns
-drafts, superseded rows, staff publication fields or `learning.question_marking`.
+published canonical teaching package for one hub and course. The three-argument
+form `api.published_curriculum_package(hub_code, course_key, package_version)`
+returns that version, including superseded historical rows. Latest reads never
+return drafts or staff publication fields or `learning.question_marking`.
 Learner hubs must not read Admin storage. See
 [Backend publication](backend-publication.md).
 
