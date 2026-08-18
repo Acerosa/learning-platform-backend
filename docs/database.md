@@ -32,6 +32,22 @@ Canonical published teaching packages live in
 are projections used for delivery and submissions, not a second authoring
 source.
 
+## Content library and composition
+
+Reusable authoring objects live in the `library` schema. Learners never read
+these tables. Staff use `admin_api` views and SECURITY DEFINER RPCs.
+
+| Table | Role |
+| --- | --- |
+| `library.questions`, `activities`, `templates`, `resources`, `feedback`, `hints`, `code_templates`, `assessment_templates` | Reusable library objects |
+| `library.activity_questions`, `activity_resources`, `activity_learning_outcomes`, `question_*` | Library joins |
+| `library.usage_references` | Usage / impact tracking |
+| `library.composition_references` | Draft reopen state (overrides, detach, lineage) |
+| `library.composition_templates`, `curriculum_recipes` | Custom templates and recipes |
+
+Materialisation in Admin produces a standard curriculum draft. Publication
+still goes through `admin_api.publish_curriculum`.
+
 ## Evidence, results and progress
 
 These are one domain with three meanings. They are not three table families.

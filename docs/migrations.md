@@ -53,6 +53,17 @@ seed is local-only (`supabase/data/generated/seed-unit14-publication.sql`).
 Hosted publication of that package is an Admin **Publish to Platform** (or an
 equivalent reviewed SQL insert using a real hosted administrator identity).
 
+## Hosted application
+
+**Hosted database mechanism: Supabase MCP `apply_migration` / `execute_sql`.**
+
+Apply reviewed forward migrations to project `hubwpkrqndorznwzvaer` through
+MCP after local tests pass. Remote history timestamps may differ from local
+filenames (for example local `20260818090000_create_content_library.sql` is
+recorded hosted as `20260818100556 create_content_library`). That mismatch is
+expected on the MCP path. Do not repair history unless a reviewed object-level
+diff proves a missing or duplicate migration.
+
 ## Hosted handoff warning
 
 The existing hosted Supabase project already contains platform objects created

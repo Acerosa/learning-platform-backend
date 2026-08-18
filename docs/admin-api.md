@@ -4,7 +4,8 @@
 
 The admin API contract is version `0.2.0` and **draft**. It exposes read models,
 the single-use initial administrator bootstrap, hub registration, curriculum
-publication, teacher response review, and assessment analytics aggregates.
+publication, teacher response review, assessment analytics aggregates, Content
+Library CRUD, and Composition Engine RPCs.
 
 ## Authentication and roles
 
@@ -39,7 +40,17 @@ platform roles.
 - `topic_performance`
 - `skill_performance`
 - `curriculum_publications`
+- `curriculum_drafts`
 - `responses`
+- `library_questions`
+- `library_activities`
+- `library_templates`
+- `library_resources`
+- `library_feedback`
+- `library_hints`
+- `composition_references`
+- `composition_templates`
+- `curriculum_recipes`
 
 All views use `security_invoker = true`; underlying RLS remains authoritative.
 Only `platform_admin` can read platform-wide learner, enrolment, assignment,
@@ -137,6 +148,20 @@ and stores an immutable catalogue row. Staff drafts use
 `discard_curriculum_draft`. Opening live teaching copy for editing uses
 `admin_api.current_curriculum_package`. See
 [Backend publication](backend-publication.md).
+
+Content Library mutations (`save_library_question`, `save_library_activity`,
+`delete_library_item`, `publish_library_item`, `archive_library_item`,
+`duplicate_library_item`, `search_library`, `get_library_question_detail`)
+require an active content-author role (`platform_admin` or `curriculum_admin`).
+`publish_library_item` validates a draft and sets `status = published`.
+`archive_library_item` archives a published reusable asset without deleting it.
+`duplicate_library_item` creates a new draft version from a published, archived
+or superseded item. Composition `search_library` continues to filter
+`p_status = published` and does not consume drafts. Composition mutations
+(`save_composition_reference`, `detach_composition_reference`, template/recipe
+CRUD, `save_composition_draft_state`) persist authoring state only. They do
+not publish. EXECUTE is granted to `authenticated` and revoked from `anon` /
+`PUBLIC`. Function bodies still call `library.is_content_author()`.
 
 Teacher review is a separate mutation: `admin_api.review_response` accepts a
 response id, awarded score, optional correctness, feedback summary and optional

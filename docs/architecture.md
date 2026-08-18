@@ -28,8 +28,8 @@ organisational reason. Extraction is not a current requirement.
 | Layer | Owns |
 | --- | --- |
 | GitHub repositories | Application code: hubs, Core, UI, Admin shell, renderers, contracts |
-| Supabase | Authoritative **published** curriculum packages, catalogue projections, learner evidence |
-| Admin Portal | Curriculum/content **authoring**: drafts, preview, validation, publication requests |
+| Supabase | Authoritative **published** curriculum packages, catalogue projections, learner evidence, **content library** |
+| Admin Portal | Curriculum/content **authoring**: drafts, preview, validation, publication requests, **Content Library CRUD and builders** |
 
 Teaching-content changes (wording, questions, hints, starter code, marking
 metadata, resources, differentiated variants) are published through
@@ -308,6 +308,100 @@ and diagnostics visible only to authorised staff.
 No monitoring collector, alerting pipeline or automatic audit trigger is
 claimed in this release.
 
+### Content Library (Phase 2)
+
+The `library` schema provides reusable content objects that can be referenced
+across curriculum publications without duplication. Tables:
+
+- `library.questions` — reusable questions with rich metadata (type, difficulty,
+  marks, learning outcomes, topic, tags, command word, exam board)
+- `library.activities` — reusable activities with linked questions
+- `library.templates` — activity/assessment templates (multiple-choice, coding, etc.)
+- `library.resources` — reusable learning resources (video, PDF, website, repo)
+- `library.feedback` — reusable feedback (correct, incorrect, misconception, hint)
+- `library.hints` — graduated hints linked to questions
+- `library.code_templates` — starter/solution/test code for coding exercises
+- `library.assessment_templates` — assessment specifications (marks, duration)
+- `library.usage_references` — tracks where library items are used (impact analysis)
+
+All tables have RLS restricted to `platform_admin` / `curriculum_admin` staff.
+Admin views (`admin_api.library_*`) expose list and detail reads with `used_by_count`.
+RPCs: `save_library_question`, `save_library_activity`, `delete_library_item`,
+`publish_library_item`, `archive_library_item`, `duplicate_library_item`,
+`get_library_question_detail`, `search_library`.
+Reusable items use `draft → published → archived`. Composition searches
+published items only. Published rows are not edited in place; a new draft
+version is created with `duplicate_library_item`.
+
+Client-side modules:
+- `content/library-reuse.ts` — Add From Library, Duplicate From Library, Attach Resource
+- `content/builders.ts` — deterministic Retrieval Quiz Builder and Assessment Builder
+- `content/library-import-export.ts` — JSON/CSV import, canonical export
+- `views/content-library.tsx` — Admin Content Library UI (search, filter, CRUD)
+
+The Content Library does **not** use AI, LLMs or external APIs. All automation
+is deterministic and rule-based.
+
+### Composition Engine
+
+The Composition Engine enables curriculum authors to compose curriculum from
+reusable library objects instead of manually creating content per week/session.
+
+**Architecture:**
+
+```
+Question Library → Activity Library → Composition Engine → Curriculum Draft → Preview → Publish → Learner Hub
+```
+
+**Reference model:** Every library item inserted into a curriculum creates a
+`library.composition_references` row tracking:
+- `instance_id` — the curriculum-local ID of the inserted object
+- `library_item_id` — the source library object UUID
+- `library_version` — the version at time of insertion
+- `state` — `inherited` | `overridden` | `detached`
+- `overrides` — JSONB of curriculum-specific property overrides
+
+**Override model:** Curriculum instances can override specific properties
+(title, instructions, estimated time, resources) while inheriting everything
+else from the library master. State transitions: `inherited` → `overridden` →
+`inherited` (via clear). Overrides are stored in the reference row, not in the
+content package, keeping the package format unchanged.
+
+**Detach model:** An instance can be detached from its library source, making
+it fully independent. Future library changes no longer propagate. Detachment
+is one-way — reattaching requires re-inserting from library.
+
+**Update propagation:** `admin_api.composition_update_check` compares
+reference versions against current library versions. Authors can: Update
+(accept new version, clear overrides), Ignore (keep current version), or
+Compare (structural diff viewer). The diff viewer shows added/removed/changed
+blocks and metadata changes — pure structural comparison, no AI.
+
+**Coverage analysis:** `analyseCoverage()` computes per-learning-outcome
+coverage percentages across all curriculum activities. Shows missing,
+underrepresented, and over-covered outcomes.
+
+**Difficulty balance:** `analyseDifficultyBalance()` shows foundation/standard/
+challenge distribution across activities.
+
+**Composition templates:** Built-in week templates (`weekly-lesson`,
+`practical-lesson`, `revision-lesson`, `assessment-week`, `project-week`)
+generate complete week/session/activity scaffolding.
+
+**Curriculum recipes:** Built-in session recipes (`revision-session`,
+`retrieval-session`, `practical-session`, `assessment-session`,
+`homework-session`) generate session layouts with activity slots.
+
+**Version graph:** `buildVersionGraph()` visualises library item lineage
+including difficulty variants.
+
+**Impact analysis:** `admin_api.composition_impact_analysis` shows draft count,
+publication count, and total usage for any library item before editing.
+
+**Security:** All composition tables have RLS restricted to
+`platform_admin`/`curriculum_admin`. Learner hubs receive only the final
+published curriculum package — no composition metadata is exposed.
+
 ### Known architectural debt
 
 - Existing formative activities may submit client-derived correctness and
@@ -324,3 +418,190 @@ claimed in this release.
   Teacher editing and moderation remain out of scope.
 - T Level's historical `supabase/` tree is extraction provenance, not a second
   backend.
+
+## Phase 4 — Composition Workflow Integration
+
+### Architectural Principle
+
+The Composition Engine is the canonical curriculum authoring experience. It does
+**not** publish content directly. It produces standard **Curriculum Drafts** that
+flow through the existing Draft → Preview → Validate → Approve → Publish
+pipeline. No second publication architecture may be introduced.
+
+### Composition Workflow
+
+```
+Content Library
+      │
+      ▼
+Composition Engine
+      │
+      ▼
+Materialisation Layer
+      │
+      ▼
+Curriculum Draft  (AuthoringDraft)
+      │
+      ▼
+Existing Publication Pipeline
+      │
+      ▼
+Published Package → Shared Core Runtime → Learner Hub
+```
+
+### Materialisation
+
+The materialisation layer (`src/content/materialise.ts`) transforms a
+`CompositionDraft` into a canonical `ContentPackage`:
+
+1. **Reference resolution** — Library references are tracked during composition
+   via `CompositionReference` objects. During materialisation, the `_compositionRef`
+   metadata marker is stripped so the output is indistinguishable from a manually
+   authored package.
+2. **Override resolution** — For references in the `overridden` state, each
+   override key-value pair is merged into the activity's resolved metadata.
+   Learner hubs never receive unresolved overrides.
+3. **Detach resolution** — Detached activities are treated as independent; their
+   `_compositionRef` marker is removed and no override merge occurs.
+4. **Variant resolution** — Variants produce distinct activity instances during
+   insertion, resolved identically during materialisation.
+5. **Resource inclusion** — Resources attached from the library are already
+   embedded as content blocks during composition. Materialisation preserves them.
+6. **Canonical output** — `syncCurriculumLists()` ensures all document cross-
+   references are consistent. The resulting `ContentPackage` passes the existing
+   `publicationGate` validation.
+
+### Draft Integration
+
+- `compositionToDraft()` creates a new `AuthoringDraft` from a composition,
+  using the existing `createDraft()` and `touchDraft()` functions.
+- `updateDraftFromComposition()` updates an existing draft in-place, maintaining
+  the draft's identity (id, revision, metadata) while replacing its package.
+- The existing optimistic concurrency model (`remoteRevision`) continues to
+  prevent conflicting edits.
+
+### Draft Comparison
+
+`comparePackages()` produces a `PackageDiff` showing added, removed, and changed
+activities, weeks, sessions, questions, and metadata fields — enabling the
+"Current Draft vs Last Published" comparison view.
+
+### Package Preview
+
+`previewPackageJson()` materialises the composition and serialises the canonical
+package as indented JSON, useful for debugging the exact output that will be
+published.
+
+### Drag-and-Drop
+
+Visual drag-and-drop uses `@dnd-kit/core` and `@dnd-kit/sortable` for reordering
+weeks, sessions, activities, and questions. The `reorderActivities()` and
+`reorderQuestions()` functions in the composition engine maintain ordering.
+
+Accessibility hardening adds deterministic Move Up / Move Down fallback controls
+for every reorderable level. Composition state changes only on completed
+reorders and then flows through the existing draft save path, so failed or
+cancelled drag attempts do not persist intermediate order.
+
+### Template and Recipe Management
+
+User-created templates (`library.composition_templates`) and recipes
+(`library.curriculum_recipes`) support full CRUD via Admin API RPCs. The
+composition UI exposes built-in templates and recipes as well as user-created
+ones. Operations: Create, Edit, Duplicate, Archive, Publish.
+
+Built-in templates and recipes remain application-owned defaults. They are
+reusable but are not edited in place by curriculum staff. When staff need to
+adapt a built-in structure, the intended flow is Duplicate → Custom → Edit.
+Archived custom items remain stored for audit/history but are excluded from
+normal creation selectors unless the author explicitly includes archived items.
+
+### Duration Metadata and Timeline
+
+Session duration no longer relies on a fabricated per-activity placeholder.
+Activities use `metadata.estimatedDurationMinutes` when a duration is known.
+Composition resolves duration with deterministic precedence:
+
+1. curriculum-instance override from `CompositionReference.overrides`
+2. inherited activity metadata
+3. template or recipe slot duration for scaffolded draft activities
+4. unknown
+
+Unknown duration stays unknown. The composition UI reports known totals and the
+count of activities without estimates rather than inventing a full session
+total. Duration editing uses the existing override model for inherited library
+content and direct metadata edits for scaffolded non-library activities.
+
+### Inline Library Search
+
+The composition builder includes inline search panels for Activities, Questions,
+and Resources. Search queries the `admin_api.search_library` RPC with type
+filtering and renders results with an Insert button. No module switching is
+required.
+
+### Composition State Reopen
+
+Saving a composition still produces a standard curriculum draft. The draft's
+recoverable authoring state is persisted separately through
+`admin_api.save_composition_draft_state()` and
+`admin_api.get_composition_draft_state()`, backed by
+`library.composition_references`. This preserves overrides, detached state,
+library lineage, and reorder state across save, reload, and reopen without
+introducing a parallel draft model.
+
+### Browser Verification Status
+
+Local browser verification on the composition screen confirmed built-in week and
+recipe insertion, keyboard-accessible activity reordering, duration editing,
+local Save Composition, page reload, and Reopen Saved restoring the saved draft
+identity and reordered structure.
+
+Pointer-drag automation remains partially constrained by browser tooling because
+`@dnd-kit` handles do not expose native `draggable` attributes to the MCP drag
+command. Keyboard and button-based reordering are therefore the deterministic
+verification path today. Live browser verification of custom template/recipe
+CRUD and inline library RPC search also depends on a live `admin_api`
+connection; in demo mode those controls are intentionally read-only.
+
+### Update Notifications and Conflict Detection
+
+When a referenced library object changes, `findUpdatesAvailable()` detects
+version mismatches. The UI displays "Update Available" with options to Compare,
+Update, Ignore, or Detach. Conflict detection relies on the existing optimistic
+concurrency model.
+
+### Security
+
+Composition permissions mirror curriculum authoring. All composition tables use
+RLS restricted to `platform_admin` or `curriculum_admin` roles. No learner
+access. No direct protected table writes. Learner hubs receive only published
+packages and have no dependency on the Content Library.
+
+### Scope Exclusions
+
+The following remain out of scope: AI/LLM, automatic publishing, automatic
+curriculum updates, learner-side composition, and runtime dependency on the
+Content Library. Published packages remain immutable.
+
+## Phase 5 — Production readiness
+
+Phase 5 is operational validation of the Platform 1.0 candidate. It does not
+add a second architecture.
+
+| Gate | Status 2026-08-18 |
+| --- | --- |
+| Hosted database (`hubwpkrqndorznwzvaer`, RR NHC Hub) | Applied through Supabase MCP `apply_migration` / `execute_sql` |
+| Learner hubs load `data-curriculum-source=published` | Unit 3, T Level, Unit 14 verified |
+| Teaching-content publish without Git | Pipeline exists; live packages already served from Postgres |
+| Content Library + Composition schema | Hosted; RLS and EXECUTE grants hardened |
+| Hosted Admin Phase 4 UI | **Not on GitHub Pages** — local Admin still uncommitted |
+| Hosted Library → Compose → Publish loop | **Not proven** — library tables empty; Admin UI missing |
+
+Ordinary teaching-copy changes still must not require Git commits, GitHub
+Actions or GitHub Pages. Application-code changes (Admin modules, hub
+runtime, Core) still deploy through GitHub.
+
+Hosted schema changes use **Supabase MCP** `apply_migration` / `execute_sql`
+on project `hubwpkrqndorznwzvaer`. Local CLI (`supabase db reset`,
+`supabase test db`) validates; it does not deploy. See
+[Release process](release-process.md) and [Operations](operations.md).

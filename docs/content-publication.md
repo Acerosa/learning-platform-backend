@@ -57,9 +57,10 @@ Curriculum Engine MVP. Later weeks start from `main` at that tag. Client-marked
 `submit_attempt` items remain accepted for Unit 3 / T Level compatibility.
 
 Admin-authored `lp.content` snapshots enter the backend through
-`admin_api.publish_curriculum`. Staff may open the live package with
-`admin_api.current_curriculum_package` and save working copies with
-`admin_api.save_curriculum_draft`. The generator remains for reviewed
+`admin_api.publish_curriculum`. Composition materialises library references
+into the same canonical package before that RPC. Staff may open the live
+package with `admin_api.current_curriculum_package` and save working copies
+with `admin_api.save_curriculum_draft`. The generator remains for reviewed
 historical imports. See [Backend publication](backend-publication.md).
 
 ## Tests

@@ -44,6 +44,14 @@ Version 0.1.0 grants full learner-domain read views only to `platform_admin`.
 Other roles can read only the platform views appropriate to their role. No
 authenticated role can mutate protected tables directly.
 
+The `library` schema is staff-only. Every library table has RLS. Policies
+require `library.is_content_author()` (`platform_admin` or
+`curriculum_admin`). Anonymous clients have no table privilege and no EXECUTE
+on library/composition RPCs. Authenticated non-authors may EXECUTE those RPCs
+but receive empty results or author-role exceptions; they cannot mutate
+library rows. All `admin_api` library and composition views use
+`security_invoker = true`.
+
 `platform.curriculum_publications` is readable by authorised staff roles.
 Inserts occur only through `admin_api.publish_curriculum`. Published rows are
 immutable except for the controlled supersede transition. Staff drafts live in
