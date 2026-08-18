@@ -45,8 +45,8 @@ platform contracts and infrastructure.
 | Hub | Runtime class |
 | --- | --- |
 | Unit 14 Software Engineering for Business | **DATABASE_DRIVEN** — `platform.curriculum` / `api.published_curriculum_package` |
-| Unit 3 Cyber Security | **MIGRATION_READY** — runtime uses shared `platform.curriculum.loadLatest()`; local seed `0.2.0`; classify **DATABASE_DRIVEN** after hosted publish + live reload verification |
-| T Level Software Development | **MIGRATION_READY** — runtime uses shared `platform.curriculum.loadLatest()`; local seed `0.2.0`; classify **DATABASE_DRIVEN** after hosted publish + live reload verification |
+| Unit 3 Cyber Security | **DATABASE_DRIVEN** — hosted `api.published_curriculum_package`; `data-curriculum-source=published` verified 2026-08-18 |
+| T Level Software Development | **DATABASE_DRIVEN** — hosted `api.published_curriculum_package`; `data-curriculum-source=published` verified 2026-08-18 |
 
 Every hub consumes `@learning-platform/core/curriculum-runtime`. Hubs supply
 `hubCode` and `courseKey` only. They must not implement publication lookup,
@@ -199,8 +199,8 @@ or Kubernetes unless a concrete requirement appears.
 | Hub | Class | Notes |
 | --- | --- | --- |
 | Unit 14 | **Current generation** (reference) | React + TypeScript + Vite MPA, Core 0.2, UI, Content, runtime published package |
-| Unit 3 Cyber | **Current generation** | Core 0.2 + UI shell; database-first runtime wired; Week 1 Apps Script copy partially outside package |
-| T Level | **Current generation** | Core 0.2 + UI shell; database-first runtime wired; Foundations mapped to single canonical week |
+| Unit 3 Cyber | **Current generation** | Core 0.2 + UI shell; hosted published package is authoritative; Week 1 Apps Script `markSection` copy still outside the package |
+| T Level | **Current generation** | Core 0.2 + UI shell; hosted published package is authoritative; Foundations mapped to a single canonical week |
 
 Do not migrate a hub solely for visual consistency. Classic engines are retained on purpose.
 
