@@ -1,0 +1,69 @@
+name: Backend Database Tests
+
+on:
+  pull_request:
+    paths:
+      - "supabase/**"
+      - "scripts/validation/**"
+      - "scripts/import/**"
+      - ".github/workflows/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "supabase/**"
+      - "scripts/validation/**"
+      - "scripts/import/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+concurrency:
+  group: backend-database-tests-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repository-validation:
+    name: Repository Validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate repository structure
+        run: python3 scripts/validation/validate_repository.py
+
+  database-tests:
+    name: Database Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: repository-validation
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v3
+        with:
+          version: 2.113.0
+
+      - name: Show Supabase CLI version
+        run: supabase --version
+
+      - name: List database test files
+        run: find supabase/tests -name '*.sql' | sort
+
+      - name: Start Supabase local stack
+        run: |
+          supabase start --yes \
+            --exclude studio,imgproxy,edge-runtime,logflare,vector,supavisor,mailpit
+
+      - name: Reset database from migrations
+        run: supabase db reset --yes
+
+      - name: Run pgTAP database tests
+        run: supabase test db --local
+
+      - name: Stop Supabase
+        if: always()
+        run: supabase stop --no-backup --yes
