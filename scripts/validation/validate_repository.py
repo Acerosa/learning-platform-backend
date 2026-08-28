@@ -25,6 +25,7 @@ from hub_manifest import (  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 MIGRATION_PATTERN = re.compile(r"^(\d{14})_[a-z0-9_]+\.sql$")
+SEED_PATH_PATTERN = re.compile(r'"(\./[^"]+\.sql)"')
 STABLE_KEY_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
 REQUIRED_PATHS = (
@@ -213,6 +214,39 @@ def validate_config(failures: list[str]) -> None:
         fail("admin_api is not declared in the local Data API schema list", failures)
 
 
+def validate_seed_files(failures: list[str]) -> None:
+    config = (ROOT / "supabase" / "config.toml").read_text(encoding="utf-8")
+    in_seed_paths = False
+    for line in config.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("sql_paths"):
+            in_seed_paths = True
+            continue
+        if not in_seed_paths:
+            continue
+        if stripped.startswith("]"):
+            break
+        match = SEED_PATH_PATTERN.search(stripped)
+        if not match:
+            continue
+        relative = match.group(1).removeprefix("./")
+        path = ROOT / "supabase" / relative
+        if not path.is_file():
+            fail(f"missing configured seed file: supabase/{relative}", failures)
+            continue
+        tracked = subprocess.run(
+            ["git", "ls-files", "--error-unmatch", str(path.relative_to(ROOT))],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        if tracked.returncode != 0:
+            fail(
+                f"configured seed file is not tracked in git: supabase/{relative}",
+                failures,
+            )
+
+
 def validate_forbidden_files(failures: list[str]) -> None:
     forbidden_names = {".env", ".temp", ".branches"}
     result = subprocess.run(
@@ -237,6 +271,7 @@ def main() -> int:
     validate_hub_manifests(failures)
     validate_hub_schema_alignment(failures)
     validate_config(failures)
+    validate_seed_files(failures)
     validate_forbidden_files(failures)
 
     if failures:
