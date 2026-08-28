@@ -11,4 +11,6 @@ supabase/.temp/
 supabase/data/generated/*
 !supabase/data/generated/.gitkeep
 !supabase/data/generated/seed-unit14-publication.sql
+!supabase/data/generated/seed-unit3-publication.sql
+!supabase/data/generated/seed-tlevel-publication.sql
 !supabase/data/generated/seed-tlevel-weeks-1-3-publication.sql
