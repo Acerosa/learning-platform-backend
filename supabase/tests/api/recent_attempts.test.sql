@@ -55,8 +55,8 @@ insert into learning.attempts (
     'server',
     'summary_only',
     repeat('1', 64),
-    timestamptz '2026-08-01T10:00:00Z',
-    timestamptz '2026-08-01T10:05:00Z'
+    clock_timestamp() + interval '1 day',
+    clock_timestamp() + interval '1 day 5 minutes'
   ),
   (
     '93000000-0000-4000-8000-000000000102',
@@ -72,8 +72,8 @@ insert into learning.attempts (
     'server',
     'summary_only',
     repeat('2', 64),
-    timestamptz '2026-08-02T10:00:00Z',
-    timestamptz '2026-08-02T10:05:00Z'
+    clock_timestamp() + interval '2 days',
+    clock_timestamp() + interval '2 days 5 minutes'
   ),
   (
     '93000000-0000-4000-8000-000000000103',
@@ -89,8 +89,8 @@ insert into learning.attempts (
     'server',
     'summary_only',
     repeat('3', 64),
-    timestamptz '2026-08-03T10:00:00Z',
-    timestamptz '2026-08-03T10:05:00Z'
+    clock_timestamp() + interval '3 days',
+    clock_timestamp() + interval '3 days 5 minutes'
   ),
   (
     '93000000-0000-4000-8000-000000000104',
@@ -106,8 +106,8 @@ insert into learning.attempts (
     'server',
     'summary_only',
     repeat('4', 64),
-    timestamptz '2026-08-04T10:00:00Z',
-    timestamptz '2026-08-04T10:05:00Z'
+    clock_timestamp() + interval '4 days',
+    clock_timestamp() + interval '4 days 5 minutes'
   ),
   (
     '93000000-0000-4000-8000-000000000105',
@@ -123,8 +123,8 @@ insert into learning.attempts (
     'server',
     'summary_only',
     repeat('5', 64),
-    timestamptz '2026-08-05T10:00:00Z',
-    timestamptz '2026-08-05T10:05:00Z'
+    clock_timestamp() + interval '5 days',
+    clock_timestamp() + interval '5 days 5 minutes'
   ),
   (
     '93000000-0000-4000-8000-000000000106',
@@ -140,8 +140,8 @@ insert into learning.attempts (
     'server',
     'summary_only',
     repeat('6', 64),
-    timestamptz '2026-08-06T10:00:00Z',
-    timestamptz '2026-08-06T10:05:00Z'
+    clock_timestamp() + interval '6 days',
+    clock_timestamp() + interval '6 days 5 minutes'
   ),
   (
     '93000000-0000-4000-8000-000000000107',
@@ -157,8 +157,8 @@ insert into learning.attempts (
     'server',
     'summary_only',
     repeat('7', 64),
-    timestamptz '2026-08-07T10:00:00Z',
-    timestamptz '2026-08-07T12:00:00Z'
+    clock_timestamp() + interval '7 days',
+    clock_timestamp() + interval '7 days 12 hours'
   ),
   (
     '93000000-0000-4000-8000-000000000108',
@@ -174,8 +174,8 @@ insert into learning.attempts (
     'server',
     'summary_only',
     repeat('8', 64),
-    timestamptz '2026-08-07T11:00:00Z',
-    timestamptz '2026-08-07T12:00:00Z'
+    clock_timestamp() + interval '7 days 1 hour',
+    clock_timestamp() + interval '7 days 12 hours'
   );
 
 set local "request.jwt.claim.sub" = '20000000-0000-4000-8000-000000000003';
