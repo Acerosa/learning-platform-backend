@@ -30,6 +30,7 @@ platform roles.
 - `enrolments`
 - `assignments`
 - `attempts`
+- `recent_attempts`
 - `dashboard_summary`
 - `activity_performance`
 - `assessment_overview`
@@ -64,7 +65,9 @@ active staff profile and active backend roles. It does not accept an identity
 or role from the browser.
 
 `dashboard_summary` and `activity_performance` are platform-admin-only,
-backend-derived operational aggregates. Assessment analytics views add
+backend-derived operational aggregates. `recent_attempts` returns at most five
+attempt summaries ordered by latest `completed_at` for the Admin Dashboard;
+full attempt history remains on `admin_api.attempts`. Assessment analytics views add
 staff-facing educational aggregates without a warehouse:
 
 | View | Purpose |
