@@ -17,6 +17,9 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
   Week 5 activities, and `W2OCR-Q08` on `week2-ocr-question-practice` `1.1.0`.
   Published `1.0.0` rows, learner evidence, and curriculum publication are not
   mutated.
+- Unit 3 Batch A1 hosted recovery: a guarded replayable migration completes
+  the truncated MCP apply while retaining the unpublished `u3-w01-baseline`
+  `1.1.0` residue id, without rewriting `schema_migrations` or published data.
 
 ### Security
 

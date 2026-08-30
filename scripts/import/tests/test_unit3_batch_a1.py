@@ -50,6 +50,10 @@ class Unit3BatchA1Tests(unittest.TestCase):
         self.assertNotIn("0.2.10", sql)
         self.assertNotIn("MW-Q1", sql)
 
+    def test_original_a1_sql_matches_committed_migration(self) -> None:
+        committed = Path(__file__).resolve().parents[3] / "supabase/migrations/20260830220000_unit3_batch_a1_canonical_catalogue.sql"
+        self.assertEqual(generate(MANIFEST), committed.read_text(encoding="utf-8"))
+
     def test_week1_has_no_inferred_marking(self) -> None:
         sql = generate(MANIFEST)
         baseline_pos = sql.index("BAS-Q01")
