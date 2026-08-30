@@ -10,6 +10,17 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ## [Unreleased]
 
+### Security
+
+- Learner-facing `published_curriculum_package` strips answer keys
+  (`correctOptionId` and related marking fields) while keeping teaching
+  structure. Protected `learning.question_marking` remains the scoring source.
+- `api.submit_attempt` ignores client `awarded_score` / `is_correct` when a
+  marking spec exists. Questions without a spec keep the previous client-mark
+  path.
+- Direct `INSERT`/`UPDATE`/`DELETE` on `library` tables is revoked from
+  `authenticated`; staff writes remain on existing SECURITY DEFINER RPCs.
+
 ### Changed
 
 - Hosted production cutover: Unit 3 and T Level classified **DATABASE_DRIVEN**

@@ -35,6 +35,42 @@ as $$
   );
 $$;
 
+create function unit14_tests.cheated_baseline_payload()
+returns jsonb
+language sql
+stable
+set search_path = ''
+as $$
+  select jsonb_build_array(
+    jsonb_build_object(
+      'question_id', 'u14-w1-base-q1',
+      'response_type', 'single-choice',
+      'response_payload', jsonb_build_object('optionId', 'z'),
+      'awarded_score', 1,
+      'is_correct', true
+    ),
+    jsonb_build_object(
+      'question_id', 'u14-w1-base-q2',
+      'response_type', 'single-choice',
+      'response_payload', jsonb_build_object('selectedOptionId', 'z'),
+      'awarded_score', 1,
+      'is_correct', true
+    ),
+    jsonb_build_object(
+      'question_id', 'u14-w1-base-q3',
+      'response_type', 'single-choice',
+      'response_payload', jsonb_build_object('optionId', 'z'),
+      'awarded_score', 1,
+      'is_correct', true
+    ),
+    jsonb_build_object(
+      'question_id', 'u14-w1-base-q4',
+      'response_type', 'written',
+      'response_payload', jsonb_build_object('text', 'Claiming full marks')
+    )
+  );
+$$;
+
 create function unit14_tests.reflection_payload()
 returns jsonb
 language sql
@@ -52,6 +88,7 @@ $$;
 
 grant usage on schema unit14_tests to authenticated, anon;
 grant execute on function unit14_tests.baseline_payload() to authenticated, anon;
+grant execute on function unit14_tests.cheated_baseline_payload() to authenticated, anon;
 grant execute on function unit14_tests.reflection_payload() to authenticated, anon;
 
 insert into auth.users (
@@ -248,6 +285,40 @@ select ok(
       and awarded_score = 0
   ),
   'an incorrect single-choice item is marked by the backend, not the browser'
+);
+
+select lives_ok(
+  $$
+    select *
+    from api.submit_attempt(
+      'week-1-baseline-diagnostic',
+      '0.1.0',
+      'unit14-baseline-cheat-1',
+      unit14_tests.cheated_baseline_payload(),
+      '/weeks/week-1/'
+    )
+  $$,
+  'client-supplied full marks on a marked activity are accepted as evidence'
+);
+
+select is(
+  (
+    select score
+    from api.my_attempts
+    where client_attempt_id = 'unit14-baseline-cheat-1'
+  ),
+  0.00,
+  'client-supplied scores cannot override protected question marking'
+);
+
+select is(
+  (
+    select marking_source
+    from api.my_attempts
+    where client_attempt_id = 'unit14-baseline-cheat-1'
+  ),
+  'server',
+  'questions with marking specs are recorded as server-marked even when the client sends scores'
 );
 
 select ok(
