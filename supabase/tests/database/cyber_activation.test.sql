@@ -250,7 +250,7 @@ select is(
 
 select ok(
   (
-    select score = 7
+    select score = 0
       and max_score = 10
       and activity_key = 'week2-malware-symptoms'
     from api.my_attempts

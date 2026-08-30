@@ -353,10 +353,10 @@ select ok(
   (
     select
       attempt_count = 2
-      and first_score = 10
-      and latest_score = 15
-      and best_score = 15
-      and improvement = 5
+      and first_score = 0
+      and latest_score = 0
+      and best_score = 0
+      and improvement = 0
     from api.my_activity_progress
     where activity_key = 'foundations-requirements-classification'
   ),
@@ -372,7 +372,7 @@ select ok(
   (
     select
       students_completed = 1
-      and latest_group_average_percentage = 75.00
+      and latest_group_average_percentage = 0.00
       and completion_percentage = 100.00
     from api.teacher_group_activity_analytics
     where group_code = 'TEST-GROUP-A'
@@ -387,7 +387,7 @@ select ok(
       assigned_activities = 5
       and completed_activities = 3
       and completion_percentage = 60.00
-      and latest_average_percentage = 25.00
+      and latest_average_percentage = 0.00
       and requires_support
     from api.teacher_group_student_progress
     where group_code = 'TEST-GROUP-A'

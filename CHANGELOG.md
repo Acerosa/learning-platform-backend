@@ -34,6 +34,9 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 - `api.submit_attempt` ignores client `awarded_score` / `is_correct` when a
   marking spec exists. Questions without a spec keep the previous client-mark
   path.
+- Client `awarded_score` / `is_correct` are never applied. Questions without a
+  marking spec now take the same pending-evidence path as `completion` /
+  `requires_review` (score 0). Historical attempts are unchanged.
 - Direct `INSERT`/`UPDATE`/`DELETE` on `library` tables is revoked from
   `authenticated`; staff writes remain on existing SECURITY DEFINER RPCs.
 
