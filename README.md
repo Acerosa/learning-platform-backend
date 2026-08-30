@@ -212,11 +212,10 @@ None of these hubs is marked certified by this repository.
 
 ## Current limitations
 
-- `api.submit_attempt` still accepts client-marked items when both
-  `awarded_score` and `is_correct` are present (Unit 3 / T Level). Core
-  evidence-only items omit both fields and are server-marked from protected
-  `learning.question_marking`. Rejecting client marks on questions that have
-  marking specs is later contract work; do not break historical attempts.
+- `api.submit_attempt` still accepts client-marked items for questions that
+  have no protected `learning.question_marking` row (legacy classification
+  payloads). When a marking spec exists, client scores are ignored and the
+  server marks from the spec.
 - The admin API contract is `0.2.0` (draft). It is not read-only: hub
   registration, hub updates and curriculum publication are reviewed mutations.
   Other staff writes remain pending.

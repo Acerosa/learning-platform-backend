@@ -524,9 +524,10 @@ select ok(
       and not coalesce(package::text, '') like '%Staff only marking guidance%'
       and not coalesce(package::text, '') like '%Ada Author%'
       and not coalesce(package::text, '') like '%Riley Reviewer%'
+      and not coalesce(package::text, '') like '%correctOptionId%'
     from api.published_curriculum_package('unit-3-cyber-security', 'ocr-level-3-it')
   ),
-  'the learner package omits teacher-notes and staff publication metadata'
+  'the learner package omits teacher-notes, staff publication metadata and answer keys'
 );
 select throws_like(
   $$select spec from learning.question_marking limit 1$$,

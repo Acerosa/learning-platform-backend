@@ -168,5 +168,25 @@ select is(
 
 reset role;
 
+set local "request.jwt.claim.sub" = '10000000-0000-4000-8000-000000000001';
+set local "request.jwt.claims" = '{"sub":"10000000-0000-4000-8000-000000000001","role":"authenticated"}';
+set local role authenticated;
+select throws_like(
+  $$insert into library.activities (
+      stable_key, title, activity_type, status, version, content, author
+    ) values (
+      'learner-direct-write',
+      'Should fail',
+      'lesson',
+      'draft',
+      '1.0.0',
+      '{}'::jsonb,
+      'Learner'
+    )$$,
+  '%permission denied%',
+  'authenticated learners cannot insert library rows directly'
+);
+reset role;
+
 select * from finish();
 rollback;
