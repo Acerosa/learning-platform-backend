@@ -20,6 +20,11 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 - Unit 3 Batch A1 hosted recovery: a guarded replayable migration completes
   the truncated MCP apply while retaining the unpublished `u3-w01-baseline`
   `1.1.0` residue id, without rewriting `schema_migrations` or published data.
+- Unit 3 Batch B authoritative marking: new activity versions attach explicit
+  `single-choice`, `classification`, `completion`, or `requires_review` specs.
+  Published versions, historical evidence, and curriculum publication are
+  unchanged. Week 5 activities that already had complete specs are not
+  re-versioned.
 
 ### Security
 
