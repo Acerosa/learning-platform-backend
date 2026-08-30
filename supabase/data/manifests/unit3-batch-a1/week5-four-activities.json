@@ -1,0 +1,496 @@
+{
+  "week5-secure-rewrite": {
+    "id": "week5-secure-rewrite",
+    "title": "Improving insecure implementations",
+    "version": "1.0.0",
+    "questionCount": 6,
+    "questions": [
+      {
+        "stableKey": "R1",
+        "questionType": "single",
+        "prompt": "Insecure training lookup: query = \"SELECT * FROM training_patients WHERE surname = '\" + typedSurname + \"'\". Which rewrite is the secure alternative?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Keep concatenating, but convert the surname to uppercase first"
+          },
+          {
+            "id": "b",
+            "label": "Use a parameterised query so the surname is bound as data, not mixed into the SQL text"
+          },
+          {
+            "id": "c",
+            "label": "Hide the lookup behind a longer URL"
+          },
+          {
+            "id": "d",
+            "label": "Print the full query on the screen so staff can check it"
+          }
+        ],
+        "correctOptionId": "b",
+        "sectionTitle": "Improving insecure implementations"
+      },
+      {
+        "stableKey": "R2",
+        "questionType": "single",
+        "prompt": "Insecure training page: comments.innerHTML = visitorMessage. Which rewrite is appropriate?",
+        "options": [
+          {
+            "id": "a",
+            "label": "comments.textContent = visitorMessage (or another encoding-safe output method)"
+          },
+          {
+            "id": "b",
+            "label": "comments.innerHTML = visitorMessage + visitorMessage"
+          },
+          {
+            "id": "c",
+            "label": "Disable CSS so scripts cannot run"
+          },
+          {
+            "id": "d",
+            "label": "Store the message twice in localStorage"
+          }
+        ],
+        "correctOptionId": "a",
+        "sectionTitle": "Improving insecure implementations"
+      },
+      {
+        "stableKey": "R3",
+        "questionType": "single",
+        "prompt": "Insecure training config: CLINIC_DEMO_TOKEN = \"not-a-real-secret\" committed next to the app. What should happen?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Leave it, because the value says it is not real"
+          },
+          {
+            "id": "b",
+            "label": "Remove it from the file, load secrets from a secret store or environment at run time, and rotate any value that was copied"
+          },
+          {
+            "id": "c",
+            "label": "Rename the variable to TOKEN2"
+          },
+          {
+            "id": "d",
+            "label": "Email the token to every staff member so they remember it"
+          }
+        ],
+        "correctOptionId": "b",
+        "sectionTitle": "Improving insecure implementations"
+      },
+      {
+        "stableKey": "R4",
+        "questionType": "single",
+        "prompt": "Insecure records route: return trainingRecord(idFromUrl) with no further check. What is the secure alternative?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Load the record only if the signed-in clinician is authorised for that patient or role"
+          },
+          {
+            "id": "b",
+            "label": "Use a longer patient number so it is harder to guess"
+          },
+          {
+            "id": "c",
+            "label": "Show a warning banner but still return any record"
+          },
+          {
+            "id": "d",
+            "label": "Cache every training record in the browser"
+          }
+        ],
+        "correctOptionId": "a",
+        "sectionTitle": "Improving insecure implementations"
+      },
+      {
+        "stableKey": "R5",
+        "questionType": "single",
+        "prompt": "Insecure kiosk setup: a shared admin / admin login on the training terminal. What is the secure alternative?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Unique accounts, no default passwords, and MFA where the platform supports it"
+          },
+          {
+            "id": "b",
+            "label": "Write admin / admin on a sticky note under the keyboard"
+          },
+          {
+            "id": "c",
+            "label": "Use admin / admin but change the username to Admin"
+          },
+          {
+            "id": "d",
+            "label": "Disable the screen lock so staff save time"
+          }
+        ],
+        "correctOptionId": "a",
+        "sectionTitle": "Improving insecure implementations"
+      },
+      {
+        "stableKey": "R6",
+        "questionType": "single",
+        "prompt": "Insecure share: Everyone (clinic Wi-Fi) = Read on the draft-letters folder. What is the secure alternative?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Restrict the share to the staff group that needs those files; keep guests off that folder"
+          },
+          {
+            "id": "b",
+            "label": "Add more files to the same open share so it is harder to find letters"
+          },
+          {
+            "id": "c",
+            "label": "Rename the folder to PRIVATE but leave Everyone = Read"
+          },
+          {
+            "id": "d",
+            "label": "Email all draft letters to a public mailing list instead"
+          }
+        ],
+        "correctOptionId": "a",
+        "sectionTitle": "Improving insecure implementations"
+      }
+    ]
+  },
+  "week5-controls-matching": {
+    "id": "week5-controls-matching",
+    "title": "Choosing defensive controls",
+    "version": "1.0.0",
+    "questionCount": 8,
+    "questions": [
+      {
+        "stableKey": "C1",
+        "questionType": "matching",
+        "prompt": "The kiosk still runs last year’s booking component after the vendor issued a fix.",
+        "correctCategoryId": "Patching and updates",
+        "sectionTitle": "Choosing defensive controls"
+      },
+      {
+        "stableKey": "C2",
+        "questionType": "matching",
+        "prompt": "The training app shows any patient record whose number appears in the URL.",
+        "correctCategoryId": "Access control",
+        "sectionTitle": "Choosing defensive controls"
+      },
+      {
+        "stableKey": "C3",
+        "questionType": "matching",
+        "prompt": "Surnames are concatenated into a SQL string in a training lookup.",
+        "correctCategoryId": "Input validation",
+        "sectionTitle": "Choosing defensive controls"
+      },
+      {
+        "stableKey": "C4",
+        "questionType": "matching",
+        "prompt": "A demo token is written into a config file that is copied with the project.",
+        "correctCategoryId": "Secrets hygiene",
+        "sectionTitle": "Choosing defensive controls"
+      },
+      {
+        "stableKey": "C5",
+        "questionType": "matching",
+        "prompt": "Reception still uses the original admin / admin kiosk login.",
+        "correctCategoryId": "Secrets hygiene",
+        "sectionTitle": "Choosing defensive controls"
+      },
+      {
+        "stableKey": "C6",
+        "questionType": "matching",
+        "prompt": "Wi-Fi guests can open the shared folder of draft clinic letters.",
+        "correctCategoryId": "Access control",
+        "sectionTitle": "Choosing defensive controls"
+      },
+      {
+        "stableKey": "C7",
+        "questionType": "matching",
+        "prompt": "Managers want an alert if many failed logins hit the kiosk overnight.",
+        "correctCategoryId": "Detection",
+        "sectionTitle": "Choosing defensive controls"
+      },
+      {
+        "stableKey": "C8",
+        "questionType": "matching",
+        "prompt": "A reviewer is asked to find innerHTML assignments that use visitor-supplied text.",
+        "correctCategoryId": "Detection",
+        "sectionTitle": "Choosing defensive controls"
+      }
+    ]
+  },
+  "week5-threat-vulnerability-risk": {
+    "id": "week5-threat-vulnerability-risk",
+    "title": "Vulnerability, threat and risk",
+    "version": "1.0.0",
+    "questionCount": 8,
+    "questions": [
+      {
+        "stableKey": "T1",
+        "questionType": "matching",
+        "prompt": "The training booking app concatenates surnames into a SQL string.",
+        "correctCategoryId": "Vulnerability",
+        "sectionTitle": "Vulnerability, threat and risk"
+      },
+      {
+        "stableKey": "T2",
+        "questionType": "matching",
+        "prompt": "A criminal group that tries to steal clinic appointment data for fraud.",
+        "correctCategoryId": "Threat",
+        "sectionTitle": "Vulnerability, threat and risk"
+      },
+      {
+        "stableKey": "T3",
+        "questionType": "matching",
+        "prompt": "If the unpatched kiosk is reached, patients may miss reviews and Northbank’s reputation may be damaged.",
+        "correctCategoryId": "Risk",
+        "sectionTitle": "Vulnerability, threat and risk"
+      },
+      {
+        "stableKey": "T4",
+        "questionType": "matching",
+        "prompt": "The shared training folder allows any Wi-Fi guest to read draft letters.",
+        "correctCategoryId": "Vulnerability",
+        "sectionTitle": "Vulnerability, threat and risk"
+      },
+      {
+        "stableKey": "T5",
+        "questionType": "matching",
+        "prompt": "Ransomware operators targeting health organisations this year.",
+        "correctCategoryId": "Threat",
+        "sectionTitle": "Vulnerability, threat and risk"
+      },
+      {
+        "stableKey": "T6",
+        "questionType": "matching",
+        "prompt": "There is a realistic chance that default kiosk logins lead to cancelled appointments and clinical delay.",
+        "correctCategoryId": "Risk",
+        "sectionTitle": "Vulnerability, threat and risk"
+      },
+      {
+        "stableKey": "T7",
+        "questionType": "matching",
+        "prompt": "No check that clinician A is allowed to open patient 1044’s training record.",
+        "correctCategoryId": "Vulnerability",
+        "sectionTitle": "Vulnerability, threat and risk"
+      },
+      {
+        "stableKey": "T8",
+        "questionType": "matching",
+        "prompt": "A former contractor still has a live remote-access account they should not have.",
+        "correctCategoryId": "Vulnerability",
+        "sectionTitle": "Vulnerability, threat and risk"
+      }
+    ]
+  },
+  "week5-vulnerability-patterns": {
+    "id": "week5-vulnerability-patterns",
+    "title": "Recognising vulnerability patterns",
+    "version": "1.0.0",
+    "questionCount": 8,
+    "questions": [
+      {
+        "stableKey": "P1",
+        "questionType": "single",
+        "prompt": "A training booking page still accepts the clinic’s original demo login of admin / admin. What vulnerability pattern is this?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Weak or default credentials"
+          },
+          {
+            "id": "b",
+            "label": "A threat actor’s motivation"
+          },
+          {
+            "id": "c",
+            "label": "A completed ransomware impact"
+          },
+          {
+            "id": "d",
+            "label": "A legal requirement to keep demo accounts"
+          }
+        ],
+        "correctOptionId": "a",
+        "sectionTitle": "Recognising vulnerability patterns"
+      },
+      {
+        "stableKey": "P2",
+        "questionType": "single",
+        "prompt": "A fictional records URL is /training/records/patient/1044. The app shows whichever training record matches the number, without checking that the signed-in clinician is allowed to see it. What is the main weakness?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Missing object-level access control"
+          },
+          {
+            "id": "b",
+            "label": "The clinic uses too many firewalls"
+          },
+          {
+            "id": "c",
+            "label": "Backups are encrypted"
+          },
+          {
+            "id": "d",
+            "label": "Staff completed phishing training"
+          }
+        ],
+        "correctOptionId": "a",
+        "sectionTitle": "Recognising vulnerability patterns"
+      },
+      {
+        "stableKey": "P3",
+        "questionType": "single",
+        "prompt": "A Northbank training lookup is built as: query = \"SELECT * FROM training_patients WHERE surname = '\" + typedSurname + \"'\". What pattern should you flag?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Untrusted input concatenated into a query"
+          },
+          {
+            "id": "b",
+            "label": "Using a database at all"
+          },
+          {
+            "id": "c",
+            "label": "Encrypting backups overnight"
+          },
+          {
+            "id": "d",
+            "label": "Asking the learner to type a surname"
+          }
+        ],
+        "correctOptionId": "a",
+        "sectionTitle": "Recognising vulnerability patterns"
+      },
+      {
+        "stableKey": "P4",
+        "questionType": "single",
+        "prompt": "A fictional training config contains CLINIC_DEMO_TOKEN = \"not-a-real-secret\" in a file that is copied into the learner hub. Why is this a vulnerability pattern?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Secrets in source or config can be reused if the file leaks"
+          },
+          {
+            "id": "b",
+            "label": "Tokens should always be printed on posters"
+          },
+          {
+            "id": "c",
+            "label": "Demo tokens cannot be misused even if copied"
+          },
+          {
+            "id": "d",
+            "label": "This is only a threat, not a weakness"
+          }
+        ],
+        "correctOptionId": "a",
+        "sectionTitle": "Recognising vulnerability patterns"
+      },
+      {
+        "stableKey": "P5",
+        "questionType": "single",
+        "prompt": "Northbank’s training kiosk still runs last year’s unpatched booking component after a vendor published a fix. What is the vulnerability?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Unpatched or outdated software"
+          },
+          {
+            "id": "b",
+            "label": "Having a vendor at all"
+          },
+          {
+            "id": "c",
+            "label": "Publishing a fix too quickly"
+          },
+          {
+            "id": "d",
+            "label": "Asking reception staff to reboot weekly"
+          }
+        ],
+        "correctOptionId": "a",
+        "sectionTitle": "Recognising vulnerability patterns"
+      },
+      {
+        "stableKey": "P6",
+        "questionType": "single",
+        "prompt": "A feedback box does comments.innerHTML = visitorMessage in a training page. What is the main client-side risk?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Untrusted text can be treated as HTML in the page"
+          },
+          {
+            "id": "b",
+            "label": "The page uses too much CSS"
+          },
+          {
+            "id": "c",
+            "label": "innerHTML always encrypts the message"
+          },
+          {
+            "id": "d",
+            "label": "Visitors cannot submit empty comments"
+          }
+        ],
+        "correctOptionId": "a",
+        "sectionTitle": "Recognising vulnerability patterns"
+      },
+      {
+        "stableKey": "P7",
+        "questionType": "single",
+        "prompt": "A shared training folder is set so that anyone on the clinic Wi-Fi can read every file, including draft letters. What configuration weakness is this?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Excessive permissions / overly open sharing"
+          },
+          {
+            "id": "b",
+            "label": "Using folders instead of paper"
+          },
+          {
+            "id": "c",
+            "label": "Wi-Fi existing in the building"
+          },
+          {
+            "id": "d",
+            "label": "Encrypting the letters after they are posted"
+          }
+        ],
+        "correctOptionId": "a",
+        "sectionTitle": "Recognising vulnerability patterns"
+      },
+      {
+        "stableKey": "P8",
+        "questionType": "single",
+        "prompt": "Which check best detects several of these weaknesses before they reach live clinic systems?",
+        "options": [
+          {
+            "id": "a",
+            "label": "A code and configuration review against a short secure-coding checklist"
+          },
+          {
+            "id": "b",
+            "label": "Hoping no one notices"
+          },
+          {
+            "id": "c",
+            "label": "Deleting log files each night so nothing is stored"
+          },
+          {
+            "id": "d",
+            "label": "Publishing admin passwords in the staff newsletter"
+          }
+        ],
+        "correctOptionId": "a",
+        "sectionTitle": "Recognising vulnerability patterns"
+      }
+    ]
+  }
+}
