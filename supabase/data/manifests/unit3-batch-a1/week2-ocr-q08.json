@@ -1,0 +1,14 @@
+{
+  "activityId": "week2-ocr-question-practice",
+  "stableKey": "W2OCR-Q08",
+  "questionType": "text",
+  "sectionKey": "questions",
+  "sectionTitle": "Questions",
+  "ordinal": 8,
+  "maxScore": 6,
+  "prompt": "Explain how a phishing attack could lead to a cyber security incident at Northbank Community Health Partnership. In your answer, refer to threats, vulnerabilities and the impact on confidentiality. [6 marks]",
+  "commandWord": "Explain",
+  "source": "unit-3-Cyber-Security-Hub/week-2/data/ocr-practice.js",
+  "frontendId": "ocr-q8",
+  "marking": null
+}

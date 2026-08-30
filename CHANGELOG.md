@@ -10,6 +10,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ## [Unreleased]
 
+### Added
+
+- Unit 3 Batch A1 catalogue completeness: new unpublished-then-published
+  activity versions for the eight live Week 1 banks (`1.1.0`), the four missing
+  Week 5 activities, and `W2OCR-Q08` on `week2-ocr-question-practice` `1.1.0`.
+  Published `1.0.0` rows, learner evidence, and curriculum publication are not
+  mutated.
+
 ### Security
 
 - Learner-facing `published_curriculum_package` strips answer keys

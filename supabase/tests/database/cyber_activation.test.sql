@@ -90,8 +90,8 @@ select is(
     join learning.modules as module on module.id = activity.module_id
     where module.stable_key = 'unit-3-cyber-security'
   ),
-  76,
-  'Cyber catalogue still contains exactly 76 activity versions'
+  89,
+  'Cyber catalogue contains 89 activity versions after Batch A1'
 );
 
 select is(
@@ -104,8 +104,8 @@ select is(
       and version.published_at is not null
       and version.retired_at is null
   ),
-  68,
-  'Weeks 2–7 Cyber activity versions are published (Week 1 remains unpublished)'
+  81,
+  'Published Cyber versions include Weeks 2–7 plus Batch A1 1.1.0/Week 5 rows'
 );
 
 select is(
@@ -130,8 +130,8 @@ select is(
     where learner_group.code = 'CYBER-TEST-A'
       and assignment.active
   ),
-  68,
-  'CYBER-TEST-A has 68 active Weeks 2–7 Cyber assignments'
+  81,
+  'CYBER-TEST-A has 81 active Cyber assignments after Batch A1'
 );
 
 select ok(
@@ -217,8 +217,8 @@ select ok(
 
 select is(
   (select count(*)::int from api.my_assignments),
-  68,
-  'Cyber learner can see all 68 assigned Weeks 2–7 activities'
+  81,
+  'Cyber learner can see all 81 assigned Cyber activity versions'
 );
 
 select lives_ok(

@@ -1,0 +1,3442 @@
+{
+  "U3-W01-BASELINE": {
+    "activity": {
+      "activityId": "U3-W01-BASELINE",
+      "maximumScore": 10,
+      "allowsPartner": false,
+      "activityType": "Diagnostic"
+    },
+    "topLevelKeys": [
+      "activity",
+      "contentSchemaVersion",
+      "sections"
+    ],
+    "sectionCount": 3,
+    "sections": [
+      {
+        "sectionId": "BASELINE-INTRO",
+        "title": "Before you begin",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "BASELINE-ASSESSMENT",
+        "title": "Baseline knowledge questions",
+        "questionCount": 10
+      },
+      {
+        "sectionId": "BASELINE-REVIEW",
+        "title": "Review your starting point",
+        "questionCount": 0
+      }
+    ],
+    "questions": [
+      {
+        "questionId": "BAS-Q01",
+        "prompt": "Which password is the strongest?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "password123"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Summer2026"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "River!Glass7-Planet"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "ricardo2005"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "BASELINE-ASSESSMENT",
+        "sectionTitle": "Baseline knowledge questions"
+      },
+      {
+        "questionId": "BAS-Q02",
+        "prompt": "What is phishing?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Physically stealing a computer"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Sending a fraudulent message to obtain information"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Installing updates on a computer"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Encrypting a backup"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "BASELINE-ASSESSMENT",
+        "sectionTitle": "Baseline knowledge questions"
+      },
+      {
+        "questionId": "BAS-Q03",
+        "prompt": "You receive an unexpected email asking you to reset your college password. What should you do first?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Click the link immediately"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Reply with your password"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Check the sender and report the message if it is suspicious"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Forward it to other learners"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "BASELINE-ASSESSMENT",
+        "sectionTitle": "Baseline knowledge questions"
+      },
+      {
+        "questionId": "BAS-Q04",
+        "prompt": "Which statement best describes malware?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Software designed to damage, disrupt or gain unauthorised access"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Any software that runs slowly"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "A secure method of storing passwords"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "A type of computer hardware"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 4,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "BASELINE-ASSESSMENT",
+        "sectionTitle": "Baseline knowledge questions"
+      },
+      {
+        "questionId": "BAS-Q05",
+        "prompt": "Which of the following is an example of personal data?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "A blank spreadsheet"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "A person's name and home address"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "A generic company logo"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "A public weather forecast"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 5,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "BASELINE-ASSESSMENT",
+        "sectionTitle": "Baseline knowledge questions"
+      },
+      {
+        "questionId": "BAS-Q06",
+        "prompt": "Why should an organisation protect personal data?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "To make computers run faster"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "To prevent harm, misuse and unauthorised disclosure"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "To avoid using passwords"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "To make all information public"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 6,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "BASELINE-ASSESSMENT",
+        "sectionTitle": "Baseline knowledge questions"
+      },
+      {
+        "questionId": "BAS-Q07",
+        "prompt": "A learner changes another learner's saved work without permission. What has been affected most directly?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Availability"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Portability"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 7,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "BASELINE-ASSESSMENT",
+        "sectionTitle": "Baseline knowledge questions"
+      },
+      {
+        "questionId": "BAS-Q08",
+        "prompt": "A college system is offline and staff cannot access student records. What has been affected most directly?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Availability"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Ownership"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 8,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "BASELINE-ASSESSMENT",
+        "sectionTitle": "Baseline knowledge questions"
+      },
+      {
+        "questionId": "BAS-Q09",
+        "prompt": "A patient's medical record is viewed by someone without permission. What has been affected most directly?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Availability"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Performance"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 9,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "BASELINE-ASSESSMENT",
+        "sectionTitle": "Baseline knowledge questions"
+      },
+      {
+        "questionId": "BAS-Q10",
+        "prompt": "Which action is most likely to reduce the risk of an account being compromised?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Sharing a password with a trusted friend"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Using the same password everywhere"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Enabling multi-factor authentication"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Writing the password on the computer"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 10,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "BASELINE-ASSESSMENT",
+        "sectionTitle": "Baseline knowledge questions"
+      }
+    ],
+    "answerKeysPresent": false
+  },
+  "U3-W01-CIA": {
+    "activity": {
+      "activityId": "U3-W01-CIA",
+      "maximumScore": 15,
+      "allowsPartner": false,
+      "activityType": "Guided learning"
+    },
+    "topLevelKeys": [
+      "activity",
+      "contentSchemaVersion",
+      "sections"
+    ],
+    "sectionCount": 9,
+    "sections": [
+      {
+        "sectionId": "CIA-INTRO",
+        "title": "Understanding the CIA triad",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "CIA-CONF",
+        "title": "Confidentiality",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "CIA-CONF-CHECK",
+        "title": "Confidentiality check",
+        "questionCount": 3
+      },
+      {
+        "sectionId": "CIA-INTEGRITY",
+        "title": "Integrity",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "CIA-INTEGRITY-CHECK",
+        "title": "Integrity check",
+        "questionCount": 3
+      },
+      {
+        "sectionId": "CIA-AVAIL",
+        "title": "Availability",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "CIA-AVAIL-CHECK",
+        "title": "Availability check",
+        "questionCount": 3
+      },
+      {
+        "sectionId": "CIA-COMBINED-CHECK",
+        "title": "Combined Northbank scenarios",
+        "questionCount": 3
+      },
+      {
+        "sectionId": "CIA-REFLECTION",
+        "title": "Review your understanding",
+        "questionCount": 0
+      }
+    ],
+    "questions": [
+      {
+        "questionId": "CIA-Q01",
+        "prompt": "Which definition best matches confidentiality?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Ensuring information remains accurate and complete"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Ensuring information can only be viewed by authorised people or systems"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Ensuring systems can be accessed whenever they are needed"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Ensuring every member of staff can view all information"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "CIA-CONF-CHECK",
+        "sectionTitle": "Confidentiality check"
+      },
+      {
+        "questionId": "CIA-Q02",
+        "prompt": "A visitor uses a staff password to open a Northbank patient record. Which CIA aim is affected most directly?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Availability"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Performance"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "CIA-CONF-CHECK",
+        "sectionTitle": "Confidentiality check"
+      },
+      {
+        "questionId": "CIA-Q03",
+        "prompt": "Which control would most directly support confidentiality for Northbank patient records?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Role-based access with multi-factor authentication"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "A larger monitor for reception staff"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "A faster printer"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Keeping every staff account permanently active"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "CIA-CONF-CHECK",
+        "sectionTitle": "Confidentiality check"
+      },
+      {
+        "questionId": "CIA-Q04",
+        "prompt": "Which definition best matches integrity?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Ensuring every system is connected to the internet"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Ensuring information is hidden from its owner"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Ensuring authorised users can always access a service"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Ensuring information remains accurate, complete and is not changed without permission"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "CIA-INTEGRITY-CHECK",
+        "sectionTitle": "Integrity check"
+      },
+      {
+        "questionId": "CIA-Q05",
+        "prompt": "An attacker changes a patient's medication dose in the Northbank clinical system. Which CIA aim is affected most directly?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Availability"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Portability"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "CIA-INTEGRITY-CHECK",
+        "sectionTitle": "Integrity check"
+      },
+      {
+        "questionId": "CIA-Q06",
+        "prompt": "Which control would most directly help Northbank protect the integrity of appointment and medication data?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Allowing all staff to edit every record"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Removing validation from data-entry forms"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Using input validation, restricted editing and an audit trail"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Sharing one administrator account across the organisation"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "CIA-INTEGRITY-CHECK",
+        "sectionTitle": "Integrity check"
+      },
+      {
+        "questionId": "CIA-Q07",
+        "prompt": "Which definition best matches availability?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Ensuring authorised users can access information and systems when needed"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Ensuring information is never backed up"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Ensuring only managers can use computers"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Ensuring all data is printed"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "CIA-AVAIL-CHECK",
+        "sectionTitle": "Availability check"
+      },
+      {
+        "questionId": "CIA-Q08",
+        "prompt": "Northbank staff cannot open the appointment system during clinic hours. Which CIA aim is affected most directly?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Ownership"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Availability"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "CIA-AVAIL-CHECK",
+        "sectionTitle": "Availability check"
+      },
+      {
+        "questionId": "CIA-Q09",
+        "prompt": "Which measure would most directly improve the availability of Northbank's critical systems?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Deleting all recovery copies"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Using tested backups, resilient infrastructure and a recovery plan"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Giving every visitor an administrator account"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Turning off monitoring alerts"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "CIA-AVAIL-CHECK",
+        "sectionTitle": "Availability check"
+      },
+      {
+        "questionId": "CIA-Q10",
+        "prompt": "A laptop containing unencrypted patient records is stolen from a Northbank employee. Which CIA aim is threatened most directly, and why?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Integrity, because the laptop is heavier than before"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Availability, because every Northbank system has stopped"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Confidentiality, because an unauthorised person may be able to view the patient records"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Integrity, because all patient records have definitely been changed"
+          }
+        ],
+        "marks": 2,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "CIA-COMBINED-CHECK",
+        "sectionTitle": "Combined Northbank scenarios"
+      },
+      {
+        "questionId": "CIA-Q11",
+        "prompt": "Ransomware encrypts Northbank records and also corrupts some appointment details. Which CIA aims are affected?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Integrity and availability"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Confidentiality only"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Availability only"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Confidentiality and ownership"
+          }
+        ],
+        "marks": 2,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "CIA-COMBINED-CHECK",
+        "sectionTitle": "Combined Northbank scenarios"
+      },
+      {
+        "questionId": "CIA-Q12",
+        "prompt": "An attacker uses stolen credentials to view and change patient records, then causes the record system to become unavailable. Which CIA aims are affected?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Confidentiality only"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Integrity and availability only"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Availability only"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Confidentiality, integrity and availability"
+          }
+        ],
+        "marks": 2,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "CIA-COMBINED-CHECK",
+        "sectionTitle": "Combined Northbank scenarios"
+      }
+    ],
+    "answerKeysPresent": false
+  },
+  "U3-W01-INCIDENTS": {
+    "activity": {
+      "activityId": "U3-W01-INCIDENTS",
+      "maximumScore": 12,
+      "allowsPartner": true,
+      "activityType": "Practical classification"
+    },
+    "topLevelKeys": [
+      "activity",
+      "contentSchemaVersion",
+      "sections"
+    ],
+    "sectionCount": 5,
+    "sections": [
+      {
+        "sectionId": "INC-INTRO",
+        "title": "Incident classification",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "INC-CARDS-01-04",
+        "title": "Cards 1 to 4",
+        "questionCount": 4
+      },
+      {
+        "sectionId": "INC-CARDS-05-08",
+        "title": "Cards 5 to 8",
+        "questionCount": 4
+      },
+      {
+        "sectionId": "INC-CARDS-09-12",
+        "title": "Cards 9 to 12",
+        "questionCount": 4
+      },
+      {
+        "sectionId": "INC-REVIEW",
+        "title": "Review your classifications",
+        "questionCount": 0
+      }
+    ],
+    "questions": [
+      {
+        "questionId": "INC-Q01",
+        "prompt": "A former temporary worker uses an account that was not disabled to open the patient database.",
+        "questionType": "classification",
+        "options": [
+          {
+            "optionId": "INCIDENT-UNAUTHORISED-ACCESS",
+            "displayOrder": 1,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "INCIDENT-INFORMATION-DISCLOSURE",
+            "displayOrder": 2,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "INCIDENT-MODIFICATION-OF-DATA",
+            "displayOrder": 3,
+            "text": "Modification of data"
+          },
+          {
+            "optionId": "INCIDENT-INACCESSIBLE-DATA",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          },
+          {
+            "optionId": "INCIDENT-DESTRUCTION",
+            "displayOrder": 5,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "INCIDENT-THEFT",
+            "displayOrder": 6,
+            "text": "Theft"
+          },
+          {
+            "optionId": "CIA-CONFIDENTIALITY",
+            "displayOrder": 7,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "CIA-INTEGRITY",
+            "displayOrder": 8,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "CIA-AVAILABILITY",
+            "displayOrder": 9,
+            "text": "Availability"
+          }
+        ],
+        "marks": 1,
+        "minimumCharacters": 8,
+        "maximumCharacters": 300,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Choose the main incident type and CIA aim, then enter a short evidence phrase from the scenario.",
+        "maximumSelections": 2,
+        "minimumSelections": 2,
+        "sectionId": "INC-CARDS-01-04",
+        "sectionTitle": "Cards 1 to 4"
+      },
+      {
+        "questionId": "INC-Q02",
+        "prompt": "A receptionist emails patient telephone numbers to an external supplier that has no permission to receive them.",
+        "questionType": "classification",
+        "options": [
+          {
+            "optionId": "INCIDENT-UNAUTHORISED-ACCESS",
+            "displayOrder": 1,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "INCIDENT-INFORMATION-DISCLOSURE",
+            "displayOrder": 2,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "INCIDENT-MODIFICATION-OF-DATA",
+            "displayOrder": 3,
+            "text": "Modification of data"
+          },
+          {
+            "optionId": "INCIDENT-INACCESSIBLE-DATA",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          },
+          {
+            "optionId": "INCIDENT-DESTRUCTION",
+            "displayOrder": 5,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "INCIDENT-THEFT",
+            "displayOrder": 6,
+            "text": "Theft"
+          },
+          {
+            "optionId": "CIA-CONFIDENTIALITY",
+            "displayOrder": 7,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "CIA-INTEGRITY",
+            "displayOrder": 8,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "CIA-AVAILABILITY",
+            "displayOrder": 9,
+            "text": "Availability"
+          }
+        ],
+        "marks": 1,
+        "minimumCharacters": 8,
+        "maximumCharacters": 300,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Choose the main incident type and CIA aim, then enter a short evidence phrase from the scenario.",
+        "maximumSelections": 2,
+        "minimumSelections": 2,
+        "sectionId": "INC-CARDS-01-04",
+        "sectionTitle": "Cards 1 to 4"
+      },
+      {
+        "questionId": "INC-Q03",
+        "prompt": "An attacker changes a patient allergy status in the clinical system.",
+        "questionType": "classification",
+        "options": [
+          {
+            "optionId": "INCIDENT-UNAUTHORISED-ACCESS",
+            "displayOrder": 1,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "INCIDENT-INFORMATION-DISCLOSURE",
+            "displayOrder": 2,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "INCIDENT-MODIFICATION-OF-DATA",
+            "displayOrder": 3,
+            "text": "Modification of data"
+          },
+          {
+            "optionId": "INCIDENT-INACCESSIBLE-DATA",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          },
+          {
+            "optionId": "INCIDENT-DESTRUCTION",
+            "displayOrder": 5,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "INCIDENT-THEFT",
+            "displayOrder": 6,
+            "text": "Theft"
+          },
+          {
+            "optionId": "CIA-CONFIDENTIALITY",
+            "displayOrder": 7,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "CIA-INTEGRITY",
+            "displayOrder": 8,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "CIA-AVAILABILITY",
+            "displayOrder": 9,
+            "text": "Availability"
+          }
+        ],
+        "marks": 1,
+        "minimumCharacters": 8,
+        "maximumCharacters": 300,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Choose the main incident type and CIA aim, then enter a short evidence phrase from the scenario.",
+        "maximumSelections": 2,
+        "minimumSelections": 2,
+        "sectionId": "INC-CARDS-01-04",
+        "sectionTitle": "Cards 1 to 4"
+      },
+      {
+        "questionId": "INC-Q04",
+        "prompt": "The online appointment system is overwhelmed and legitimate users cannot open it.",
+        "questionType": "classification",
+        "options": [
+          {
+            "optionId": "INCIDENT-UNAUTHORISED-ACCESS",
+            "displayOrder": 1,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "INCIDENT-INFORMATION-DISCLOSURE",
+            "displayOrder": 2,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "INCIDENT-MODIFICATION-OF-DATA",
+            "displayOrder": 3,
+            "text": "Modification of data"
+          },
+          {
+            "optionId": "INCIDENT-INACCESSIBLE-DATA",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          },
+          {
+            "optionId": "INCIDENT-DESTRUCTION",
+            "displayOrder": 5,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "INCIDENT-THEFT",
+            "displayOrder": 6,
+            "text": "Theft"
+          },
+          {
+            "optionId": "CIA-CONFIDENTIALITY",
+            "displayOrder": 7,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "CIA-INTEGRITY",
+            "displayOrder": 8,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "CIA-AVAILABILITY",
+            "displayOrder": 9,
+            "text": "Availability"
+          }
+        ],
+        "marks": 1,
+        "minimumCharacters": 8,
+        "maximumCharacters": 300,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 4,
+        "instruction": "Choose the main incident type and CIA aim, then enter a short evidence phrase from the scenario.",
+        "maximumSelections": 2,
+        "minimumSelections": 2,
+        "sectionId": "INC-CARDS-01-04",
+        "sectionTitle": "Cards 1 to 4"
+      },
+      {
+        "questionId": "INC-Q05",
+        "prompt": "A staff member permanently deletes referral records and no backup exists.",
+        "questionType": "classification",
+        "options": [
+          {
+            "optionId": "INCIDENT-UNAUTHORISED-ACCESS",
+            "displayOrder": 1,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "INCIDENT-INFORMATION-DISCLOSURE",
+            "displayOrder": 2,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "INCIDENT-MODIFICATION-OF-DATA",
+            "displayOrder": 3,
+            "text": "Modification of data"
+          },
+          {
+            "optionId": "INCIDENT-INACCESSIBLE-DATA",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          },
+          {
+            "optionId": "INCIDENT-DESTRUCTION",
+            "displayOrder": 5,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "INCIDENT-THEFT",
+            "displayOrder": 6,
+            "text": "Theft"
+          },
+          {
+            "optionId": "CIA-CONFIDENTIALITY",
+            "displayOrder": 7,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "CIA-INTEGRITY",
+            "displayOrder": 8,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "CIA-AVAILABILITY",
+            "displayOrder": 9,
+            "text": "Availability"
+          }
+        ],
+        "marks": 1,
+        "minimumCharacters": 8,
+        "maximumCharacters": 300,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Choose the main incident type and CIA aim, then enter a short evidence phrase from the scenario.",
+        "maximumSelections": 2,
+        "minimumSelections": 2,
+        "sectionId": "INC-CARDS-05-08",
+        "sectionTitle": "Cards 5 to 8"
+      },
+      {
+        "questionId": "INC-Q06",
+        "prompt": "A laptop containing unencrypted patient records is taken from a staff member's car.",
+        "questionType": "classification",
+        "options": [
+          {
+            "optionId": "INCIDENT-UNAUTHORISED-ACCESS",
+            "displayOrder": 1,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "INCIDENT-INFORMATION-DISCLOSURE",
+            "displayOrder": 2,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "INCIDENT-MODIFICATION-OF-DATA",
+            "displayOrder": 3,
+            "text": "Modification of data"
+          },
+          {
+            "optionId": "INCIDENT-INACCESSIBLE-DATA",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          },
+          {
+            "optionId": "INCIDENT-DESTRUCTION",
+            "displayOrder": 5,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "INCIDENT-THEFT",
+            "displayOrder": 6,
+            "text": "Theft"
+          },
+          {
+            "optionId": "CIA-CONFIDENTIALITY",
+            "displayOrder": 7,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "CIA-INTEGRITY",
+            "displayOrder": 8,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "CIA-AVAILABILITY",
+            "displayOrder": 9,
+            "text": "Availability"
+          }
+        ],
+        "marks": 1,
+        "minimumCharacters": 8,
+        "maximumCharacters": 300,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Choose the main incident type and CIA aim, then enter a short evidence phrase from the scenario.",
+        "maximumSelections": 2,
+        "minimumSelections": 2,
+        "sectionId": "INC-CARDS-05-08",
+        "sectionTitle": "Cards 5 to 8"
+      },
+      {
+        "questionId": "INC-Q07",
+        "prompt": "A contractor signs in with a shared administrator account and opens confidential staff payroll records that are not required for the support job.",
+        "questionType": "classification",
+        "options": [
+          {
+            "optionId": "INCIDENT-UNAUTHORISED-ACCESS",
+            "displayOrder": 1,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "INCIDENT-INFORMATION-DISCLOSURE",
+            "displayOrder": 2,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "INCIDENT-MODIFICATION-OF-DATA",
+            "displayOrder": 3,
+            "text": "Modification of data"
+          },
+          {
+            "optionId": "INCIDENT-INACCESSIBLE-DATA",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          },
+          {
+            "optionId": "INCIDENT-DESTRUCTION",
+            "displayOrder": 5,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "INCIDENT-THEFT",
+            "displayOrder": 6,
+            "text": "Theft"
+          },
+          {
+            "optionId": "CIA-CONFIDENTIALITY",
+            "displayOrder": 7,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "CIA-INTEGRITY",
+            "displayOrder": 8,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "CIA-AVAILABILITY",
+            "displayOrder": 9,
+            "text": "Availability"
+          }
+        ],
+        "marks": 1,
+        "minimumCharacters": 8,
+        "maximumCharacters": 300,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Choose the main incident type and CIA aim, then enter a short evidence phrase from the scenario.",
+        "maximumSelections": 2,
+        "minimumSelections": 2,
+        "sectionId": "INC-CARDS-05-08",
+        "sectionTitle": "Cards 5 to 8"
+      },
+      {
+        "questionId": "INC-Q08",
+        "prompt": "A Northbank employee changes a cloud folder link to public, allowing anyone with the link to view patient discharge letters.",
+        "questionType": "classification",
+        "options": [
+          {
+            "optionId": "INCIDENT-UNAUTHORISED-ACCESS",
+            "displayOrder": 1,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "INCIDENT-INFORMATION-DISCLOSURE",
+            "displayOrder": 2,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "INCIDENT-MODIFICATION-OF-DATA",
+            "displayOrder": 3,
+            "text": "Modification of data"
+          },
+          {
+            "optionId": "INCIDENT-INACCESSIBLE-DATA",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          },
+          {
+            "optionId": "INCIDENT-DESTRUCTION",
+            "displayOrder": 5,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "INCIDENT-THEFT",
+            "displayOrder": 6,
+            "text": "Theft"
+          },
+          {
+            "optionId": "CIA-CONFIDENTIALITY",
+            "displayOrder": 7,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "CIA-INTEGRITY",
+            "displayOrder": 8,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "CIA-AVAILABILITY",
+            "displayOrder": 9,
+            "text": "Availability"
+          }
+        ],
+        "marks": 1,
+        "minimumCharacters": 8,
+        "maximumCharacters": 300,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 4,
+        "instruction": "Choose the main incident type and CIA aim, then enter a short evidence phrase from the scenario.",
+        "maximumSelections": 2,
+        "minimumSelections": 2,
+        "sectionId": "INC-CARDS-05-08",
+        "sectionTitle": "Cards 5 to 8"
+      },
+      {
+        "questionId": "INC-Q09",
+        "prompt": "Malware changes several appointment dates in the booking database without staff approval.",
+        "questionType": "classification",
+        "options": [
+          {
+            "optionId": "INCIDENT-UNAUTHORISED-ACCESS",
+            "displayOrder": 1,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "INCIDENT-INFORMATION-DISCLOSURE",
+            "displayOrder": 2,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "INCIDENT-MODIFICATION-OF-DATA",
+            "displayOrder": 3,
+            "text": "Modification of data"
+          },
+          {
+            "optionId": "INCIDENT-INACCESSIBLE-DATA",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          },
+          {
+            "optionId": "INCIDENT-DESTRUCTION",
+            "displayOrder": 5,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "INCIDENT-THEFT",
+            "displayOrder": 6,
+            "text": "Theft"
+          },
+          {
+            "optionId": "CIA-CONFIDENTIALITY",
+            "displayOrder": 7,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "CIA-INTEGRITY",
+            "displayOrder": 8,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "CIA-AVAILABILITY",
+            "displayOrder": 9,
+            "text": "Availability"
+          }
+        ],
+        "marks": 1,
+        "minimumCharacters": 8,
+        "maximumCharacters": 300,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Choose the main incident type and CIA aim, then enter a short evidence phrase from the scenario.",
+        "maximumSelections": 2,
+        "minimumSelections": 2,
+        "sectionId": "INC-CARDS-09-12",
+        "sectionTitle": "Cards 9 to 12"
+      },
+      {
+        "questionId": "INC-Q10",
+        "prompt": "Ransomware encrypts Northbank's shared records folder so authorised staff cannot open the files during clinic hours.",
+        "questionType": "classification",
+        "options": [
+          {
+            "optionId": "INCIDENT-UNAUTHORISED-ACCESS",
+            "displayOrder": 1,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "INCIDENT-INFORMATION-DISCLOSURE",
+            "displayOrder": 2,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "INCIDENT-MODIFICATION-OF-DATA",
+            "displayOrder": 3,
+            "text": "Modification of data"
+          },
+          {
+            "optionId": "INCIDENT-INACCESSIBLE-DATA",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          },
+          {
+            "optionId": "INCIDENT-DESTRUCTION",
+            "displayOrder": 5,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "INCIDENT-THEFT",
+            "displayOrder": 6,
+            "text": "Theft"
+          },
+          {
+            "optionId": "CIA-CONFIDENTIALITY",
+            "displayOrder": 7,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "CIA-INTEGRITY",
+            "displayOrder": 8,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "CIA-AVAILABILITY",
+            "displayOrder": 9,
+            "text": "Availability"
+          }
+        ],
+        "marks": 1,
+        "minimumCharacters": 8,
+        "maximumCharacters": 300,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Choose the main incident type and CIA aim, then enter a short evidence phrase from the scenario.",
+        "maximumSelections": 2,
+        "minimumSelections": 2,
+        "sectionId": "INC-CARDS-09-12",
+        "sectionTitle": "Cards 9 to 12"
+      },
+      {
+        "questionId": "INC-Q11",
+        "prompt": "Malware erases Northbank's local patient files and also deletes the connected recovery copies.",
+        "questionType": "classification",
+        "options": [
+          {
+            "optionId": "INCIDENT-UNAUTHORISED-ACCESS",
+            "displayOrder": 1,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "INCIDENT-INFORMATION-DISCLOSURE",
+            "displayOrder": 2,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "INCIDENT-MODIFICATION-OF-DATA",
+            "displayOrder": 3,
+            "text": "Modification of data"
+          },
+          {
+            "optionId": "INCIDENT-INACCESSIBLE-DATA",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          },
+          {
+            "optionId": "INCIDENT-DESTRUCTION",
+            "displayOrder": 5,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "INCIDENT-THEFT",
+            "displayOrder": 6,
+            "text": "Theft"
+          },
+          {
+            "optionId": "CIA-CONFIDENTIALITY",
+            "displayOrder": 7,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "CIA-INTEGRITY",
+            "displayOrder": 8,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "CIA-AVAILABILITY",
+            "displayOrder": 9,
+            "text": "Availability"
+          }
+        ],
+        "marks": 1,
+        "minimumCharacters": 8,
+        "maximumCharacters": 300,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Choose the main incident type and CIA aim, then enter a short evidence phrase from the scenario.",
+        "maximumSelections": 2,
+        "minimumSelections": 2,
+        "sectionId": "INC-CARDS-09-12",
+        "sectionTitle": "Cards 9 to 12"
+      },
+      {
+        "questionId": "INC-Q12",
+        "prompt": "A removable backup drive containing billing and patient-contact data is taken from a locked office without permission.",
+        "questionType": "classification",
+        "options": [
+          {
+            "optionId": "INCIDENT-UNAUTHORISED-ACCESS",
+            "displayOrder": 1,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "INCIDENT-INFORMATION-DISCLOSURE",
+            "displayOrder": 2,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "INCIDENT-MODIFICATION-OF-DATA",
+            "displayOrder": 3,
+            "text": "Modification of data"
+          },
+          {
+            "optionId": "INCIDENT-INACCESSIBLE-DATA",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          },
+          {
+            "optionId": "INCIDENT-DESTRUCTION",
+            "displayOrder": 5,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "INCIDENT-THEFT",
+            "displayOrder": 6,
+            "text": "Theft"
+          },
+          {
+            "optionId": "CIA-CONFIDENTIALITY",
+            "displayOrder": 7,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "CIA-INTEGRITY",
+            "displayOrder": 8,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "CIA-AVAILABILITY",
+            "displayOrder": 9,
+            "text": "Availability"
+          }
+        ],
+        "marks": 1,
+        "minimumCharacters": 8,
+        "maximumCharacters": 300,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 4,
+        "instruction": "Choose the main incident type and CIA aim, then enter a short evidence phrase from the scenario.",
+        "maximumSelections": 2,
+        "minimumSelections": 2,
+        "sectionId": "INC-CARDS-09-12",
+        "sectionTitle": "Cards 9 to 12"
+      }
+    ],
+    "answerKeysPresent": false
+  },
+  "U3-W01-GLOSSARY": {
+    "activity": {
+      "activityId": "U3-W01-GLOSSARY",
+      "maximumScore": 12,
+      "allowsPartner": false,
+      "activityType": "Knowledge check"
+    },
+    "topLevelKeys": [
+      "activity",
+      "contentSchemaVersion",
+      "sections"
+    ],
+    "sectionCount": 8,
+    "sections": [
+      {
+        "sectionId": "GLO-INTRO",
+        "title": "Using the glossary",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "GLO-CIA-LEARNING",
+        "title": "CIA glossary terms",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "GLO-CIA-CHECK",
+        "title": "CIA terminology check",
+        "questionCount": 3
+      },
+      {
+        "sectionId": "GLO-INCIDENT-LEARNING",
+        "title": "Six OCR incident types",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "GLO-INCIDENT-CHECK",
+        "title": "Incident terminology check",
+        "questionCount": 6
+      },
+      {
+        "sectionId": "GLO-DATA-LEARNING",
+        "title": "Types of information",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "GLO-DATA-CHECK",
+        "title": "Information terminology check",
+        "questionCount": 3
+      },
+      {
+        "sectionId": "GLO-REVIEW",
+        "title": "Review your terminology",
+        "questionCount": 0
+      }
+    ],
+    "questions": [
+      {
+        "questionId": "GLO-Q01",
+        "prompt": "Which glossary term matches this definition? Ensuring that information can only be viewed by authorised people or systems.",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Availability"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Information disclosure"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "GLO-CIA-CHECK",
+        "sectionTitle": "CIA terminology check"
+      },
+      {
+        "questionId": "GLO-Q02",
+        "prompt": "Which glossary term matches this definition? Ensuring that information remains accurate, complete and is not changed without permission.",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Availability"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Modification of data"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Integrity"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "GLO-CIA-CHECK",
+        "sectionTitle": "CIA terminology check"
+      },
+      {
+        "questionId": "GLO-Q03",
+        "prompt": "Which glossary term matches this definition? Ensuring that information and systems can be accessed by authorised users when needed.",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Availability"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Integrity"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Confidentiality"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "GLO-CIA-CHECK",
+        "sectionTitle": "CIA terminology check"
+      },
+      {
+        "questionId": "GLO-Q04",
+        "prompt": "Which glossary term matches this definition? A person or system gains access to data, an account or a service without permission.",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Theft"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Modification of data"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "GLO-INCIDENT-CHECK",
+        "sectionTitle": "Incident terminology check"
+      },
+      {
+        "questionId": "GLO-Q05",
+        "prompt": "Which glossary term matches this definition? Information is revealed to people who are not permitted to see it.",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "GLO-INCIDENT-CHECK",
+        "sectionTitle": "Incident terminology check"
+      },
+      {
+        "questionId": "GLO-Q06",
+        "prompt": "Which glossary term matches this definition? Information is changed without permission, so it may no longer be accurate or complete.",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Inaccessible data"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Information disclosure"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Modification of data"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "GLO-INCIDENT-CHECK",
+        "sectionTitle": "Incident terminology check"
+      },
+      {
+        "questionId": "GLO-Q07",
+        "prompt": "Which glossary term matches this definition? Authorised users cannot access information or systems when they need them.",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Inaccessible data"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Theft"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Unauthorised access"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 4,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "GLO-INCIDENT-CHECK",
+        "sectionTitle": "Incident terminology check"
+      },
+      {
+        "questionId": "GLO-Q08",
+        "prompt": "Which glossary term matches this definition? Data, software or equipment is deleted, damaged or made unusable.",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Modification of data"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Theft"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Information disclosure"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 5,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "GLO-INCIDENT-CHECK",
+        "sectionTitle": "Incident terminology check"
+      },
+      {
+        "questionId": "GLO-Q09",
+        "prompt": "Which glossary term matches this definition? Information, credentials, devices or other digital assets are taken without permission.",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Destruction"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Theft"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Unauthorised access"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Inaccessible data"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 6,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "GLO-INCIDENT-CHECK",
+        "sectionTitle": "Incident terminology check"
+      },
+      {
+        "questionId": "GLO-Q10",
+        "prompt": "Which glossary term matches this definition? Information that relates to an identified or identifiable person.",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Organisation data"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "State data"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Data holding"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Personal data"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "GLO-DATA-CHECK",
+        "sectionTitle": "Information terminology check"
+      },
+      {
+        "questionId": "GLO-Q11",
+        "prompt": "Which glossary term matches this definition? Information owned or used by an organisation to operate, plan or compete.",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Organisation data"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Personal data"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "State data"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Evidence"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "GLO-DATA-CHECK",
+        "sectionTitle": "Information terminology check"
+      },
+      {
+        "questionId": "GLO-Q12",
+        "prompt": "Which glossary term matches this definition? Information connected to government, public safety, national infrastructure or national security.",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Personal data"
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Organisation data"
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "State data"
+          },
+          {
+            "optionId": "D",
+            "displayOrder": 4,
+            "text": "Data breach"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "GLO-DATA-CHECK",
+        "sectionTitle": "Information terminology check"
+      }
+    ],
+    "answerKeysPresent": false
+  },
+  "U3-W01-RETRIEVAL": {
+    "activity": {
+      "activityId": "U3-W01-RETRIEVAL",
+      "maximumScore": 15,
+      "allowsPartner": false,
+      "activityType": "Retrieval quiz"
+    },
+    "topLevelKeys": [
+      "activity",
+      "contentSchemaVersion",
+      "sections"
+    ],
+    "sectionCount": 6,
+    "sections": [
+      {
+        "sectionId": "RET-INTRO",
+        "title": "Session 2 retrieval quiz",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "RET-AIMS-CHECK",
+        "title": "The three aims of cyber security",
+        "questionCount": 1
+      },
+      {
+        "sectionId": "RET-CIA-SCENARIOS",
+        "title": "CIA scenario recall",
+        "questionCount": 3
+      },
+      {
+        "sectionId": "RET-INCIDENT-TYPES",
+        "title": "Cyber security incident types",
+        "questionCount": 6
+      },
+      {
+        "sectionId": "RET-EXAM-RESPONSES",
+        "title": "Explain and use evidence",
+        "questionCount": 2
+      },
+      {
+        "sectionId": "RET-REVIEW",
+        "title": "Review your retrieval",
+        "questionCount": 0
+      }
+    ],
+    "questions": [
+      {
+        "questionId": "RET-Q01",
+        "prompt": "1. State the three aims of cyber security.",
+        "questionType": "short-response",
+        "marks": 3,
+        "minimumCharacters": 15,
+        "maximumCharacters": 300,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Type all three aims. Separate them with commas or write them in a sentence.",
+        "sectionId": "RET-AIMS-CHECK",
+        "sectionTitle": "The three aims of cyber security"
+      },
+      {
+        "questionId": "RET-Q02A",
+        "prompt": "2(a). Clinic staff cannot open the appointment system during working hours. Identify the main CIA aim affected.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 100,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Type the CIA aim.",
+        "sectionId": "RET-CIA-SCENARIOS",
+        "sectionTitle": "CIA scenario recall"
+      },
+      {
+        "questionId": "RET-Q02B",
+        "prompt": "2(b). A patient medication dose is changed without permission. Identify the main CIA aim affected.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 100,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Type the CIA aim.",
+        "sectionId": "RET-CIA-SCENARIOS",
+        "sectionTitle": "CIA scenario recall"
+      },
+      {
+        "questionId": "RET-Q02C",
+        "prompt": "2(c). A stranger reads private patient records. Identify the main CIA aim affected.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 100,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Type the CIA aim.",
+        "sectionId": "RET-CIA-SCENARIOS",
+        "sectionTitle": "CIA scenario recall"
+      },
+      {
+        "questionId": "RET-Q03",
+        "prompt": "3. A former temporary worker uses an account that was not disabled to open the patient database. Identify the cyber security incident type.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 120,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Type the incident type.",
+        "sectionId": "RET-INCIDENT-TYPES",
+        "sectionTitle": "Cyber security incident types"
+      },
+      {
+        "questionId": "RET-Q04",
+        "prompt": "4. A receptionist emails patient telephone numbers to an external supplier that has no permission to receive them. Identify the cyber security incident type.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 120,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Type the incident type.",
+        "sectionId": "RET-INCIDENT-TYPES",
+        "sectionTitle": "Cyber security incident types"
+      },
+      {
+        "questionId": "RET-Q05",
+        "prompt": "5. An attacker changes a patient allergy status in the clinical system. Identify the cyber security incident type.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 120,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Type the incident type.",
+        "sectionId": "RET-INCIDENT-TYPES",
+        "sectionTitle": "Cyber security incident types"
+      },
+      {
+        "questionId": "RET-Q06",
+        "prompt": "6. The online appointment system is overwhelmed and legitimate users cannot open it. Identify the cyber security incident type.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 120,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 4,
+        "instruction": "Type the incident type.",
+        "sectionId": "RET-INCIDENT-TYPES",
+        "sectionTitle": "Cyber security incident types"
+      },
+      {
+        "questionId": "RET-Q07",
+        "prompt": "7. A staff member permanently deletes referral records and no backup exists. Identify the cyber security incident type.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 120,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 5,
+        "instruction": "Type the incident type.",
+        "sectionId": "RET-INCIDENT-TYPES",
+        "sectionTitle": "Cyber security incident types"
+      },
+      {
+        "questionId": "RET-Q08",
+        "prompt": "8. A laptop containing unencrypted patient records is taken from a staff member's car. Identify the cyber security incident type.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 120,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 6,
+        "instruction": "Type the incident type.",
+        "sectionId": "RET-INCIDENT-TYPES",
+        "sectionTitle": "Cyber security incident types"
+      },
+      {
+        "questionId": "RET-Q09",
+        "prompt": "9. Explain the difference between confidentiality and integrity.",
+        "questionType": "short-response",
+        "marks": 2,
+        "minimumCharacters": 30,
+        "maximumCharacters": 800,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Write a short explanation covering both concepts.",
+        "sectionId": "RET-EXAM-RESPONSES",
+        "sectionTitle": "Explain and use evidence"
+      },
+      {
+        "questionId": "RET-Q10",
+        "prompt": "10. Write the exact evidence that proves information disclosure occurred in Question 4.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 15,
+        "maximumCharacters": 500,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Quote the key wording or provide a clearly identified equivalent phrase.",
+        "sectionId": "RET-EXAM-RESPONSES",
+        "sectionTitle": "Explain and use evidence"
+      }
+    ],
+    "answerKeysPresent": false
+  },
+  "U3-W01-COMMAND-WORDS": {
+    "activity": {
+      "activityId": "U3-W01-COMMAND-WORDS",
+      "maximumScore": 12,
+      "allowsPartner": false,
+      "activityType": "Exam skills"
+    },
+    "topLevelKeys": [
+      "activity",
+      "contentSchemaVersion",
+      "sections"
+    ],
+    "sectionCount": 8,
+    "sections": [
+      {
+        "sectionId": "SEC-INTRO",
+        "title": "Understanding command words",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "SEC-IDENTIFY",
+        "title": "Identify",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "SEC-IDENTIFY-CHECK",
+        "title": "Identify check",
+        "questionCount": 2
+      },
+      {
+        "sectionId": "SEC-DESCRIBE",
+        "title": "Describe",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "SEC-DESCRIBE-CHECK",
+        "title": "Describe check",
+        "questionCount": 2
+      },
+      {
+        "sectionId": "SEC-EXPLAIN",
+        "title": "Explain",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "SEC-EXPLAIN-CHECK",
+        "title": "Explain check",
+        "questionCount": 2
+      },
+      {
+        "sectionId": "SEC-REFLECTION",
+        "title": "Reflect and continue",
+        "questionCount": 0
+      }
+    ],
+    "questions": [
+      {
+        "questionId": "Q001",
+        "prompt": "Which definition best matches the OCR command word “Identify”?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Give the correct point, term or feature."
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Give the point and state what it is like or what happens."
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Show how or why a point leads to an outcome."
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "SEC-IDENTIFY-CHECK",
+        "sectionTitle": "Identify check"
+      },
+      {
+        "questionId": "Q002",
+        "prompt": "Which response correctly identifies one cyber security aim?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Patient records are private, so unauthorised access could harm patients and reduce trust."
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "An unauthorised person could view a patient record."
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Confidentiality."
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "SEC-IDENTIFY-CHECK",
+        "sectionTitle": "Identify check"
+      },
+      {
+        "questionId": "Q003",
+        "prompt": "Which definition best matches the OCR command word “Describe”?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Name only the relevant term."
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Give the relevant point and state what it is like or what happens."
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Show how or why the point leads to a consequence."
+          }
+        ],
+        "marks": 2,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "SEC-DESCRIBE-CHECK",
+        "sectionTitle": "Describe check"
+      },
+      {
+        "questionId": "Q004",
+        "prompt": "Which response best describes how confidentiality may be affected at Northbank?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "An unauthorised person could view a Northbank patient record."
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Confidentiality."
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Patient data is private, so unauthorised access could cause harm and a loss of trust."
+          }
+        ],
+        "marks": 2,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "SEC-DESCRIBE-CHECK",
+        "sectionTitle": "Describe check"
+      },
+      {
+        "questionId": "Q005",
+        "prompt": "Which definition best matches the OCR command word “Explain”?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "Name the relevant term without further development."
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Give the relevant point and add descriptive detail only."
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Give a point and show how or why it leads to an outcome."
+          }
+        ],
+        "marks": 3,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "SEC-EXPLAIN-CHECK",
+        "sectionTitle": "Explain check"
+      },
+      {
+        "questionId": "Q006",
+        "prompt": "Which response best explains why confidentiality is important to Northbank?",
+        "questionType": "single-choice",
+        "options": [
+          {
+            "optionId": "A",
+            "displayOrder": 1,
+            "text": "An unauthorised person could view a Northbank patient record."
+          },
+          {
+            "optionId": "B",
+            "displayOrder": 2,
+            "text": "Patient records contain private medical information. If an unauthorised person accesses them, patients could be harmed and lose trust in Northbank."
+          },
+          {
+            "optionId": "C",
+            "displayOrder": 3,
+            "text": "Confidentiality."
+          }
+        ],
+        "marks": 3,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Select one answer.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "SEC-EXPLAIN-CHECK",
+        "sectionTitle": "Explain check"
+      }
+    ],
+    "answerKeysPresent": false
+  },
+  "U3-W01-OCR-PRACTICE": {
+    "activity": {
+      "activityId": "U3-W01-OCR-PRACTICE",
+      "maximumScore": 20,
+      "allowsPartner": false,
+      "activityType": "Exam skills"
+    },
+    "topLevelKeys": [
+      "activity",
+      "contentSchemaVersion",
+      "sections"
+    ],
+    "sectionCount": 7,
+    "sections": [
+      {
+        "sectionId": "OCR-INTRO",
+        "title": "OCR-style practice instructions",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "OCR-Q1-AIMS",
+        "title": "Question 1: Identify",
+        "questionCount": 1
+      },
+      {
+        "sectionId": "OCR-Q2-DESCRIBE",
+        "title": "Question 2: Describe",
+        "questionCount": 2
+      },
+      {
+        "sectionId": "OCR-Q3-INCIDENTS",
+        "title": "Question 3: Incident types",
+        "questionCount": 6
+      },
+      {
+        "sectionId": "OCR-Q4-PERSONAL-DATA",
+        "title": "Question 4: Explain personal-data protection",
+        "questionCount": 1
+      },
+      {
+        "sectionId": "OCR-Q5-NORTHBANK",
+        "title": "Question 5: Explain the Northbank effects",
+        "questionCount": 1
+      },
+      {
+        "sectionId": "OCR-REVIEW",
+        "title": "Review your examination practice",
+        "questionCount": 0
+      }
+    ],
+    "questions": [
+      {
+        "questionId": "OCR-Q01",
+        "prompt": "1. Identify the three aims of cyber security.",
+        "questionType": "short-response",
+        "marks": 3,
+        "minimumCharacters": 15,
+        "maximumCharacters": 300,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Write all three aims. One mark is available for each correct OCR term.",
+        "sectionId": "OCR-Q1-AIMS",
+        "sectionTitle": "Question 1: Identify"
+      },
+      {
+        "questionId": "OCR-Q02A",
+        "prompt": "2(a). Describe confidentiality.",
+        "questionType": "extended-response",
+        "marks": 2,
+        "minimumCharacters": 30,
+        "maximumCharacters": 1000,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Write a clear description and develop it with a consequence or relevant example. [2 marks]",
+        "sectionId": "OCR-Q2-DESCRIBE",
+        "sectionTitle": "Question 2: Describe"
+      },
+      {
+        "questionId": "OCR-Q02B",
+        "prompt": "2(b). Describe availability.",
+        "questionType": "extended-response",
+        "marks": 2,
+        "minimumCharacters": 30,
+        "maximumCharacters": 1000,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Write a clear description and develop it with a consequence or relevant example. [2 marks]",
+        "sectionId": "OCR-Q2-DESCRIBE",
+        "sectionTitle": "Question 2: Describe"
+      },
+      {
+        "questionId": "OCR-Q03A",
+        "prompt": "3(a). A visitor guesses an administrator password and opens patient records without permission. Identify the cyber security incident type.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 120,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Use one of the six OCR incident terms. [1 mark]",
+        "sectionId": "OCR-Q3-INCIDENTS",
+        "sectionTitle": "Question 3: Incident types"
+      },
+      {
+        "questionId": "OCR-Q03B",
+        "prompt": "3(b). A staff member emails a patient spreadsheet to an external address by mistake. Identify the cyber security incident type.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 120,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Use one of the six OCR incident terms. [1 mark]",
+        "sectionId": "OCR-Q3-INCIDENTS",
+        "sectionTitle": "Question 3: Incident types"
+      },
+      {
+        "questionId": "OCR-Q03C",
+        "prompt": "3(c). An attacker changes medication dosage information in the clinical system. Identify the cyber security incident type.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 120,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Use one of the six OCR incident terms. [1 mark]",
+        "sectionId": "OCR-Q3-INCIDENTS",
+        "sectionTitle": "Question 3: Incident types"
+      },
+      {
+        "questionId": "OCR-Q03D",
+        "prompt": "3(d). A denial-of-service attack prevents staff from opening the appointment system. Identify the cyber security incident type.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 120,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 4,
+        "instruction": "Give the OCR incident classification, not the attack method. [1 mark]",
+        "sectionId": "OCR-Q3-INCIDENTS",
+        "sectionTitle": "Question 3: Incident types"
+      },
+      {
+        "questionId": "OCR-Q03E",
+        "prompt": "3(e). Malware permanently deletes Northbank backup files. Identify the cyber security incident type.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 120,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 5,
+        "instruction": "Use one of the six OCR incident terms. [1 mark]",
+        "sectionId": "OCR-Q3-INCIDENTS",
+        "sectionTitle": "Question 3: Incident types"
+      },
+      {
+        "questionId": "OCR-Q03F",
+        "prompt": "3(f). A criminal copies National Insurance numbers and plans to sell them. Identify the cyber security incident type.",
+        "questionType": "short-response",
+        "marks": 1,
+        "minimumCharacters": 4,
+        "maximumCharacters": 120,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 6,
+        "instruction": "Use one of the six OCR incident terms. [1 mark]",
+        "sectionId": "OCR-Q3-INCIDENTS",
+        "sectionTitle": "Question 3: Incident types"
+      },
+      {
+        "questionId": "OCR-Q04",
+        "prompt": "4. Explain one reason why personal data needs to be protected.",
+        "questionType": "extended-response",
+        "marks": 3,
+        "minimumCharacters": 50,
+        "maximumCharacters": 1500,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "State a valid reason, explain a possible harm or consequence and link your answer to an identifiable person or an example of personal data. [3 marks]",
+        "sectionId": "OCR-Q4-PERSONAL-DATA",
+        "sectionTitle": "Question 4: Explain personal-data protection"
+      },
+      {
+        "questionId": "OCR-Q05",
+        "prompt": "5. Northbank incident: An attacker obtains a senior administrator account. The attacker changes several appointment times and then disables access to the booking system for the rest of the morning. Staff cannot confirm appointments, and some patients receive incorrect information.\n\nExplain two ways in which this incident affects Northbank. Refer to the appropriate cyber security aims in your answer.",
+        "questionType": "extended-response",
+        "marks": 4,
+        "minimumCharacters": 80,
+        "maximumCharacters": 2000,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Explain one integrity effect and one availability effect. Develop each using evidence or a consequence from the Northbank scenario. [4 marks]",
+        "sectionId": "OCR-Q5-NORTHBANK",
+        "sectionTitle": "Question 5: Explain the Northbank effects"
+      }
+    ],
+    "answerKeysPresent": false
+  },
+  "U3-W01-PEER-IMPROVEMENT": {
+    "activity": {
+      "activityId": "U3-W01-PEER-IMPROVEMENT",
+      "maximumScore": 7,
+      "allowsPartner": true,
+      "activityType": "Reflection"
+    },
+    "topLevelKeys": [
+      "activity",
+      "contentSchemaVersion",
+      "sections"
+    ],
+    "sectionCount": 7,
+    "sections": [
+      {
+        "sectionId": "PM-INTRO",
+        "title": "Peer and self-marking instructions",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "PM-MARK-SCHEME",
+        "title": "Week 1 practice mark scheme",
+        "questionCount": 0
+      },
+      {
+        "sectionId": "PM-SELECT",
+        "title": "Select and review an answer",
+        "questionCount": 3
+      },
+      {
+        "sectionId": "PM-FEEDBACK",
+        "title": "Write useful feedback",
+        "questionCount": 2
+      },
+      {
+        "sectionId": "PM-IMPROVE",
+        "title": "Improve the answer",
+        "questionCount": 1
+      },
+      {
+        "sectionId": "PM-TARGET",
+        "title": "Set an examination target",
+        "questionCount": 1
+      },
+      {
+        "sectionId": "PM-COMPLETE",
+        "title": "Complete your review",
+        "questionCount": 0
+      }
+    ],
+    "questions": [
+      {
+        "questionId": "PM-Q01",
+        "prompt": "Which OCR-style practice question are you reviewing?",
+        "questionType": "self-assessment",
+        "options": [
+          {
+            "optionId": "PM-QUESTION-1",
+            "displayOrder": 1,
+            "text": "Question 1: Identify the three aims [3]"
+          },
+          {
+            "optionId": "PM-QUESTION-2",
+            "displayOrder": 2,
+            "text": "Question 2: Describe confidentiality and availability [4]"
+          },
+          {
+            "optionId": "PM-QUESTION-3",
+            "displayOrder": 3,
+            "text": "Question 3: Identify six incident types [6]"
+          },
+          {
+            "optionId": "PM-QUESTION-4",
+            "displayOrder": 4,
+            "text": "Question 4: Explain why personal data needs protection [3]"
+          },
+          {
+            "optionId": "PM-QUESTION-5",
+            "displayOrder": 5,
+            "text": "Question 5: Explain two Northbank effects [4]"
+          }
+        ],
+        "marks": 1,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Select the source question that matches the answer you will review.",
+        "maximumSelections": 1,
+        "minimumSelections": 1,
+        "sectionId": "PM-SELECT",
+        "sectionTitle": "Select and review an answer"
+      },
+      {
+        "questionId": "PM-Q02",
+        "prompt": "Record the original answer being reviewed.",
+        "questionType": "reflection",
+        "marks": 1,
+        "minimumCharacters": 20,
+        "maximumCharacters": 2500,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Copy the answer accurately. Do not add corrections yet.",
+        "sectionId": "PM-SELECT",
+        "sectionTitle": "Select and review an answer"
+      },
+      {
+        "questionId": "PM-Q03",
+        "prompt": "Record the mark awarded and justify the decision using the mark scheme.",
+        "questionType": "reflection",
+        "marks": 1,
+        "minimumCharacters": 15,
+        "maximumCharacters": 1000,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 3,
+        "instruction": "Include the score and maximum, for example 2/4, then identify the marking points that were met.",
+        "sectionId": "PM-SELECT",
+        "sectionTitle": "Select and review an answer"
+      },
+      {
+        "questionId": "PM-Q04",
+        "prompt": "WWW: What was done well?",
+        "questionType": "reflection",
+        "marks": 1,
+        "minimumCharacters": 20,
+        "maximumCharacters": 1000,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Identify a specific part of the answer that earned credit and link it to the mark scheme.",
+        "sectionId": "PM-FEEDBACK",
+        "sectionTitle": "Write useful feedback"
+      },
+      {
+        "questionId": "PM-Q05",
+        "prompt": "EBI: What is missing or needs improvement?",
+        "questionType": "reflection",
+        "marks": 1,
+        "minimumCharacters": 20,
+        "maximumCharacters": 1000,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 2,
+        "instruction": "Identify a missing marking point and explain what should be added or changed.",
+        "sectionId": "PM-FEEDBACK",
+        "sectionTitle": "Write useful feedback"
+      },
+      {
+        "questionId": "PM-Q06",
+        "prompt": "Write an improved version of the answer.",
+        "questionType": "reflection",
+        "marks": 1,
+        "minimumCharacters": 40,
+        "maximumCharacters": 3000,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "Keep accurate content and add the missing terminology, development, evidence or consequence required by the mark scheme.",
+        "sectionId": "PM-IMPROVE",
+        "sectionTitle": "Improve the answer"
+      },
+      {
+        "questionId": "PM-Q07",
+        "prompt": "Set one specific target for your next OCR-style answer.",
+        "questionType": "reflection",
+        "marks": 1,
+        "minimumCharacters": 20,
+        "maximumCharacters": 600,
+        "required": true,
+        "_otherKeys": [
+          "displayOrder",
+          "instruction",
+          "maximumSelections",
+          "minimumSelections"
+        ],
+        "displayOrder": 1,
+        "instruction": "State an action you can repeat. Avoid vague targets such as “write more”.",
+        "sectionId": "PM-TARGET",
+        "sectionTitle": "Set an examination target"
+      }
+    ],
+    "answerKeysPresent": false
+  }
+}
