@@ -61,14 +61,15 @@ The backend:
 Zero matching assignments returns `ACTIVITY_NOT_ASSIGNED`; more than one
 matching assignment returns `ACTIVITY_ASSIGNMENT_AMBIGUOUS`.
 
-Response items may include client marks (`awarded_score` and `is_correct`) for
-existing Unit 3 / T Level hubs. Core evidence-only items omit both fields. In
-that case the backend marks from protected `learning.question_marking` rows:
+Response items may still include client marks (`awarded_score` and
+`is_correct`) for compatibility with older hubs. Those fields are never
+authoritative. The backend always marks through protected
+`learning.question_marking` via `learning.score_submitted_item`:
 deterministic formative comparison where a spec exists (`single-choice`,
 `classification`, `python-patterns`). Explicit `completion` and
-`requires_review` specs stay pending evidence (`is_correct` null, score 0,
-`requires_review` true) and do not award marks for text presence. Mixed
-client/server items in one attempt are rejected.
+`requires_review` specs, and questions with no spec, stay pending evidence
+(`is_correct` null, score 0, `requires_review` true) and do not award marks
+for text presence or client-supplied scores.
 The submission contract version remains 0.1.0.
 
 ## Public compatibility RPCs

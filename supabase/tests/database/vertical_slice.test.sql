@@ -233,14 +233,36 @@ select is(
 
 select ok(
   (
-    select score = 15
+    select score = 0
       and max_score = 20
-      and marking_source = 'client'
+      and marking_source = 'server'
       and evidence_level = 'question_level'
     from learning.attempts
     where client_attempt_id = 'student-a-attempt-1'
   ),
-  'the attempt records bounded client marking and question-level evidence'
+  'the attempt records server marking and ignores client awarded_score'
+);
+
+reset role;
+
+select ok(
+  (
+    select mark.awarded_score = 0
+      and mark.requires_review
+      and mark.marking_source = 'server'
+    from learning.questions as question
+    cross join lateral learning.score_submitted_item(
+      question.id,
+      question.max_score,
+      to_jsonb('synthetic-correct'::text),
+      true,
+      99,
+      true
+    ) as mark
+    where question.activity_version_id = '91000000-0000-4000-8000-000000000001'
+      and question.ordinal = 1
+  ),
+  'score_submitted_item ignores inflated client marks when no spec exists'
 );
 
 set local "request.jwt.claim.sub" = '10000000-0000-4000-8000-000000000001';
@@ -281,25 +303,6 @@ select throws_ok(
   '23505',
   'CLIENT_ATTEMPT_ID_CONFLICT',
   'conflicting reuse of a learner-scoped client_attempt_id is rejected'
-);
-
-select throws_ok(
-  $$
-    select *
-    from api.submit_attempt(
-      'foundations-requirements-classification',
-      '1.0.0',
-      'student-a-invalid-score',
-      tests.replace_awarded_score(
-        tests.requirements_payload(15),
-        'FOUND-REQ-001',
-        2
-      )
-    )
-  $$,
-  '23514',
-  'INVALID_RESPONSE_SCORE',
-  'a client score above the question maximum is rejected'
 );
 
 select throws_ok(
@@ -485,12 +488,12 @@ select ok(
       from api.my_attempts
     )
     select
-      max(percentage) filter (where first_rank = 1) = 75
-      and max(percentage) filter (where latest_rank = 1) = 90
-      and max(percentage) = 90
+      max(percentage) filter (where first_rank = 1) = 0
+      and max(percentage) filter (where latest_rank = 1) = 0
+      and max(percentage) = 0
     from ranked
   ),
-  'first, latest and best percentages derive as 75, 90 and 90'
+  'first, latest and best percentages stay 0 when client marks are ignored'
 );
 
 select throws_like(
@@ -542,8 +545,8 @@ select is(
     from api.teacher_group_topic_analytics
     where group_code = 'TEST-GROUP-A'
       and topic_key = 'requirements-classification'),
-  100.00::numeric,
-  'Teacher A classification-topic aggregate matches the fixture'
+  0.00::numeric,
+  'Teacher A classification-topic aggregate is 0 when client marks are ignored'
 );
 
 select is(
@@ -551,8 +554,8 @@ select is(
     from api.teacher_group_topic_analytics
     where group_code = 'TEST-GROUP-A'
       and topic_key = 'requirement-testability'),
-  41.67::numeric,
-  'Teacher A testability-topic aggregate matches the fixture'
+  0.00::numeric,
+  'Teacher A testability-topic aggregate is 0 when client marks are ignored'
 );
 
 select is(
@@ -560,8 +563,8 @@ select is(
     from api.teacher_group_question_analytics
     where group_code = 'TEST-GROUP-A'
       and question_key = 'FOUND-REQ-001'),
-  100.00::numeric,
-  'Teacher A question success-rate calculation matches the fixture'
+  null,
+  'Teacher A question success-rate is pending when unmarked items require review'
 );
 reset role;
 
