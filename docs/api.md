@@ -66,10 +66,14 @@ Response items may still include client marks (`awarded_score` and
 authoritative. The backend always marks through protected
 `learning.question_marking` via `learning.score_submitted_item`:
 deterministic formative comparison where a spec exists (`single-choice`,
-`classification`, `python-patterns`). Explicit `completion` and
-`requires_review` specs, and questions with no spec, stay pending evidence
-(`is_correct` null, score 0, `requires_review` true) and do not award marks
-for text presence or client-supplied scores.
+`classification`, `python-patterns`, `multi-field-exact`). Explicit
+`completion` and `requires_review` specs, and questions with no spec, stay
+pending evidence (`is_correct` null, score 0, `requires_review` true) and do
+not award marks for text presence or client-supplied scores.
+`multi-field-exact` compares only configured object fields against
+`correctValues` (trim always; case-insensitive only when
+`caseInsensitive` is true). Extra learner fields are ignored for
+correctness. There is no partial credit. Malformed specs stay pending.
 The submission contract version remains 0.1.0.
 
 ## Public compatibility RPCs

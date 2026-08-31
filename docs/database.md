@@ -67,7 +67,10 @@ These are one domain with three meanings. They are not three table families.
 - `learning.attempts.score`, `max_score`, `status`, `marking_source`,
   `evidence_level`
 - protected `learning.question_marking` for server-side formative specs
-  (never learner-readable)
+  (never learner-readable). Supported modes: `single-choice`,
+  `classification`, `python-patterns`, `multi-field-exact`, `completion`,
+  `requires_review`. Learner packages strip `correctValues` with other
+  answer keys; teaching `requiredFields` lists are kept.
 
 `requires_review = true` with `is_correct` null is the existing hook for
 teacher-reviewed written/code/reflection evidence. Staff complete reviews
