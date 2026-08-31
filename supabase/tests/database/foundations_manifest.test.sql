@@ -146,8 +146,8 @@ select ok(
 
 select is(
   (select count(*) from learning.activity_assignments),
-  192::bigint,
-  'local fixtures include 11 T Level assignments, 157 Cyber assignments and 24 Unit 14 Week 1–2 assignments'
+  193::bigint,
+  'local fixtures include 11 T Level assignments, 158 Cyber assignments and 24 Unit 14 Week 1–2 assignments'
 );
 
 set local role anon;

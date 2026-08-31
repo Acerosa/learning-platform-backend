@@ -15,8 +15,8 @@ select is(
     join learning.modules as module on module.id = activity.module_id
     where module.stable_key = 'unit-3-cyber-security'
   ),
-  585,
-  'Batch B attaches marking to every latest Unit 3 question row that needs a policy'
+  591,
+  'Unit 3 marking rows include Batch B plus legislation 1.2.0 multi-field-exact specs'
 );
 
 select ok(

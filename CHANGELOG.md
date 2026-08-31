@@ -12,6 +12,15 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Shared `multi-field-exact` marking mode: configured object fields must
+  all match `correctValues`. Extra learner fields are ignored. Trim is
+  always applied; case-insensitive comparison is opt-in via
+  `caseInsensitive`. Malformed specs stay pending evidence. No partial
+  credit. Published historical versions and learner attempts are
+  unchanged.
+- Unit 3 `week6-legislation-matching` `1.2.0` uses `multi-field-exact`
+  for the hub legislation/duty pairs. Incidents stay `requires_review`
+  because authoritative pairs are not in the catalogue source.
 - Unit 3 Batch A1 catalogue completeness: new unpublished-then-published
   activity versions for the eight live Week 1 banks (`1.1.0`), the four missing
   Week 5 activities, and `W2OCR-Q08` on `week2-ocr-question-practice` `1.1.0`.
@@ -29,8 +38,9 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 ### Security
 
 - Learner-facing `published_curriculum_package` strips answer keys
-  (`correctOptionId` and related marking fields) while keeping teaching
-  structure. Protected `learning.question_marking` remains the scoring source.
+  (`correctOptionId`, `correctValues`, and related marking fields) while
+  keeping teaching structure. Protected `learning.question_marking`
+  remains the scoring source.
 - `api.submit_attempt` ignores client `awarded_score` / `is_correct` when a
   marking spec exists. Questions without a spec keep the previous client-mark
   path.
