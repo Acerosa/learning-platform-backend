@@ -165,7 +165,17 @@ site_url = "http://127.0.0.1:3000"
 # The public URL that Auth serves on. Defaults to the API external URL with `/auth/v1` appended.
 # external_url = ""
 # A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
-additional_redirect_urls = ["http://127.0.0.1:3000", "http://localhost:3000", "https://acerosa.github.io/learning-platform-admin/"]
+additional_redirect_urls = [
+  "http://127.0.0.1:3000",
+  "http://localhost:3000",
+  "http://127.0.0.1:5173/**",
+  "http://localhost:5173/**",
+  "https://acerosa.github.io/learning-platform-admin/",
+  "https://acerosa.github.io/unit-3-Cyber-Security-Hub/**",
+  "https://acerosa.github.io/tlevel-software-development-hub/**",
+  "https://acerosa.github.io/unit-14-software-engineering-for-business-hub/**",
+  "https://acerosa.github.io/Emerging-Digital-Technologies-Hub/**"
+]
 # How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
 jwt_expiry = 3600
 # JWT issuer URL. If not set, defaults to auth.external_url.
@@ -417,3 +427,30 @@ enabled = true
 # declarative_schema_path = "./database"
 # JSON string passed through to pg-delta SQL formatting.
 # format_options = "{\"keywordCase\":\"upper\",\"indent\":2,\"maxWidth\":80,\"commaStyle\":\"trailing\"}"
+
+[remotes.production]
+project_id = "hubwpkrqndorznwzvaer"
+
+[remotes.production.auth]
+site_url = "https://acerosa.github.io/learning-platform-admin/"
+additional_redirect_urls = [
+  "https://acerosa.github.io/learning-platform-admin/",
+  "https://acerosa.github.io/learning-platform-admin/**",
+  "https://acerosa.github.io/unit-3-Cyber-Security-Hub/**",
+  "https://acerosa.github.io/tlevel-software-development-hub/**",
+  "https://acerosa.github.io/unit-14-software-engineering-for-business-hub/**",
+  "https://acerosa.github.io/Emerging-Digital-Technologies-Hub/**",
+  "http://127.0.0.1:5173/**",
+  "http://localhost:5173/**",
+  "http://127.0.0.1:3000",
+  "http://localhost:3000"
+]
+
+[remotes.production.auth.email]
+enable_confirmations = true
+max_frequency = "1m0s"
+otp_length = 8
+
+[remotes.production.auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true
