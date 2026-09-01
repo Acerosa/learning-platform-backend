@@ -1,0 +1,812 @@
+[
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-cloud",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-cloud-q1",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-cloud",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-cloud-q2",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-cloud",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-cloud-q3",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-cloud",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-cloud-q4",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-cloud",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-cloud-q5",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-cloud",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-cloud-q6",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-current-emerging",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ce-sort:ce-ai",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-current-emerging",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ce-sort:ce-cloud",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-current-emerging",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ce-sort:ce-desktop",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-current-emerging",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ce-sort:ce-driverless",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-current-emerging",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ce-sort:ce-phone",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-current-emerging",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ce-sort:ce-quantum",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-current-emerging",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ce-sort:ce-wearable",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-digital-technology",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-digital-match:d-ai",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-digital-technology",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-digital-match:d-cloud",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-digital-technology",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-digital-match:d-iot",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-digital-technology",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-digital-match:d-mobile",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-exit-ticket",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-exit-q1",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-exit-ticket",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-exit-q2",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-exit-ticket",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-exit-q3",
+    "question_type": "text",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-industry",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ind-match:ex-amazon",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-industry",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ind-match:ex-bank",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-industry",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ind-match:ex-fraud",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-industry",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ind-match:ex-netflix",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-industry",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ind-orgs:org-bank",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-industry",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ind-orgs:org-ent",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-industry",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ind-orgs:org-health",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-industry",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ind-orgs:org-retail",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-intelligent-computing",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ic-tf1",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-intelligent-computing",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ic-tf2",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-intelligent-computing",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ic-tf3",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-intelligent-computing",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ic-tf4",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-intelligent-computing",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ic-tf5",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-iot",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-iot-groups:iot-car",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-iot",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-iot-groups:iot-rfid",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-iot",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-iot-groups:iot-robot",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-iot",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-iot-groups:iot-thermo",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-iot",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-iot-groups:iot-warehouse",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-iot",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-iot-groups:iot-watch",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-knowledge-check",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-kc-q1",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-knowledge-check",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-kc-q10:kc-mail",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-knowledge-check",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-kc-q10:kc-soil",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-knowledge-check",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-kc-q2",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-knowledge-check",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-kc-q3",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-knowledge-check",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-kc-q4:kc-holo",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-knowledge-check",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-kc-q4:kc-wifi",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-knowledge-check",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-kc-q5",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-knowledge-check",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-kc-q6",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-knowledge-check",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-kc-q7",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-knowledge-check",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-kc-q8",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-knowledge-check",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-kc-q9",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-mobile",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-mobile-select:m-app",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-mobile",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-mobile-select:m-gps",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-mobile",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-mobile-select:m-paper",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-mobile",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-mobile-select:m-tablet",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-mobile",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-mobile-select:m-tap",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-mobile",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-mobile-select:m-tower",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-reflection",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-ref-q",
+    "question_type": "text",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-1-welcome",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-welcome-q1",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-2-classify",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-classify:w2-01",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-2-classify",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-classify:w2-02",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-2-classify",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-classify:w2-03",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-2-classify",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-classify:w2-04",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-2-classify",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-classify:w2-05",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-2-classify",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-classify:w2-06",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-2-reflection",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-reflection:learner-note",
+    "question_type": "text",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-2-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-retrieval:q1",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-2-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-retrieval:q2",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-2-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-retrieval:q3",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-2-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-retrieval:q4",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-3-classify",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-classify:w3-01",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-3-classify",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-classify:w3-02",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-3-classify",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-classify:w3-03",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-3-classify",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-classify:w3-04",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-3-classify",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-classify:w3-05",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-3-classify",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-classify:w3-06",
+    "question_type": "matching",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-3-reflection",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-reflection:learner-note",
+    "question_type": "text",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-3-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-retrieval:q1",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-3-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-retrieval:q2",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-3-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-retrieval:q3",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "l2e-exploring-emerging-digital-technologies",
+    "activity_key": "week-3-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-retrieval:q4",
+    "question_type": "single",
+    "formative_retry": true,
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  }
+]

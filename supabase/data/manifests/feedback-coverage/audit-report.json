@@ -1,0 +1,1094 @@
+{
+  "generatedAt": "2026-09-01T14:28:13.349Z",
+  "total": {
+    "PASS": 483,
+    "REVIEW": 474,
+    "BROKEN": 0,
+    "PUBLICATION_ALIGNMENT_REQUIRED": 104
+  },
+  "hubs": [
+    {
+      "name": "Unit 3",
+      "summary": {
+        "PASS": 325,
+        "REVIEW": 83,
+        "BROKEN": 0,
+        "PUBLICATION_ALIGNMENT_REQUIRED": 0
+      },
+      "missingRepo": false
+    },
+    {
+      "name": "T Level",
+      "summary": {
+        "PASS": 52,
+        "REVIEW": 382,
+        "BROKEN": 0,
+        "PUBLICATION_ALIGNMENT_REQUIRED": 34
+      },
+      "missingRepo": false
+    },
+    {
+      "name": "Unit 14",
+      "summary": {
+        "PASS": 50,
+        "REVIEW": 0,
+        "BROKEN": 0,
+        "PUBLICATION_ALIGNMENT_REQUIRED": 0
+      },
+      "missingRepo": false
+    },
+    {
+      "name": "L2E",
+      "summary": {
+        "PASS": 56,
+        "REVIEW": 9,
+        "BROKEN": 0,
+        "PUBLICATION_ALIGNMENT_REQUIRED": 70
+      },
+      "missingRepo": false
+    }
+  ],
+  "broken": [],
+  "publicationAlignment": [
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-4-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-4-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-4-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-4-lesson-1-formative",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-4-lesson-1-formative:sort:item-1",
+      "canonicalQuestionId": "week-4-lesson-1-formative:sort:item-1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-4-lesson-1-formative",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-4-lesson-1-formative:sort:item-2",
+      "canonicalQuestionId": "week-4-lesson-1-formative:sort:item-2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-4-lesson-1-formative",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-4-lesson-1-formative:sort:item-3",
+      "canonicalQuestionId": "week-4-lesson-1-formative:sort:item-3"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-4-lesson-1-formative",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-4-lesson-1-formative:sort:item-4",
+      "canonicalQuestionId": "week-4-lesson-1-formative:sort:item-4"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-4-lesson-1-formative",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-4-lesson-1-formative:sort:item-5",
+      "canonicalQuestionId": "week-4-lesson-1-formative:sort:item-5"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-4-lesson-2-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-4-lesson-2-retrieval:q1",
+      "canonicalQuestionId": "week-4-lesson-2-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-4-lesson-3-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-4-lesson-3-retrieval:q1",
+      "canonicalQuestionId": "week-4-lesson-3-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-5-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-5-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-5-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-5-lesson-2-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-5-lesson-2-retrieval:q1",
+      "canonicalQuestionId": "week-5-lesson-2-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-5-lesson-3-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-5-lesson-3-retrieval:q1",
+      "canonicalQuestionId": "week-5-lesson-3-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-6-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-6-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-6-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-6-lesson-2-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-6-lesson-2-retrieval:q1",
+      "canonicalQuestionId": "week-6-lesson-2-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-6-lesson-3-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-6-lesson-3-retrieval:q1",
+      "canonicalQuestionId": "week-6-lesson-3-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-7-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-7-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-7-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-7-lesson-2-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-7-lesson-2-retrieval:q1",
+      "canonicalQuestionId": "week-7-lesson-2-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-8-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-8-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-8-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-8-lesson-2-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-8-lesson-2-retrieval:q1",
+      "canonicalQuestionId": "week-8-lesson-2-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-9-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-9-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-9-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-9-lesson-3-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-9-lesson-3-retrieval:q1",
+      "canonicalQuestionId": "week-9-lesson-3-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-10-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-10-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-10-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-11-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-11-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-11-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-12-lesson-3-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-12-lesson-3-retrieval:q1",
+      "canonicalQuestionId": "week-12-lesson-3-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-13-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-13-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-13-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-14-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-14-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-14-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-14-lesson-2-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-14-lesson-2-retrieval:q1",
+      "canonicalQuestionId": "week-14-lesson-2-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-15-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-15-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-15-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-15-lesson-3-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-15-lesson-3-retrieval:q1",
+      "canonicalQuestionId": "week-15-lesson-3-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-16-lesson-2-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-16-lesson-2-retrieval:q1",
+      "canonicalQuestionId": "week-16-lesson-2-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-17-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-17-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-17-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-18-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-18-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-18-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-19-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-19-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-19-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-21-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-21-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-21-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "T Level",
+      "activityKey": "week-22-lesson-1-retrieval",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-22-lesson-1-retrieval:q1",
+      "canonicalQuestionId": "week-22-lesson-1-retrieval:q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-starter",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-2-starter-q1",
+      "canonicalQuestionId": "week-2-starter-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-iot",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-2-iot-q1",
+      "canonicalQuestionId": "week-2-iot-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-iot",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-2-iot-q2",
+      "canonicalQuestionId": "week-2-iot-q2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-iot-sectors",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-iot-sectors-q:s1",
+      "canonicalQuestionId": "week-2-iot-sectors-q:s1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-iot-sectors",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-iot-sectors-q:s2",
+      "canonicalQuestionId": "week-2-iot-sectors-q:s2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-iot-sectors",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-iot-sectors-q:s3",
+      "canonicalQuestionId": "week-2-iot-sectors-q:s3"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-iot-sectors",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-iot-sectors-q:s4",
+      "canonicalQuestionId": "week-2-iot-sectors-q:s4"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-iot-sectors",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-iot-sectors-q:s5",
+      "canonicalQuestionId": "week-2-iot-sectors-q:s5"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-iot-sectors",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-iot-sectors-q:s6",
+      "canonicalQuestionId": "week-2-iot-sectors-q:s6"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-rfid",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-2-rfid-q1",
+      "canonicalQuestionId": "week-2-rfid-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-nfc",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-2-nfc-q1",
+      "canonicalQuestionId": "week-2-nfc-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-nfc",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-2-nfc-q2",
+      "canonicalQuestionId": "week-2-nfc-q2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-rfid-vs-nfc",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-rfid-vs-nfc-q:v1",
+      "canonicalQuestionId": "week-2-rfid-vs-nfc-q:v1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-rfid-vs-nfc",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-rfid-vs-nfc-q:v2",
+      "canonicalQuestionId": "week-2-rfid-vs-nfc-q:v2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-rfid-vs-nfc",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-rfid-vs-nfc-q:v3",
+      "canonicalQuestionId": "week-2-rfid-vs-nfc-q:v3"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-rfid-vs-nfc",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-rfid-vs-nfc-q:v4",
+      "canonicalQuestionId": "week-2-rfid-vs-nfc-q:v4"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-wearables",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-2-wearables-q1",
+      "canonicalQuestionId": "week-2-wearables-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-wearables",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-2-wearables-q2",
+      "canonicalQuestionId": "week-2-wearables-q2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-smart-settings",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-smart-settings-q:m1",
+      "canonicalQuestionId": "week-2-smart-settings-q:m1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-smart-settings",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-smart-settings-q:m2",
+      "canonicalQuestionId": "week-2-smart-settings-q:m2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-smart-settings",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-smart-settings-q:m3",
+      "canonicalQuestionId": "week-2-smart-settings-q:m3"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-smart-settings",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-smart-settings-q:m4",
+      "canonicalQuestionId": "week-2-smart-settings-q:m4"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-smart-settings",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-smart-settings-q:m5",
+      "canonicalQuestionId": "week-2-smart-settings-q:m5"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-smart-settings",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-2-smart-settings-q:m6",
+      "canonicalQuestionId": "week-2-smart-settings-q:m6"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-benefits-risks",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-2-benefits-risks-q1",
+      "canonicalQuestionId": "week-2-benefits-risks-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-benefits-risks",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-2-benefits-risks-q2",
+      "canonicalQuestionId": "week-2-benefits-risks-q2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-privacy",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-2-privacy-q1",
+      "canonicalQuestionId": "week-2-privacy-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-trends",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-2-trends-q1",
+      "canonicalQuestionId": "week-2-trends-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-exit",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-2-exit-q1",
+      "canonicalQuestionId": "week-2-exit-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-2-exit",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-2-exit-q2",
+      "canonicalQuestionId": "week-2-exit-q2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-starter",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-starter-q1",
+      "canonicalQuestionId": "week-3-starter-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-cloud-outline",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-cloud-q1",
+      "canonicalQuestionId": "week-3-cloud-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-cloud-outline",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-cloud-q2",
+      "canonicalQuestionId": "week-3-cloud-q2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-local-vs-cloud",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-local-q:l1",
+      "canonicalQuestionId": "week-3-local-q:l1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-local-vs-cloud",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-local-q:l2",
+      "canonicalQuestionId": "week-3-local-q:l2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-local-vs-cloud",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-local-q:l3",
+      "canonicalQuestionId": "week-3-local-q:l3"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-local-vs-cloud",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-local-q:l4",
+      "canonicalQuestionId": "week-3-local-q:l4"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-local-vs-cloud",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-local-q:l5",
+      "canonicalQuestionId": "week-3-local-q:l5"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-local-vs-cloud",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-local-q:l6",
+      "canonicalQuestionId": "week-3-local-q:l6"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-saas",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-saas-q1",
+      "canonicalQuestionId": "week-3-saas-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-saas",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-saas-q2",
+      "canonicalQuestionId": "week-3-saas-q2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-iaas",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-iaas-q1",
+      "canonicalQuestionId": "week-3-iaas-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-iaas",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-iaas-q2",
+      "canonicalQuestionId": "week-3-iaas-q2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-paas",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-paas-q1",
+      "canonicalQuestionId": "week-3-paas-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-paas",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-paas-q2",
+      "canonicalQuestionId": "week-3-paas-q2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-daas",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-daas-q1",
+      "canonicalQuestionId": "week-3-daas-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-daas",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-daas-q2",
+      "canonicalQuestionId": "week-3-daas-q2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-models-match",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-models-q:m1",
+      "canonicalQuestionId": "week-3-models-q:m1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-models-match",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-models-q:m2",
+      "canonicalQuestionId": "week-3-models-q:m2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-models-match",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-models-q:m3",
+      "canonicalQuestionId": "week-3-models-q:m3"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-models-match",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-models-q:m4",
+      "canonicalQuestionId": "week-3-models-q:m4"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-models-match",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-models-q:m5",
+      "canonicalQuestionId": "week-3-models-q:m5"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-models-match",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-models-q:m6",
+      "canonicalQuestionId": "week-3-models-q:m6"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-models-match",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-models-q:m7",
+      "canonicalQuestionId": "week-3-models-q:m7"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-models-match",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-models-q:m8",
+      "canonicalQuestionId": "week-3-models-q:m8"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-responsibility",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-resp-q:r1",
+      "canonicalQuestionId": "week-3-resp-q:r1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-responsibility",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-resp-q:r2",
+      "canonicalQuestionId": "week-3-resp-q:r2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-responsibility",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-resp-q:r3",
+      "canonicalQuestionId": "week-3-resp-q:r3"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-responsibility",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-resp-q:r4",
+      "canonicalQuestionId": "week-3-resp-q:r4"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-responsibility",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-resp-q:r5",
+      "canonicalQuestionId": "week-3-resp-q:r5"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-responsibility",
+      "runtimeVersion": "0.1.0",
+      "blockType": "classification",
+      "runtimeQuestionId": "week-3-resp-q:r6",
+      "canonicalQuestionId": "week-3-resp-q:r6"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-scenarios",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-scen-q1",
+      "canonicalQuestionId": "week-3-scen-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-scenarios",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-scen-q2",
+      "canonicalQuestionId": "week-3-scen-q2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-scenarios",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-scen-q3",
+      "canonicalQuestionId": "week-3-scen-q3"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-scenarios",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-scen-q4",
+      "canonicalQuestionId": "week-3-scen-q4"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-benefits-risks",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-br-q1",
+      "canonicalQuestionId": "week-3-br-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-benefits-risks",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-br-q2",
+      "canonicalQuestionId": "week-3-br-q2"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-extension",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-ext-q1",
+      "canonicalQuestionId": "week-3-ext-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-exit",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-exit-q1",
+      "canonicalQuestionId": "week-3-exit-q1"
+    },
+    {
+      "status": "PUBLICATION_ALIGNMENT_REQUIRED",
+      "reason": "ACTIVITY_NOT_PUBLISHED",
+      "hub": "L2E",
+      "activityKey": "week-3-exit",
+      "runtimeVersion": "0.1.0",
+      "blockType": "single-choice",
+      "runtimeQuestionId": "week-3-exit-q2",
+      "canonicalQuestionId": "week-3-exit-q2"
+    }
+  ]
+}

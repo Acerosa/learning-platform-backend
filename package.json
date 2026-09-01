@@ -1,0 +1,8 @@
+{
+  "name": "learning-platform-backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check:feedback-coverage": "node scripts/import/audit-feedback-coverage.mjs"
+  }
+}
