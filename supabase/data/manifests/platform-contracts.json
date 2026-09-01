@@ -20,6 +20,12 @@
       "compatibility": "Supported Core runtime generation for learner hubs"
     },
     {
+      "contractKey": "learning-platform-core",
+      "version": "0.2.5",
+      "status": "active",
+      "compatibility": "Auth email confirmation redirect and hubRootPath generation"
+    },
+    {
       "contractKey": "learner-api",
       "version": "0.1.0",
       "status": "active",
