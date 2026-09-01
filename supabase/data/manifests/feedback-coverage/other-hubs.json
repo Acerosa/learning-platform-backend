@@ -1,0 +1,1685 @@
+[
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-homework-product",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-homework-product:product",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-homework-product",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-homework-product:roles",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-1-formative:sort:item-1",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-1-formative:sort:item-2",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-1-formative:sort:item-3",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-1-formative:sort:item-4",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-1-formative:sort:item-5",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-1-formative:sort:item-6",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-1-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-1-main:stated",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-1-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-1-main:missing",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-1-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-1-retrieval:purpose",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-1-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-1-retrieval:who",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-1-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-1-retrieval:q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-2-formative:sort:item-1",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-2-formative:sort:item-2",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-2-formative:sort:item-3",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-2-formative:sort:item-4",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-2-formative:sort:item-5",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-2-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-2-main:problem",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-2-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-2-main:risk",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-2-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-2-retrieval:users",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-2-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-2-retrieval:q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-3-formative:sort:item-1",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-3-formative:sort:item-2",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-3-formative:sort:item-3",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-3-formative:sort:item-4",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-3-formative:q1",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-3-formative:q2",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-3-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-3-main:hardware",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-3-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-3-main:software",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-3-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-3-retrieval:constraint",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-1-lesson-3-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-1-lesson-3-retrieval:q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-homework-emerging",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-homework-emerging:tech",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-homework-emerging",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-homework-emerging:source",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-1-formative:sort:item-1",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-1-formative:sort:item-2",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-1-formative:sort:item-3",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-1-formative:sort:item-4",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-1-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-1-main:compare",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-1-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-1-main:justify",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-1-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-1-retrieval:now",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-1-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-1-retrieval:q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-2-formative:sort:item-1",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-2-formative:sort:item-2",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-2-formative:sort:item-3",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-2-formative:sort:item-4",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-2-formative:unknown",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-2-formative:q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-2-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-2-main:table",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-2-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-2-main:users",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-2-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-2-retrieval:criteria",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-2-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-2-retrieval:q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-3-formative:sort:item-1",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-3-formative:sort:item-2",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-3-formative:sort:item-3",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-3-formative:sort:item-4",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-3-formative:why",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-3-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-3-main:rules",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-3-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-3-main:plan",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-3-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-3-retrieval:q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-2-lesson-3-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-2-lesson-3-retrieval:gap",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-homework-rewrite",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-homework-rewrite:one",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-homework-rewrite",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-homework-rewrite:two",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-1-formative:sort:item-1",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-1-formative:sort:item-2",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-1-formative:sort:item-3",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-1-formative:sort:item-4",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-1-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-1-formative:sort:item-5",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-1-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-1-main:inscope",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-1-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-1-main:outscope",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-1-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-1-retrieval:need",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-1-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-1-retrieval:q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-2-formative:sort:item-1",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-2-formative:sort:item-2",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-2-formative:sort:item-3",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-2-formative:sort:item-4",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-2-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-2-formative:why",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-2-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-2-main:groups",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-2-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-2-main:abstract",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-2-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-2-retrieval:pair",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-2-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-2-retrieval:q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-3-formative:sort:item-1",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-3-formative:sort:item-2",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-3-formative:sort:item-3",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-3-formative:sort:item-4",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-3-formative:q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-3-formative",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-3-formative:out",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-3-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-3-main:scope",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-3-main",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-3-main:decomp",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-3-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-3-retrieval:value",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "tlevel-software-development",
+    "activity_key": "week-3-lesson-3-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "week-3-lesson-3-retrieval:q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-assignment-1-guide",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-a1-notes",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-baseline-diagnostic",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-base-q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-baseline-diagnostic",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-base-q2",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-baseline-diagnostic",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-base-q3",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-baseline-diagnostic",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-base-q4",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-business-data-explorer",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-biz-class:customer-name",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-business-data-explorer",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-biz-class:item-quantity",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-business-data-explorer",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-biz-class:unit-price",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-business-data-explorer",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-biz-class:delivery-flag",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-business-data-explorer",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-biz-why",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-business-data-explorer",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-biz-ref",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-first-commits",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-commit-q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-first-commits",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-commit-ref",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-first-python-business-program",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-order-code",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "python-patterns"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-first-python-business-program",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-order-ref",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-github-classroom-guidance",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-gh-q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-github-classroom-guidance",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-gh-ref",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-guided-business-data",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-guided-class:drink-name",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-guided-business-data",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-guided-class:cup-count",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-guided-business-data",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-guided-class:price",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-guided-business-data",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-guided-class:loyalty",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-guided-business-data",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-guided-class:notes",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-guided-business-data",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-guided-why",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-homework-extension",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-hw-code",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "python-patterns"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-homework-extension",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-hw-ref",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-input-and-output",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-io-code",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "python-patterns"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-input-and-output",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-io-q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-review",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-rev-q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-review",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-rev-q2",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-review",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-rev-class:stock-count",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-review",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-rev-class:paid",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-variables-and-data-types",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-var-code",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-variables-and-data-types",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-var-q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-1-variables-and-data-types",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w1-var-why",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-assignment-1-guide",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-a1-conv",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-assignment-1-guide",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-a1-sub",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-business-calculation",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-calc-code",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "python-patterns"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-business-calculation",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-calc-ref",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-debugging",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-dbg-1",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "python-patterns"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-debugging",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-dbg-1e",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-debugging",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-dbg-2",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "python-patterns"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-debugging",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-dbg-2e",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-debugging",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-dbg-3",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "python-patterns"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-debugging",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-dbg-3e",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-debugging",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-dbg-4",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "python-patterns"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-debugging",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-dbg-4e",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-debugging",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-dbg-5",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "python-patterns"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-debugging",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-dbg-5e",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-demonstration",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-conv-examples",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-demonstration",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-conv-q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-demonstration",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-conv-fail",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-demonstration",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-conv-err",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-demonstration",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-conv-code",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "python-patterns"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-problem",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-prob-demo",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-problem",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-prob-q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-problem",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-prob-q2",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-conversion-problem",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-prob-why",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-customer-data-cleaning",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-cln-sample",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-customer-data-cleaning",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-cln-class:name",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-customer-data-cleaning",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-cln-class:email",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-customer-data-cleaning",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-cln-class:postcode",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-customer-data-cleaning",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-cln-class:address",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-customer-data-cleaning",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-cln-class:double",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-customer-data-cleaning",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-cln-class:sku",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-customer-data-cleaning",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-cln-code",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "python-patterns"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-customer-data-cleaning",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-cln-ref",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-formatted-output",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-fmt-example",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-formatted-output",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-fmt-code",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "python-patterns"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-formatted-output",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-fmt-q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-git-branch-guidance",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-git-q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-git-branch-guidance",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-git-ref",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-gitignore",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-gh-q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-gitignore",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-gi-add",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-gitignore",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-gh-why",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-homework",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-hw-code",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "python-patterns"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-homework",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-hw-ref",
+    "question_type": "text",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-predefined-subroutines",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-sub-examples",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "completion"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-predefined-subroutines",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-sub-class:spaces",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-predefined-subroutines",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-sub-class:email",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-predefined-subroutines",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-sub-class:postcode",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-predefined-subroutines",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-sub-class:address",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-predefined-subroutines",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-sub-class:typo",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-predefined-subroutines",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-sub-class:count",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-predefined-subroutines",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-sub-code",
+    "question_type": "code-editor",
+    "has_marking_spec": true,
+    "marking_mode": "python-patterns"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-review",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-rev-q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-review",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-rev-q2",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-review",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-rev-class:qty",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-review",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-rev-class:price",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-review",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-rev-class:name",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-review",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-rev-class:csv",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-week-1-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-ret-q1",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-week-1-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-ret-q2",
+    "question_type": "single",
+    "has_marking_spec": true,
+    "marking_mode": "single-choice"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-week-1-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-ret-class:qty",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-week-1-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-ret-class:price",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-week-1-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-ret-class:name",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  },
+  {
+    "module_key": "unit-14-software-engineering-for-business",
+    "activity_key": "week-2-week-1-retrieval",
+    "activity_version": "0.1.0",
+    "question_key": "u14-w2-ret-class:delivery",
+    "question_type": "matching",
+    "has_marking_spec": true,
+    "marking_mode": "classification"
+  }
+]
