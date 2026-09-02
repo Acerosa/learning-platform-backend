@@ -133,6 +133,16 @@ administrators. Future mutations must be narrow RPCs with:
 Planned areas include group admission, enrolment changes, assignments, activity
 lifecycle and staff-role management.
 
+Synthetic QA fixtures are provisioned through:
+
+- `admin_api.ensure_synthetic_qa_groups()`
+- `admin_api.provision_synthetic_qa_learner(auth_user_id, persona)`
+- `admin_api.set_synthetic_qa_learner_active(persona, active)`
+
+These require `platform_admin` or the service role. They do not create Auth
+users, do not copy email into learner records, and do not bypass enrolment RLS.
+See [Synthetic QA learners](synthetic-qa-learners.md).
+
 Hub registration is a reviewed administrative write, not curriculum
 publication. `admin_api.register_hub` accepts a `learning-platform-hub.json`
 object plus lifecycle status. It requires an active `platform_admin` role,

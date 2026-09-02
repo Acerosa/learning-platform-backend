@@ -12,6 +12,11 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Permanent hub-isolated synthetic QA learners and closed groups
+  (`CYBER-TEST-QA`, `TLEVEL-TEST-A`, `UNIT14-TEST-A`, `L2E-TEST-A`).
+  Auth users are created through the Admin API; application rows use
+  `auth_user_id` and do not copy email into `learning.students`.
+  Ordinary enrolment/assignment RLS is unchanged.
 - Shared `multi-field-exact` marking mode: configured object fields must
   all match `correctValues`. Extra learner fields are ignored. Trim is
   always applied; case-insensitive comparison is opt-in via

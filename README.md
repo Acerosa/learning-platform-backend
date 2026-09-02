@@ -237,6 +237,7 @@ None of these hubs is marked certified by this repository.
 - [Content package publication](docs/content-publication.md)
 - [Backend curriculum publication](docs/backend-publication.md)
 - [Release process](docs/release-process.md)
+- [Synthetic QA learners](docs/synthetic-qa-learners.md)
 
 ## Release policy
 
