@@ -6,6 +6,9 @@ on:
       - "supabase/**"
       - "scripts/validation/**"
       - "scripts/import/**"
+      - "scripts/ops/**"
+      - "package.json"
+      - "package-lock.json"
       - ".github/workflows/**"
   push:
     branches:
@@ -14,6 +17,9 @@ on:
       - "supabase/**"
       - "scripts/validation/**"
       - "scripts/import/**"
+      - "scripts/ops/**"
+      - "package.json"
+      - "package-lock.json"
       - ".github/workflows/**"
   workflow_dispatch:
 
@@ -32,6 +38,26 @@ jobs:
 
       - name: Validate repository structure
         run: python3 scripts/validation/validate_repository.py
+
+  ops-script-tests:
+    name: Ops Script Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ops tests
+        run: npm test
 
   database-tests:
     name: Database Tests

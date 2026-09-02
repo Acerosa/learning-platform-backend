@@ -1,175 +1,205 @@
 #!/usr/bin/env node
 /**
- * Provision permanent synthetic QA Auth users, then map them through
- * admin_api.provision_synthetic_qa_learner.
+ * Admin/ops CLI for permanent synthetic QA Auth users and learner mapping.
  *
- * Does not insert into auth.users through SQL. Does not log passwords,
- * emails, service-role keys, or JWTs.
+ * Never import this module from learner hubs, Vite bundles, or browser code.
+ * Does not insert into auth.users through SQL.
  */
 
-const PERSONAS = [
-  { persona: "UNIT3_TEST_LEARNER", emailEnv: ["SYNTHETIC_QA_EMAIL_UNIT3", "UNIT3_TEST_EMAIL"], passwordEnv: ["SYNTHETIC_QA_PASSWORD_UNIT3", "UNIT3_TEST_PASSWORD"] },
-  { persona: "TLEVEL_TEST_LEARNER", emailEnv: ["SYNTHETIC_QA_EMAIL_TLEVEL", "TLEVEL_TEST_EMAIL"], passwordEnv: ["SYNTHETIC_QA_PASSWORD_TLEVEL", "TLEVEL_TEST_PASSWORD"] },
-  { persona: "UNIT14_TEST_LEARNER", emailEnv: ["SYNTHETIC_QA_EMAIL_UNIT14", "UNIT14_TEST_EMAIL"], passwordEnv: ["SYNTHETIC_QA_PASSWORD_UNIT14", "UNIT14_TEST_PASSWORD"] },
-  { persona: "L2E_TEST_LEARNER", emailEnv: ["SYNTHETIC_QA_EMAIL_L2E", "L2E_TEST_EMAIL"], passwordEnv: ["SYNTHETIC_QA_PASSWORD_L2E", "L2E_TEST_PASSWORD"] }
-];
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { createClient } from "@supabase/supabase-js";
+import { ProvisionError, runProvision } from "./synthetic-qa-provision.mjs";
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
+
+function loadLocalEnv(env) {
+  const path = join(ROOT, ".env");
+  if (!existsSync(path)) return env;
+  const next = { ...env };
+  for (const raw of readFileSync(path, "utf8").split(/\r?\n/)) {
+    const line = raw.trim();
+    if (!line || line.startsWith("#")) continue;
+    const eq = line.indexOf("=");
+    if (eq <= 0) continue;
+    const name = line.slice(0, eq).trim();
+    let value = line.slice(eq + 1).trim();
+    if (
+      (value.startsWith("\"") && value.endsWith("\""))
+      || (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1);
+    }
+    if (!String(next[name] || "").trim()) next[name] = value;
+  }
+  return next;
+}
 
 function fail(message) {
   console.error(message);
   process.exit(1);
 }
 
-function requiredEnv(name) {
-  const value = String(process.env[name] || "").trim();
-  if (!value) fail(`Missing required environment variable ${name}.`);
-  return value;
-}
-
-function firstEnv(names) {
-  for (const name of names) {
-    const value = String(process.env[name] || "").trim();
-    if (value) return { name, value };
+function toQuery(params) {
+  const search = new URLSearchParams();
+  for (const [key, value] of Object.entries(params || {})) {
+    search.set(key, String(value));
   }
-  fail(`Missing required environment variable ${names.join(" or ")}.`);
+  return search.toString();
 }
 
-function isDryRun() {
-  return process.argv.includes("--dry-run");
-}
+function createAdmin(url, serviceRoleKey) {
+  const supabase = createClient(url, serviceRoleKey, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+      detectSessionInUrl: false
+    }
+  });
 
-function headers(serviceRoleKey) {
   return {
+    async findUserByEmail(email) {
+      const needle = String(email || "").toLowerCase();
+      let page = 1;
+      while (page <= 10) {
+        const { data, error } = await supabase.auth.admin.listUsers({
+          page,
+          perPage: 200
+        });
+        if (error) {
+          throw new ProvisionError("AUTH_LOOKUP_FAILED", "Auth Admin lookup failed.");
+        }
+        const users = Array.isArray(data?.users) ? data.users : [];
+        const match = users.find((user) => String(user?.email || "").toLowerCase() === needle);
+        if (match) return match;
+        if (users.length < 200) return null;
+        page += 1;
+      }
+      return null;
+    },
+
+    async createUser({ email, password, persona }) {
+      const { data, error } = await supabase.auth.admin.createUser({
+        email,
+        password,
+        email_confirm: true,
+        user_metadata: {
+          synthetic: true,
+          purpose: "formative-smoke-test",
+          persona
+        }
+      });
+      if (error || !data?.user?.id) {
+        throw new ProvisionError(
+          "AUTH_CREATE_FAILED",
+          `Auth Admin create failed for ${persona}.`
+        );
+      }
+      return data.user;
+    }
+  };
+}
+
+function createRest(url, serviceRoleKey) {
+  const headers = {
     apikey: serviceRoleKey,
     Authorization: `Bearer ${serviceRoleKey}`,
     "Content-Type": "application/json"
   };
-}
 
-function maskEmail(email) {
-  const trimmed = String(email || "");
-  const at = trimmed.indexOf("@");
-  if (at <= 1) return "(redacted)";
-  return `${trimmed.slice(0, 2)}…${trimmed.slice(at)}`;
-}
-
-async function readJson(response) {
-  const text = await response.text();
-  if (!text) return null;
-  try {
-    return JSON.parse(text);
-  } catch {
-    return { parseError: true };
+  async function readJson(response) {
+    const text = await response.text();
+    if (!text) return null;
+    try {
+      return JSON.parse(text);
+    } catch {
+      return { parseError: true };
+    }
   }
-}
 
-async function findUserIdByEmail(url, serviceRoleKey, email) {
-  const encoded = encodeURIComponent(email);
-  const response = await fetch(`${url}/auth/v1/admin/users?page=1&per_page=200`, {
-    headers: headers(serviceRoleKey)
-  });
-  const body = await readJson(response);
-  if (!response.ok) {
-    fail(`Auth Admin lookup failed with HTTP ${response.status}.`);
-  }
-  const users = Array.isArray(body?.users) ? body.users : [];
-  const match = users.find((user) => String(user?.email || "").toLowerCase() === email.toLowerCase());
-  return match?.id || null;
-}
-
-async function createOrFindAuthUser({ url, serviceRoleKey, email, password, persona }) {
-  const response = await fetch(`${url}/auth/v1/admin/users`, {
-    method: "POST",
-    headers: headers(serviceRoleKey),
-    body: JSON.stringify({
-      email,
-      password,
-      email_confirm: true,
-      user_metadata: {
-        synthetic: true,
-        purpose: "formative-smoke-test",
-        persona
+  return {
+    async select(schema, table, query) {
+      const response = await fetch(`${url}/rest/v1/${table}?${toQuery(query)}`, {
+        headers: {
+          ...headers,
+          "Accept-Profile": schema,
+          "Content-Profile": schema
+        }
+      });
+      const body = await readJson(response);
+      if (!response.ok) {
+        throw new ProvisionError(
+          "REST_SELECT_FAILED",
+          `Read of ${schema}.${table} failed.`
+        );
       }
-    })
-  });
-  const body = await readJson(response);
-  if (response.ok && body?.id) {
-    return { id: body.id, created: true };
-  }
-
-  const alreadyExists = response.status === 422
-    || /already been registered|already exists|email_exists/i.test(JSON.stringify(body || {}));
-  if (!alreadyExists) {
-    fail(`Auth Admin create failed for ${persona} with HTTP ${response.status}.`);
-  }
-
-  const existingId = await findUserIdByEmail(url, serviceRoleKey, email);
-  if (!existingId) fail(`Auth user for ${persona} already exists but could not be resolved safely.`);
-  return { id: existingId, created: false };
-}
-
-async function rpc(url, serviceRoleKey, name, args) {
-  const response = await fetch(`${url}/rest/v1/rpc/${name}`, {
-    method: "POST",
-    headers: {
-      ...headers(serviceRoleKey),
-      "Content-Profile": "admin_api",
-      "Accept-Profile": "admin_api"
+      return body;
     },
-    body: JSON.stringify(args)
-  });
-  const body = await readJson(response);
-  if (!response.ok) {
-    const code = body?.code || body?.message || `HTTP ${response.status}`;
-    fail(`RPC ${name} failed: ${code}`);
-  }
-  return body;
+
+    async rpc(name, args) {
+      const response = await fetch(`${url}/rest/v1/rpc/${name}`, {
+        method: "POST",
+        headers: {
+          ...headers,
+          "Content-Profile": "admin_api",
+          "Accept-Profile": "admin_api"
+        },
+        body: JSON.stringify(args || {})
+      });
+      const body = await readJson(response);
+      if (!response.ok) {
+        const code = body?.code || body?.message || `HTTP ${response.status}`;
+        throw new ProvisionError("RPC_FAILED", `RPC ${name} failed: ${code}`);
+      }
+      return body;
+    }
+  };
 }
 
 async function main() {
-  const url = requiredEnv("SUPABASE_URL").replace(/\/$/, "");
-  const serviceRoleKey = requiredEnv("SUPABASE_SERVICE_ROLE_KEY");
+  const env = loadLocalEnv(process.env);
+  const dryRun = process.argv.includes("--dry-run");
+  const checkOnly = process.argv.includes("--check");
+  const url = String(env.SUPABASE_URL || "").replace(/\/$/, "");
+  const serviceRoleKey = String(env.SUPABASE_SERVICE_ROLE_KEY || "").trim();
 
-  if (isDryRun()) {
-    for (const item of PERSONAS) {
-      const email = firstEnv(item.emailEnv);
-      firstEnv(item.passwordEnv);
-      console.log(`${item.persona}: env present (email ${maskEmail(email.value)})`);
-    }
-    console.log("Dry run complete. No Auth users or learner rows were written.");
-    return;
+  let admin = null;
+  let rest = null;
+  if (url && serviceRoleKey) {
+    admin = createAdmin(url, serviceRoleKey);
+    rest = createRest(url, serviceRoleKey);
+  } else {
+    admin = {
+      findUserByEmail: async () => null,
+      createUser: async () => {
+        throw new ProvisionError("MISSING_REQUIRED_ENV", "MISSING_REQUIRED_ENV:\nSUPABASE_URL\nSUPABASE_SERVICE_ROLE_KEY");
+      }
+    };
+    rest = {
+      select: async () => [],
+      rpc: async () => {
+        throw new ProvisionError("MISSING_REQUIRED_ENV", "MISSING_REQUIRED_ENV:\nSUPABASE_URL\nSUPABASE_SERVICE_ROLE_KEY");
+      }
+    };
   }
 
-  console.log("Refreshing synthetic QA groups…");
-  const groups = await rpc(url, serviceRoleKey, "ensure_synthetic_qa_groups", {});
-  const groupRows = Array.isArray(groups) ? groups : [groups];
-  for (const row of groupRows) {
-    const status = row?.skipped_reason || row?.created_or_reused || "unknown";
-    console.log(`${row?.persona || "unknown"} group ${row?.group_code || "?"}: ${status}; assignments=${row?.assignment_count ?? 0}`);
-  }
+  const outcome = await runProvision({
+    env: { ...env, SUPABASE_URL: url },
+    admin,
+    rest,
+    dryRun,
+    checkOnly,
+    log: console.log,
+    error: console.error
+  });
 
-  for (const item of PERSONAS) {
-    const email = firstEnv(item.emailEnv).value;
-    const password = firstEnv(item.passwordEnv).value;
-    const authUser = await createOrFindAuthUser({
-      url,
-      serviceRoleKey,
-      email,
-      password,
-      persona: item.persona
-    });
-    const provisioned = await rpc(url, serviceRoleKey, "provision_synthetic_qa_learner", {
-      p_auth_user_id: authUser.id,
-      p_persona: item.persona
-    });
-    const row = Array.isArray(provisioned) ? provisioned[0] : provisioned;
-    console.log(
-      `${item.persona}: auth ${authUser.created ? "created" : "reused"}; learner ${row?.idempotent ? "reused" : "created"}; group ${row?.group_code || "?"}`
-    );
-  }
-
-  console.log("Synthetic QA provisioning complete.");
+  if (!outcome.ok) process.exit(1);
 }
 
 main().catch((error) => {
+  if (error instanceof ProvisionError && error.code === "MISSING_REQUIRED_ENV") {
+    fail(error.message);
+  }
   fail(error instanceof Error ? error.message : "Provisioning failed.");
 });

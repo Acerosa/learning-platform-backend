@@ -3,6 +3,7 @@
 .env.*
 !.env.example
 *.log
+node_modules/
 __pycache__/
 *.py[cod]
 .supabase/

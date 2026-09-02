@@ -142,7 +142,8 @@ Synthetic QA fixtures are provisioned through:
 These require `platform_admin` or the service role. They do not create Auth
 users, do not copy email into learner records, do not bypass enrolment RLS,
 and assign only the catalogued smoke activity rather than the full module
-catalogue.
+catalogue. Auth users are created or reused by the local admin command
+`npm run provision:synthetic-qa`.
 See [Synthetic QA learners](synthetic-qa-learners.md).
 
 Hub registration is a reviewed administrative write, not curriculum
