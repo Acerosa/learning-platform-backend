@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check:feedback-coverage": "node scripts/import/audit-feedback-coverage.mjs"
+    "check:feedback-coverage": "node scripts/import/audit-feedback-coverage.mjs",
+    "ops:provision-synthetic-qa": "node scripts/ops/provision-synthetic-qa-learners.mjs"
   }
 }

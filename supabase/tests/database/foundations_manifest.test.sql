@@ -145,9 +145,14 @@ select ok(
 );
 
 select is(
-  (select count(*) from learning.activity_assignments),
+  (
+    select count(*)
+    from learning.activity_assignments as assignment
+    join learning.groups as learner_group on learner_group.id = assignment.group_id
+    where learner_group.code not in ('CYBER-TEST-QA', 'TLEVEL-TEST-A', 'L2E-TEST-A')
+  ),
   193::bigint,
-  'local fixtures include 11 T Level assignments, 158 Cyber assignments and 24 Unit 14 Week 1–2 assignments'
+  'pre-existing local assignments remain 193 excluding new hub-isolated QA groups'
 );
 
 set local role anon;

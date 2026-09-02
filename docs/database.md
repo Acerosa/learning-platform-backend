@@ -6,10 +6,14 @@
 - `learning.courses`: stable course identities shared across hubs.
 - `learning.groups`: course/year cohorts and controlled onboarding options.
 - `learning.students`: learner profiles linked one-to-one to Supabase Auth when
-  linked.
-- `learning.teachers`: staff profiles linked to Supabase Auth.
+  linked. Optional `is_synthetic` / `synthetic_purpose` mark permanent QA
+  fixtures without changing `auth.uid()` identity.
+- `learning.teachers`: staff profiles linked to Supabase Auth. Synthetic
+  learners cannot be linked to a teacher row.
 - `learning.enrolments`: learner-to-group history; one active enrolment per
   learner/group, with multiple concurrent courses supported.
+- `learning.synthetic_qa_fixtures`: catalog of hub-isolated QA personas and
+  groups. See [Synthetic QA learners](synthetic-qa-learners.md).
 - `learning.teacher_group_access`: scoped teacher access to groups.
 
 ## Curriculum and delivery

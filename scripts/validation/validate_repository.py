@@ -49,6 +49,7 @@ REQUIRED_PATHS = (
     "docs/hub-registration.md",
     "docs/backend-publication.md",
     "docs/release-process.md",
+    "docs/synthetic-qa-learners.md",
     "supabase/data/manifests/schemas/learning-platform-hub.schema.json",
     "scripts/import/validate-hub-manifest.py",
     "scripts/import/generate-hub-registration-migration.py",
