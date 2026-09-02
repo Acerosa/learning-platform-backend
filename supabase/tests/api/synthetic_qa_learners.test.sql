@@ -356,6 +356,48 @@ select is(
   'L2E-TEST-A has the explicit L2E smoke assignment when the module exists'
 );
 
+select ok(
+  not exists (
+    select 1
+    from learning.synthetic_qa_allowed_activity_keys('L2E_TEST_LEARNER') as allowed
+    join learning.activities as activity
+      on activity.stable_key = allowed.activity_key
+    join learning.modules as module
+      on module.id = activity.module_id
+    join learning.activity_versions as version
+      on version.activity_id = activity.id
+    where module.stable_key = 'l2e-exploring-emerging-digital-technologies'
+      and version.published_at is not null
+      and version.retired_at is null
+      and not exists (
+        select 1
+        from learning.activity_assignments as assignment
+        join learning.groups as learner_group on learner_group.id = assignment.group_id
+        where learner_group.code = 'L2E-TEST-A'
+          and assignment.active
+          and assignment.activity_version_id = version.id
+      )
+  ),
+  'every published catalogued L2E Week 1 smoke activity is assigned to L2E-TEST-A'
+);
+
+select ok(
+  not exists (
+    select 1
+    from learning.activity_assignments as assignment
+    join learning.groups as learner_group on learner_group.id = assignment.group_id
+    join learning.activity_versions as version on version.id = assignment.activity_version_id
+    join learning.activities as activity on activity.id = version.activity_id
+    where learner_group.code = 'L2E-TEST-A'
+      and assignment.active
+      and activity.stable_key not in (
+        select allowed.activity_key
+        from learning.synthetic_qa_allowed_activity_keys('L2E_TEST_LEARNER') as allowed
+      )
+  ),
+  'L2E-TEST-A is not assigned unpublished, review-only, or Week 2/3 L2E activities'
+);
+
 set local role anon;
 select throws_like(
   $$select * from admin_api.ensure_synthetic_qa_groups()$$,
@@ -652,6 +694,9 @@ select set_config('test.qa.u14_correct', (select correct_option from pg_temp.qa_
 select set_config('test.qa.l2e_version', pg_temp.qa_latest_version('week-1-knowledge-check'), true);
 select set_config('test.qa.l2e_question', (select question_key from pg_temp.qa_choice_question('week-1-knowledge-check')), true);
 select set_config('test.qa.l2e_correct', (select correct_option from pg_temp.qa_choice_question('week-1-knowledge-check')), true);
+select set_config('test.qa.l2e_welcome_version', pg_temp.qa_latest_version('week-1-welcome'), true);
+select set_config('test.qa.l2e_welcome_question', (select question_key from pg_temp.qa_choice_question('week-1-welcome')), true);
+select set_config('test.qa.l2e_welcome_correct', (select correct_option from pg_temp.qa_choice_question('week-1-welcome')), true);
 
 select ok(
   current_setting('test.qa.unit3_version', true) is not null
@@ -932,6 +977,28 @@ select ok(
 );
 
 select ok(
+  exists (
+    select 1 from api.my_assignments
+    where activity_key = 'week-1-welcome'
+  )
+  or pg_temp.qa_latest_version('week-1-welcome') is null,
+  'L2E QA learner sees week-1-welcome when that published activity exists'
+);
+
+select ok(
+  not exists (
+    select 1 from api.my_assignments
+    where activity_key in (
+      'week-1-reflection',
+      'week-2-classify',
+      'week-2-retrieval',
+      'week-3-classify'
+    )
+  ),
+  'L2E QA learner cannot see review-only or later-week L2E activities'
+);
+
+select ok(
   not exists (
     select 1 from api.my_assignments
     where activity_key in (
@@ -959,6 +1026,42 @@ select throws_ok(
   '42501',
   'ACTIVITY_NOT_ASSIGNED',
   'L2E QA learner cannot mark a Unit 3 assigned activity'
+);
+
+select throws_ok(
+  format(
+    $$select * from api.mark_formative_response(%L, %L, %L::jsonb, %L)$$,
+    'week-1-lesson-1-retrieval',
+    coalesce(pg_temp.qa_latest_version('week-1-lesson-1-retrieval'), '0.1.0'),
+    jsonb_build_array(
+      jsonb_build_object(
+        'question_id', 'ignored',
+        'response_payload', jsonb_build_object('optionId', 'wrong')
+      )
+    ),
+    'l2e-cross-tlevel'
+  ),
+  '42501',
+  'ACTIVITY_NOT_ASSIGNED',
+  'L2E QA learner cannot mark a T Level assigned activity'
+);
+
+select throws_ok(
+  format(
+    $$select * from api.mark_formative_response(%L, %L, %L::jsonb, %L)$$,
+    'week-1-variables-and-data-types',
+    coalesce(pg_temp.qa_latest_version('week-1-variables-and-data-types'), '0.1.0'),
+    jsonb_build_array(
+      jsonb_build_object(
+        'question_id', 'ignored',
+        'response_payload', jsonb_build_object('optionId', 'wrong')
+      )
+    ),
+    'l2e-cross-unit14'
+  ),
+  '42501',
+  'ACTIVITY_NOT_ASSIGNED',
+  'L2E QA learner cannot mark a Unit 14 assigned activity'
 );
 
 select ok(
@@ -997,6 +1100,46 @@ select ok(
     )
   ),
   'L2E smoke: authored correct option is marked Correct'
+);
+
+select ok(
+  pg_temp.qa_latest_version('week-1-welcome') is null
+  or (
+    select is_correct = false
+    from api.mark_formative_response(
+      'week-1-welcome',
+      pg_temp.qa_latest_version('week-1-welcome'),
+      jsonb_build_array(
+        jsonb_build_object(
+          'question_id', current_setting('test.qa.l2e_welcome_question', true),
+          'response_payload', jsonb_build_object('optionId', 'qa-incorrect-option')
+        )
+      ),
+      'l2e-welcome-incorrect'
+    )
+  ),
+  'L2E Week 1 starter: incorrect option is marked Incorrect when published'
+);
+
+select ok(
+  pg_temp.qa_latest_version('week-1-welcome') is null
+  or (
+    select is_correct
+    from api.mark_formative_response(
+      'week-1-welcome',
+      pg_temp.qa_latest_version('week-1-welcome'),
+      jsonb_build_array(
+        jsonb_build_object(
+          'question_id', current_setting('test.qa.l2e_welcome_question', true),
+          'response_payload', jsonb_build_object(
+            'optionId', current_setting('test.qa.l2e_welcome_correct', true)
+          )
+        )
+      ),
+      'l2e-welcome-correct'
+    )
+  ),
+  'L2E Week 1 starter: authored correct option is marked Correct when published'
 );
 reset role;
 

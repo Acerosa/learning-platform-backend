@@ -38,6 +38,18 @@ export const PERSONAS = [
     displayName: "Synthetic L2E Learner",
     groupCode: "L2E-TEST-A",
     smokeActivityKey: "week-1-knowledge-check",
+    smokeActivityKeys: [
+      "week-1-welcome",
+      "week-1-digital-technology",
+      "week-1-current-emerging",
+      "week-1-mobile",
+      "week-1-intelligent-computing",
+      "week-1-iot",
+      "week-1-cloud",
+      "week-1-industry",
+      "week-1-knowledge-check",
+      "week-1-exit-ticket"
+    ],
     emailEnv: ["L2E_TEST_EMAIL", "SYNTHETIC_QA_EMAIL_L2E"],
     passwordEnv: ["L2E_TEST_PASSWORD", "SYNTHETIC_QA_PASSWORD_L2E"]
   }
