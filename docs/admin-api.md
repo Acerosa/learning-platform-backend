@@ -37,7 +37,9 @@ platform roles.
 - `group_performance`
 - `learner_performance`
 - `activity_analytics`
+- `learner_activity_performance`
 - `question_performance`
+- `question_group_performance`
 - `topic_performance`
 - `skill_performance`
 - `curriculum_publications`
@@ -74,9 +76,11 @@ staff-facing educational aggregates without a warehouse:
 | --- | --- |
 | `assessment_overview` | Platform KPIs: learners, groups, attempts, completion, average result, review backlog, participation, topic/skill metadata coverage counts |
 | `group_performance` | Per-group participation, completion, average/best/latest performance, review backlog |
-| `learner_performance` | Per-learner assigned/completed activities, first/latest/best/average scores, review counts |
-| `activity_analytics` | Per-assignment assigned vs attempted learners, completion, score distribution, review backlog |
-| `question_performance` | Per-question response counts, correctness, awarded score averages, review counts, topic/skill keys |
+| `learner_performance` | Per-learner assigned/completed activities, first/latest/best/average scores, review counts. Learner-wide summary only; scores are not scoped to a course, group or activity. |
+| `learner_activity_performance` | One row per active enrolment assignment (learner + assignment + activity version). First/latest/best/attempt-average scores are completed attempts for that same learner and assignment. Includes assigned learners with zero attempts. Canonical activity/course/group titles. Hub codes are included only as the course's linked hubs, which may be zero, one or many. |
+| `activity_analytics` | Per-assignment assigned vs attempted learners, participation, completion, score distribution, review backlog, canonical titles |
+| `question_performance` | Platform-wide per-question response counts, correctness, awarded score averages, review counts, topic/skill keys. Aggregates across teaching groups. |
+| `question_group_performance` | Question aggregates scoped to a group assignment, including unanswered completed attempts. Does not invent partial credit. |
 | `topic_performance` / `skill_performance` | Existing `topic_keys` / `skill_keys` rollups only; incomplete metadata is visible as sparse coverage |
 
 These aggregates expose summary scores and counts only. They do not include

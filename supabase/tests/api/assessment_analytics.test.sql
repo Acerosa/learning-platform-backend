@@ -47,6 +47,18 @@ select has_view(
   'admin API exposes skill performance aggregates'
 );
 
+select has_view(
+  'admin_api',
+  'learner_activity_performance',
+  'admin API exposes contextual learner activity performance'
+);
+
+select has_view(
+  'admin_api',
+  'question_group_performance',
+  'admin API exposes group-scoped question performance'
+);
+
 set local "request.jwt.claim.sub" = '10000000-0000-4000-8000-000000000001';
 set local "request.jwt.claims" = '{"sub":"10000000-0000-4000-8000-000000000001","role":"authenticated"}';
 set local role authenticated;
