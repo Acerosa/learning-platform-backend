@@ -3,7 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check:feedback-coverage": "node scripts/import/audit-feedback-coverage.mjs",
-    "ops:provision-synthetic-qa": "node scripts/ops/provision-synthetic-qa-learners.mjs"
+    "test": "node --test scripts/ops/tests/*.test.mjs",
+    "provision:synthetic-qa": "node scripts/ops/provision-synthetic-qa-learners.mjs",
+    "check:synthetic-qa": "node scripts/ops/provision-synthetic-qa-learners.mjs --check",
+    "ops:provision-synthetic-qa": "node scripts/ops/provision-synthetic-qa-learners.mjs",
+    "check:feedback-coverage": "node scripts/import/audit-feedback-coverage.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.109.0"
   }
 }

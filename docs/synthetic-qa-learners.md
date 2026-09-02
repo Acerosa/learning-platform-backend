@@ -24,21 +24,33 @@ Published teaching packages remain publicly readable. That is
 
 ## Provisioning
 
-Auth users are created only through the Supabase Auth Admin API. Application
-rows are created by `admin_api.provision_synthetic_qa_learner(auth_user_id, persona)`.
-Email is not stored on `learning.students` for these fixtures.
+Auth users are created only through the Supabase Auth Admin API from local
+admin/ops tooling. Application rows are created by
+`admin_api.provision_synthetic_qa_learner(auth_user_id, persona)`. Email is
+not stored on `learning.students` for these fixtures.
 
 ```bash
 cp .env.example .env
-# Fill controlled mailbox aliases and generated passwords. Do not commit .env.
-node scripts/ops/provision-synthetic-qa-learners.mjs --dry-run
-node scripts/ops/provision-synthetic-qa-learners.mjs
+# Fill SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, and the four QA email/password
+# pairs. Use a controlled mailbox with plus-aliases. Do not commit .env.
+
+npm run provision:synthetic-qa -- --dry-run
+npm run provision:synthetic-qa
+npm run check:synthetic-qa
 ```
 
-If the service role cannot be used safely, create the four Auth users in the
+The command is idempotent. Existing Auth users are reused only when metadata
+already matches (`synthetic=true`, `purpose=formative-smoke-test`, expected
+`persona`). Ordinary learner and staff accounts are not converted. Passwords
+are never rotated by this command.
+
+Unset `SUPABASE_SERVICE_ROLE_KEY` when finished. Browser smoke then uses the
+same gitignored email/password pairs, not the service-role key.
+
+If the service role cannot be used, create the four Auth users in the
 Supabase Dashboard (email/password, confirm email, user metadata
 `synthetic=true`, `purpose=formative-smoke-test`, `persona=<PERSONA>`), then
-call the provision RPC with each Auth user UUID. Never paste passwords into
+re-run the provisioner so it can reuse those users. Never paste passwords into
 SQL, migrations, chat logs or git.
 
 ## Lifecycle

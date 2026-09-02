@@ -18,6 +18,9 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
   `auth_user_id` and do not copy email into `learning.students`.
   Ordinary enrolment/assignment RLS is unchanged. New QA groups receive
   only the explicit smoke activity, not the full published catalogue.
+  `npm run provision:synthetic-qa` is the idempotent admin/ops command that
+  creates or safely reuses the four Auth users and links them through
+  `admin_api.provision_synthetic_qa_learner`.
 - Shared `multi-field-exact` marking mode: configured object fields must
   all match `correctValues`. Extra learner fields are ignored. Trim is
   always applied; case-insensitive comparison is opt-in via
