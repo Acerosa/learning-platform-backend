@@ -12,6 +12,16 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Contextual assessment analytics read models: `admin_api.learner_activity_performance`
+  (one row per learner/assignment/activity version, including unattempted assigned
+  learners) and `admin_api.question_group_performance` (question aggregates scoped
+  to a teaching group). First/latest/best/attempt-average scores stay on the same
+  learner and assignment. `activity_analytics` now includes canonical titles and
+  participation. Hub is not assumed 1:1 with course; linked hub codes are
+  exposed only where `platform.hub_course_links` already relates them.
+
+### Added
+
 - `admin_api.inspect_synthetic_qa_learners` and
   `admin_api.inspect_synthetic_qa_auth_user` give the ops provisioner a
   service-role read of synthetic QA readiness without exposing the `learning`
