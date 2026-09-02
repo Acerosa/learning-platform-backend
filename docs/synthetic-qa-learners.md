@@ -77,11 +77,13 @@ Reseed assignments:
 select * from admin_api.ensure_synthetic_qa_groups();
 ```
 
-This upserts only the catalogued smoke activity (latest published,
+This upserts the catalogued smoke activity allowlist (latest published,
 non-retired version) for each fixture. Exclusive-smoke groups
-(`CYBER-TEST-QA`, `TLEVEL-TEST-A`, `L2E-TEST-A`) keep only that assignment
+(`CYBER-TEST-QA`, `TLEVEL-TEST-A`, `L2E-TEST-A`) keep only that allowlist
 active; later curriculum publication cannot silently enlarge them.
-Reused `UNIT14-TEST-A` keeps historical catalogue assignments already present.
+`L2E-TEST-A` covers published Week 1 deterministic Check-answer activities,
+not the full L2E catalogue. Reused `UNIT14-TEST-A` keeps historical catalogue
+assignments already present.
 
 Rotate credentials: generate a new password outside the repo and set it with
 the Auth Admin API or Dashboard. Do not write the password to git.
@@ -96,4 +98,4 @@ Archive old test evidence: leave rows in place. Filter staff views with
 | Unit 3 | `week2-malware-symptoms` |
 | T Level | `week-1-lesson-1-retrieval` |
 | Unit 14 | `week-1-variables-and-data-types` |
-| L2E | `week-1-knowledge-check` |
+| L2E | published Week 1 Check-answer set (`week-1-welcome` … `week-1-exit-ticket`; primary `week-1-knowledge-check`) |
