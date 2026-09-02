@@ -138,6 +138,8 @@ Synthetic QA fixtures are provisioned through:
 - `admin_api.ensure_synthetic_qa_groups()`
 - `admin_api.provision_synthetic_qa_learner(auth_user_id, persona)`
 - `admin_api.set_synthetic_qa_learner_active(persona, active)`
+- `admin_api.inspect_synthetic_qa_learners()`
+- `admin_api.inspect_synthetic_qa_auth_user(auth_user_id)`
 
 These require `platform_admin` or the service role. They do not create Auth
 users, do not copy email into learner records, do not bypass enrolment RLS,

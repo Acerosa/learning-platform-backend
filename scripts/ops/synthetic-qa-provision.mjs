@@ -160,134 +160,123 @@ function safeLogger(log, secrets) {
   };
 }
 
-async function existingStudentForAuth(rest, authUserId) {
-  const rows = await rest.select("learning", "students", {
-    auth_user_id: `eq.${authUserId}`,
-    select: "student_number,is_synthetic,active,contact_email,display_name,synthetic_purpose"
-  });
-  return Array.isArray(rows) ? rows[0] || null : null;
+const WRITE_RPCS = new Set([
+  "provision_synthetic_qa_learner",
+  "ensure_synthetic_qa_groups",
+  "set_synthetic_qa_learner_active"
+]);
+
+export function isWriteRpc(name) {
+  return WRITE_RPCS.has(String(name || ""));
 }
 
-async function existingTeacherForAuth(rest, authUserId) {
-  const rows = await rest.select("learning", "teachers", {
-    auth_user_id: `eq.${authUserId}`,
-    select: "id",
-    limit: "1"
-  });
-  return Array.isArray(rows) && rows.length > 0;
+function rpcRows(body) {
+  if (Array.isArray(body)) return body;
+  if (body && typeof body === "object") return [body];
+  return [];
 }
 
-async function studentByNumber(rest, studentNumber) {
-  const rows = await rest.select("learning", "students", {
-    student_number: `eq.${studentNumber}`,
-    select: "student_number,display_name,active,is_synthetic,synthetic_purpose,contact_email,auth_user_id"
-  });
-  return Array.isArray(rows) ? rows[0] || null : null;
+async function inspectLearners(rest) {
+  return rpcRows(await rest.rpc("inspect_synthetic_qa_learners", {}));
 }
 
-async function activeEnrolmentCodes(rest, studentNumber) {
-  const students = await rest.select("learning", "students", {
-    student_number: `eq.${studentNumber}`,
-    select: "id"
-  });
-  const student = Array.isArray(students) ? students[0] : null;
-  if (!student?.id) return [];
-  const rows = await rest.select("learning", "enrolments", {
-    student_id: `eq.${student.id}`,
-    status: "eq.active",
-    select: "status,groups(code)"
-  });
-  return (Array.isArray(rows) ? rows : [])
-    .map((row) => row?.groups?.code)
-    .filter(Boolean)
-    .sort();
-}
-
-async function assignedActivityKeys(rest, groupCode) {
-  const rows = await rest.select("learning", "activity_assignments", {
-    active: "eq.true",
-    select: "active,activity_versions(version,retired_at,published_at,activities(stable_key)),groups!inner(code)",
-    "groups.code": `eq.${groupCode}`
-  });
-  return (Array.isArray(rows) ? rows : []).map((row) => ({
-    key: row?.activity_versions?.activities?.stable_key,
-    version: row?.activity_versions?.version,
-    published: Boolean(row?.activity_versions?.published_at),
-    notRetired: row?.activity_versions?.retired_at == null,
-    active: row?.active === true
+async function inspectAuthLink(rest, authUserId) {
+  const rows = rpcRows(await rest.rpc("inspect_synthetic_qa_auth_user", {
+    p_auth_user_id: authUserId
   }));
-}
-
-function planForPersona({ existingUser, student, enrolmentCodes, assignments, expected }) {
-  const authAction = existingUser ? "AUTH REUSE" : "AUTH CREATE";
-  const studentAction = student ? "STUDENT READY" : "STUDENT PROVISION";
-  const enrolmentAction = enrolmentCodes.includes(expected.groupCode)
-    ? "ENROLMENT READY"
-    : "ENROLMENT CREATE";
-  const assignmentReady = assignments.some((item) => (
-    item.key === expected.smokeActivityKey && item.active && item.published && item.notRetired
-  ));
-  return {
-    authAction,
-    studentAction,
-    enrolmentAction,
-    assignmentAction: assignmentReady ? "ASSIGNMENT READY" : "ASSIGNMENT MISSING"
+  return rows[0] || {
+    auth_user_linked: false,
+    student_number: null,
+    is_synthetic: null,
+    student_active: null,
+    teacher_linked: false
   };
 }
 
-export async function inspectPersonaState({ admin, rest, personaConfig }) {
-  const existingUser = await admin.findUserByEmail(personaConfig.email);
-  const student = await studentByNumber(rest, personaConfig.studentNumber);
-  const enrolmentCodes = student
-    ? await activeEnrolmentCodes(rest, personaConfig.studentNumber)
-    : [];
-  const assignments = await assignedActivityKeys(rest, personaConfig.groupCode);
-  return { existingUser, student, enrolmentCodes, assignments };
+function fixtureRow(rows, persona) {
+  return rows.find((row) => row?.persona === persona) || null;
 }
 
-export async function provisionPersona({ admin, rest, personaConfig, dryRun, log }) {
-  const expected = personaConfig;
-  const state = await inspectPersonaState({ admin, rest, personaConfig });
-  const plan = planForPersona({ ...state, expected });
+function planForPersona({ existingUser, fixture, expected }) {
+  const enrolmentCodes = Array.isArray(fixture?.enrolment_codes) ? fixture.enrolment_codes : [];
+  const assignmentReady = fixture?.smoke_assigned === true;
+  return {
+    authAction: existingUser ? "AUTH REUSE" : "AUTH CREATE",
+    studentAction: fixture?.student_present ? "STUDENT READY" : "STUDENT PROVISION",
+    enrolmentAction: enrolmentCodes.includes(expected.groupCode)
+      ? "ENROLMENT READY"
+      : "ENROLMENT CREATE",
+    assignmentAction: assignmentReady ? "ASSIGNMENT READY" : "ASSIGNMENT MISSING",
+    enrolmentCodes,
+    assignmentReady
+  };
+}
 
-  if (state.existingUser) {
-    const metadata = inspectAuthMetadata(state.existingUser, expected.persona);
-    if (!metadata.ok) {
-      throw new ProvisionError(
-        metadata.code,
-        `${expected.persona}: ${metadata.code} — existing Auth user will not be converted.`
-      );
-    }
-    const teacher = await existingTeacherForAuth(rest, state.existingUser.id);
-    if (teacher) {
-      throw new ProvisionError("STAFF_ACCOUNT_FORBIDDEN", `${expected.persona}: STAFF_ACCOUNT_FORBIDDEN`);
-    }
-    const linked = await existingStudentForAuth(rest, state.existingUser.id);
-    if (linked && linked.is_synthetic === false) {
-      throw new ProvisionError(
-        "REAL_LEARNER_FORBIDDEN",
-        `${expected.persona}: REAL_LEARNER_FORBIDDEN`
-      );
-    }
-    if (linked && linked.student_number !== expected.studentNumber) {
-      throw new ProvisionError(
-        "AUTH_ACCOUNT_ALREADY_LINKED",
-        `${expected.persona}: AUTH_ACCOUNT_ALREADY_LINKED`
-      );
-    }
+export async function inspectPersonaState({ admin, rest, personaConfig, fixtures }) {
+  const existingUser = await admin.findUserByEmail(personaConfig.email);
+  const rows = fixtures || await inspectLearners(rest);
+  const fixture = fixtureRow(rows, personaConfig.persona);
+  const authLink = existingUser ? await inspectAuthLink(rest, existingUser.id) : null;
+  return { existingUser, fixture, authLink, enrolmentCodes: Array.isArray(fixture?.enrolment_codes) ? fixture.enrolment_codes : [] };
+}
+
+function assertSafeExistingAuth(state, expected) {
+  if (!state.existingUser) return;
+  const metadata = inspectAuthMetadata(state.existingUser, expected.persona);
+  if (!metadata.ok) {
+    throw new ProvisionError(
+      metadata.code,
+      `${expected.persona}: ${metadata.code} — existing Auth user will not be converted.`
+    );
   }
+  if (state.authLink?.teacher_linked) {
+    throw new ProvisionError("STAFF_ACCOUNT_FORBIDDEN", `${expected.persona}: STAFF_ACCOUNT_FORBIDDEN`);
+  }
+  if (state.authLink?.auth_user_linked && state.authLink.is_synthetic === false) {
+    throw new ProvisionError(
+      "REAL_LEARNER_FORBIDDEN",
+      `${expected.persona}: REAL_LEARNER_FORBIDDEN`
+    );
+  }
+  if (
+    state.authLink?.auth_user_linked
+    && state.authLink.student_number
+    && state.authLink.student_number !== expected.studentNumber
+  ) {
+    throw new ProvisionError(
+      "AUTH_ACCOUNT_ALREADY_LINKED",
+      `${expected.persona}: AUTH_ACCOUNT_ALREADY_LINKED`
+    );
+  }
+}
+
+export async function provisionPersona({ admin, rest, personaConfig, dryRun, log, fixtures }) {
+  const expected = personaConfig;
+  const state = await inspectPersonaState({ admin, rest, personaConfig, fixtures });
+  if (!state.fixture) {
+    throw new ProvisionError(
+      "UNKNOWN_QA_PERSONA",
+      `${expected.persona}: inspect_synthetic_qa_learners returned no fixture row.`
+    );
+  }
+  const plan = planForPersona({ existingUser: state.existingUser, fixture: state.fixture, expected });
+
+  assertSafeExistingAuth(state, expected);
 
   if (dryRun) {
-    log(`${expected.persona}:`);
-    log(`  ${plan.authAction}`);
-    log(`  ${plan.studentAction}`);
-    log(`  ${plan.enrolmentAction}`);
+    log(`${expected.persona}`);
+    log(`  Auth: ${state.existingUser ? "REUSE" : "CREATE"}`);
+    log(`  Student: ${state.fixture?.student_present ? "READY" : "PROVISION"}`);
+    log(`  Enrolment: ${plan.enrolmentCodes.includes(expected.groupCode) ? "READY" : "PROVISION"}`);
+    log(`  Assignment: ${plan.assignmentReady ? "READY" : "MISSING"}`);
+    log("  Status: PLANNED");
     return {
       persona: expected.persona,
       auth: state.existingUser ? "AUTH_REUSED" : "AUTH_CREATE",
       metadata: state.existingUser ? "PASS" : "PENDING_CREATE",
       student: plan.studentAction,
       group: expected.groupCode,
+      assignmentReady: plan.assignmentReady,
       dryRun: true
     };
   }
@@ -328,17 +317,15 @@ export async function provisionPersona({ admin, rest, personaConfig, dryRun, log
   }
 
   const row = Array.isArray(provisioned) ? provisioned[0] : provisioned;
-  const student = await studentByNumber(rest, expected.studentNumber);
-  const enrolmentCodes = await activeEnrolmentCodes(rest, expected.studentNumber);
-  const assignments = await assignedActivityKeys(rest, expected.groupCode);
-  const assignmentReady = assignments.some((item) => (
-    item.key === expected.smokeActivityKey && item.active && item.published && item.notRetired
-  ));
-  const contactEmailCopied = student?.contact_email != null;
+  const after = fixtureRow(await inspectLearners(rest), expected.persona);
+  const enrolmentCodes = Array.isArray(after?.enrolment_codes) ? after.enrolment_codes : [];
+  const assignmentReady = after?.smoke_assigned === true;
+  const contactEmailCopied = after?.contact_email_copied === true;
   const ready = Boolean(
-    student?.is_synthetic
-    && student?.active
-    && student?.contact_email == null
+    after?.student_present
+    && after?.is_synthetic
+    && after?.student_active
+    && contactEmailCopied === false
     && enrolmentCodes.length === 1
     && enrolmentCodes[0] === expected.groupCode
     && assignmentReady
@@ -403,12 +390,17 @@ export async function runProvision({
   };
 
   const wrappedRest = {
-    select: (schema, table, query) => rest.select(schema, table, query),
+    select: async (schema, table) => {
+      throw new ProvisionError(
+        "INTERNAL_SCHEMA_FORBIDDEN",
+        `Direct REST read of ${schema}.${table} is not allowed.`
+      );
+    },
     rpc: async (name, args) => {
-      if (dryRun || checkOnly) {
+      if ((dryRun || checkOnly) && isWriteRpc(name)) {
         throw new ProvisionError("WRITE_BLOCKED", "RPC write attempted during dry-run/check.");
       }
-      writes.rpcCalls.push(name);
+      if (isWriteRpc(name)) writes.rpcCalls.push(name);
       return rest.rpc(name, args);
     }
   };
@@ -417,6 +409,7 @@ export async function runProvision({
     await wrappedRest.rpc("ensure_synthetic_qa_groups", {});
   }
 
+  const fixtures = await inspectLearners(wrappedRest);
   const results = [];
   const failures = [];
   for (const personaConfig of resolved) {
@@ -425,18 +418,18 @@ export async function runProvision({
         const state = await inspectPersonaState({
           admin: wrappedAdmin,
           rest: wrappedRest,
-          personaConfig
+          personaConfig,
+          fixtures
         });
         const metadata = state.existingUser
           ? inspectAuthMetadata(state.existingUser, personaConfig.persona)
           : { ok: false, code: "AUTH_MISSING" };
-        const assignmentReady = state.assignments.some((item) => (
-          item.key === personaConfig.smokeActivityKey && item.active && item.published && item.notRetired
-        ));
+        const assignmentReady = state.fixture?.smoke_assigned === true;
         const ready = Boolean(
           metadata.ok
-          && state.student?.is_synthetic
-          && state.student?.contact_email == null
+          && state.fixture?.student_present
+          && state.fixture?.is_synthetic
+          && state.fixture?.contact_email_copied === false
           && state.enrolmentCodes.length === 1
           && state.enrolmentCodes[0] === personaConfig.groupCode
           && assignmentReady
@@ -444,7 +437,7 @@ export async function runProvision({
         out(`${personaConfig.persona}`);
         out(`  Auth: ${state.existingUser ? "PRESENT" : "MISSING"}`);
         out(`  Metadata: ${metadata.ok ? "PASS" : metadata.code}`);
-        out(`  Student: ${state.student ? "PRESENT" : "MISSING"}`);
+        out(`  Student: ${state.fixture?.student_present ? "PRESENT" : "MISSING"}`);
         out(`  Group: ${personaConfig.groupCode}`);
         out(`  Enrolment: ${state.enrolmentCodes[0] || "MISSING"}`);
         out(`  Assignment: ${assignmentReady ? "READY" : "MISSING"}`);
@@ -459,7 +452,8 @@ export async function runProvision({
         rest: wrappedRest,
         personaConfig,
         dryRun,
-        log: out
+        log: out,
+        fixtures
       });
       results.push(result);
       if (!dryRun && result.ready === false) failures.push(personaConfig.persona);

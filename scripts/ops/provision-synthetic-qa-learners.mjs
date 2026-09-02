@@ -41,20 +41,26 @@ function fail(message) {
   process.exit(1);
 }
 
-function toQuery(params) {
-  const search = new URLSearchParams();
-  for (const [key, value] of Object.entries(params || {})) {
-    search.set(key, String(value));
-  }
-  return search.toString();
-}
-
 function createAdmin(url, serviceRoleKey) {
+  class OpsNoopWebSocket {
+    constructor() {}
+    close() {}
+    send() {}
+    addEventListener() {}
+    removeEventListener() {}
+    dispatchEvent() {
+      return false;
+    }
+  }
+
   const supabase = createClient(url, serviceRoleKey, {
     auth: {
       persistSession: false,
       autoRefreshToken: false,
       detectSessionInUrl: false
+    },
+    realtime: {
+      transport: OpsNoopWebSocket
     }
   });
 
@@ -119,22 +125,11 @@ function createRest(url, serviceRoleKey) {
   }
 
   return {
-    async select(schema, table, query) {
-      const response = await fetch(`${url}/rest/v1/${table}?${toQuery(query)}`, {
-        headers: {
-          ...headers,
-          "Accept-Profile": schema,
-          "Content-Profile": schema
-        }
-      });
-      const body = await readJson(response);
-      if (!response.ok) {
-        throw new ProvisionError(
-          "REST_SELECT_FAILED",
-          `Read of ${schema}.${table} failed.`
-        );
-      }
-      return body;
+    async select(schema, table) {
+      throw new ProvisionError(
+        "INTERNAL_SCHEMA_FORBIDDEN",
+        `Direct REST read of ${schema}.${table} is not allowed.`
+      );
     },
 
     async rpc(name, args) {
@@ -194,7 +189,9 @@ async function main() {
     error: console.error
   });
 
-  if (!outcome.ok) process.exit(1);
+  if (!outcome.ok) {
+    fail("Provisioning completed with failures. See persona lines above.");
+  }
 }
 
 main().catch((error) => {
