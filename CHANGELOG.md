@@ -12,6 +12,10 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- `admin_api.inspect_synthetic_qa_learners` and
+  `admin_api.inspect_synthetic_qa_auth_user` give the ops provisioner a
+  service-role read of synthetic QA readiness without exposing the `learning`
+  schema through PostgREST. Learner RLS is unchanged.
 - Permanent hub-isolated synthetic QA learners and closed groups
   (`CYBER-TEST-QA`, `TLEVEL-TEST-A`, `UNIT14-TEST-A`, `L2E-TEST-A`).
   Auth users are created through the Admin API; application rows use

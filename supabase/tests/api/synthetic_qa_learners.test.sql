@@ -362,6 +362,11 @@ select throws_like(
   '%permission denied%',
   'anonymous callers cannot refresh synthetic QA groups'
 );
+select throws_like(
+  $$select * from admin_api.inspect_synthetic_qa_learners()$$,
+  '%permission denied%',
+  'anonymous callers cannot inspect synthetic QA readiness'
+);
 reset role;
 
 set local "request.jwt.claim.sub" = '10000000-0000-4000-8000-000000000001';
@@ -375,6 +380,12 @@ select throws_ok(
   '42501',
   'SYNTHETIC_QA_NOT_AUTHORISED',
   'ordinary learners cannot provision synthetic QA accounts'
+);
+select throws_ok(
+  $$select * from admin_api.inspect_synthetic_qa_learners()$$,
+  '42501',
+  'SYNTHETIC_QA_NOT_AUTHORISED',
+  'ordinary learners cannot inspect synthetic QA readiness'
 );
 reset role;
 
@@ -489,6 +500,52 @@ select is(
   ),
   4::bigint,
   'four synthetic QA learners exist without duplicated contact email'
+);
+
+set local "request.jwt.claim.sub" = '20000000-0000-4000-8000-000000000003';
+set local "request.jwt.claims" = '{"sub":"20000000-0000-4000-8000-000000000003","role":"authenticated"}';
+set local role authenticated;
+select is(
+  (
+    select student_present and student_active and is_synthetic
+      and not contact_email_copied
+      and smoke_assigned
+      and enrolment_codes = array['CYBER-TEST-QA']::text[]
+    from admin_api.inspect_synthetic_qa_learners()
+    where persona = 'UNIT3_TEST_LEARNER'
+  ),
+  true,
+  'platform admin inspect reports Unit 3 QA readiness without copied email'
+);
+reset role;
+
+set local "request.jwt.claim.role" = 'service_role';
+set local "request.jwt.claims" = '{"role":"service_role"}';
+set local role service_role;
+select lives_ok(
+  $$select * from admin_api.inspect_synthetic_qa_learners()$$,
+  'service_role can inspect synthetic QA readiness'
+);
+select is(
+  (
+    select count(*)::integer
+    from admin_api.inspect_synthetic_qa_learners()
+  ),
+  4,
+  'service_role inspect returns one row per QA persona'
+);
+reset role;
+
+select is(
+  has_schema_privilege('service_role', 'admin_api', 'USAGE'),
+  true,
+  'service_role has usage on admin_api for inspect and provision RPCs'
+);
+
+select is(
+  has_schema_privilege('service_role', 'learning', 'USAGE'),
+  false,
+  'service_role is not granted usage on the unexposed learning schema'
 );
 
 select is(

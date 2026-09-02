@@ -37,16 +37,30 @@ function secretValues(env = BASE_ENV) {
   ];
 }
 
-function createHarness({ users = [], students = [], teachers = [], enrolments = [], assignments = [] } = {}) {
+function defaultAssignments() {
+  return PERSONAS.map((persona) => ({
+    active: true,
+    activity_versions: {
+      version: persona.smokeActivityKey === "week2-malware-symptoms" ? "1.1.0" : "0.1.0",
+      published_at: "2026-01-01T00:00:00Z",
+      retired_at: null,
+      activities: { stable_key: persona.smokeActivityKey }
+    },
+    groups: { code: persona.groupCode }
+  }));
+}
+
+function createHarness({ users = [], students = [], teachers = [], enrolments = [], assignments } = {}) {
   const state = {
     users: [...users],
     students: [...students],
     teachers: [...teachers],
     enrolments: [...enrolments],
-    assignments: [...assignments],
+    assignments: assignments ? [...assignments] : defaultAssignments(),
     passwordUpdates: 0,
     createCalls: 0,
-    rpcCalls: []
+    rpcCalls: [],
+    selectCalls: []
   };
 
   const admin = {
@@ -72,34 +86,55 @@ function createHarness({ users = [], students = [], teachers = [], enrolments = 
   };
 
   const rest = {
-    async select(schema, table, query) {
-      if (table === "teachers") {
-        const authId = String(query.auth_user_id || "").replace(/^eq\./, "");
-        return state.teachers.filter((row) => row.auth_user_id === authId);
-      }
-      if (table === "students") {
-        if (query.auth_user_id) {
-          const authId = String(query.auth_user_id).replace(/^eq\./, "");
-          return state.students.filter((row) => row.auth_user_id === authId);
-        }
-        if (query.student_number) {
-          const number = String(query.student_number).replace(/^eq\./, "");
-          return state.students.filter((row) => row.student_number === number);
-        }
-        return state.students;
-      }
-      if (table === "enrolments") {
-        const studentId = String(query.student_id || "").replace(/^eq\./, "");
-        return state.enrolments.filter((row) => row.student_id === studentId && row.status === "active");
-      }
-      if (table === "activity_assignments") {
-        const groupCode = String(query["groups.code"] || "").replace(/^eq\./, "");
-        return state.assignments.filter((row) => row.groups?.code === groupCode && row.active);
-      }
-      return [];
+    async select(schema, table) {
+      state.selectCalls.push({ schema, table });
+      throw new Error(`direct REST access to ${schema}.${table} is forbidden`);
     },
     async rpc(name, args) {
       state.rpcCalls.push({ name, args });
+      if (name === "inspect_synthetic_qa_learners") {
+        return PERSONAS.map((persona) => {
+          const student = state.students.find((row) => row.student_number === persona.studentNumber);
+          const enrolmentCodes = student
+            ? state.enrolments
+              .filter((row) => row.student_id === student.id && row.status === "active")
+              .map((row) => row.groups.code)
+            : [];
+          const assignment = state.assignments.find((row) => (
+            row.groups?.code === persona.groupCode
+            && row.active
+            && row.activity_versions?.activities?.stable_key === persona.smokeActivityKey
+            && row.activity_versions?.published_at
+            && row.activity_versions?.retired_at == null
+          ));
+          return {
+            persona: persona.persona,
+            student_number: persona.studentNumber,
+            display_name: persona.displayName,
+            group_code: persona.groupCode,
+            smoke_activity_key: persona.smokeActivityKey,
+            student_present: Boolean(student),
+            student_active: student?.active ?? null,
+            is_synthetic: student?.is_synthetic ?? null,
+            synthetic_purpose: student?.synthetic_purpose ?? null,
+            contact_email_copied: student ? student.contact_email != null : false,
+            linked_auth_user_id: student?.auth_user_id ?? null,
+            enrolment_codes: enrolmentCodes,
+            smoke_assigned: Boolean(assignment),
+            smoke_version: assignment?.activity_versions?.version ?? null
+          };
+        });
+      }
+      if (name === "inspect_synthetic_qa_auth_user") {
+        const student = state.students.find((row) => row.auth_user_id === args.p_auth_user_id);
+        return [{
+          auth_user_linked: Boolean(student),
+          student_number: student?.student_number ?? null,
+          is_synthetic: student?.is_synthetic ?? null,
+          student_active: student?.active ?? null,
+          teacher_linked: state.teachers.some((row) => row.auth_user_id === args.p_auth_user_id)
+        }];
+      }
       if (name === "ensure_synthetic_qa_groups") {
         return PERSONAS.map((persona) => ({
           persona: persona.persona,
@@ -127,18 +162,6 @@ function createHarness({ users = [], students = [], teachers = [], enrolments = 
           state.enrolments.push({
             student_id: student.id,
             status: "active",
-            groups: { code: persona.groupCode }
-          });
-        }
-        if (!state.assignments.some((row) => row.groups.code === persona.groupCode)) {
-          state.assignments.push({
-            active: true,
-            activity_versions: {
-              version: "0.1.0",
-              published_at: "2026-01-01T00:00:00Z",
-              retired_at: null,
-              activities: { stable_key: persona.smokeActivityKey }
-            },
             groups: { code: persona.groupCode }
           });
         }
@@ -196,6 +219,8 @@ test("new users are created then application-provisioned with returned Auth ids"
   }
   assert.equal(harness.state.students.length, 4);
   assert.ok(harness.state.students.every((row) => row.contact_email == null));
+  assert.deepEqual(harness.state.selectCalls, []);
+  assert.ok(harness.state.rpcCalls.some((call) => call.name === "inspect_synthetic_qa_learners"));
   const text = logs.join("\n");
   for (const secret of secretValues()) {
     assert.equal(text.includes(secret), false);
@@ -342,7 +367,7 @@ test("linked Auth UUID cannot back a second QA persona", async () => {
   assert.equal(tlevel.code, "AUTH_ACCOUNT_ALREADY_LINKED");
 });
 
-test("dry-run reports planned actions and performs no writes", async () => {
+test("dry-run inspects application state without direct learning REST and performs no writes", async () => {
   const harness = createHarness();
   const logs = [];
   const outcome = await runProvision({
@@ -352,10 +377,73 @@ test("dry-run reports planned actions and performs no writes", async () => {
     dryRun: true,
     log: (...args) => logs.push(args.join(" "))
   });
+  const text = logs.join("\n");
   assert.equal(outcome.ok, true);
   assert.equal(harness.state.createCalls, 0);
-  assert.deepEqual(harness.state.rpcCalls, []);
-  assert.ok(logs.join("\n").includes("AUTH CREATE"));
-  assert.ok(logs.join("\n").includes("STUDENT PROVISION"));
+  assert.equal(
+    harness.state.rpcCalls.some((call) => call.name === "provision_synthetic_qa_learner"),
+    false
+  );
+  assert.equal(
+    harness.state.rpcCalls.some((call) => call.name === "ensure_synthetic_qa_groups"),
+    false
+  );
+  assert.ok(harness.state.rpcCalls.some((call) => call.name === "inspect_synthetic_qa_learners"));
+  assert.deepEqual(harness.state.selectCalls, []);
+  assert.ok(text.includes("Auth: CREATE"));
+  assert.ok(text.includes("Student: PROVISION"));
+  assert.ok(text.includes("Enrolment: PROVISION"));
+  assert.ok(text.includes("Assignment: READY"));
+  assert.ok(text.includes("Status: PLANNED"));
+  assert.equal(text.includes("REST_SELECT_FAILED"), false);
+  for (const secret of secretValues()) {
+    assert.equal(text.includes(secret), false);
+  }
   assert.equal(maskEmail("qa+unit3@example.test").includes("qa+unit3@example.test"), false);
+});
+
+test("dry-run reports reuse when a synthetic learner already exists", async () => {
+  const harness = createHarness({
+    users: PERSONAS.map((persona, index) => ({
+      id: `11111111-0000-4000-8000-00000000000${index + 1}`,
+      email: BASE_ENV[persona.emailEnv[0]],
+      email_confirmed_at: "2026-09-02T00:00:00Z",
+      user_metadata: {
+        synthetic: true,
+        purpose: "formative-smoke-test",
+        persona: persona.persona
+      },
+      app_metadata: { provider: "email" }
+    })),
+    students: PERSONAS.map((persona, index) => ({
+      id: `student-${persona.studentNumber}`,
+      student_number: persona.studentNumber,
+      display_name: persona.displayName,
+      auth_user_id: `11111111-0000-4000-8000-00000000000${index + 1}`,
+      active: true,
+      is_synthetic: true,
+      synthetic_purpose: "formative-smoke-test",
+      contact_email: null
+    })),
+    enrolments: PERSONAS.map((persona) => ({
+      student_id: `student-${persona.studentNumber}`,
+      status: "active",
+      groups: { code: persona.groupCode }
+    }))
+  });
+  const logs = [];
+  const outcome = await runProvision({
+    env: BASE_ENV,
+    admin: harness.admin,
+    rest: harness.rest,
+    dryRun: true,
+    log: (...args) => logs.push(args.join(" "))
+  });
+  const text = logs.join("\n");
+  assert.equal(outcome.ok, true);
+  assert.equal(harness.state.createCalls, 0);
+  assert.ok(text.includes("Auth: REUSE"));
+  assert.ok(text.includes("Student: READY"));
+  assert.ok(text.includes("Enrolment: READY"));
+  assert.ok(outcome.results.every((row) => row.auth === "AUTH_REUSED"));
 });

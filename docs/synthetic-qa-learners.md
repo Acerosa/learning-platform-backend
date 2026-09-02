@@ -27,7 +27,10 @@ Published teaching packages remain publicly readable. That is
 Auth users are created only through the Supabase Auth Admin API from local
 admin/ops tooling. Application rows are created by
 `admin_api.provision_synthetic_qa_learner(auth_user_id, persona)`. Email is
-not stored on `learning.students` for these fixtures.
+not stored on `learning.students` for these fixtures. Dry-run and readiness
+checks read application state through
+`admin_api.inspect_synthetic_qa_learners`, not direct REST access to
+`learning` tables.
 
 ```bash
 cp .env.example .env
