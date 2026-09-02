@@ -279,6 +279,83 @@ select is(
   'four isolated synthetic QA groups are active and closed for self-registration'
 );
 
+select is(
+  (
+    select count(distinct activity.stable_key)
+    from learning.activity_assignments as assignment
+    join learning.groups as learner_group on learner_group.id = assignment.group_id
+    join learning.activity_versions as activity_version
+      on activity_version.id = assignment.activity_version_id
+    join learning.activities as activity on activity.id = activity_version.activity_id
+    where learner_group.code = 'CYBER-TEST-QA'
+      and assignment.active
+  ),
+  1::bigint,
+  'CYBER-TEST-QA is assigned only the explicit Unit 3 smoke activity, not the full catalogue'
+);
+
+select ok(
+  exists (
+    select 1
+    from learning.activity_assignments as assignment
+    join learning.groups as learner_group on learner_group.id = assignment.group_id
+    join learning.activity_versions as activity_version
+      on activity_version.id = assignment.activity_version_id
+    join learning.activities as activity on activity.id = activity_version.activity_id
+    where learner_group.code = 'CYBER-TEST-QA'
+      and assignment.active
+      and activity.stable_key = 'week2-malware-symptoms'
+  ),
+  'CYBER-TEST-QA includes week2-malware-symptoms as its smoke assignment'
+);
+
+select is(
+  (
+    select count(*)
+    from learning.activity_assignments as assignment
+    join learning.groups as learner_group on learner_group.id = assignment.group_id
+    join learning.activity_versions as activity_version
+      on activity_version.id = assignment.activity_version_id
+    join learning.activities as activity on activity.id = activity_version.activity_id
+    where learner_group.code = 'TLEVEL-TEST-A'
+      and assignment.active
+      and activity.stable_key = 'week-1-lesson-1-retrieval'
+  ),
+  1::bigint,
+  'TLEVEL-TEST-A has the explicit T Level smoke assignment when the module exists'
+);
+
+select ok(
+  exists (
+    select 1
+    from learning.activity_assignments as assignment
+    join learning.groups as learner_group on learner_group.id = assignment.group_id
+    join learning.activity_versions as activity_version
+      on activity_version.id = assignment.activity_version_id
+    join learning.activities as activity on activity.id = activity_version.activity_id
+    where learner_group.code = 'UNIT14-TEST-A'
+      and assignment.active
+      and activity.stable_key = 'week-1-variables-and-data-types'
+  ),
+  'UNIT14-TEST-A retains the explicit Unit 14 smoke assignment'
+);
+
+select is(
+  (
+    select count(*)
+    from learning.activity_assignments as assignment
+    join learning.groups as learner_group on learner_group.id = assignment.group_id
+    join learning.activity_versions as activity_version
+      on activity_version.id = assignment.activity_version_id
+    join learning.activities as activity on activity.id = activity_version.activity_id
+    where learner_group.code = 'L2E-TEST-A'
+      and assignment.active
+      and activity.stable_key = 'week-1-knowledge-check'
+  ),
+  1::bigint,
+  'L2E-TEST-A has the explicit L2E smoke assignment when the module exists'
+);
+
 set local role anon;
 select throws_like(
   $$select * from admin_api.ensure_synthetic_qa_groups()$$,

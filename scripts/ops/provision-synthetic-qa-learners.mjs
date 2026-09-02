@@ -8,10 +8,10 @@
  */
 
 const PERSONAS = [
-  { persona: "UNIT3_TEST_LEARNER", emailEnv: "SYNTHETIC_QA_EMAIL_UNIT3", passwordEnv: "SYNTHETIC_QA_PASSWORD_UNIT3" },
-  { persona: "TLEVEL_TEST_LEARNER", emailEnv: "SYNTHETIC_QA_EMAIL_TLEVEL", passwordEnv: "SYNTHETIC_QA_PASSWORD_TLEVEL" },
-  { persona: "UNIT14_TEST_LEARNER", emailEnv: "SYNTHETIC_QA_EMAIL_UNIT14", passwordEnv: "SYNTHETIC_QA_PASSWORD_UNIT14" },
-  { persona: "L2E_TEST_LEARNER", emailEnv: "SYNTHETIC_QA_EMAIL_L2E", passwordEnv: "SYNTHETIC_QA_PASSWORD_L2E" }
+  { persona: "UNIT3_TEST_LEARNER", emailEnv: ["SYNTHETIC_QA_EMAIL_UNIT3", "UNIT3_TEST_EMAIL"], passwordEnv: ["SYNTHETIC_QA_PASSWORD_UNIT3", "UNIT3_TEST_PASSWORD"] },
+  { persona: "TLEVEL_TEST_LEARNER", emailEnv: ["SYNTHETIC_QA_EMAIL_TLEVEL", "TLEVEL_TEST_EMAIL"], passwordEnv: ["SYNTHETIC_QA_PASSWORD_TLEVEL", "TLEVEL_TEST_PASSWORD"] },
+  { persona: "UNIT14_TEST_LEARNER", emailEnv: ["SYNTHETIC_QA_EMAIL_UNIT14", "UNIT14_TEST_EMAIL"], passwordEnv: ["SYNTHETIC_QA_PASSWORD_UNIT14", "UNIT14_TEST_PASSWORD"] },
+  { persona: "L2E_TEST_LEARNER", emailEnv: ["SYNTHETIC_QA_EMAIL_L2E", "L2E_TEST_EMAIL"], passwordEnv: ["SYNTHETIC_QA_PASSWORD_L2E", "L2E_TEST_PASSWORD"] }
 ];
 
 function fail(message) {
@@ -23,6 +23,14 @@ function requiredEnv(name) {
   const value = String(process.env[name] || "").trim();
   if (!value) fail(`Missing required environment variable ${name}.`);
   return value;
+}
+
+function firstEnv(names) {
+  for (const name of names) {
+    const value = String(process.env[name] || "").trim();
+    if (value) return { name, value };
+  }
+  fail(`Missing required environment variable ${names.join(" or ")}.`);
 }
 
 function isDryRun() {
@@ -123,9 +131,9 @@ async function main() {
 
   if (isDryRun()) {
     for (const item of PERSONAS) {
-      requiredEnv(item.emailEnv);
-      requiredEnv(item.passwordEnv);
-      console.log(`${item.persona}: env present (email ${maskEmail(process.env[item.emailEnv])})`);
+      const email = firstEnv(item.emailEnv);
+      firstEnv(item.passwordEnv);
+      console.log(`${item.persona}: env present (email ${maskEmail(email.value)})`);
     }
     console.log("Dry run complete. No Auth users or learner rows were written.");
     return;
@@ -140,8 +148,8 @@ async function main() {
   }
 
   for (const item of PERSONAS) {
-    const email = requiredEnv(item.emailEnv);
-    const password = requiredEnv(item.passwordEnv);
+    const email = firstEnv(item.emailEnv).value;
+    const password = firstEnv(item.passwordEnv).value;
     const authUser = await createOrFindAuthUser({
       url,
       serviceRoleKey,

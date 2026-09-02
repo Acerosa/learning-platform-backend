@@ -62,8 +62,11 @@ Reseed assignments:
 select * from admin_api.ensure_synthetic_qa_groups();
 ```
 
-This assigns currently published, non-retired activity versions for each
-fixture module. It does not publish curriculum.
+This upserts only the catalogued smoke activity (latest published,
+non-retired version) for each fixture. Exclusive-smoke groups
+(`CYBER-TEST-QA`, `TLEVEL-TEST-A`, `L2E-TEST-A`) keep only that assignment
+active; later curriculum publication cannot silently enlarge them.
+Reused `UNIT14-TEST-A` keeps historical catalogue assignments already present.
 
 Rotate credentials: generate a new password outside the repo and set it with
 the Auth Admin API or Dashboard. Do not write the password to git.

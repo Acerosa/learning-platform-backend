@@ -60,6 +60,7 @@ create table if not exists learning.synthetic_qa_fixtures (
   module_key text not null,
   hub_code text not null,
   smoke_activity_key text not null,
+  exclusive_smoke boolean not null default true,
   group_name text not null,
   purpose text not null default 'formative-smoke-test',
   group_id_stable uuid not null unique,
@@ -81,7 +82,10 @@ create table if not exists learning.synthetic_qa_fixtures (
 );
 
 comment on table learning.synthetic_qa_fixtures is
-  'Catalog of permanent hub-isolated synthetic QA learners and groups. Not a second authorisation path.';
+  'Catalog of permanent hub-isolated synthetic QA learners and groups. Not a second authorisation path. exclusive_smoke groups receive only the catalogued smoke activity.';
+
+alter table learning.synthetic_qa_fixtures
+  add column if not exists exclusive_smoke boolean not null default true;
 
 alter table learning.synthetic_qa_fixtures enable row level security;
 
@@ -107,6 +111,7 @@ insert into learning.synthetic_qa_fixtures (
   module_key,
   hub_code,
   smoke_activity_key,
+  exclusive_smoke,
   group_name,
   purpose,
   group_id_stable
@@ -122,6 +127,7 @@ insert into learning.synthetic_qa_fixtures (
     'unit-3-cyber-security',
     'unit-3-cyber-security',
     'week2-malware-symptoms',
+    true,
     'Cyber Security Synthetic QA Group',
     'formative-smoke-test',
     '60000000-0000-4000-8000-000000000011'
@@ -137,6 +143,7 @@ insert into learning.synthetic_qa_fixtures (
     'tlevel-software-development',
     'tlevel-software-development',
     'week-1-lesson-1-retrieval',
+    true,
     'T Level Synthetic Test Group A',
     'formative-smoke-test',
     '60000000-0000-4000-8000-000000000012'
@@ -152,6 +159,7 @@ insert into learning.synthetic_qa_fixtures (
     'unit-14-software-engineering-for-business',
     'unit-14-software-engineering-for-business',
     'week-1-variables-and-data-types',
+    false,
     'Unit 14 Synthetic Test Group A',
     'formative-smoke-test',
     '8e3fa246-6ebb-5488-8625-8adb5242fe42'
@@ -167,6 +175,7 @@ insert into learning.synthetic_qa_fixtures (
     'l2e-exploring-emerging-digital-technologies',
     'l2e-exploring-emerging-digital-technologies',
     'week-1-knowledge-check',
+    true,
     'L2E Synthetic Test Group A',
     'formative-smoke-test',
     '60000000-0000-4000-8000-000000000013'
@@ -182,6 +191,7 @@ set
   module_key = excluded.module_key,
   hub_code = excluded.hub_code,
   smoke_activity_key = excluded.smoke_activity_key,
+  exclusive_smoke = excluded.exclusive_smoke,
   group_name = excluded.group_name,
   purpose = excluded.purpose,
   group_id_stable = excluded.group_id_stable;
@@ -223,6 +233,7 @@ declare
   v_existing_id uuid;
   v_created text;
   v_assignments integer;
+  v_smoke_version_id uuid;
 begin
   select candidate.id
   into v_year_id
@@ -329,35 +340,55 @@ begin
       v_created := 'reused';
     end if;
 
-    insert into learning.activity_assignments (
-      id,
-      group_id,
-      activity_version_id,
-      required,
-      active
-    )
-    select
-      md5(
-        'synthetic-qa:'
-        || v_group_id::text
-        || ':'
-        || activity_version.id::text
-      )::uuid,
-      v_group_id,
-      activity_version.id,
-      true,
-      true
+    select latest.id
+    into v_smoke_version_id
     from learning.activities as activity
-    join learning.activity_versions as activity_version
-      on activity_version.activity_id = activity.id
+    join lateral (
+      select activity_version.id
+      from learning.activity_versions as activity_version
+      where activity_version.activity_id = activity.id
+        and activity_version.published_at is not null
+        and activity_version.retired_at is null
+      order by activity_version.published_at desc, activity_version.version desc
+      limit 1
+    ) as latest on true
     where activity.module_id = v_module_id
-      and activity.active
-      and activity_version.published_at is not null
-      and activity_version.retired_at is null
-    on conflict (group_id, activity_version_id) do update
-    set
-      required = excluded.required,
-      active = excluded.active;
+      and activity.stable_key = v_fixture.smoke_activity_key
+      and activity.active;
+
+    if v_smoke_version_id is not null then
+      insert into learning.activity_assignments (
+        id,
+        group_id,
+        activity_version_id,
+        required,
+        active
+      )
+      values (
+        md5(
+          'synthetic-qa:'
+          || v_group_id::text
+          || ':'
+          || v_smoke_version_id::text
+        )::uuid,
+        v_group_id,
+        v_smoke_version_id,
+        true,
+        true
+      )
+      on conflict (group_id, activity_version_id) do update
+      set
+        required = excluded.required,
+        active = excluded.active;
+    end if;
+
+    if v_fixture.exclusive_smoke and v_smoke_version_id is not null then
+      update learning.activity_assignments as assignment
+      set active = false
+      where assignment.group_id = v_group_id
+        and assignment.active
+        and assignment.activity_version_id is distinct from v_smoke_version_id;
+    end if;
 
     select count(*)::integer
     into v_assignments
@@ -373,10 +404,64 @@ end
 $$;
 
 comment on function learning.ensure_synthetic_qa_groups() is
-  'Creates or reuses closed synthetic QA groups and assigns currently published module versions. Skips fixtures whose course or module is absent.';
+  'Creates or reuses closed synthetic QA groups and upserts only the catalogued smoke activity latest published version. exclusive_smoke groups keep only that assignment active. Skips fixtures whose course or module is absent.';
 
 revoke all on function learning.ensure_synthetic_qa_groups()
   from public, anon, authenticated;
+
+create or replace function learning.guard_synthetic_qa_smoke_assignments()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_exclusive boolean;
+  v_smoke_key text;
+  v_activity_key text;
+begin
+  select fixture.exclusive_smoke, fixture.smoke_activity_key
+  into v_exclusive, v_smoke_key
+  from learning.groups as learner_group
+  join learning.synthetic_qa_fixtures as fixture
+    on fixture.group_code = learner_group.code
+  where learner_group.id = new.group_id;
+
+  if not found or coalesce(v_exclusive, false) = false then
+    return new;
+  end if;
+
+  select activity.stable_key
+  into v_activity_key
+  from learning.activity_versions as activity_version
+  join learning.activities as activity
+    on activity.id = activity_version.activity_id
+  where activity_version.id = new.activity_version_id;
+
+  if v_activity_key is distinct from v_smoke_key then
+    if tg_op = 'UPDATE' and new.active is false then
+      return new;
+    end if;
+    return null;
+  end if;
+
+  return new;
+end
+$$;
+
+comment on function learning.guard_synthetic_qa_smoke_assignments() is
+  'Prevents curriculum publication from silently enlarging exclusive synthetic QA smoke groups.';
+
+revoke all on function learning.guard_synthetic_qa_smoke_assignments()
+  from public, anon, authenticated;
+
+drop trigger if exists activity_assignments_guard_synthetic_qa_smoke
+  on learning.activity_assignments;
+
+create trigger activity_assignments_guard_synthetic_qa_smoke
+before insert or update on learning.activity_assignments
+for each row
+execute function learning.guard_synthetic_qa_smoke_assignments();
 
 create or replace function learning.provision_synthetic_qa_learner(
   p_auth_user_id uuid,
@@ -814,7 +899,7 @@ grant execute on function admin_api.set_synthetic_qa_learner_active(text, boolea
   to authenticated, service_role;
 
 comment on function admin_api.ensure_synthetic_qa_groups() is
-  'Platform-admin or service-role refresh of synthetic QA groups and published assignments.';
+  'Platform-admin or service-role refresh of synthetic QA groups and explicit smoke assignments.';
 comment on function admin_api.provision_synthetic_qa_learner(uuid, text) is
   'Platform-admin or service-role mapping of an existing Auth user onto one synthetic QA learner.';
 comment on function admin_api.set_synthetic_qa_learner_active(text, boolean) is
