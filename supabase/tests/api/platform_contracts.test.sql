@@ -38,8 +38,8 @@ select is(
     from platform.contract_versions
     where status = 'active'
   ),
-  5::bigint,
-  'hub manifest, core 0.1/0.2, learner API and submission contracts are active'
+  6::bigint,
+  'hub manifest, core 0.1/0.2/0.2.5, learner API and submission contracts are active'
 );
 
 select is(
@@ -81,13 +81,13 @@ set local role anon;
 
 select is(
   (select count(*) from api.registered_hubs()),
-  3::bigint,
+  4::bigint,
   'anonymous clients can discover active local hub fixtures through the safe RPC'
 );
 
 select is(
   (select count(*) from api.platform_contract_versions()),
-  5::bigint,
+  6::bigint,
   'anonymous clients can negotiate active platform contract versions'
 );
 

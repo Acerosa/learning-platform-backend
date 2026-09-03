@@ -87,6 +87,66 @@ The submission contract version remains 0.1.0.
 These RPCs are callable before authentication because they expose configuration
 and service availability only.
 
+## Readiness diagnostics
+
+Readiness diagnostics are anonymous pre-enrolment checks. They are **not**
+authenticated learner attempts. They must not be stored in `learning.attempts`.
+Student name and student ID are learner-supplied reporting labels. They are
+not Auth credentials, not `learning.students` identity, and not enrolment keys.
+The RPCs do not call `auth.uid()` and do not create learner accounts.
+
+Browsers write only through these `api` RPCs. Direct DML on
+`learning.diagnostic_sessions` and `learning.diagnostic_responses` is revoked
+from `anon` and `authenticated`.
+
+### `api.start_diagnostic(p_hub_code, p_student_name, p_student_id, p_course_key default null)`
+
+Creates a `started` session for an active registered hub.
+
+Returns `{id, started_at, status, hub_code, course_key}`. Does not return
+scores, marking keys, or internal UUIDs other than the session id.
+
+If `p_course_key` is omitted, the hub must have exactly one active course
+link. The Year 1 readiness hub is expected to use existing course
+`ocr-level-3-it`; there is no Year 1-only course.
+
+Error codes: `INVALID_HUB_CODE`, `INVALID_STUDENT_NAME`, `INVALID_STUDENT_ID`,
+`INVALID_COURSE_KEY`, `DIAGNOSTIC_HUB_UNKNOWN`, `DIAGNOSTIC_HUB_INACTIVE`,
+`DIAGNOSTIC_HUB_COURSE_NOT_LINKED`, `DIAGNOSTIC_COURSE_REQUIRED`,
+`DIAGNOSTIC_COURSE_UNKNOWN`.
+
+### `api.submit_diagnostic_response(p_session_id, p_activity_id, p_unit_key, p_question_key, p_evidence, p_is_not_sure default false, p_confidence default null, p_topic_key default null)`
+
+Persists one question's evidence. Repeat submissions for the same
+`(session, activity_id, question_key)` upsert while the session is `started`.
+Completed sessions reject further writes (`DIAGNOSTIC_SESSION_COMPLETED`).
+
+The RPC does not accept `is_correct`, `score`, or attempt number. `is_correct`
+is always stored as null until an authoritative diagnostic marking spec exists
+in `learning.question_marking`. Client evidence may contain a `not-sure`
+option; the server also derives `is_not_sure` from that evidence.
+
+`unit_key` is currently an allowlisted client value
+(`general`, `global-information`, `fundamentals-of-it`, `cyber-security`,
+`web-design`) because the diagnostic package is not yet a published catalogue
+projection. Display labels are not stored.
+
+Returns `{id, activity_id, question_key, is_not_sure}`. Does not return
+correctness or scores.
+
+### `api.complete_diagnostic(p_session_id)`
+
+Marks the session `completed` and sets `completed_at`. Repeat completion is
+idempotent and returns the existing completion. It does not accept a client
+final score and does not compute a readiness percentage while `is_correct`
+remains unset.
+
+Returns `{id, completed_at, status}`.
+
+Possession of a session UUID is the write capability for submit/complete.
+There is no list/read RPC for anonymous clients, so one learner cannot enumerate
+another learner's diagnostic rows.
+
 ## Published curriculum
 
 `api.published_curriculum()` returns hub, course, version and timestamp

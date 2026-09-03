@@ -12,6 +12,20 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Testing registration of `level-3-it-year-1-readiness` against existing
+  course `ocr-level-3-it`. Core contract `0.2.5` is recorded so the hub can
+  register. No Year 1-only course is created. Hosted apply records
+  `add_readiness_diagnostic_persistence` and
+  `register_level_3_it_year_1_readiness`; hub status remains `testing`.
+- Anonymous readiness diagnostic persistence, separate from `learning.attempts`.
+  Tables `learning.diagnostic_sessions` and `learning.diagnostic_responses`
+  store learner-supplied name/student ID as reporting identifiers only.
+  Learner hubs write through `api.start_diagnostic`,
+  `api.submit_diagnostic_response`, and `api.complete_diagnostic` (no
+  `auth.uid()`, no client scores). Staff read
+  `admin_api.diagnostic_sessions`, `diagnostic_responses`, and
+  `diagnostic_summary` (`platform_admin` only). `is_correct` stays null until
+  a published diagnostic marking spec exists.
 - Contextual assessment analytics read models: `admin_api.learner_activity_performance`
   (one row per learner/assignment/activity version, including unattempted assigned
   learners) and `admin_api.question_group_performance` (question aggregates scoped

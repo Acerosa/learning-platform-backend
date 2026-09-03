@@ -86,13 +86,13 @@ select is(
 
 select is(
   (select count(*) from admin_api.hubs),
-  3::bigint,
+  4::bigint,
   'the platform administrator can read the complete local hub registry'
 );
 
 select is(
   (select count(*) from admin_api.platform_contracts),
-  7::bigint,
+  8::bigint,
   'the platform administrator can inspect active, retired and draft contracts'
 );
 

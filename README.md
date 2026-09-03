@@ -153,6 +153,8 @@ The foundation also adds safe discovery RPCs:
 - `api.registered_hubs()`
 - `api.platform_contract_versions()`
 - `api.platform_health()`
+- `api.start_diagnostic(...)`, `api.submit_diagnostic_response(...)`,
+  `api.complete_diagnostic(...)` (anonymous readiness diagnostics; not attempts)
 
 The `api` schema is the supported learner-facing boundary. Hubs must not query
 protected schemas directly.
@@ -161,10 +163,10 @@ protected schemas directly.
 
 `admin_api` provides staff views for current staff context, hubs,
 contracts, staff roles, audit events, operational health, learners, groups,
-enrolments, assignments, attempts, dashboard counts, activity-performance
-aggregates and curriculum publication history. Access requires an active staff
-profile and the appropriate role in `platform.staff_roles`; learner Auth
-sessions return no administrative data.
+enrolments, assignments, attempts, readiness diagnostics, dashboard counts,
+activity-performance aggregates and curriculum publication history. Access
+requires an active staff profile and the appropriate role in
+`platform.staff_roles`; learner Auth sessions return no administrative data.
 
 Hub registration is a narrow `admin_api` mutation: `admin_api.register_hub`
 and `admin_api.update_hub`. Register accepts a reviewed
@@ -195,6 +197,7 @@ The initial hub registry contains draft/testing metadata for:
 - Unit 3 Cyber Security Hub
 - T Level Digital Software Development Hub
 - Unit 14 Software Engineering for Business Hub
+- Level 3 IT Year 1 Readiness Diagnostic Hub
 
 None of these hubs is marked certified by this repository.
 

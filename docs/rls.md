@@ -18,6 +18,15 @@ policies.
 Learner writes occur through narrow SECURITY DEFINER RPCs. Direct inserts into
 learner records are not granted.
 
+Anonymous readiness diagnostics are an explicit exception to `auth.uid()`
+identity. `anon` may execute `api.start_diagnostic`,
+`api.submit_diagnostic_response`, and `api.complete_diagnostic` only. Direct
+INSERT/UPDATE/DELETE on `learning.diagnostic_sessions` and
+`learning.diagnostic_responses` is revoked from `anon` and `authenticated`.
+`anon` has no SELECT. Authenticated SELECT is granted but RLS limits it to
+`platform_admin`. There is no anonymous read RPC for other learners' sessions.
+Session UUID possession is the write capability for submit/complete.
+
 ## Teaching-group access
 
 `learning.current_teacher_id()` maps Auth to an active staff profile.
@@ -74,7 +83,9 @@ Every SECURITY DEFINER function must:
 
 - set `search_path = ''`;
 - fully qualify protected objects;
-- derive identity from `auth.uid()`;
+- derive identity from `auth.uid()`, except the documented anonymous public
+  RPCs (`registered_hubs`, published curriculum, readiness diagnostics) which
+  must not bind `auth.uid()` and must not create learner accounts;
 - validate every browser-controlled input;
 - expose the minimum capability;
 - revoke default execution and re-grant only intended roles;

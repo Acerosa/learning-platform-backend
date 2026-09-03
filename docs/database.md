@@ -97,6 +97,25 @@ submission. Group markbook, question diagnostics and topic/skill aggregates use
 existing `question_topics` / `question_skills` mappings rather than duplicate
 attempt rows.
 
+## Readiness diagnostics
+
+Anonymous readiness checks live in their own tables. They are not attempts,
+not enrolments, and not learner accounts.
+
+- `learning.diagnostic_sessions`: one row per diagnostic sitting. Stores hub,
+  course, learner-supplied `student_name` / `student_id` (reporting identifiers
+  only), `status` (`started` \| `completed` \| `abandoned`), timestamps, and
+  small metadata. No `auth.uid()`.
+- `learning.diagnostic_responses`: one row per session/activity/question.
+  Stores `unit_key`, optional `topic_key`, evidence JSON, confidence, derived
+  `is_not_sure`, and server-only `is_correct` (currently always null). Unique on
+  `(diagnostic_session_id, activity_id, question_key)` so repeats upsert.
+
+Do not copy student name or student ID onto response rows. Do not store email,
+DOB, phone, or address. Browsers never receive table DML; writes go through
+`api.start_diagnostic`, `api.submit_diagnostic_response`, and
+`api.complete_diagnostic`. Staff read through `admin_api.diagnostic_*` views.
+
 ## Platform data
 
 - `platform.hubs`: authoritative hub registration metadata, required contract
