@@ -54,10 +54,13 @@ platform roles.
 - `composition_references`
 - `composition_templates`
 - `curriculum_recipes`
+- `diagnostic_sessions`
+- `diagnostic_responses`
+- `diagnostic_summary`
 
 All views use `security_invoker = true`; underlying RLS remains authoritative.
 Only `platform_admin` can read platform-wide learner, enrolment, assignment,
-attempt and assessment-analytics views in this release. Group-scoped teacher
+attempt, readiness-diagnostic and assessment-analytics views in this release. Group-scoped teacher
 analytics reads are not opened yet; teacher review mutations remain separately
 authorised through `admin_api.review_response`.
 
@@ -86,6 +89,29 @@ staff-facing educational aggregates without a warehouse:
 These aggregates expose summary scores and counts only. They do not include
 response payloads or answer keys. Intervention/“needs attention” interpretation
 remains in `@learning-platform/results`.
+
+## Readiness Diagnostic staff reads
+
+Readiness diagnostics are separate from `admin_api.attempts` and
+`admin_api.responses`. They are not academic grades. `platform_admin` can read:
+
+| View | Purpose |
+| --- | --- |
+| `admin_api.diagnostic_sessions` | Session list: session id, student name, student ID, hub, course, status, started/completed times, response and Not-sure counts |
+| `admin_api.diagnostic_responses` | Session detail: activity/question keys, unit/topic keys, evidence, confidence, Not-sure, server `is_correct` when later available |
+| `admin_api.diagnostic_summary` | Hub/course counts: started, completed, completion percentage, response count, Not-sure count and percentage |
+
+These views do **not** yet compute average readiness or unit/question
+distributions. The next Admin dashboard can group `diagnostic_responses` by
+`unit_key` / `question_key` for Not-sure rates and option distributions. Average
+readiness by unit should be added only after authoritative `is_correct` exists;
+do not treat completion percentage as a grade.
+
+Proposed follow-up RPCs (not in this release):
+`admin_api.diagnostic_session_detail(session_id)` and
+`admin_api.diagnostic_unit_summary(hub_code, course_key)` once marking specs
+or richer grouping is required. The three views above are enough to build the
+Readiness Diagnostic list, detail, and headline counts.
 
 **Query note:** topic/skill/question aggregates join curriculum metadata to
 responses. At larger scale they may need materialised follow-ups; MVP computes

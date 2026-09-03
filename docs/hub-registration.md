@@ -26,6 +26,11 @@ existing hub is a separate, hub-owned adoption change.
 
 Unit 14 is registered locally as testing/active from
 `supabase/data/manifests/hubs/unit-14-software-engineering-for-business/learning-platform-hub.json`.
+The Level 3 IT Year 1 Readiness Diagnostic Hub is registered locally as
+testing/active from
+`supabase/data/manifests/hubs/level-3-it-year-1-readiness/learning-platform-hub.json`
+against existing course `ocr-level-3-it`. It does not create a Year 1-only
+course and does not require authentication.
 Curriculum catalogue data is a separate content-package publication; see
 [content-publication.md](content-publication.md). Hub Manifest 1.0.0 still
 cannot hold a curriculum pointer.

@@ -76,6 +76,33 @@
       "active": true,
       "certified": false,
       "manifestPath": "hubs/unit-14-software-engineering-for-business/learning-platform-hub.json"
+    },
+    {
+      "hubCode": "level-3-it-year-1-readiness",
+      "hubName": "Level 3 IT Year 1 Readiness Diagnostic Hub",
+      "hubVersion": "0.1.0",
+      "platformVersion": "0.2.5",
+      "subject": "OCR Level 3 IT Year 1 Readiness Diagnostic",
+      "repository": "https://github.com/Acerosa/level-3-it-year-1-readiness-hub",
+      "deploymentUrl": "https://acerosa.github.io/level-3-it-year-1-readiness-hub/",
+      "curriculumModel": "course/unit/activity",
+      "activityTypes": [
+        "classification",
+        "diagnostic",
+        "matching",
+        "reflection",
+        "retrieval-quiz"
+      ],
+      "features": {
+        "authentication": false,
+        "diagnostic": true,
+        "onboarding": false,
+        "progress": false
+      },
+      "status": "testing",
+      "active": true,
+      "certified": false,
+      "manifestPath": "hubs/level-3-it-year-1-readiness/learning-platform-hub.json"
     }
   ]
 }

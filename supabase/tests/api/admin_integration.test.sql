@@ -135,7 +135,7 @@ select ok(
 
 select is(
   (select registered_hubs from admin_api.dashboard_summary),
-  3::bigint,
+  4::bigint,
   'dashboard hub count is backend-derived'
 );
 

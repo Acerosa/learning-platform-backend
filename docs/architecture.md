@@ -138,6 +138,7 @@ SECURITY DEFINER functions and views, not through extra network hops.
 | Curriculum | `curriculum_publications`, activities, versions, questions | No |
 | Delivery | `activity_delivery`, `activity_assignments` | No |
 | Evidence / Results | `attempts`, `responses`, `question_marking` | No — first-class in-process domain |
+| Readiness diagnostics | `diagnostic_sessions`, `diagnostic_responses` | No — anonymous, separate from attempts |
 | Progress | `api.my_activity_progress` and derived views | No |
 | Analytics | `admin_api.dashboard_summary`, `activity_performance` | Later warehouse possible |
 | Platform | hubs, contracts, roles, audit, health | No |
@@ -162,6 +163,14 @@ separates the concepts:
 Teacher review, written/code evidence, first/latest/best, group markbook and
 topic/skill analytics extend these columns and additive `admin_api` aggregate
 views. See [Admin API](admin-api.md) and [Database model](database.md).
+
+Readiness diagnostics are a separate anonymous evidence family. They must not
+be modelled as `learning.attempts`: there is no `auth.uid()`, no enrolment, no
+assignment, and no academic grade. Student name and student ID are reporting
+labels only. Writes go through `api.start_diagnostic`,
+`api.submit_diagnostic_response`, and `api.complete_diagnostic`. Staff later
+read `admin_api.diagnostic_sessions`, `diagnostic_responses`, and
+`diagnostic_summary`. See [Learner API](api.md) and [Admin API](admin-api.md).
 
 ## Future extraction (design for, do not build)
 

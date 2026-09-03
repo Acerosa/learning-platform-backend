@@ -40,8 +40,8 @@ select is(
     where contract_key in ('hub-manifest', 'learning-platform-core')
       and status = 'active'
   ),
-  3::bigint,
-  'manifest 1.0.0 and Core 0.1.0/0.2.0 contract versions are active'
+  4::bigint,
+  'manifest 1.0.0 and Core 0.1.0/0.2.0/0.2.5 contract versions are active'
 );
 
 select is(

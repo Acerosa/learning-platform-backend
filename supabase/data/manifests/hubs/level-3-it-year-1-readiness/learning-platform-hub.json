@@ -1,0 +1,44 @@
+{
+  "manifestVersion": "1.0.0",
+  "hubId": "level-3-it-year-1-readiness",
+  "name": "Level 3 IT Year 1 Readiness Diagnostic Hub",
+  "description": "Short, low-pressure readiness check for new OCR Level 3 IT Year 1 learners covering first-term units. Diagnostic only; not a formal assessment.",
+  "version": "0.1.0",
+  "repositoryUrl": "https://github.com/Acerosa/level-3-it-year-1-readiness-hub",
+  "deploymentUrl": "https://acerosa.github.io/level-3-it-year-1-readiness-hub",
+  "courses": [
+    "ocr-level-3-it"
+  ],
+  "compatibility": {
+    "required": {
+      "coreVersion": "0.2.5",
+      "learnerApiContractVersion": "0.1.0",
+      "submissionContractVersion": "0.1.0"
+    },
+    "testedCombinations": [
+      {
+        "coreVersion": "0.2.5",
+        "learnerApiContractVersion": "0.1.0",
+        "submissionContractVersion": "0.1.0"
+      }
+    ]
+  },
+  "capabilities": {
+    "evidence": [
+      "question-level"
+    ],
+    "activities": [
+      "classification",
+      "diagnostic",
+      "matching",
+      "reflection",
+      "retrieval-quiz"
+    ]
+  },
+  "featureFlags": {
+    "authentication": false,
+    "diagnostic": true,
+    "onboarding": false,
+    "progress": false
+  }
+}
