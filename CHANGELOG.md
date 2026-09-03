@@ -12,6 +12,21 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- One readiness diagnostic sitting per hub, course, diagnostic version, and
+  trimmed student ID. `api.start_diagnostic` reuses a `started` sitting
+  (`resumed: true`) and raises `DIAGNOSTIC_ALREADY_COMPLETED` for a completed
+  sitting of the same version, without returning a session id or learner
+  details. Uniqueness is
+  `(hub_id, course_id, diagnostic_key, diagnostic_version, student_id)`.
+  `diagnostic_key` is the hub code; `diagnostic_version` is server-derived from
+  hub `features.diagnosticVersion` (default `1.0.0`), not hub software version
+  and not content-package version. Student ID remains a self-declared reporting
+  label: names are not a uniqueness key and are not overwritten on resume.
+  Response-level upsert on `(diagnostic_session_id, activity_id, question_key)`
+  is unchanged. No Auth, no `learning.attempts`, no scores.
+
+### Added
+
 - Testing registration of `level-3-it-year-1-readiness` against existing
   course `ocr-level-3-it`. Core contract `0.2.5` is recorded so the hub can
   register. No Year 1-only course is created. Hosted apply records

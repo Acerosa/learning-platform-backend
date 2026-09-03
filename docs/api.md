@@ -101,10 +101,25 @@ from `anon` and `authenticated`.
 
 ### `api.start_diagnostic(p_hub_code, p_student_name, p_student_id, p_course_key default null)`
 
-Creates a `started` session for an active registered hub.
+Starts or resumes one `started` sitting for an active registered hub, course,
+diagnostic version, and trimmed student ID. This is deduplication, not
+authentication: the RPC still does not call `auth.uid()`, still does not verify
+the ID against `learning.students`, and still accepts a self-declared name.
 
-Returns `{id, started_at, status, hub_code, course_key}`. Does not return
-scores, marking keys, or internal UUIDs other than the session id.
+`diagnostic_key` is the hub code. `diagnostic_version` is derived server-side
+from `platform.hubs.features.diagnosticVersion`, defaulting to `1.0.0`. Clients
+must not send a version.
+
+Behaviour:
+
+- no matching sitting → insert and return `resumed: false`
+- matching `started` (or `abandoned`) sitting → return that row with
+  `resumed: true`; the original stored name is preserved
+- matching `completed` sitting → raise `DIAGNOSTIC_ALREADY_COMPLETED` with no
+  session id, name, timestamps, or responses
+
+Returns `{id, started_at, status, hub_code, course_key, resumed}`. Does not
+return scores, marking keys, or internal UUIDs other than the session id.
 
 If `p_course_key` is omitted, the hub must have exactly one active course
 link. The Year 1 readiness hub is expected to use existing course
@@ -113,7 +128,13 @@ link. The Year 1 readiness hub is expected to use existing course
 Error codes: `INVALID_HUB_CODE`, `INVALID_STUDENT_NAME`, `INVALID_STUDENT_ID`,
 `INVALID_COURSE_KEY`, `DIAGNOSTIC_HUB_UNKNOWN`, `DIAGNOSTIC_HUB_INACTIVE`,
 `DIAGNOSTIC_HUB_COURSE_NOT_LINKED`, `DIAGNOSTIC_COURSE_REQUIRED`,
-`DIAGNOSTIC_COURSE_UNKNOWN`.
+`DIAGNOSTIC_COURSE_UNKNOWN`, `DIAGNOSTIC_VERSION_INVALID`,
+`DIAGNOSTIC_ALREADY_COMPLETED`, `DIAGNOSTIC_START_FAILED`.
+
+`DIAGNOSTIC_ALREADY_COMPLETED` is an accepted, minimal enumeration signal: an
+anonymous caller who already knows a student ID can learn that a completed
+sitting exists for that ID and diagnostic version. The error must not include
+learner name, completed date, responses, score, confidence, or session UUID.
 
 ### `api.submit_diagnostic_response(p_session_id, p_activity_id, p_unit_key, p_question_key, p_evidence, p_is_not_sure default false, p_confidence default null, p_topic_key default null)`
 
@@ -139,7 +160,9 @@ correctness or scores.
 Marks the session `completed` and sets `completed_at`. Repeat completion is
 idempotent and returns the existing completion. It does not accept a client
 final score and does not compute a readiness percentage while `is_correct`
-remains unset.
+remains unset. Completion does not create a new sitting. After completion,
+`api.start_diagnostic` for the same student ID and diagnostic version raises
+`DIAGNOSTIC_ALREADY_COMPLETED`.
 
 Returns `{id, completed_at, status}`.
 

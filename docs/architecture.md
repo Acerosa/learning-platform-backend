@@ -167,10 +167,13 @@ views. See [Admin API](admin-api.md) and [Database model](database.md).
 Readiness diagnostics are a separate anonymous evidence family. They must not
 be modelled as `learning.attempts`: there is no `auth.uid()`, no enrolment, no
 assignment, and no academic grade. Student name and student ID are reporting
-labels only. Writes go through `api.start_diagnostic`,
-`api.submit_diagnostic_response`, and `api.complete_diagnostic`. Staff later
-read `admin_api.diagnostic_sessions`, `diagnostic_responses`, and
-`diagnostic_summary`. See [Learner API](api.md) and [Admin API](admin-api.md).
+labels only. One trimmed student ID has one sitting per hub, course, and
+diagnostic version; `api.start_diagnostic` reuses a `started` sitting and
+rejects a `completed` sitting for that version. Writes go through
+`api.start_diagnostic`, `api.submit_diagnostic_response`, and
+`api.complete_diagnostic`. Staff later read `admin_api.diagnostic_sessions`,
+`diagnostic_responses`, and `diagnostic_summary`. See [Learner API](api.md) and
+[Admin API](admin-api.md).
 
 ## Future extraction (design for, do not build)
 

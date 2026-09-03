@@ -12,6 +12,7 @@ select is(
       and hub.hub_code = 'level-3-it-year-1-readiness'
       and hub.core_version = '0.2.5'
       and hub.features ->> 'authentication' = 'false'
+      and hub.features ->> 'diagnosticVersion' = '1.0.0'
     from platform.hubs as hub
     where hub.hub_code = 'level-3-it-year-1-readiness'
   ),
