@@ -97,15 +97,17 @@ Readiness diagnostics are separate from `admin_api.attempts` and
 
 | View | Purpose |
 | --- | --- |
-| `admin_api.diagnostic_sessions` | Session list: session id, student name, student ID, hub, course, status, started/completed times, response and Not-sure counts |
+| `admin_api.diagnostic_sessions` | Session list: session id, student name, student ID, hub, course, diagnostic key/version, status, started/completed times, response and Not-sure counts |
 | `admin_api.diagnostic_responses` | Session detail: activity/question keys, unit/topic keys, evidence, confidence, Not-sure, server `is_correct` when later available |
 | `admin_api.diagnostic_summary` | Hub/course counts: started, completed, completion percentage, response count, Not-sure count and percentage |
 
 These views do **not** yet compute average readiness or unit/question
-distributions. The next Admin dashboard can group `diagnostic_responses` by
-`unit_key` / `question_key` for Not-sure rates and option distributions. Average
-readiness by unit should be added only after authoritative `is_correct` exists;
-do not treat completion percentage as a grade.
+distributions. Started counts are one row per sitting; duplicate Start requests
+for the same student ID and diagnostic version no longer inflate them. The next
+Admin dashboard can group `diagnostic_responses` by `unit_key` / `question_key`
+for Not-sure rates and option distributions. Average readiness by unit should
+be added only after authoritative `is_correct` exists; do not treat completion
+percentage as a grade.
 
 Proposed follow-up RPCs (not in this release):
 `admin_api.diagnostic_session_detail(session_id)` and

@@ -479,7 +479,7 @@ select is(
     where student_id in ('RDY01', 'RDY02', 'RDY03')
   ),
   3::bigint,
-  'repeat starts create additional sessions rather than overwriting identity'
+  'different student IDs create distinct diagnostic sittings'
 );
 
 set local "request.jwt.claim.sub" = '10000000-0000-4000-8000-000000000001';

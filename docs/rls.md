@@ -26,6 +26,13 @@ INSERT/UPDATE/DELETE on `learning.diagnostic_sessions` and
 `anon` has no SELECT. Authenticated SELECT is granted but RLS limits it to
 `platform_admin`. There is no anonymous read RPC for other learners' sessions.
 Session UUID possession is the write capability for submit/complete.
+`api.start_diagnostic` is idempotent per trimmed student ID and diagnostic
+version; uniqueness is enforced by
+`learning.diagnostic_sessions_one_sitting_idx`. A completed sitting raises
+`DIAGNOSTIC_ALREADY_COMPLETED` without returning that session's UUID, name, or
+responses. That error can reveal that a sitting exists for a guessed student
+ID; that residual enumeration is accepted only because the payload is otherwise
+empty. Duplicate prevention does not use `auth.uid()`.
 
 ## Teaching-group access
 

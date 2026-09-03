@@ -103,13 +103,24 @@ Anonymous readiness checks live in their own tables. They are not attempts,
 not enrolments, and not learner accounts.
 
 - `learning.diagnostic_sessions`: one row per diagnostic sitting. Stores hub,
-  course, learner-supplied `student_name` / `student_id` (reporting identifiers
-  only), `status` (`started` \| `completed` \| `abandoned`), timestamps, and
-  small metadata. No `auth.uid()`.
+  course, server-derived `diagnostic_key` / `diagnostic_version`, learner-supplied
+  `student_name` / `student_id` (reporting identifiers only), `status`
+  (`started` \| `completed` \| `abandoned`), timestamps, and small metadata. No
+  `auth.uid()`. Unique on
+  `(hub_id, course_id, diagnostic_key, diagnostic_version, student_id)` so one
+  learner-entered student ID has one sitting per diagnostic version. `student_id`
+  is stored trimmed; a later name variation does not create a second sitting and
+  does not overwrite the original name. Completed sittings cannot be restarted
+  for the same version; a future `diagnostic_version` may permit a new sitting.
+  `diagnostic_version` comes from registered hub `features.diagnosticVersion`
+  (default `1.0.0`). It is not hub software version and not content-package
+  version, so question expansions do not open a new sitting.
 - `learning.diagnostic_responses`: one row per session/activity/question.
   Stores `unit_key`, optional `topic_key`, evidence JSON, confidence, derived
   `is_not_sure`, and server-only `is_correct` (currently always null). Unique on
   `(diagnostic_session_id, activity_id, question_key)` so repeats upsert.
+  That upsert is technical idempotency for retries in transit, not a learner
+  Retry control.
 
 Do not copy student name or student ID onto response rows. Do not store email,
 DOB, phone, or address. Browsers never receive table DML; writes go through
