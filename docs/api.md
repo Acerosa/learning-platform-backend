@@ -142,10 +142,12 @@ Persists one question's evidence. Repeat submissions for the same
 `(session, activity_id, question_key)` upsert while the session is `started`.
 Completed sessions reject further writes (`DIAGNOSTIC_SESSION_COMPLETED`).
 
-The RPC does not accept `is_correct`, `score`, or attempt number. `is_correct`
-is always stored as null until an authoritative diagnostic marking spec exists
-in `learning.question_marking`. Client evidence may contain a `not-sure`
-option; the server also derives `is_not_sure` from that evidence.
+The RPC does not accept `is_correct`, `score`, or attempt number. The server
+looks up `learning.diagnostic_question_marking` for the **session** diagnostic
+key/version and stores `is_correct`, `awarded_score`, and `max_score`. Client
+evidence may include forged correctness fields; they are ignored. A sitting
+whose version has no spec stays unmarked. Client evidence may contain a
+`not-sure` option; the server also derives `is_not_sure` from that evidence.
 
 `unit_key` is currently an allowlisted client value
 (`general`, `global-information`, `fundamentals-of-it`, `cyber-security`,
@@ -159,8 +161,9 @@ correctness or scores.
 
 Marks the session `completed` and sets `completed_at`. Repeat completion is
 idempotent and returns the existing completion. It does not accept a client
-final score and does not compute a readiness percentage while `is_correct`
-remains unset. Completion does not create a new sitting. After completion,
+final score and does not return awarded marks. Staff totals are derived from
+already-stored response marks in `admin_api.diagnostic_sessions`. Completion
+does not create a new sitting. After completion,
 `api.start_diagnostic` for the same student ID and diagnostic version raises
 `DIAGNOSTIC_ALREADY_COMPLETED`.
 

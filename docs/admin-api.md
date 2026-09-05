@@ -97,23 +97,23 @@ Readiness diagnostics are separate from `admin_api.attempts` and
 
 | View | Purpose |
 | --- | --- |
-| `admin_api.diagnostic_sessions` | Session list: session id, student name, student ID, hub, course, diagnostic key/version, status, started/completed times, response and Not-sure counts |
-| `admin_api.diagnostic_responses` | Session detail: activity/question keys, unit/topic keys, evidence, confidence, Not-sure, server `is_correct` when later available |
+| `admin_api.diagnostic_sessions` | Session list: session id, student name, student ID, hub, course, diagnostic key/version, status, started/completed times, response and Not-sure counts, server `awarded_score` / `max_score` / `score_percentage` |
+| `admin_api.diagnostic_responses` | Session detail: activity/question keys, unit/topic keys, evidence, confidence, Not-sure, server `is_correct` / `awarded_score` / `max_score`. Answer keys are not included |
 | `admin_api.diagnostic_summary` | Hub/course counts: started, completed, completion percentage, response count, Not-sure count and percentage |
 
-These views do **not** yet compute average readiness or unit/question
-distributions. Started counts are one row per sitting; duplicate Start requests
-for the same student ID and diagnostic version no longer inflate them. The next
-Admin dashboard can group `diagnostic_responses` by `unit_key` / `question_key`
-for Not-sure rates and option distributions. Average readiness by unit should
-be added only after authoritative `is_correct` exists; do not treat completion
-percentage as a grade.
+Session `max_score` is the version denominator from
+`learning.diagnostic_question_marking`, not the number of questions answered.
+`score_percentage` is present only for completed sittings with a positive
+denominator. A sitting whose version has no spec keeps those fields null.
+Started counts are one row per sitting; duplicate Start requests for the same
+student ID and diagnostic version no longer inflate them. Unit breakdowns can
+be grouped from `diagnostic_responses.unit_key` using stored marks. Do not
+treat completion percentage as a grade. Do not invent Ready / Developing /
+At-risk labels.
 
-Proposed follow-up RPCs (not in this release):
-`admin_api.diagnostic_session_detail(session_id)` and
-`admin_api.diagnostic_unit_summary(hub_code, course_key)` once marking specs
-or richer grouping is required. The three views above are enough to build the
-Readiness Diagnostic list, detail, and headline counts.
+The three views above are enough for the Readiness Diagnostic list, detail,
+unit breakdown, and headline counts. Additional RPCs are not required for this
+release.
 
 **Query note:** topic/skill/question aggregates join curriculum metadata to
 responses. At larger scale they may need materialised follow-ups; MVP computes

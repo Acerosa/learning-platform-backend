@@ -12,6 +12,17 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Server-authoritative Readiness Diagnostic marking for version `1.1.0` (current
+  25-question contract, 24 scorable marks). Specs live in
+  `learning.diagnostic_question_marking`. `api.submit_diagnostic_response`
+  marks against the sitting version and ignores client scores. Learner RPCs
+  still do not return correctness, scores, or answer keys. Admin session views
+  expose `awarded_score`, `max_score`, and completion `score_percentage`.
+  Historical `1.0.0` sittings stay unmarked until a separately approved spec
+  exists. See [Diagnostic versioning](docs/diagnostic-versioning.md).
+
+### Added
+
 - One readiness diagnostic sitting per hub, course, diagnostic version, and
   trimmed student ID. `api.start_diagnostic` reuses a `started` sitting
   (`resumed: true`) and raises `DIAGNOSTIC_ALREADY_COMPLETED` for a completed

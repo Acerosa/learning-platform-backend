@@ -23,6 +23,9 @@ identity. `anon` may execute `api.start_diagnostic`,
 `api.submit_diagnostic_response`, and `api.complete_diagnostic` only. Direct
 INSERT/UPDATE/DELETE on `learning.diagnostic_sessions` and
 `learning.diagnostic_responses` is revoked from `anon` and `authenticated`.
+`learning.diagnostic_question_marking` has RLS enabled and is not granted to
+`anon` or `authenticated`. `learning.mark_diagnostic_evidence` is not executable
+by those roles.
 `anon` has no SELECT. Authenticated SELECT is granted but RLS limits it to
 `platform_admin`. There is no anonymous read RPC for other learners' sessions.
 Session UUID possession is the write capability for submit/complete.

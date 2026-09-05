@@ -171,9 +171,11 @@ labels only. One trimmed student ID has one sitting per hub, course, and
 diagnostic version; `api.start_diagnostic` reuses a `started` sitting and
 rejects a `completed` sitting for that version. Writes go through
 `api.start_diagnostic`, `api.submit_diagnostic_response`, and
-`api.complete_diagnostic`. Staff later read `admin_api.diagnostic_sessions`,
-`diagnostic_responses`, and `diagnostic_summary`. See [Learner API](api.md) and
-[Admin API](admin-api.md).
+`api.complete_diagnostic`. Submit applies versioned specs from
+`learning.diagnostic_question_marking` and never returns marks to the browser.
+Staff later read `admin_api.diagnostic_sessions`, `diagnostic_responses`, and
+`diagnostic_summary`. See [Learner API](api.md), [Admin API](admin-api.md), and
+[Diagnostic versioning](diagnostic-versioning.md).
 
 ## Future extraction (design for, do not build)
 
