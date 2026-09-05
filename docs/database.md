@@ -114,13 +114,21 @@ not enrolments, and not learner accounts.
   for the same version; a future `diagnostic_version` may permit a new sitting.
   `diagnostic_version` comes from registered hub `features.diagnosticVersion`
   (default `1.0.0`). It is not hub software version and not content-package
-  version, so question expansions do not open a new sitting.
+  version. A material change to the question set, answers, or marks requires a
+  new diagnostic version so existing sittings stay bound to the contract they
+  started with. See [Diagnostic versioning](diagnostic-versioning.md).
+- `learning.diagnostic_question_marking`: versioned server-only specs for
+  diagnostic items. Independent of `learning.question_marking` because
+  diagnostic questions are not catalogue UUIDs. Never granted to
+  `anon`/`authenticated`.
 - `learning.diagnostic_responses`: one row per session/activity/question.
   Stores `unit_key`, optional `topic_key`, evidence JSON, confidence, derived
-  `is_not_sure`, and server-only `is_correct` (currently always null). Unique on
-  `(diagnostic_session_id, activity_id, question_key)` so repeats upsert.
-  That upsert is technical idempotency for retries in transit, not a learner
-  Retry control.
+  `is_not_sure`, and server-only `is_correct`, `awarded_score`, and `max_score`.
+  Those mark columns are null when the sitting version has no spec, or when the
+  question is intentionally unscored. Unique on
+  `(diagnostic_session_id, activity_id, question_key)` so repeats upsert and
+  re-mark. That upsert is technical idempotency for retries in transit, not a
+  learner Retry control.
 
 Do not copy student name or student ID onto response rows. Do not store email,
 DOB, phone, or address. Browsers never receive table DML; writes go through
