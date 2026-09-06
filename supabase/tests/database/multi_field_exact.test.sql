@@ -114,7 +114,7 @@ insert into learning.question_marking (question_id, spec) values
     )
   );
 
-select plan(40);
+select plan(41);
 
 select ok(
   (
