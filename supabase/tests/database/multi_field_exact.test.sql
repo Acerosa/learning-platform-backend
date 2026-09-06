@@ -282,6 +282,23 @@ select is(
   'teaching requiredFields lists are not stripped as answer keys'
 );
 
+select is(
+  platform.strip_learner_answer_keys(
+    '{
+      "type": "drag-drop",
+      "prompt": "Match each item",
+      "correct": {"find": "learner", "register": "tutor"},
+      "feedback": {"correct": "Well done", "incorrect": "Try again"}
+    }'::jsonb
+  ),
+  '{
+    "type": "drag-drop",
+    "prompt": "Match each item",
+    "feedback": {"correct": "Well done", "incorrect": "Try again"}
+  }'::jsonb,
+  'learner packages strip drag-drop object correct maps and keep feedback.correct'
+);
+
 select ok(
   (
     select mark.requires_review
