@@ -10,6 +10,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ## [Unreleased]
 
+### Changed
+
+- `platform.strip_learner_answer_keys` also removes object `correct` maps used
+  by drag-drop blocks. Boolean `correct` remains stripped. Teaching strings
+  such as `feedback.correct` are unchanged. Named answer-key fields
+  (`correctOptionId`, `correctCategoryId`, `correctValues`, and the rest of the
+  existing list) are unchanged.
+
 ### Added
 
 - Server-authoritative Readiness Diagnostic marking for version `1.1.0` (current
