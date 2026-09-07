@@ -96,6 +96,6 @@ Archive old test evidence: leave rows in place. Filter staff views with
 | Hub | Activity key |
 | --- | --- |
 | Unit 3 | `week2-malware-symptoms` |
-| T Level | `week-1-lesson-1-retrieval` |
+| T Level | `week-1-lesson-1-ex-01` |
 | Unit 14 | `week-1-variables-and-data-types` |
 | L2E | published Week 1 Check-answer set (`week-1-welcome` … `week-1-exit-ticket`; primary `week-1-knowledge-check`) |

@@ -19,7 +19,7 @@ export const PERSONAS = [
     studentNumber: "QA-TLEVEL",
     displayName: "Synthetic T Level Learner",
     groupCode: "TLEVEL-TEST-A",
-    smokeActivityKey: "week-1-lesson-1-retrieval",
+    smokeActivityKey: "week-1-lesson-1-ex-01",
     emailEnv: ["TLEVEL_TEST_EMAIL", "SYNTHETIC_QA_EMAIL_TLEVEL"],
     passwordEnv: ["TLEVEL_TEST_PASSWORD", "SYNTHETIC_QA_PASSWORD_TLEVEL"]
   },
