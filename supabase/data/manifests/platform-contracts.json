@@ -26,6 +26,12 @@
       "compatibility": "Auth email confirmation redirect and hubRootPath generation"
     },
     {
+      "contractKey": "learning-platform-core",
+      "version": "0.2.8",
+      "status": "active",
+      "compatibility": "Learner email sign-in UX and client-side email validation"
+    },
+    {
       "contractKey": "learner-api",
       "version": "0.1.0",
       "status": "active",
