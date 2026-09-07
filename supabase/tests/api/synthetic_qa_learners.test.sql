@@ -203,6 +203,195 @@ where activity.id = version.activity_id
   and activity.stable_key = 'week-1-lesson-1-ex-01'
   and version.published_at is null;
 
+insert into learning.activities (
+  id, module_id, stable_key, title, activity_type, git_path, active
+)
+select extra.id, module.id, extra.stable_key, extra.title, 'retrieval-quiz',
+  'supabase/tests/api/synthetic_qa_learners.test.sql', true
+from learning.modules as module
+cross join (
+  values
+    (
+      'a2300000-0000-4000-8000-000000000001'::uuid,
+      'week-1-lesson-1-ex-07',
+      'T Level classification QA'
+    ),
+    (
+      'a2300000-0000-4000-8000-000000000011'::uuid,
+      'week-1-lesson-1-ex-13',
+      'T Level drag-drop QA'
+    ),
+    (
+      'a2300000-0000-4000-8000-000000000021'::uuid,
+      'week-1-lesson-1-ex-20',
+      'T Level short-response QA'
+    )
+) as extra(id, stable_key, title)
+where module.stable_key = 'tlevel-software-development'
+  and not exists (
+    select 1 from learning.activities where stable_key = extra.stable_key
+  );
+
+insert into learning.activity_versions (
+  id, activity_id, version, content_hash, max_score, question_count, published_at
+)
+select extra.version_id, activity.id, '0.1.0', extra.content_hash, 1, 1, clock_timestamp()
+from (
+  values
+    (
+      'a2300000-0000-4000-8000-000000000002'::uuid,
+      'week-1-lesson-1-ex-07',
+      repeat('7', 64)
+    ),
+    (
+      'a2300000-0000-4000-8000-000000000012'::uuid,
+      'week-1-lesson-1-ex-13',
+      repeat('d', 64)
+    ),
+    (
+      'a2300000-0000-4000-8000-000000000022'::uuid,
+      'week-1-lesson-1-ex-20',
+      repeat('2', 64)
+    )
+) as extra(version_id, stable_key, content_hash)
+join learning.activities as activity on activity.stable_key = extra.stable_key
+where not exists (
+  select 1
+  from learning.activity_versions as version
+  where version.activity_id = activity.id
+);
+
+insert into learning.groups (
+  id, academic_year_id, course_id, code, name, active, year_group,
+  registration_key, registration_open, is_synthetic
+)
+select
+  '60000000-0000-4000-8000-000000000031',
+  academic_year.id,
+  course.id,
+  'TLEVEL-DSD-Y2',
+  'T Level Digital Software Development - Year 2',
+  true,
+  'Year 2',
+  'tlevel-dsd-y2-reg',
+  true,
+  false
+from learning.academic_years as academic_year
+join learning.courses as course
+  on course.stable_key = 't-level-digital-software-development'
+where academic_year.active
+on conflict (academic_year_id, course_id, code) do update
+set
+  name = excluded.name,
+  active = true,
+  year_group = excluded.year_group,
+  registration_key = excluded.registration_key,
+  registration_open = excluded.registration_open,
+  is_synthetic = false,
+  synthetic_purpose = null;
+
+insert into auth.users (
+  instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at
+)
+select
+  '00000000-0000-0000-0000-000000000000'::uuid,
+  '13000000-0000-4000-8000-000000000007'::uuid,
+  'authenticated',
+  'authenticated',
+  'tlevel.y2.teaching@local.invalid',
+  null,
+  clock_timestamp(),
+  '{"provider":"email","providers":["email"]}'::jsonb,
+  '{"fixture":"tlevel-dsd-y2-teaching"}'::jsonb,
+  clock_timestamp(),
+  clock_timestamp()
+where not exists (
+  select 1 from auth.users where id = '13000000-0000-4000-8000-000000000007'
+);
+
+insert into learning.students (
+  id, auth_user_id, student_number, first_name, surname, display_name, active,
+  is_synthetic
+) values (
+  '30000000-0000-4000-8000-000000000031',
+  '13000000-0000-4000-8000-000000000007',
+  'TLEVEL-Y2-0001',
+  'Year',
+  'Two',
+  'T Level Year 2 Learner',
+  true,
+  false
+)
+on conflict (student_number) do update
+set
+  auth_user_id = excluded.auth_user_id,
+  first_name = excluded.first_name,
+  surname = excluded.surname,
+  display_name = excluded.display_name,
+  active = true,
+  is_synthetic = false;
+
+insert into learning.enrolments (
+  id, student_id, group_id, status, joined_on
+)
+select
+  '31000000-0000-4000-8000-000000000031',
+  student.id,
+  learner_group.id,
+  'active',
+  current_date
+from learning.students as student
+join learning.groups as learner_group
+  on learner_group.code = 'TLEVEL-DSD-Y2'
+where student.student_number = 'TLEVEL-Y2-0001'
+on conflict (student_id, group_id, joined_on) do nothing;
+
+insert into learning.activity_assignments (
+  id, group_id, activity_version_id, required, active
+)
+select
+  md5('dsd-y2-teaching:' || activity.stable_key)::uuid,
+  learner_group.id,
+  version.id,
+  true,
+  true
+from learning.groups as learner_group
+join learning.activities as activity
+  on activity.stable_key in (
+    'week-1-lesson-1-ex-07',
+    'week-1-lesson-1-ex-13',
+    'week-1-lesson-1-ex-20'
+  )
+join learning.activity_versions as version
+  on version.activity_id = activity.id
+where learner_group.code = 'TLEVEL-DSD-Y2'
+on conflict (group_id, activity_version_id) do update
+set active = true, required = true;
+
+create temporary table dsd_y2_teaching_snapshot as
+select
+  student.id,
+  student.auth_user_id,
+  student.student_number,
+  student.first_name,
+  student.surname,
+  student.display_name,
+  student.active,
+  student.is_synthetic,
+  student.updated_at,
+  enrolment.id as enrolment_id,
+  enrolment.status as enrolment_status,
+  enrolment.group_id
+from learning.students as student
+join learning.enrolments as enrolment
+  on enrolment.student_id = student.id
+join learning.groups as learner_group
+  on learner_group.id = enrolment.group_id
+where student.student_number = 'TLEVEL-Y2-0001'
+  and learner_group.code = 'TLEVEL-DSD-Y2'
+  and enrolment.status = 'active';
+
 insert into auth.users (
   instance_id,
   id,
@@ -255,6 +444,11 @@ from (
       'L2E_TEST_LEARNER'
     ),
     (
+      '13000000-0000-4000-8000-000000000006'::uuid,
+      'qa.tlevel.dsd.y2@local.invalid',
+      'TLEVEL_DSD_Y2_TEST_LEARNER'
+    ),
+    (
       '13000000-0000-4000-8000-000000000005'::uuid,
       'qa.conflict@local.invalid',
       'CONFLICT'
@@ -277,6 +471,51 @@ select is(
   ),
   4::bigint,
   'four isolated synthetic QA groups are active and closed for self-registration'
+);
+
+select is(
+  (
+    select created_or_reused
+    from learning.ensure_synthetic_qa_groups()
+    where persona = 'TLEVEL_DSD_Y2_TEST_LEARNER'
+  ),
+  'joined',
+  'DSD Y2 QA fixture joins the existing teaching group instead of creating one'
+);
+
+select ok(
+  exists (
+    select 1
+    from learning.groups
+    where code = 'TLEVEL-DSD-Y2'
+      and active
+      and not is_synthetic
+      and registration_open
+      and registration_key = 'tlevel-dsd-y2-reg'
+      and year_group = 'Year 2'
+      and name = 'T Level Digital Software Development - Year 2'
+      and synthetic_purpose is null
+  ),
+  'joining TLEVEL-DSD-Y2 does not convert the teaching group to synthetic or close registration'
+);
+
+select is(
+  (
+    select count(*)
+    from learning.groups
+    where code = 'TLEVEL-DSD-Y2'
+  ),
+  1::bigint,
+  'ensure does not create a second TLEVEL-DSD-Y2 group'
+);
+
+select ok(
+  not exists (
+    select 1
+    from learning.groups
+    where code in ('TLEVEL-TEST-B', 'TLEVEL-DSD-Y2-QA')
+  ),
+  'ensure does not create a substitute T Level QA group'
 );
 
 select is(
@@ -323,6 +562,45 @@ select is(
   ),
   1::bigint,
   'TLEVEL-TEST-A has the explicit T Level smoke assignment when the module exists'
+);
+
+select ok(
+  not exists (
+    select 1
+    from learning.activity_assignments as assignment
+    join learning.groups as learner_group on learner_group.id = assignment.group_id
+    join learning.activity_versions as activity_version
+      on activity_version.id = assignment.activity_version_id
+    join learning.activities as activity on activity.id = activity_version.activity_id
+    where learner_group.code = 'TLEVEL-TEST-A'
+      and assignment.active
+      and activity.stable_key <> 'week-1-lesson-1-ex-01'
+  ),
+  'TLEVEL-TEST-A remains exclusive to week-1-lesson-1-ex-01 after the DSD Y2 fixture'
+);
+
+select is(
+  (
+    select array_agg(activity.stable_key order by activity.stable_key)
+    from learning.activity_assignments as assignment
+    join learning.groups as learner_group on learner_group.id = assignment.group_id
+    join learning.activity_versions as activity_version
+      on activity_version.id = assignment.activity_version_id
+    join learning.activities as activity on activity.id = activity_version.activity_id
+    where learner_group.code = 'TLEVEL-DSD-Y2'
+      and assignment.active
+      and activity.stable_key in (
+        'week-1-lesson-1-ex-07',
+        'week-1-lesson-1-ex-13',
+        'week-1-lesson-1-ex-20'
+      )
+  ),
+  array[
+    'week-1-lesson-1-ex-07',
+    'week-1-lesson-1-ex-13',
+    'week-1-lesson-1-ex-20'
+  ]::text[],
+  'TLEVEL-DSD-Y2 keeps its teaching assignments for ex-07, ex-13 and ex-20'
 );
 
 select ok(
@@ -500,6 +778,40 @@ select is(
   'L2E QA learner is enrolled in L2E-TEST-A'
 );
 
+select is(
+  (
+    select group_code
+    from admin_api.provision_synthetic_qa_learner(
+      '13000000-0000-4000-8000-000000000006',
+      'TLEVEL_DSD_Y2_TEST_LEARNER'
+    )
+  ),
+  'TLEVEL-DSD-Y2',
+  'DSD Y2 QA learner is enrolled in the existing TLEVEL-DSD-Y2 teaching group'
+);
+
+select is(
+  (
+    select idempotent
+    from admin_api.provision_synthetic_qa_learner(
+      '13000000-0000-4000-8000-000000000006',
+      'TLEVEL_DSD_Y2_TEST_LEARNER'
+    )
+  ),
+  true,
+  're-provisioning the DSD Y2 QA learner is idempotent'
+);
+
+select throws_ok(
+  $$select * from admin_api.provision_synthetic_qa_learner(
+    '13000000-0000-4000-8000-000000000007',
+    'TLEVEL_DSD_Y2_TEST_LEARNER'
+  )$$,
+  '23000',
+  'AUTH_ACCOUNT_ALREADY_LINKED',
+  'the real TLEVEL-DSD-Y2 teaching Auth user cannot be converted into the QA persona'
+);
+
 select throws_ok(
   $$select * from admin_api.provision_synthetic_qa_learner(
     '13000000-0000-4000-8000-000000000001',
@@ -535,13 +847,15 @@ select is(
   (
     select count(*)
     from learning.students
-    where student_number in ('QA-UNIT3', 'QA-TLEVEL', 'QA-UNIT14', 'QA-L2E')
+    where student_number in (
+      'QA-UNIT3', 'QA-TLEVEL', 'QA-UNIT14', 'QA-L2E', 'QA-TLEVEL-DSD-Y2'
+    )
       and is_synthetic
       and contact_email is null
       and active
   ),
-  4::bigint,
-  'four synthetic QA learners exist without duplicated contact email'
+  5::bigint,
+  'five synthetic QA learners exist without duplicated contact email'
 );
 
 set local "request.jwt.claim.sub" = '20000000-0000-4000-8000-000000000003';
@@ -559,6 +873,33 @@ select is(
   true,
   'platform admin inspect reports Unit 3 QA readiness without copied email'
 );
+
+select is(
+  (
+    select student_present and student_active and is_synthetic
+      and not contact_email_copied
+      and smoke_assigned
+      and enrolment_codes = array['TLEVEL-TEST-A']::text[]
+    from admin_api.inspect_synthetic_qa_learners()
+    where persona = 'TLEVEL_TEST_LEARNER'
+  ),
+  true,
+  'existing TLEVEL_TEST_LEARNER remains enrolled only in exclusive TLEVEL-TEST-A'
+);
+
+select is(
+  (
+    select student_present and student_active and is_synthetic
+      and not contact_email_copied
+      and smoke_assigned
+      and enrolment_codes = array['TLEVEL-DSD-Y2']::text[]
+      and smoke_activity_key = 'week-1-lesson-1-ex-07'
+    from admin_api.inspect_synthetic_qa_learners()
+    where persona = 'TLEVEL_DSD_Y2_TEST_LEARNER'
+  ),
+  true,
+  'DSD Y2 QA inspect shows a synthetic learner on TLEVEL-DSD-Y2 with the teaching assignment probe'
+);
 reset role;
 
 set local "request.jwt.claim.role" = 'service_role';
@@ -573,7 +914,7 @@ select is(
     select count(*)::integer
     from admin_api.inspect_synthetic_qa_learners()
   ),
-  4,
+  5,
   'service_role inspect returns one row per QA persona'
 );
 reset role;
@@ -622,11 +963,19 @@ select is(
     from learning.enrolments as enrolment
     join learning.students as student on student.id = enrolment.student_id
     join learning.groups as learner_group on learner_group.id = enrolment.group_id
-    where student.student_number in ('QA-UNIT3', 'QA-TLEVEL', 'QA-UNIT14', 'QA-L2E')
+    where student.student_number in (
+      'QA-UNIT3', 'QA-TLEVEL', 'QA-UNIT14', 'QA-L2E', 'QA-TLEVEL-DSD-Y2'
+    )
       and enrolment.status = 'active'
   ),
-  array['CYBER-TEST-QA', 'L2E-TEST-A', 'TLEVEL-TEST-A', 'UNIT14-TEST-A']::text[],
-  'each synthetic QA learner is enrolled in exactly one matching isolated group'
+  array[
+    'CYBER-TEST-QA',
+    'L2E-TEST-A',
+    'TLEVEL-DSD-Y2',
+    'TLEVEL-TEST-A',
+    'UNIT14-TEST-A'
+  ]::text[],
+  'each synthetic QA learner is enrolled in exactly one matching catalogued group'
 );
 
 select throws_ok(
@@ -847,6 +1196,18 @@ select ok(
   'T Level QA learner cannot see other-hub QA assignments'
 );
 
+select ok(
+  not exists (
+    select 1 from api.my_assignments
+    where activity_key in (
+      'week-1-lesson-1-ex-07',
+      'week-1-lesson-1-ex-13',
+      'week-1-lesson-1-ex-20'
+    )
+  ),
+  'exclusive TLEVEL-TEST-A learner cannot see DSD Y2 teaching assignments'
+);
+
 select throws_ok(
   format(
     $$select * from api.mark_formative_response(%L, %L, %L::jsonb, %L)$$,
@@ -903,6 +1264,154 @@ select ok(
   'T Level smoke: authored correct option is marked Correct'
 );
 reset role;
+
+select is(
+  (
+    select student.auth_user_id = snapshot.auth_user_id
+      and student.student_number = snapshot.student_number
+      and student.first_name = snapshot.first_name
+      and student.surname = snapshot.surname
+      and student.display_name = snapshot.display_name
+      and student.active = snapshot.active
+      and student.is_synthetic = snapshot.is_synthetic
+      and student.updated_at = snapshot.updated_at
+      and enrolment.id = snapshot.enrolment_id
+      and enrolment.status = snapshot.enrolment_status
+      and enrolment.group_id = snapshot.group_id
+    from pg_temp.dsd_y2_teaching_snapshot as snapshot
+    join learning.students as student on student.id = snapshot.id
+    join learning.enrolments as enrolment on enrolment.id = snapshot.enrolment_id
+  ),
+  true,
+  'the real TLEVEL-DSD-Y2 teaching learner is not modified by QA ensure or provision'
+);
+
+select is(
+  (
+    select count(*)
+    from learning.enrolments as enrolment
+    join learning.students as student on student.id = enrolment.student_id
+    join learning.groups as learner_group on learner_group.id = enrolment.group_id
+    where student.student_number = 'TLEVEL-Y2-0001'
+      and learner_group.code = 'TLEVEL-DSD-Y2'
+      and enrolment.status = 'active'
+  ),
+  1::bigint,
+  'the real TLEVEL-DSD-Y2 learner keeps a single active teaching enrolment'
+);
+
+set local "request.jwt.claim.sub" = '13000000-0000-4000-8000-000000000006';
+set local "request.jwt.claims" = '{"sub":"13000000-0000-4000-8000-000000000006","role":"authenticated"}';
+set local role authenticated;
+
+select is(
+  (select student_number from api.my_profile),
+  'QA-TLEVEL-DSD-Y2',
+  'DSD Y2 QA Auth session resolves the synthetic learner profile'
+);
+
+select is(
+  (select array_agg(group_code order by group_code) from api.my_enrolments where status = 'active'),
+  array['TLEVEL-DSD-Y2']::text[],
+  'DSD Y2 QA learner sees only the TLEVEL-DSD-Y2 enrolment'
+);
+
+select ok(
+  exists (select 1 from api.my_assignments where activity_key = 'week-1-lesson-1-ex-07')
+  and exists (select 1 from api.my_assignments where activity_key = 'week-1-lesson-1-ex-13')
+  and exists (select 1 from api.my_assignments where activity_key = 'week-1-lesson-1-ex-20'),
+  'DSD Y2 QA learner can see the teaching-group assignments for ex-07, ex-13 and ex-20'
+);
+
+select ok(
+  not exists (
+    select 1 from api.my_assignments
+    where activity_key in ('week2-malware-symptoms', 'week-1-knowledge-check')
+  ),
+  'DSD Y2 QA learner cannot see other-hub QA assignments'
+);
+reset role;
+
+select is(
+  (
+    select created_or_reused
+    from learning.ensure_synthetic_qa_groups()
+    where persona = 'TLEVEL_DSD_Y2_TEST_LEARNER'
+  ),
+  'joined',
+  'repeated ensure remains idempotent for the DSD Y2 teaching-group join'
+);
+
+select is(
+  (
+    select count(*)
+    from learning.activity_assignments as assignment
+    join learning.groups as learner_group on learner_group.id = assignment.group_id
+    join learning.activity_versions as activity_version
+      on activity_version.id = assignment.activity_version_id
+    join learning.activities as activity on activity.id = activity_version.activity_id
+    where learner_group.code = 'TLEVEL-TEST-A'
+      and assignment.active
+  ),
+  1::bigint,
+  'repeated ensure does not enlarge exclusive TLEVEL-TEST-A'
+);
+
+select is(
+  (
+    select count(*)
+    from learning.activity_assignments as assignment
+    join learning.groups as learner_group on learner_group.id = assignment.group_id
+    join learning.activity_versions as activity_version
+      on activity_version.id = assignment.activity_version_id
+    join learning.activities as activity on activity.id = activity_version.activity_id
+    where learner_group.code = 'TLEVEL-DSD-Y2'
+      and assignment.active
+      and activity.stable_key in (
+        'week-1-lesson-1-ex-07',
+        'week-1-lesson-1-ex-13',
+        'week-1-lesson-1-ex-20'
+      )
+  ),
+  3::bigint,
+  'repeated ensure does not duplicate TLEVEL-DSD-Y2 teaching assignments'
+);
+
+select is(
+  (
+    select count(distinct activity.stable_key)
+    from learning.activity_assignments as assignment
+    join learning.groups as learner_group on learner_group.id = assignment.group_id
+    join learning.activity_versions as activity_version
+      on activity_version.id = assignment.activity_version_id
+    join learning.activities as activity on activity.id = activity_version.activity_id
+    where learner_group.code = 'CYBER-TEST-QA'
+      and assignment.active
+  ),
+  1::bigint,
+  'repeated ensure does not modify unrelated CYBER-TEST-QA assignments'
+);
+
+select ok(
+  not exists (
+    select 1
+    from information_schema.columns
+    where table_schema = 'learning'
+      and table_name = 'synthetic_qa_fixtures'
+      and column_name in ('email', 'password', 'encrypted_password', 'secret')
+  ),
+  'synthetic QA fixtures do not store credentials'
+);
+
+select ok(
+  not exists (
+    select 1
+    from learning.students
+    where student_number = 'QA-TLEVEL-DSD-Y2'
+      and contact_email is not null
+  ),
+  'DSD Y2 QA learner does not copy Auth email into learning.students'
+);
 
 set local "request.jwt.claim.sub" = '13000000-0000-4000-8000-000000000003';
 set local "request.jwt.claims" = '{"sub":"13000000-0000-4000-8000-000000000003","role":"authenticated"}';
@@ -1200,6 +1709,7 @@ select is(
       and entity_key in (
         'UNIT3_TEST_LEARNER',
         'TLEVEL_TEST_LEARNER',
+        'TLEVEL_DSD_Y2_TEST_LEARNER',
         'UNIT14_TEST_LEARNER',
         'L2E_TEST_LEARNER'
       )

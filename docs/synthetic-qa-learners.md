@@ -7,17 +7,24 @@ enrolment-scoped learning model. They are ordinary learner accounts with
 ## Isolation model
 
 One shared Supabase Auth project. Authentication alone does not grant hub
-access. Each QA learner is enrolled in exactly one synthetic group:
+access. Each QA learner is enrolled in exactly one group. Exclusive fixtures
+use closed synthetic groups. `TLEVEL_DSD_Y2_TEST_LEARNER` joins the existing
+teaching group `TLEVEL-DSD-Y2` without marking that group synthetic.
 
 | Persona | Group | Hub / module |
 | --- | --- | --- |
 | `UNIT3_TEST_LEARNER` | `CYBER-TEST-QA` | Unit 3 Cyber Security |
-| `TLEVEL_TEST_LEARNER` | `TLEVEL-TEST-A` | T Level Software Development |
+| `TLEVEL_TEST_LEARNER` | `TLEVEL-TEST-A` | T Level Software Development (exclusive smoke) |
+| `TLEVEL_DSD_Y2_TEST_LEARNER` | `TLEVEL-DSD-Y2` | T Level Software Development (teaching group) |
 | `UNIT14_TEST_LEARNER` | `UNIT14-TEST-A` | Unit 14 Software Engineering for Business |
 | `L2E_TEST_LEARNER` | `L2E-TEST-A` | Exploring Emerging Digital Technologies |
 
 `CYBER-TEST-A` is legacy mixed infrastructure and is not the Unit 3 QA fixture.
-`TLEVEL-DSD-Y2` is a real teaching group and must not be reused.
+`TLEVEL-TEST-A` remains exclusive to `week-1-lesson-1-ex-01` and must not be
+enlarged. `TLEVEL-DSD-Y2` stays a real teaching group: the DSD Y2 QA persona
+uses `join_existing_group`, so ensure/provision must not create a second
+group, convert `TLEVEL-DSD-Y2` to synthetic, close registration, or rewrite
+its assignments.
 
 Published teaching packages remain publicly readable. That is
 `PUBLIC_CONTENT_VISIBLE`, not authorised assignment or evidence access.
@@ -34,7 +41,7 @@ checks read application state through
 
 ```bash
 cp .env.example .env
-# Fill SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, and the four QA email/password
+# Fill SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, and the five QA email/password
 # pairs. Use a controlled mailbox with plus-aliases. Do not commit .env.
 
 npm run provision:synthetic-qa -- --dry-run
@@ -50,7 +57,7 @@ are never rotated by this command.
 Unset `SUPABASE_SERVICE_ROLE_KEY` when finished. Browser smoke then uses the
 same gitignored email/password pairs, not the service-role key.
 
-If the service role cannot be used, create the four Auth users in the
+If the service role cannot be used, create the five Auth users in the
 Supabase Dashboard (email/password, confirm email, user metadata
 `synthetic=true`, `purpose=formative-smoke-test`, `persona=<PERSONA>`), then
 re-run the provisioner so it can reuse those users. Never paste passwords into
@@ -78,12 +85,15 @@ select * from admin_api.ensure_synthetic_qa_groups();
 ```
 
 This upserts the catalogued smoke activity allowlist (latest published,
-non-retired version) for each fixture. Exclusive-smoke groups
-(`CYBER-TEST-QA`, `TLEVEL-TEST-A`, `L2E-TEST-A`) keep only that allowlist
-active; later curriculum publication cannot silently enlarge them.
-`L2E-TEST-A` covers published Week 1 deterministic Check-answer activities,
-not the full L2E catalogue. Reused `UNIT14-TEST-A` keeps historical catalogue
-assignments already present.
+non-retired version) for each exclusive or synthetic-group fixture.
+Exclusive-smoke groups (`CYBER-TEST-QA`, `TLEVEL-TEST-A`, `L2E-TEST-A`) keep
+only that allowlist active; later curriculum publication cannot silently
+enlarge them. `L2E-TEST-A` covers published Week 1 deterministic Check-answer
+activities, not the full L2E catalogue. Reused `UNIT14-TEST-A` keeps
+historical catalogue assignments already present. `join_existing_group`
+fixtures (`TLEVEL-DSD-Y2`) are not created, converted, or reassigned; they
+inherit the teaching group's current assignments. If that teaching group is
+absent, ensure skips with `TEACHING_GROUP_NOT_FOUND`.
 
 Rotate credentials: generate a new password outside the repo and set it with
 the Auth Admin API or Dashboard. Do not write the password to git.
@@ -96,6 +106,7 @@ Archive old test evidence: leave rows in place. Filter staff views with
 | Hub | Activity key |
 | --- | --- |
 | Unit 3 | `week2-malware-symptoms` |
-| T Level | `week-1-lesson-1-ex-01` |
+| T Level exclusive (`TLEVEL-TEST-A`) | `week-1-lesson-1-ex-01` |
+| T Level teaching group (`TLEVEL-DSD-Y2`) | inspect probe `week-1-lesson-1-ex-07`; learner receives the group's normal Week 1 set, not an exclusive allowlist |
 | Unit 14 | `week-1-variables-and-data-types` |
 | L2E | published Week 1 Check-answer set (`week-1-welcome` … `week-1-exit-ticket`; primary `week-1-knowledge-check`) |

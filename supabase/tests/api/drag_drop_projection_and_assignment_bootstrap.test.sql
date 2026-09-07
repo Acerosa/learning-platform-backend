@@ -3,7 +3,7 @@ begin;
 create extension if not exists pgtap with schema extensions;
 set local search_path = extensions, public, pg_catalog;
 
-select plan(28);
+select plan(30);
 
 create function pg_temp.week1_marking_package()
 returns jsonb
@@ -544,6 +544,26 @@ select ok(
       and activity.stable_key <> 'week-1-lesson-1-ex-01'
   ),
   'exclusive QA group keeps only the catalogued smoke assignment active'
+);
+
+select is(
+  (
+    select is_synthetic
+    from learning.groups
+    where code = 'TLEVEL-DSD-Y2'
+  ),
+  false,
+  'ensure does not convert teaching group TLEVEL-DSD-Y2 to synthetic'
+);
+
+select is(
+  (
+    select year_group
+    from learning.groups
+    where code = 'TLEVEL-DSD-Y2'
+  ),
+  'Year 2',
+  'ensure leaves TLEVEL-DSD-Y2 year_group unchanged'
 );
 
 set local "request.jwt.claim.sub" = '10000000-0000-4000-8000-000000000004';
