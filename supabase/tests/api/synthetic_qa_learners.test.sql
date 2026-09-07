@@ -136,7 +136,7 @@ insert into learning.activities (
 select
   'a2200000-0000-4000-8000-000000000001',
   module.id,
-  'week-1-lesson-1-retrieval',
+  'week-1-lesson-1-ex-01',
   'T Level synthetic QA retrieval',
   'retrieval-quiz',
   'supabase/tests/api/synthetic_qa_learners.test.sql',
@@ -144,7 +144,7 @@ select
 from learning.modules as module
 where module.stable_key = 'tlevel-software-development'
   and not exists (
-    select 1 from learning.activities where stable_key = 'week-1-lesson-1-retrieval'
+    select 1 from learning.activities where stable_key = 'week-1-lesson-1-ex-01'
   );
 
 insert into learning.activity_versions (
@@ -159,7 +159,7 @@ select
   1,
   null
 from learning.activities as activity
-where activity.stable_key = 'week-1-lesson-1-retrieval'
+where activity.stable_key = 'week-1-lesson-1-ex-01'
   and not exists (
     select 1
     from learning.activity_versions as version
@@ -182,7 +182,7 @@ select
   1
 from learning.activity_versions as version
 join learning.activities as activity on activity.id = version.activity_id
-where activity.stable_key = 'week-1-lesson-1-retrieval'
+where activity.stable_key = 'week-1-lesson-1-ex-01'
   and not exists (
     select 1 from learning.questions where stable_key = 'tlevel-qa-q1'
   );
@@ -200,7 +200,7 @@ update learning.activity_versions as version
 set published_at = clock_timestamp()
 from learning.activities as activity
 where activity.id = version.activity_id
-  and activity.stable_key = 'week-1-lesson-1-retrieval'
+  and activity.stable_key = 'week-1-lesson-1-ex-01'
   and version.published_at is null;
 
 insert into auth.users (
@@ -319,7 +319,7 @@ select is(
     join learning.activities as activity on activity.id = activity_version.activity_id
     where learner_group.code = 'TLEVEL-TEST-A'
       and assignment.active
-      and activity.stable_key = 'week-1-lesson-1-retrieval'
+      and activity.stable_key = 'week-1-lesson-1-ex-01'
   ),
   1::bigint,
   'TLEVEL-TEST-A has the explicit T Level smoke assignment when the module exists'
@@ -685,9 +685,9 @@ $$;
 select set_config('test.qa.unit3_version', pg_temp.qa_latest_version('week2-malware-symptoms'), true);
 select set_config('test.qa.unit3_question', (select question_key from pg_temp.qa_choice_question('week2-malware-symptoms')), true);
 select set_config('test.qa.unit3_correct', (select correct_option from pg_temp.qa_choice_question('week2-malware-symptoms')), true);
-select set_config('test.qa.tlevel_version', pg_temp.qa_latest_version('week-1-lesson-1-retrieval'), true);
-select set_config('test.qa.tlevel_question', (select question_key from pg_temp.qa_choice_question('week-1-lesson-1-retrieval')), true);
-select set_config('test.qa.tlevel_correct', (select correct_option from pg_temp.qa_choice_question('week-1-lesson-1-retrieval')), true);
+select set_config('test.qa.tlevel_version', pg_temp.qa_latest_version('week-1-lesson-1-ex-01'), true);
+select set_config('test.qa.tlevel_question', (select question_key from pg_temp.qa_choice_question('week-1-lesson-1-ex-01')), true);
+select set_config('test.qa.tlevel_correct', (select correct_option from pg_temp.qa_choice_question('week-1-lesson-1-ex-01')), true);
 select set_config('test.qa.u14_version', pg_temp.qa_latest_version('week-1-variables-and-data-types'), true);
 select set_config('test.qa.u14_question', (select question_key from pg_temp.qa_choice_question('week-1-variables-and-data-types')), true);
 select set_config('test.qa.u14_correct', (select correct_option from pg_temp.qa_choice_question('week-1-variables-and-data-types')), true);
@@ -734,7 +734,7 @@ select ok(
     select 1
     from api.my_assignments
     where activity_key in (
-      'week-1-lesson-1-retrieval',
+      'week-1-lesson-1-ex-01',
       'week-1-variables-and-data-types',
       'week-1-knowledge-check'
     )
@@ -745,8 +745,8 @@ select ok(
 select throws_ok(
   format(
     $$select * from api.mark_formative_response(%L, %L, %L::jsonb, %L)$$,
-    'week-1-lesson-1-retrieval',
-    pg_temp.qa_latest_version('week-1-lesson-1-retrieval'),
+    'week-1-lesson-1-ex-01',
+    pg_temp.qa_latest_version('week-1-lesson-1-ex-01'),
     jsonb_build_array(
       jsonb_build_object(
         'question_id', 'ignored',
@@ -833,9 +833,9 @@ set local role authenticated;
 select ok(
   exists (
     select 1 from api.my_assignments
-    where activity_key = 'week-1-lesson-1-retrieval'
+    where activity_key = 'week-1-lesson-1-ex-01'
   )
-  or pg_temp.qa_latest_version('week-1-lesson-1-retrieval') is null,
+  or pg_temp.qa_latest_version('week-1-lesson-1-ex-01') is null,
   'T Level QA learner sees the assigned Weeks 1–3 retrieval activity when published'
 );
 
@@ -869,8 +869,8 @@ select ok(
   (
     select is_correct = false
     from api.mark_formative_response(
-      'week-1-lesson-1-retrieval',
-      pg_temp.qa_latest_version('week-1-lesson-1-retrieval'),
+      'week-1-lesson-1-ex-01',
+      pg_temp.qa_latest_version('week-1-lesson-1-ex-01'),
       jsonb_build_array(
         jsonb_build_object(
           'question_id', current_setting('test.qa.tlevel_question', true),
@@ -887,8 +887,8 @@ select ok(
   (
     select is_correct
     from api.mark_formative_response(
-      'week-1-lesson-1-retrieval',
-      pg_temp.qa_latest_version('week-1-lesson-1-retrieval'),
+      'week-1-lesson-1-ex-01',
+      pg_temp.qa_latest_version('week-1-lesson-1-ex-01'),
       jsonb_build_array(
         jsonb_build_object(
           'question_id', current_setting('test.qa.tlevel_question', true),
@@ -920,7 +920,7 @@ select ok(
 select ok(
   not exists (
     select 1 from api.my_assignments
-    where activity_key in ('week2-malware-symptoms', 'week-1-lesson-1-retrieval', 'week-1-knowledge-check')
+    where activity_key in ('week2-malware-symptoms', 'week-1-lesson-1-ex-01', 'week-1-knowledge-check')
   ),
   'Unit 14 QA learner cannot see other-hub QA assignments'
 );
@@ -1003,7 +1003,7 @@ select ok(
     select 1 from api.my_assignments
     where activity_key in (
       'week2-malware-symptoms',
-      'week-1-lesson-1-retrieval',
+      'week-1-lesson-1-ex-01',
       'week-1-variables-and-data-types'
     )
   ),
@@ -1031,8 +1031,8 @@ select throws_ok(
 select throws_ok(
   format(
     $$select * from api.mark_formative_response(%L, %L, %L::jsonb, %L)$$,
-    'week-1-lesson-1-retrieval',
-    coalesce(pg_temp.qa_latest_version('week-1-lesson-1-retrieval'), '0.1.0'),
+    'week-1-lesson-1-ex-01',
+    coalesce(pg_temp.qa_latest_version('week-1-lesson-1-ex-01'), '0.1.0'),
     jsonb_build_array(
       jsonb_build_object(
         'question_id', 'ignored',
