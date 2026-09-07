@@ -10,6 +10,17 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ## [Unreleased]
 
+### Added
+
+- Synthetic QA persona `TLEVEL_DSD_Y2_TEST_LEARNER` joins the existing
+  teaching group `TLEVEL-DSD-Y2` (`join_existing_group`) so Week 1
+  classification, drag-drop, and short-response can be smoke-tested against
+  the normal teaching assignment set. The group is not marked synthetic,
+  registration and assignments are left unchanged, and exclusive
+  `TLEVEL-TEST-A` / `TLEVEL_TEST_LEARNER` remain restricted to
+  `week-1-lesson-1-ex-01`. Credentials stay in gitignored env
+  (`TLEVEL_DSD_Y2_TEST_EMAIL` / `TLEVEL_DSD_Y2_TEST_PASSWORD`).
+
 ### Changed
 
 - `platform.strip_learner_answer_keys` also removes object `correct` maps used

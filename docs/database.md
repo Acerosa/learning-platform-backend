@@ -13,7 +13,9 @@
 - `learning.enrolments`: learner-to-group history; one active enrolment per
   learner/group, with multiple concurrent courses supported.
 - `learning.synthetic_qa_fixtures`: catalog of hub-isolated QA personas and
-  groups. See [Synthetic QA learners](synthetic-qa-learners.md).
+  groups. `exclusive_smoke` groups receive only the catalogued allowlist.
+  `join_existing_group` personas enrol into an existing teaching group
+  without converting it. See [Synthetic QA learners](synthetic-qa-learners.md).
 - `learning.teacher_group_access`: scoped teacher access to groups.
 
 ## Curriculum and delivery

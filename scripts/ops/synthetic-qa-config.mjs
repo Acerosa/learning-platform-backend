@@ -52,5 +52,15 @@ export const PERSONAS = [
     ],
     emailEnv: ["L2E_TEST_EMAIL", "SYNTHETIC_QA_EMAIL_L2E"],
     passwordEnv: ["L2E_TEST_PASSWORD", "SYNTHETIC_QA_PASSWORD_L2E"]
+  },
+  {
+    persona: "TLEVEL_DSD_Y2_TEST_LEARNER",
+    studentNumber: "QA-TLEVEL-DSD-Y2",
+    displayName: "Synthetic T Level DSD Y2 Learner",
+    groupCode: "TLEVEL-DSD-Y2",
+    smokeActivityKey: "week-1-lesson-1-ex-07",
+    joinExistingGroup: true,
+    emailEnv: ["TLEVEL_DSD_Y2_TEST_EMAIL", "SYNTHETIC_QA_EMAIL_TLEVEL_DSD_Y2"],
+    passwordEnv: ["TLEVEL_DSD_Y2_TEST_PASSWORD", "SYNTHETIC_QA_PASSWORD_TLEVEL_DSD_Y2"]
   }
 ];

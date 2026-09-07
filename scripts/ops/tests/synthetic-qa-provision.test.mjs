@@ -20,7 +20,9 @@ const BASE_ENV = {
   UNIT14_TEST_EMAIL: "qa+unit14@example.test",
   UNIT14_TEST_PASSWORD: "unit14-password-value",
   L2E_TEST_EMAIL: "qa+l2e@example.test",
-  L2E_TEST_PASSWORD: "l2e-password-value"
+  L2E_TEST_PASSWORD: "l2e-password-value",
+  TLEVEL_DSD_Y2_TEST_EMAIL: "qa+tlevel-dsd-y2@example.test",
+  TLEVEL_DSD_Y2_TEST_PASSWORD: "tlevel-dsd-y2-password-value"
 };
 
 function secretValues(env = BASE_ENV) {
@@ -33,7 +35,9 @@ function secretValues(env = BASE_ENV) {
     env.UNIT14_TEST_EMAIL,
     env.UNIT14_TEST_PASSWORD,
     env.L2E_TEST_EMAIL,
-    env.L2E_TEST_PASSWORD
+    env.L2E_TEST_PASSWORD,
+    env.TLEVEL_DSD_Y2_TEST_EMAIL,
+    env.TLEVEL_DSD_Y2_TEST_PASSWORD
   ];
 }
 
@@ -198,6 +202,7 @@ test("missing env performs zero writes", async () => {
   const missing = collectMissingEnv({ SUPABASE_URL: BASE_ENV.SUPABASE_URL });
   assert.ok(missing.includes("SUPABASE_SERVICE_ROLE_KEY"));
   assert.ok(missing.includes("UNIT14_TEST_PASSWORD"));
+  assert.ok(missing.includes("TLEVEL_DSD_Y2_TEST_EMAIL"));
 });
 
 test("new users are created then application-provisioned with returned Auth ids", async () => {
@@ -210,14 +215,14 @@ test("new users are created then application-provisioned with returned Auth ids"
     log: (...args) => logs.push(args.join(" "))
   });
   assert.equal(outcome.ok, true);
-  assert.equal(harness.state.createCalls, 4);
+  assert.equal(harness.state.createCalls, PERSONAS.length);
   const provisionCalls = harness.state.rpcCalls.filter((call) => call.name === "provision_synthetic_qa_learner");
-  assert.equal(provisionCalls.length, 4);
+  assert.equal(provisionCalls.length, PERSONAS.length);
   for (const call of provisionCalls) {
     assert.equal(typeof call.args.p_auth_user_id, "string");
     assert.ok(call.args.p_auth_user_id.startsWith("00000000-"));
   }
-  assert.equal(harness.state.students.length, 4);
+  assert.equal(harness.state.students.length, PERSONAS.length);
   assert.ok(harness.state.students.every((row) => row.contact_email == null));
   assert.deepEqual(harness.state.selectCalls, []);
   assert.ok(harness.state.rpcCalls.some((call) => call.name === "inspect_synthetic_qa_learners"));
@@ -246,8 +251,8 @@ test("existing valid synthetic users are reused and passwords are not reset", as
   assert.equal(second.ok, true);
   assert.equal(harness.state.createCalls, 0);
   assert.equal(harness.state.passwordUpdates, 0);
-  assert.equal(harness.state.students.length, 4);
-  assert.equal(harness.state.enrolments.length, 4);
+  assert.equal(harness.state.students.length, PERSONAS.length);
+  assert.equal(harness.state.enrolments.length, PERSONAS.length);
   assert.ok(second.results.every((row) => row.auth === "AUTH_REUSED"));
   assert.ok(second.results.every((row) => row.student === "REUSED"));
 });
@@ -266,7 +271,7 @@ test("conflicting metadata stops without converting the account", async () => {
   assert.equal(outcome.ok, false);
   const unit3 = outcome.results.find((row) => row.persona === "UNIT3_TEST_LEARNER");
   assert.equal(unit3.code, "PERSONA_COLLISION");
-  assert.equal(harness.state.createCalls, 3);
+  assert.equal(harness.state.createCalls, PERSONAS.length - 1);
   assert.equal(harness.state.students.some((row) => row.student_number === "QA-UNIT3"), false);
 });
 
