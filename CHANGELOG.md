@@ -12,6 +12,15 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Migration `20260908140000_activate_l2e_formative_delivery`: open teaching
+  group `L2E-DELIVERY-A` (`registration_key` `l2e-year-1-delivery`) for
+  `gateway-level-2-digital-it-skills`, assigning every published L2E module
+  activity version. Fixes signed-in learner Check-answer failures caused by
+  `ACTIVITY_NOT_ASSIGNED` when only exclusive-smoke `L2E-TEST-A` existed.
+  `L2E-TEST-A` remains closed and Week 1 smoke-only.
+
+### Added (prior)
+
 - Synthetic QA persona `TLEVEL_DSD_Y2_TEST_LEARNER` joins the existing
   teaching group `TLEVEL-DSD-Y2` (`join_existing_group`) so Week 1
   classification, drag-drop, and short-response can be smoke-tested against
