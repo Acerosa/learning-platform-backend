@@ -140,6 +140,7 @@ SECURITY DEFINER functions and views, not through extra network hops.
 | Evidence / Results | `attempts`, `responses`, `question_marking` | No — first-class in-process domain |
 | Readiness diagnostics | `diagnostic_sessions`, `diagnostic_responses` | No — anonymous, separate from attempts |
 | Progress | `api.my_activity_progress` and derived views | No |
+| In-progress drafts | `learning.activity_states` via `api.get_activity_state` / `save_activity_state` / `clear_activity_state` | No |
 | Analytics | `admin_api.dashboard_summary`, `activity_performance` | Later warehouse possible |
 | Platform | hubs, contracts, roles, audit, health | No |
 
@@ -159,6 +160,7 @@ separates the concepts:
 | **Evidence** | What did the learner submit? | `learning.responses.response_payload` |
 | **Result** | How was that evaluated? | `responses.awarded_score`, `is_correct`, `requires_review`, `marking_source`; attempt `score` / `marking_source` |
 | **Progress** | What does that mean for the journey? | Derived views (`api.my_activity_progress`), not a write model |
+| **In-progress draft** | What has the learner entered so far? | `learning.activity_states` through `api.get_activity_state` / `save_activity_state` / `clear_activity_state`. Not an attempt and not a score |
 
 Teacher review, written/code evidence, first/latest/best, group markbook and
 topic/skill analytics extend these columns and additive `admin_api` aggregate

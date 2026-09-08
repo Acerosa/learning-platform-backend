@@ -12,6 +12,15 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Authenticated in-progress activity drafts: `learning.activity_states` with
+  `api.get_activity_state`, `api.save_activity_state`, and
+  `api.clear_activity_state`. Server-side resume state is separate from
+  completed attempts. Marks and scores cannot be injected through the draft
+  payload. `api.submit_attempt` still creates authoritative attempt history
+  and completes the matching draft.
+
+### Added
+
 - Synthetic QA persona `TLEVEL_DSD_Y2_TEST_LEARNER` joins the existing
   teaching group `TLEVEL-DSD-Y2` (`join_existing_group`) so Week 1
   classification, drag-drop, and short-response can be smoke-tested against

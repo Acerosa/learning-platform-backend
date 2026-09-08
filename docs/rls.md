@@ -18,6 +18,11 @@ policies.
 Learner writes occur through narrow SECURITY DEFINER RPCs. Direct inserts into
 learner records are not granted.
 
+Authenticated in-progress drafts follow the same rule: `learning.activity_states`
+has RLS enabled and no direct DML. Learners read and write only through
+`api.get_activity_state`, `api.save_activity_state`, and `api.clear_activity_state`.
+Those RPCs resolve `auth.uid()` and cannot read or modify another learner's draft.
+
 Anonymous readiness diagnostics are an explicit exception to `auth.uid()`
 identity. `anon` may execute `api.start_diagnostic`,
 `api.submit_diagnostic_response`, and `api.complete_diagnostic` only. Direct

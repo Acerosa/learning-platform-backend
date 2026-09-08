@@ -18,6 +18,16 @@ Authenticated learner views:
 - `api.my_responses`
 - `api.my_activity_progress`
 
+Authenticated in-progress drafts:
+
+- `api.get_activity_state(activity_key, activity_version)`
+- `api.save_activity_state(activity_key, activity_version, state, client_updated_at default null, hub_code default null)`
+- `api.clear_activity_state(activity_key, activity_version)`
+
+These persist unfinished responses so a learner can resume across browsers and
+devices. They are not attempts, scores, or derived progress. Identity is always
+`auth.uid()`. Direct table access is revoked.
+
 Teacher-scoped analytics views are retained for compatibility and use teacher
 group access through RLS.
 
