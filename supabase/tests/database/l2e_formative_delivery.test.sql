@@ -79,7 +79,7 @@ select
   'b5100000-0000-4000-8000-0000000000b2'::uuid,
   activity.id,
   '0.1.0',
-  'l2e-delivery-test-hash',
+  'dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',
   4,
   4,
   clock_timestamp()
