@@ -8,8 +8,22 @@ declare
   v_hash text := 'aa8a115dcbc1bae8fee8854a219bc072d2a760373cbcc2fde0281738195c971c';
   v_publication_id uuid;
   v_prev text;
+  v_publisher uuid;
+  v_staff_ref text;
 begin
-  if exists (
+  select coalesce(
+    (select id from auth.users where id = 'fd5fcbfc-5c01-4df3-a8df-458e1dbb0cc4'::uuid),
+    (select id from auth.users order by created_at nulls last, id limit 1)
+  ) into v_publisher;
+
+  if v_publisher is null then
+    raise notice 'L2E 0.3.13 publication skipped: no auth.users row for published_by';
+  elsif not exists (
+    select 1 from learning.courses
+    where stable_key = 'gateway-level-2-digital-it-skills' and active
+  ) then
+    raise notice 'L2E 0.3.13 publication skipped: gateway course not present';
+  elsif exists (
     select 1 from platform.curriculum_publications
     where hub_code = 'l2e-exploring-emerging-digital-technologies'
       and course_key = 'gateway-level-2-digital-it-skills'
@@ -17,6 +31,7 @@ begin
   ) then
     raise notice 'L2E 0.3.13 already published';
   else
+    v_staff_ref := 'PLATFORM-ADMIN-' || upper(replace(v_publisher::text, '-', ''));
     select package_version into v_prev
     from platform.curriculum_publications
     where hub_code = 'l2e-exploring-emerging-digital-technologies'
@@ -45,8 +60,8 @@ begin
       'L2E expanded Weeks 2-3 publication',
       'Curriculum review',
       format('Publish expanded L2E Weeks 1-3 package. Previous published version: %s', coalesce(v_prev, 'none')),
-      'fd5fcbfc-5c01-4df3-a8df-458e1dbb0cc4'::uuid,
-      'PLATFORM-ADMIN-FD5FCBFC-5C01-4DF3-A8DF-458E1DBB0CC4'
+      v_publisher,
+      v_staff_ref
     )
     returning id into v_publication_id;
 
