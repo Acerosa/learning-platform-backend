@@ -76,7 +76,7 @@ insert into learning.activity_versions (
   id, activity_id, version, content_hash, max_score, question_count, published_at
 )
 select
-  'v5100000-0000-4000-8000-0000000000b2'::uuid,
+  'b5100000-0000-4000-8000-0000000000b2'::uuid,
   activity.id,
   '0.1.0',
   'l2e-delivery-test-hash',
