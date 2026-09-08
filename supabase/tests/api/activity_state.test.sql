@@ -356,8 +356,13 @@ select is(
     from api.my_attempts
     where client_attempt_id = 'activity-state-student-a-final'
   ),
-  1,
-  'the submitted attempt keeps normal attempt numbering'
+  (
+    select count(*)::integer
+    from learning.attempts
+    where student_id = '30000000-0000-4000-8000-000000000001'
+      and activity_version_id = '91000000-0000-4000-8000-000000000001'
+  ),
+  'the submitted attempt keeps sequential attempt numbering'
 );
 
 select is(
@@ -382,6 +387,48 @@ select is(
   'completed',
   'the foundations draft is completed rather than deleted'
 );
+
+set local "request.jwt.claim.sub" = '10000000-0000-4000-8000-000000000001';
+set local "request.jwt.claims" = '{"sub":"10000000-0000-4000-8000-000000000001","role":"authenticated"}';
+set local role authenticated;
+
+select lives_ok(
+  $$
+    select *
+    from api.save_activity_state(
+      'foundations-requirements-classification',
+      '1.0.0',
+      '{"responses":{"REQ-001":"stale"},"startedAt":"2026-01-01T00:00:00Z"}'::jsonb
+    )
+  $$,
+  'a late in-progress save after submit does not error'
+);
+reset role;
+
+select is(
+  (
+    select status
+    from learning.activity_states
+    where student_id = '30000000-0000-4000-8000-000000000001'
+      and activity_version_id = '91000000-0000-4000-8000-000000000001'
+  ),
+  'completed',
+  'a late in-progress save does not reopen the completed draft'
+);
+
+set local "request.jwt.claim.sub" = '10000000-0000-4000-8000-000000000001';
+set local "request.jwt.claims" = '{"sub":"10000000-0000-4000-8000-000000000001","role":"authenticated"}';
+set local role authenticated;
+
+select is(
+  (
+    select count(*)
+    from api.get_activity_state('foundations-requirements-classification', '1.0.0')
+  ),
+  0::bigint,
+  'get_activity_state still hides the completed draft after a stale save'
+);
+reset role;
 
 select is(
   (

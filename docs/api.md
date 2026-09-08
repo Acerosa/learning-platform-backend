@@ -26,7 +26,9 @@ Authenticated in-progress drafts:
 
 These persist unfinished responses so a learner can resume across browsers and
 devices. They are not attempts, scores, or derived progress. Identity is always
-`auth.uid()`. Direct table access is revoked.
+`auth.uid()`. Direct table access is revoked. Saving after `api.submit_attempt`
+does not reopen a completed draft unless the payload `startedAt` is after
+`completed_at` (a new attempt).
 
 Teacher-scoped analytics views are retained for compatibility and use teacher
 group access through RLS.

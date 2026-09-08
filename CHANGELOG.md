@@ -17,7 +17,8 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
   `api.clear_activity_state`. Server-side resume state is separate from
   completed attempts. Marks and scores cannot be injected through the draft
   payload. `api.submit_attempt` still creates authoritative attempt history
-  and completes the matching draft.
+  and completes the matching draft. A later in-progress save does not reopen a
+  completed draft unless the client started a new attempt after completion.
 
 ### Added
 
