@@ -92,6 +92,17 @@ and never changes `response_payload`.
 - attempt summaries now include `requires_review` and `question_count`
 - no browser-authoritative progress table
 
+Authenticated in-progress activity state is a separate write model:
+
+- `learning.activity_states` stores the current draft for one learner + activity version
+- browsers write only through `api.get_activity_state`, `api.save_activity_state`,
+  and `api.clear_activity_state`
+- payloads are learner interaction state only; marks, scores and identity fields
+  are stripped
+- `api.submit_attempt` remains the authoritative completion path and completes
+  any matching in-progress draft
+- historical attempts are not rewritten
+
 Completed attempts and responses remain immutable for ordinary clients.
 The security-definer review path may update mark and feedback columns only.
 Historical attempts stay attached to the activity version that was current at
