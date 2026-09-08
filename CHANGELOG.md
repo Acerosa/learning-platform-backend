@@ -12,6 +12,17 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Migration `20260908153000_publish_l2e_expanded_weeks_0_3_13`: publish
+  immutable curriculum package `0.3.13` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from the expanded Weeks 1–3 hub
+  package (39 activities), project marking catalogue keys, supersede
+  `0.3.12`, and assign all published L2E module activity versions to
+  `L2E-DELIVERY-A`. Leaves superseded stale Weeks 2–3 activity versions
+  in place for history. Contract tests:
+  `scripts/ops/tests/l2e-catalogue-alignment.test.mjs` and
+  `supabase/tests/database/l2e_expanded_weeks_catalogue.test.sql`.
+
 - Migration `20260908140000_activate_l2e_formative_delivery`: open teaching
   group `L2E-DELIVERY-A` (`registration_key` `l2e-year-1-delivery`) for
   `gateway-level-2-digital-it-skills`, assigning every published L2E module
