@@ -10,6 +10,18 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ## [Unreleased]
 
+### Security
+
+- Learner group authority is no longer client-chosen.
+  `api.complete_learner_onboarding` is profile/linking only;
+  `p_registration_option` is ignored and cannot create or reactivate
+  enrolments. `api.registration_options()` no longer lists class keys.
+  `open_auto` hubs enrol through `api.resolve_learner_hub_access`.
+  Controlled hubs enrol through `api.join_learner_hub_group(hub_code,
+  class_key)`, which accepts only an `open_explicit` group bound to that
+  hub. Local migration `20260909200000_hub_bound_learner_onboarding`; do
+  not apply hosted until review.
+
 ### Added
 
 - Authoritative hub ↔ group binding `platform.hub_group_links` and learner RPCs
