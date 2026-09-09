@@ -35,18 +35,28 @@ group access through RLS.
 
 ## Registration and onboarding
 
-`api.registration_options()` returns only active, explicitly opened learner
-registration choices. It exposes stable keys and display values, not internal
-UUIDs.
-
 `api.complete_learner_onboarding(first_name, surname, student_number,
-registration_option)` derives the verified Auth user, creates or safely links
-one learner profile and creates the selected enrolment transactionally. It is
-idempotent for an identical completed onboarding, lets an already-linked learner
-join an additional open group, and reuses or reactivates an existing enrolment
-when a matching unlinked roster record is linked. It still rejects profile,
-email and student-number conflicts. It is not the generic “enter this hub”
-RPC.
+registration_option)` creates or safely links one learner profile for the
+current Auth user. `registration_option` is accepted for compatibility and is
+ignored. This RPC does not create, reactivate, or choose enrolments.
+
+`api.registration_options()` remains as a compatibility stub and returns no
+class keys or teaching groups. Learners must not pick a year, cohort, or group
+to grant authority.
+
+Hub enrolment is server-side:
+
+- `api.resolve_learner_hub_access(hub_code, course_key)` auto-enrols only when
+  the requested hub has exactly one eligible `open_auto` bound group.
+- `api.join_learner_hub_group(hub_code, class_key)` enrols into an
+  `open_explicit` group bound to that hub when the class key matches. It
+  rejects other hubs' keys, `open_auto` groups, and `closed` groups.
+
+A learner may have one Auth identity and one `learning.students` row with
+independent enrolments on more than one hub. Each hub resolves only its own
+bound groups.
+
+`api.complete_learner_onboarding` is not the generic “enter this hub” RPC.
 
 ## Hub access and hub-scoped assignments
 
@@ -72,18 +82,18 @@ status fields only.
 
 Statuses:
 
-- `profile_required` — no active `learning.students` row. If exactly one
-  eligible open bound group exists, `registration_option` is that group's
-  existing `registration_key` so profile completion can call
-  `complete_learner_onboarding` without a platform-wide picker.
+- `profile_required` — no active `learning.students` row. Profile completion
+  uses `complete_learner_onboarding` and does not send a group key for
+  authority. If exactly one eligible open bound group exists,
+  `registration_option` may still be returned as display metadata only.
 - `enrolled` — active enrolment in a group bound to this hub. No write.
 - `enrolled_created` — auto-enrol into the single `open_auto` bound group for
   this hub. Other-hub enrolments do not block that write. The write is only
   into the hub-bound group.
 - `enrolled_reactivated` — inactive enrolment in an eligible `open_auto`
-  hub-bound group is reactivated. `open_explicit` and `closed` are not
-  reactivated by opening the hub; those remain JoinClass /
-  `complete_learner_onboarding` or staff placement.
+  hub-bound group is reactivated. `open_explicit` groups are restored only by
+  `api.join_learner_hub_group` with a matching class key. `closed` groups are
+  staff placement only.
 - `ambiguous` — more than one eligible `open_auto` group and the learner is not
   already enrolled. No pick-list of keys.
 - `no_enrolment` — profile exists but this hub has no matching enrolment, and

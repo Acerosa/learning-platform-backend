@@ -91,45 +91,8 @@ insert into learning.groups (
 
 select is(
   (select count(*) from api.registration_options()),
-  3::bigint,
-  'registration options include only explicitly open active choices'
-);
-
-select ok(
-  exists (
-    select 1
-    from api.registration_options()
-    where registration_option = 'cyber-year-1-test'
-      and academic_year = '2026-27'
-      and year_group = 'Year 1'
-      and course_key = 'ocr-level-3-it'
-      and group_code = 'CYBER-TEST-A'
-  ),
-  'registration options include the activated Cyber Security test group'
-);
-
-select ok(
-  exists (
-    select 1
-    from api.registration_options()
-    where registration_option = 'synthetic-year-1-a'
-      and academic_year = '2026-27'
-      and year_group = 'Year 1'
-      and course_key = 't-level-digital-software-development'
-      and group_code = 'TEST-GROUP-A'
-  ),
-  'registration options expose the controlled learner-safe display contract'
-);
-
-select ok(
-  exists (
-    select 1
-    from api.registration_options()
-    where registration_option = 'tlevel-dsd-y2'
-      and group_code = 'TLEVEL-DSD-Y2'
-      and course_key = 't-level-digital-software-development'
-  ),
-  'registration options include the T Level teaching group'
+  0::bigint,
+  'registration_options does not list class keys or teaching groups'
 );
 
 set local role anon;
@@ -177,30 +140,22 @@ select throws_ok(
   'INVALID_STUDENT_NUMBER',
   'blank student numbers are rejected'
 );
-select throws_ok(
+select lives_ok(
   $$select * from api.complete_learner_onboarding('Valid', 'Learner', '0042', 'not-a-real-option')$$,
-  '22023',
-  'INVALID_REGISTRATION_OPTION',
-  'unknown registration options are rejected'
+  'p_registration_option is ignored and cannot grant group membership'
 );
 reset role;
 
-set local "request.jwt.claim.sub" = '11000000-0000-4000-8000-000000000005';
-set local "request.jwt.claims" = '{"sub":"11000000-0000-4000-8000-000000000005","role":"authenticated"}';
-set local role authenticated;
-select throws_ok(
-  $$select * from api.complete_learner_onboarding('Inactive', 'Learner', '0051', 'inactive-group')$$,
-  '22023',
-  'GROUP_INACTIVE',
-  'inactive groups cannot be selected'
+select is(
+  (
+    select count(*)
+    from learning.enrolments as enrolment
+    join learning.students as student on student.id = enrolment.student_id
+    where student.auth_user_id = '11000000-0000-4000-8000-000000000004'
+  ),
+  0::bigint,
+  'ignored registration options do not create enrolments'
 );
-select throws_ok(
-  $$select * from api.complete_learner_onboarding('Inactive', 'Learner', '0051', 'inactive-academic-year')$$,
-  '22023',
-  'ACADEMIC_YEAR_INACTIVE',
-  'inactive academic years cannot be selected'
-);
-reset role;
 
 set local "request.jwt.claim.sub" = '11000000-0000-4000-8000-000000000001';
 set local "request.jwt.claims" = '{"sub":"11000000-0000-4000-8000-000000000001","role":"authenticated","email":"untrusted@example.invalid"}';
@@ -216,7 +171,7 @@ select is(
     )
   ),
   false,
-  'first valid onboarding call creates the learner and enrolment'
+  'first valid onboarding call creates the learner profile'
 );
 reset role;
 
@@ -258,8 +213,8 @@ select is(
     where student.auth_user_id = '11000000-0000-4000-8000-000000000001'
       and enrolment.status = 'active'
   ),
-  1::bigint,
-  'valid onboarding creates exactly one active enrolment'
+  0::bigint,
+  'profile onboarding does not create an enrolment'
 );
 
 set local "request.jwt.claim.sub" = '11000000-0000-4000-8000-000000000001';
@@ -276,15 +231,10 @@ select ok(
   ),
   'my_profile exposes the learner surname and Auth-derived contact email'
 );
-select ok(
-  exists (
-    select 1
-    from api.my_enrolments
-    where status = 'active'
-      and year_group = 'Year 1'
-      and group_code = 'TEST-GROUP-A'
-  ),
-  'my_enrolments exposes the current year group'
+select is(
+  (select count(*) from api.my_enrolments),
+  0::bigint,
+  'my_enrolments is empty until hub access or JoinClass enrols the learner'
 );
 select is(
   (
@@ -296,11 +246,14 @@ select is(
 );
 select is(
   (
-    select idempotent
-    from api.complete_learner_onboarding('Ada', 'Lovelace', '001234', 'cyber-year-1-test')
+    select count(*)
+    from learning.enrolments as enrolment
+    join learning.students as student on student.id = enrolment.student_id
+    where student.auth_user_id = '11000000-0000-4000-8000-000000000001'
+      and enrolment.status = 'active'
   ),
-  false,
-  'an already-linked learner can join an additional open group'
+  0::bigint,
+  'an already-linked learner cannot claim another group through complete_learner_onboarding'
 );
 select is(
   (
@@ -308,31 +261,7 @@ select is(
     from api.complete_learner_onboarding('Ada', 'Lovelace', '001234', 'cyber-year-1-test')
   ),
   true,
-  'repeating onboarding for an additional group already joined is idempotent'
-);
-reset role;
-
-update learning.enrolments
-set status = 'withdrawn',
-    left_on = current_date,
-    updated_at = clock_timestamp()
-where student_id = (
-  select id from learning.students where auth_user_id = '11000000-0000-4000-8000-000000000001'
-)
-  and group_id = (
-    select id from learning.groups where registration_key = 'cyber-year-1-test'
-  );
-
-set local "request.jwt.claim.sub" = '11000000-0000-4000-8000-000000000001';
-set local "request.jwt.claims" = '{"sub":"11000000-0000-4000-8000-000000000001","role":"authenticated"}';
-set local role authenticated;
-select is(
-  (
-    select enrolment_status
-    from api.complete_learner_onboarding('Ada', 'Lovelace', '001234', 'cyber-year-1-test')
-  ),
-  'active',
-  'a linked learner with an inactive enrolment can rejoin by reactivating it'
+  'supplying another registration option remains a no-op for enrolment'
 );
 select throws_ok(
   $$select * from api.complete_learner_onboarding('Ada', 'Lovelace', '009999', 'synthetic-year-1-a')$$,
@@ -438,8 +367,8 @@ select is(
     select idempotent
     from api.complete_learner_onboarding('Existing', 'Enrolment', '000999', 'synthetic-year-1-a')
   ),
-  true,
-  'linking a matching unlinked roster learner reuses an existing active enrolment'
+  false,
+  'linking a matching unlinked roster learner does not require a group choice'
 );
 reset role;
 
@@ -488,18 +417,18 @@ set local "request.jwt.claims" = '{"sub":"11000000-0000-4000-8000-000000000003",
 set local role authenticated;
 select is(
   (
-    select enrolment_status
+    select student_number
     from api.complete_learner_onboarding('Atomic', 'Learner', '000888', 'synthetic-year-1-a')
   ),
-  'active',
-  'an unlinked roster learner with an inactive enrolment is linked and reactivated'
+  '000888',
+  'an unlinked roster learner with an inactive enrolment is still linked'
 );
 reset role;
 
 select is(
   (select auth_user_id from learning.students where student_number = '000888'),
   '11000000-0000-4000-8000-000000000003'::uuid,
-  'reactivating an existing enrolment still links the Auth account atomically'
+  'profile linking still attaches the Auth account atomically'
 );
 
 select is(
@@ -510,8 +439,8 @@ select is(
     where student.student_number = '000888'
       and enrolment.group_id = '60000000-0000-4000-8000-000000000001'
   ),
-  'active',
-  'the withdrawn enrolment is reactivated rather than duplicated'
+  'withdrawn',
+  'complete_learner_onboarding does not reactivate a historical enrolment'
 );
 
 select ok(
@@ -519,6 +448,11 @@ select ok(
   and not has_function_privilege(
     'anon',
     'api.complete_learner_onboarding(text,text,text,text)',
+    'EXECUTE'
+  )
+  and not has_function_privilege(
+    'anon',
+    'api.join_learner_hub_group(text,text)',
     'EXECUTE'
   ),
   'anonymous execution grants are absent'
@@ -529,6 +463,11 @@ select ok(
   and has_function_privilege(
     'authenticated',
     'api.complete_learner_onboarding(text,text,text,text)',
+    'EXECUTE'
+  )
+  and has_function_privilege(
+    'authenticated',
+    'api.join_learner_hub_group(text,text)',
     'EXECUTE'
   ),
   'authenticated execution grants are present'

@@ -178,16 +178,10 @@ set local "request.jwt.claim.sub" = '12000000-0000-4000-8000-000000000001';
 set local "request.jwt.claims" = '{"sub":"12000000-0000-4000-8000-000000000001","role":"authenticated","email":"cyber.activation.one@local.invalid"}';
 set local role authenticated;
 
-select ok(
-  exists (
-    select 1
-    from api.registration_options()
-    where registration_option = 'cyber-year-1-test'
-      and course_key = 'ocr-level-3-it'
-      and group_code = 'CYBER-TEST-A'
-      and year_group = 'Year 1'
-  ),
-  'authenticated unlinked learners see the Cyber registration option'
+select is(
+  (select count(*) from api.registration_options()),
+  0::bigint,
+  'authenticated learners are not given a platform-wide group picker'
 );
 
 select is(
@@ -201,7 +195,29 @@ select is(
     )
   ),
   false,
-  'Cyber onboarding creates the learner profile and enrolment'
+  'Cyber profile completion does not grant group membership'
+);
+
+select is(
+  (
+    select count(*)
+    from api.my_enrolments
+    where group_code = 'CYBER-TEST-A'
+  ),
+  0::bigint,
+  'Cyber profile completion does not enrol into CYBER-TEST-A'
+);
+
+select is(
+  (
+    select group_code
+    from api.join_learner_hub_group(
+      'unit-3-cyber-security',
+      'cyber-year-1-test'
+    )
+  ),
+  'CYBER-TEST-A',
+  'Cyber JoinClass with the tutor class key enrols into CYBER-TEST-A'
 );
 
 select ok(
@@ -212,7 +228,7 @@ select ok(
       and status = 'active'
       and course_title = 'OCR Level 3 IT'
   ),
-  'Cyber onboarding yields an active OCR Level 3 IT enrolment'
+  'Cyber JoinClass yields an active OCR Level 3 IT enrolment'
 );
 
 select is(
@@ -354,11 +370,23 @@ select is(
       'Cyber',
       'Isolation',
       'CYBER-ACT-002',
-      'cyber-year-1-test'
+      'tlevel-dsd-y2'
     )
   ),
   false,
-  'second Cyber learner can onboard into the same test group'
+  'second Cyber learner can complete a profile without choosing a group'
+);
+
+select is(
+  (
+    select group_code
+    from api.join_learner_hub_group(
+      'unit-3-cyber-security',
+      'cyber-year-1-test'
+    )
+  ),
+  'CYBER-TEST-A',
+  'second Cyber learner joins CYBER-TEST-A with the class key, not a T Level option'
 );
 
 select is(
