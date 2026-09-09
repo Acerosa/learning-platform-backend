@@ -568,6 +568,22 @@ where hub.hub_code in (
 )
 on conflict (hub_id, course_id) do nothing;
 
+insert into platform.hub_group_links (hub_id, group_id, active, join_policy)
+select hub.id, learner_group.id, true, mapping.join_policy
+from (
+  values
+    ('tlevel-software-development', 'TLEVEL-DSD-Y2', 'open_auto'),
+    ('l2e-exploring-emerging-digital-technologies', 'L2E-DELIVERY-A', 'open_auto'),
+    ('unit-3-cyber-security', 'CYBER-TEST-A', 'open_explicit'),
+    ('unit-3-cyber-security', 'CYBER-TEST-QA', 'closed'),
+    ('unit-14-software-engineering-for-business', 'UNIT14-TEST-A', 'closed')
+) as mapping(hub_code, group_code, join_policy)
+join platform.hubs as hub
+  on hub.hub_code = mapping.hub_code
+join learning.groups as learner_group
+  on learner_group.code = mapping.group_code
+on conflict (hub_id, group_id) do nothing;
+
 insert into platform.operational_health (
   service_key,
   status,

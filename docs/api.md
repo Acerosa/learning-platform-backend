@@ -42,7 +42,71 @@ UUIDs.
 `api.complete_learner_onboarding(first_name, surname, student_number,
 registration_option)` derives the verified Auth user, creates or safely links
 one learner profile and creates the selected enrolment transactionally. It is
-idempotent for an identical completed onboarding and rejects conflicts.
+idempotent for an identical completed onboarding, lets an already-linked learner
+join an additional open group, and reuses or reactivates an existing enrolment
+when a matching unlinked roster record is linked. It still rejects profile,
+email and student-number conflicts. It is not the generic “enter this hub”
+RPC.
+
+## Hub access and hub-scoped assignments
+
+Authority for hub-scoped assignment reads:
+
+```text
+auth.uid()
+  → learning.students
+  → active learning.enrolments
+  → platform.hub_group_links (groups permitted for this hub)
+  → learning.activity_assignments for those groups
+```
+
+`platform.hub_course_links` remains necessary but is not sufficient. Unit 3,
+Unit 14 and Readiness all use `ocr-level-3-it`; delivery-group permission is
+`platform.hub_group_links`.
+
+`api.resolve_learner_hub_access(p_hub_code, p_course_key)` is authenticated,
+`SECURITY DEFINER`, empty `search_path`. Identity is only `auth.uid()`. The
+browser may identify the authored hub and course. It must not send student,
+enrolment, group or role UUIDs. Returned columns are learner-safe display and
+status fields only.
+
+Statuses:
+
+- `profile_required` — no active `learning.students` row. If exactly one
+  eligible open bound group exists, `registration_option` is that group's
+  existing `registration_key` so profile completion can call
+  `complete_learner_onboarding` without a platform-wide picker.
+- `enrolled` — active enrolment in a group bound to this hub. No write.
+- `enrolled_created` — auto-enrol into the single `open_auto` bound group for
+  this hub. Other-hub enrolments do not block that write. The write is only
+  into the hub-bound group.
+- `enrolled_reactivated` — inactive matching hub enrolment reactivated using
+  the existing onboarding policy.
+- `ambiguous` — more than one eligible `open_auto` group and the learner is not
+  already enrolled. No pick-list of keys.
+- `no_enrolment` — profile exists but this hub has no matching enrolment, and
+  auto-enrol is not permitted (`open_explicit`, or Unit 3 JoinClass).
+- `no_open_group` — no eligible open join path (including closed-only bindings
+  such as Unit 14).
+
+`api.my_hub_assignments(p_hub_code)` returns the same learner-safe assignment
+fields as `api.my_assignments` except `assignment_id`. It filters to groups
+bound to that hub. `api.my_assignments` remains the unscoped union of all
+active enrolments.
+
+Current `api.my_assignments` callers (unscoped compatibility union):
+
+- Core `platform.assignments.getAssignments()` (compatibility)
+- Core vendor IIFE ready-path in older hub copies
+- README and this document's learner-safe read list
+
+Unit 3 `js/core/supabase-learning-api.js` `getMyAssignments` and T Level
+`js/core/supabase-analytics.js` prefer `api.my_hub_assignments` through Core
+`getHubAssignments(hubCode)` when that method exists, and fall back to
+`getAssignments()` otherwise.
+
+`api.submit_attempt` and `api.mark_formative_response` are unchanged. They still
+resolve the unique current assignment across active enrolments by activity key.
 
 ## Submission contract 0.1.0
 

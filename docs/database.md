@@ -153,6 +153,13 @@ DOB, phone, or address. Browsers never receive table DML; writes go through
 - `platform.hubs`: authoritative hub registration metadata, required contract
   versions, capabilities, canonical manifest and provenance hash.
 - `platform.hub_course_links`: explicit hub-to-course relationships.
+- `platform.hub_group_links`: authoritative many-to-many hub-to-cohort mapping
+  and join policy (`open_auto`, `open_explicit`, `closed`). A course/year
+  teaching group may be linked to more than one hub. The group's course must
+  already be linked to that hub. Assignment isolation still depends on which
+  groups are actually bound; current fixtures keep Unit 3, Unit 14 and
+  T Level on separate groups.
+
 - `platform.contract_versions`: hub manifest, core, learner, submission and
   admin compatibility versions.
 - `platform.staff_roles`: platform-wide staff authorisation distinct from

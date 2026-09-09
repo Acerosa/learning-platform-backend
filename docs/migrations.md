@@ -64,6 +64,10 @@ recorded hosted as `20260818100556 create_content_library`). That mismatch is
 expected on the MCP path. Do not repair history unless a reviewed object-level
 diff proves a missing or duplicate migration.
 
+The already-hosted onboarding patch is recorded as
+`20260909110815_onboard_unlinked_existing_enrolment`. Keep that local filename.
+Do not create or apply a second logically identical hosted migration.
+
 ## Hosted handoff warning
 
 The existing hosted Supabase project already contains platform objects created
