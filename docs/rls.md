@@ -16,7 +16,10 @@ plus currently published/assigned curriculum permitted by the established
 policies.
 
 Learner writes occur through narrow SECURITY DEFINER RPCs. Direct inserts into
-learner records are not granted.
+learner records are not granted. `api.resolve_learner_hub_access` and
+`api.my_hub_assignments` follow the same rule: authenticated execute only,
+identity from `auth.uid()`, and `platform.hub_group_links` is staff-read with
+no learner DML.
 
 Authenticated in-progress drafts follow the same rule: `learning.activity_states`
 has RLS enabled and no direct DML. Learners read and write only through

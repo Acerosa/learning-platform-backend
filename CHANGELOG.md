@@ -10,6 +10,33 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ## [Unreleased]
 
+### Added
+
+- Authoritative hub ↔ group binding `platform.hub_group_links` and learner RPCs
+  `api.resolve_learner_hub_access(hub_code, course_key)` and
+  `api.my_hub_assignments(hub_code)`. Identity is `auth.uid()`. Hubs may send
+  only their authored hub code and course key. `api.my_assignments`,
+  `api.registration_options` and `api.complete_learner_onboarding` are unchanged.
+  Unit 3 / Unit 14 / Readiness sharing `ocr-level-3-it` cannot inherit access
+  from each other: each hub has explicit group bindings. `open_auto` auto-enrol
+  writes only into the requested hub's single eligible group and is not blocked
+  by unrelated active enrolments. Resolver reactivation is limited to eligible
+  `open_auto` groups; `open_explicit` and `closed` are not restored just by
+  opening the hub. `hub_group_links` is many-to-many because
+  `learning.groups` are course-year cohorts, not hub-owned containers. Local
+  migration `20260909110815_onboard_unlinked_existing_enrolment` is the
+  repository filename for the already-hosted onboarding patch; do not apply
+  it a second time.
+
+### Fixed
+
+- `api.complete_learner_onboarding` reuses or reactivates an existing enrolment
+  when a matching unlinked roster learner completes onboarding into a group
+  they already belong to. The previous student-number link path always inserted
+  a new enrolment and mapped that unique-constraint failure to
+  `ONBOARDING_CONFLICT`, which also rolled back the Auth link. Profile, email
+  and student-number conflicts are unchanged.
+
 ### Changed
 
 - Documented the production Admin Portal authentication path as Supabase

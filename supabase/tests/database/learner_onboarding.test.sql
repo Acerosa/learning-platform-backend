@@ -37,7 +37,8 @@ from (
     ('11000000-0000-4000-8000-000000000003'::uuid, 'onboarding.atomic@local.invalid', 'onboarding-atomic'),
     ('11000000-0000-4000-8000-000000000004'::uuid, 'onboarding.validation@local.invalid', 'onboarding-validation'),
     ('11000000-0000-4000-8000-000000000005'::uuid, 'onboarding.inactive@local.invalid', 'onboarding-inactive'),
-    ('11000000-0000-4000-8000-000000000006'::uuid, 'onboarding.roster@local.invalid', 'onboarding-roster')
+    ('11000000-0000-4000-8000-000000000006'::uuid, 'onboarding.roster@local.invalid', 'onboarding-roster'),
+    ('11000000-0000-4000-8000-000000000007'::uuid, 'onboarding.existing@local.invalid', 'onboarding-existing')
 ) as fixture(id, email, fixture);
 
 insert into learning.academic_years (
@@ -90,7 +91,7 @@ insert into learning.groups (
 
 select is(
   (select count(*) from api.registration_options()),
-  2::bigint,
+  3::bigint,
   'registration options include only explicitly open active choices'
 );
 
@@ -118,6 +119,17 @@ select ok(
       and group_code = 'TEST-GROUP-A'
   ),
   'registration options expose the controlled learner-safe display contract'
+);
+
+select ok(
+  exists (
+    select 1
+    from api.registration_options()
+    where registration_option = 'tlevel-dsd-y2'
+      and group_code = 'TLEVEL-DSD-Y2'
+      and course_key = 't-level-digital-software-development'
+  ),
+  'registration options include the T Level teaching group'
 );
 
 set local role anon;
@@ -282,6 +294,46 @@ select is(
   true,
   'an identical repeated onboarding call is idempotent'
 );
+select is(
+  (
+    select idempotent
+    from api.complete_learner_onboarding('Ada', 'Lovelace', '001234', 'cyber-year-1-test')
+  ),
+  false,
+  'an already-linked learner can join an additional open group'
+);
+select is(
+  (
+    select idempotent
+    from api.complete_learner_onboarding('Ada', 'Lovelace', '001234', 'cyber-year-1-test')
+  ),
+  true,
+  'repeating onboarding for an additional group already joined is idempotent'
+);
+reset role;
+
+update learning.enrolments
+set status = 'withdrawn',
+    left_on = current_date,
+    updated_at = clock_timestamp()
+where student_id = (
+  select id from learning.students where auth_user_id = '11000000-0000-4000-8000-000000000001'
+)
+  and group_id = (
+    select id from learning.groups where registration_key = 'cyber-year-1-test'
+  );
+
+set local "request.jwt.claim.sub" = '11000000-0000-4000-8000-000000000001';
+set local "request.jwt.claims" = '{"sub":"11000000-0000-4000-8000-000000000001","role":"authenticated"}';
+set local role authenticated;
+select is(
+  (
+    select enrolment_status
+    from api.complete_learner_onboarding('Ada', 'Lovelace', '001234', 'cyber-year-1-test')
+  ),
+  'active',
+  'a linked learner with an inactive enrolment can rejoin by reactivating it'
+);
 select throws_ok(
   $$select * from api.complete_learner_onboarding('Ada', 'Lovelace', '009999', 'synthetic-year-1-a')$$,
   '23000',
@@ -356,6 +408,57 @@ insert into learning.students (
   contact_email,
   active
 ) values (
+  '32000000-0000-4000-8000-000000000007',
+  null,
+  '000999',
+  'Existing',
+  'Enrolment',
+  'Existing Enrolment',
+  'onboarding.existing@local.invalid',
+  true
+);
+
+insert into learning.enrolments (
+  student_id,
+  group_id,
+  joined_on,
+  status
+) values (
+  '32000000-0000-4000-8000-000000000007',
+  '60000000-0000-4000-8000-000000000001',
+  current_date - 7,
+  'active'
+);
+
+set local "request.jwt.claim.sub" = '11000000-0000-4000-8000-000000000007';
+set local "request.jwt.claims" = '{"sub":"11000000-0000-4000-8000-000000000007","role":"authenticated"}';
+set local role authenticated;
+select is(
+  (
+    select idempotent
+    from api.complete_learner_onboarding('Existing', 'Enrolment', '000999', 'synthetic-year-1-a')
+  ),
+  true,
+  'linking a matching unlinked roster learner reuses an existing active enrolment'
+);
+reset role;
+
+select is(
+  (select auth_user_id from learning.students where student_number = '000999'),
+  '11000000-0000-4000-8000-000000000007'::uuid,
+  'unlinked roster onboarding with an existing enrolment still links the Auth account'
+);
+
+insert into learning.students (
+  id,
+  auth_user_id,
+  student_number,
+  first_name,
+  surname,
+  display_name,
+  contact_email,
+  active
+) values (
   '32000000-0000-4000-8000-000000000003',
   null,
   '000888',
@@ -383,18 +486,32 @@ insert into learning.enrolments (
 set local "request.jwt.claim.sub" = '11000000-0000-4000-8000-000000000003';
 set local "request.jwt.claims" = '{"sub":"11000000-0000-4000-8000-000000000003","role":"authenticated"}';
 set local role authenticated;
-select throws_ok(
-  $$select * from api.complete_learner_onboarding('Atomic', 'Learner', '000888', 'synthetic-year-1-a')$$,
-  '23000',
-  'ONBOARDING_CONFLICT',
-  'an enrolment conflict rejects onboarding'
+select is(
+  (
+    select enrolment_status
+    from api.complete_learner_onboarding('Atomic', 'Learner', '000888', 'synthetic-year-1-a')
+  ),
+  'active',
+  'an unlinked roster learner with an inactive enrolment is linked and reactivated'
 );
 reset role;
 
 select is(
   (select auth_user_id from learning.students where student_number = '000888'),
-  null::uuid,
-  'failed onboarding rolls back the learner link atomically'
+  '11000000-0000-4000-8000-000000000003'::uuid,
+  'reactivating an existing enrolment still links the Auth account atomically'
+);
+
+select is(
+  (
+    select enrolment.status
+    from learning.enrolments as enrolment
+    join learning.students as student on student.id = enrolment.student_id
+    where student.student_number = '000888'
+      and enrolment.group_id = '60000000-0000-4000-8000-000000000001'
+  ),
+  'active',
+  'the withdrawn enrolment is reactivated rather than duplicated'
 );
 
 select ok(
