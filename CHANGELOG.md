@@ -10,6 +10,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ## [Unreleased]
 
+### Changed
+
+- Documented the production Admin Portal authentication path as Supabase
+  email/password plus backend `learning.teachers` / `platform.staff_roles`
+  authorisation. First-admin bootstrap is privileged SQL, not a public
+  setup URL. `admin_api.claim_initial_platform_admin` remains the consumed
+  historical one-time claim.
+
 ### Added
 
 - Authenticated in-progress activity drafts: `learning.activity_states` with
