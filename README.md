@@ -236,6 +236,7 @@ None of these hubs is marked certified by this repository.
 - [RLS and trust model](docs/rls.md)
 - [Migration ownership](docs/migrations.md)
 - [Central Admin Portal API](docs/admin-api.md)
+- [Admin authentication](docs/admin-authentication.md)
 - [Repository-driven hub registration](docs/hub-registration.md)
 - [Content package publication](docs/content-publication.md)
 - [Backend curriculum publication](docs/backend-publication.md)

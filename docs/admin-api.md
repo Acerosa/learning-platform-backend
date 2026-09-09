@@ -9,10 +9,10 @@ Library CRUD, and Composition Engine RPCs.
 
 ## Authentication and roles
 
-The Central Admin Portal uses Supabase Auth. An authenticated user must map
-to an active `learning.teachers` profile and an active
-`platform.staff_roles` record. Auth claims supplied by the browser do not grant
-platform roles.
+The Central Admin Portal uses Supabase Auth email and password sign-in. An
+authenticated user must map to an active `learning.teachers` profile and an
+active `platform.staff_roles` record. Auth claims supplied by the browser do
+not grant platform roles. See [Admin authentication](admin-authentication.md).
 
 ## Read views
 
@@ -136,18 +136,19 @@ not part of the Phase 2 list.
 
 ## Initial administrator bootstrap
 
-`admin_api.claim_initial_platform_admin` is the single narrow exception to the
-otherwise read-only Phase 2 contract. It accepts only an expiring, out-of-band
-bootstrap token. The protected implementation derives the confirmed Auth
-identity from `auth.uid()`, creates or reuses that identity's active teacher
-profile, grants the fixed `platform_admin` role, records an audit event and
-atomically consumes the credential. It cannot accept an Auth user ID or role
-from the browser and cannot be reused by any account after the first claim.
+The first production administrator is established by creating a confirmed
+Supabase Auth user, inserting `learning.teachers` for that `auth.users.id`,
+and inserting `platform.staff_roles` with `role = 'platform_admin'`. Those
+writes are privileged database operations. Authenticated browsers have
+`SELECT` only on those tables. See [Admin authentication](admin-authentication.md).
 
-The credential table is private, RLS-enabled and inaccessible through the Data
-API. This mechanism exists only to establish the first production
-administrator; subsequent staff administration must use a separately reviewed
-administrator-only mutation.
+`admin_api.claim_initial_platform_admin` remains the historical single-use
+token claim used to create the original hosted administrator. The credential
+in `platform.admin_bootstrap_credentials` is consumed after the first
+successful claim. It accepts only the expiring token, derives identity from
+`auth.uid()`, and cannot accept an Auth user ID or role from the browser.
+Do not reuse it for later staff provisioning. Subsequent administrators use
+the same teacher + `platform.staff_roles` SQL, not a public setup URL.
 
 ## Mutations
 

@@ -156,7 +156,9 @@ DOB, phone, or address. Browsers never receive table DML; writes go through
 - `platform.contract_versions`: hub manifest, core, learner, submission and
   admin compatibility versions.
 - `platform.staff_roles`: platform-wide staff authorisation distinct from
-  teaching-group access.
+  teaching-group access. The first administrator is an active
+  `platform_admin` row linked through `learning.teachers.auth_user_id` to
+  `auth.users.id`. See [Admin authentication](admin-authentication.md).
 - `platform.audit_events`: protected, append-only event records.
 - `platform.operational_health`: current public status and protected diagnostic
   detail.
