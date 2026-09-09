@@ -146,7 +146,9 @@ from (
     ('14000000-0000-4000-8000-000000000007'::uuid, 'hub.access.auto@local.invalid', 'hub-auto'),
     ('14000000-0000-4000-8000-000000000008'::uuid, 'hub.access.inactive@local.invalid', 'hub-inactive'),
     ('14000000-0000-4000-8000-000000000009'::uuid, 'hub.access.unit14@local.invalid', 'hub-unit14'),
-    ('14000000-0000-4000-8000-00000000000a'::uuid, 'hub.access.closed@local.invalid', 'hub-closed')
+    ('14000000-0000-4000-8000-00000000000a'::uuid, 'hub.access.closed@local.invalid', 'hub-closed'),
+    ('14000000-0000-4000-8000-00000000000b'::uuid, 'hub.access.inactive.cyber@local.invalid', 'hub-inactive-cyber'),
+    ('14000000-0000-4000-8000-00000000000c'::uuid, 'hub.access.inactive.closed@local.invalid', 'hub-inactive-closed')
 ) as fixture(id, email, fixture);
 
 insert into learning.students (
@@ -240,6 +242,26 @@ insert into learning.students (
     'Group',
     'Closed Group',
     'hub.access.closed@local.invalid',
+    true
+  ),
+  (
+    '34000000-0000-4000-8000-00000000000b',
+    '14000000-0000-4000-8000-00000000000b',
+    'HUB-INACTIVE-CYBER',
+    'Inactive',
+    'Cyber',
+    'Inactive Cyber',
+    'hub.access.inactive.cyber@local.invalid',
+    true
+  ),
+  (
+    '34000000-0000-4000-8000-00000000000c',
+    '14000000-0000-4000-8000-00000000000c',
+    'HUB-INACTIVE-CLOSED',
+    'Inactive',
+    'Closed',
+    'Inactive Closed',
+    'hub.access.inactive.closed@local.invalid',
     true
   );
 
@@ -413,6 +435,26 @@ select
 from learning.groups as learner_group
 where learner_group.code = 'CYBER-TEST-QA';
 
+insert into learning.enrolments (student_id, group_id, joined_on, left_on, status)
+select
+  '34000000-0000-4000-8000-00000000000b',
+  learner_group.id,
+  current_date - 10,
+  current_date - 2,
+  'withdrawn'
+from learning.groups as learner_group
+where learner_group.code = 'CYBER-TEST-A';
+
+insert into learning.enrolments (student_id, group_id, joined_on, left_on, status)
+select
+  '34000000-0000-4000-8000-00000000000c',
+  learner_group.id,
+  current_date - 10,
+  current_date - 2,
+  'withdrawn'
+from learning.groups as learner_group
+where learner_group.code = 'UNIT14-TEST-A';
+
 insert into learning.activity_assignments (
   group_id, activity_version_id, required, active
 )
@@ -498,12 +540,97 @@ select lives_ok(
   'a course-year cohort may be linked to more than one hub'
 );
 
+select is(
+  (
+    select count(*)
+    from pg_indexes
+    where schemaname = 'platform'
+      and tablename = 'hub_group_links'
+      and indexname = 'hub_group_links_one_hub_per_group'
+  ),
+  0::bigint,
+  'hub_group_links has no one-hub-per-group uniqueness constraint'
+);
+
+select is(
+  (
+    select proc.pronargs
+    from pg_proc as proc
+    join pg_namespace as nsp on nsp.oid = proc.pronamespace
+    where nsp.nspname = 'api'
+      and proc.proname = 'resolve_learner_hub_access'
+      and pg_get_function_identity_arguments(proc.oid) = 'p_hub_code text, p_course_key text'
+  ),
+  2::smallint,
+  'resolver accepts only hub code and course key; no group UUID'
+);
+
+set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-000000000009';
+set local "request.jwt.claims" = '{"sub":"14000000-0000-4000-8000-000000000009","role":"authenticated"}';
+set local role authenticated;
+
+select is(
+  (
+    select status
+    from api.resolve_learner_hub_access(
+      'unit-3-cyber-security',
+      'ocr-level-3-it'
+    )
+  ),
+  'enrolled',
+  'explicit second-hub binding of the same cohort grants that hub access'
+);
+
+select is(
+  (
+    select group_code
+    from api.resolve_learner_hub_access(
+      'unit-3-cyber-security',
+      'ocr-level-3-it'
+    )
+  ),
+  'UNIT14-TEST-A',
+  'cross-hub authority comes from the requested hub binding, not one-group-one-hub'
+);
+
+select is(
+  (
+    select status
+    from api.resolve_learner_hub_access(
+      'unit-14-software-engineering-for-business',
+      'ocr-level-3-it'
+    )
+  ),
+  'enrolled',
+  'the original Unit 14 binding remains after the same cohort is also bound to Cyber'
+);
+reset role;
+
 delete from platform.hub_group_links as link
 using platform.hubs as hub, learning.groups as learner_group
 where link.hub_id = hub.id
   and link.group_id = learner_group.id
   and hub.hub_code = 'unit-3-cyber-security'
   and learner_group.code = 'UNIT14-TEST-A';
+
+set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-000000000009';
+set local "request.jwt.claims" = '{"sub":"14000000-0000-4000-8000-000000000009","role":"authenticated"}';
+set local role authenticated;
+
+select is(
+  (
+    select status
+    from api.resolve_learner_hub_access(
+      'unit-3-cyber-security',
+      'ocr-level-3-it'
+    )
+  ),
+  'no_enrolment',
+  'removing the Cyber binding removes Cyber authority from the Unit 14 cohort'
+);
+reset role;
+reset "request.jwt.claim.sub";
+reset "request.jwt.claims";
 
 select throws_ok(
   $$
@@ -999,6 +1126,35 @@ select is(
   (
     select status
     from api.resolve_learner_hub_access(
+      'unit-3-cyber-security',
+      'ocr-level-3-it'
+    )
+  ),
+  'no_enrolment',
+  'D. inactive T Level enrolment does not grant Cyber access'
+);
+reset role;
+
+select is(
+  (
+    select enrolment.status
+    from learning.enrolments as enrolment
+    where enrolment.student_id = '34000000-0000-4000-8000-000000000008'
+    order by enrolment.updated_at desc
+    limit 1
+  ),
+  'withdrawn',
+  'D. opening Cyber does not reactivate a withdrawn T Level enrolment'
+);
+
+set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-000000000008';
+set local "request.jwt.claims" = '{"sub":"14000000-0000-4000-8000-000000000008","role":"authenticated"}';
+set local role authenticated;
+
+select is(
+  (
+    select status
+    from api.resolve_learner_hub_access(
       'tlevel-software-development',
       't-level-digital-software-development'
     )
@@ -1029,8 +1185,127 @@ select is(
     limit 1
   ),
   'active',
-  'reactivation restores active status'
+  'A. inactive T Level open_auto enrolment is restored to active'
 );
+
+set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-00000000000b';
+set local "request.jwt.claims" = '{"sub":"14000000-0000-4000-8000-00000000000b","role":"authenticated"}';
+set local role authenticated;
+
+select is(
+  (
+    select status
+    from api.resolve_learner_hub_access(
+      'unit-3-cyber-security',
+      'ocr-level-3-it'
+    )
+  ),
+  'no_enrolment',
+  'B. inactive Cyber open_explicit enrolment is not reactivated by opening the hub'
+);
+
+select is(
+  (
+    select registration_option
+    from api.resolve_learner_hub_access(
+      'unit-3-cyber-security',
+      'ocr-level-3-it'
+    )
+  ),
+  'cyber-year-1-test',
+  'inactive Cyber learner still receives the JoinClass registration key'
+);
+reset role;
+
+select is(
+  (
+    select enrolment.status
+    from learning.enrolments as enrolment
+    where enrolment.student_id = '34000000-0000-4000-8000-00000000000b'
+      and enrolment.group_id = (
+        select id from learning.groups where code = 'CYBER-TEST-A'
+      )
+  ),
+  'withdrawn',
+  'B. opening Cyber does not bypass JoinClass by restoring a withdrawn enrolment'
+);
+
+set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-00000000000b';
+set local "request.jwt.claims" = '{"sub":"14000000-0000-4000-8000-00000000000b","role":"authenticated"}';
+set local role authenticated;
+
+select is(
+  (
+    select status
+    from api.resolve_learner_hub_access(
+      'tlevel-software-development',
+      't-level-digital-software-development'
+    )
+  ),
+  'enrolled_created',
+  'D. inactive Cyber enrolment is not T Level authority and does not block T Level open_auto'
+);
+reset role;
+
+select is(
+  (
+    select enrolment.status
+    from learning.enrolments as enrolment
+    where enrolment.student_id = '34000000-0000-4000-8000-00000000000b'
+      and enrolment.group_id = (
+        select id from learning.groups where code = 'CYBER-TEST-A'
+      )
+  ),
+  'withdrawn',
+  'D. T Level auto-enrol leaves the withdrawn Cyber enrolment unchanged'
+);
+
+set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-00000000000c';
+set local "request.jwt.claims" = '{"sub":"14000000-0000-4000-8000-00000000000c","role":"authenticated"}';
+set local role authenticated;
+
+select is(
+  (
+    select status
+    from api.resolve_learner_hub_access(
+      'unit-14-software-engineering-for-business',
+      'ocr-level-3-it'
+    )
+  ),
+  'no_open_group',
+  'C. inactive closed Unit 14 enrolment is not reactivated by opening the hub'
+);
+reset role;
+
+select is(
+  (
+    select enrolment.status
+    from learning.enrolments as enrolment
+    where enrolment.student_id = '34000000-0000-4000-8000-00000000000c'
+      and enrolment.group_id = (
+        select id from learning.groups where code = 'UNIT14-TEST-A'
+      )
+  ),
+  'withdrawn',
+  'C. closed bindings stay withdrawn until staff restore them'
+);
+
+set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-000000000003';
+set local "request.jwt.claims" = '{"sub":"14000000-0000-4000-8000-000000000003","role":"authenticated"}';
+set local role authenticated;
+
+select is(
+  (
+    select status
+    from api.resolve_learner_hub_access(
+      'tlevel-software-development',
+      't-level-digital-software-development'
+    )
+  ),
+  'enrolled',
+  'E. an already-active T Level enrolment remains idempotent'
+);
+reset role;
 
 set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-000000000006';
 set local "request.jwt.claims" = '{"sub":"14000000-0000-4000-8000-000000000006","role":"authenticated"}';
@@ -1054,6 +1329,54 @@ select ok(
       and group_code in ('TLEVEL-DSD-Y2', 'CYBER-TEST-A')
   ),
   'dual-hub learner has independent Cyber and T Level enrolments'
+);
+
+select is(
+  (
+    select status
+    from api.resolve_learner_hub_access(
+      'tlevel-software-development',
+      't-level-digital-software-development'
+    )
+  ),
+  'enrolled',
+  'dual-hub learner T Level resolver returns T Level enrolled status only'
+);
+
+select is(
+  (
+    select group_code
+    from api.resolve_learner_hub_access(
+      'tlevel-software-development',
+      't-level-digital-software-development'
+    )
+  ),
+  'TLEVEL-DSD-Y2',
+  'dual-hub learner T Level context is TLEVEL-DSD-Y2'
+);
+
+select is(
+  (
+    select status
+    from api.resolve_learner_hub_access(
+      'unit-3-cyber-security',
+      'ocr-level-3-it'
+    )
+  ),
+  'enrolled',
+  'dual-hub learner Cyber resolver returns Cyber enrolled status only'
+);
+
+select is(
+  (
+    select group_code
+    from api.resolve_learner_hub_access(
+      'unit-3-cyber-security',
+      'ocr-level-3-it'
+    )
+  ),
+  'CYBER-TEST-A',
+  'dual-hub learner Cyber context is CYBER-TEST-A'
 );
 
 select ok(

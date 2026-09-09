@@ -80,8 +80,10 @@ Statuses:
 - `enrolled_created` — auto-enrol into the single `open_auto` bound group for
   this hub. Other-hub enrolments do not block that write. The write is only
   into the hub-bound group.
-- `enrolled_reactivated` — inactive matching hub enrolment reactivated using
-  the existing onboarding policy.
+- `enrolled_reactivated` — inactive enrolment in an eligible `open_auto`
+  hub-bound group is reactivated. `open_explicit` and `closed` are not
+  reactivated by opening the hub; those remain JoinClass /
+  `complete_learner_onboarding` or staff placement.
 - `ambiguous` — more than one eligible `open_auto` group and the learner is not
   already enrolled. No pick-list of keys.
 - `no_enrolment` — profile exists but this hub has no matching enrolment, and

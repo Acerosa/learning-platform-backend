@@ -20,7 +20,9 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
   Unit 3 / Unit 14 / Readiness sharing `ocr-level-3-it` cannot inherit access
   from each other: each hub has explicit group bindings. `open_auto` auto-enrol
   writes only into the requested hub's single eligible group and is not blocked
-  by unrelated active enrolments. `hub_group_links` is many-to-many because
+  by unrelated active enrolments. Resolver reactivation is limited to eligible
+  `open_auto` groups; `open_explicit` and `closed` are not restored just by
+  opening the hub. `hub_group_links` is many-to-many because
   `learning.groups` are course-year cohorts, not hub-owned containers. Local
   migration `20260909110815_onboard_unlinked_existing_enrolment` is the
   repository filename for the already-hosted onboarding patch; do not apply

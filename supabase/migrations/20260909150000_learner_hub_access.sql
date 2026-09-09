@@ -26,7 +26,7 @@ comment on table platform.hub_group_links is
   'Authoritative many-to-many mapping of which course/year cohorts a hub may use. Groups are course-year teaching cohorts, not hub-owned containers. Course links are not sufficient: Unit 3, Unit 14 and Readiness share ocr-level-3-it.';
 
 comment on column platform.hub_group_links.join_policy is
-  'open_auto: resolver may auto-enrol into this hub-bound group when it is the only eligible open_auto group for the requested hub. Other-hub enrolments do not block that write. open_explicit: JoinClass / complete_learner_onboarding only. closed: access only if already enrolled.';
+  'open_auto: resolver may auto-enrol or reactivate this hub-bound group when it is eligible. Other-hub enrolments do not block that write. open_explicit: JoinClass / complete_learner_onboarding only; opening the hub does not reactivate. closed: access only if already actively enrolled.';
 
 create index hub_group_links_group_idx
   on platform.hub_group_links (group_id, active);
@@ -396,13 +396,16 @@ begin
   select enrolment.id
   into v_inactive_id
   from learning.enrolments as enrolment
+  join learning.hub_access_bound_groups(v_hub_id) as bound
+    on bound.group_id = enrolment.group_id
   where enrolment.student_id = v_student_id
     and enrolment.status <> 'active'
-    and exists (
-      select 1
-      from learning.hub_access_bound_groups(v_hub_id) as bound
-      where bound.group_id = enrolment.group_id
-    )
+    and bound.join_policy = 'open_auto'
+    and bound.registration_open
+    and bound.group_active
+    and bound.academic_year_active
+    and bound.course_active
+    and bound.registration_key is not null
   order by enrolment.updated_at desc, enrolment.joined_on desc
   limit 1;
 
@@ -560,7 +563,7 @@ end
 $$;
 
 comment on function api.resolve_learner_hub_access(text, text) is
-  'Resolves the current Auth learner against hub-bound delivery groups. Identity is auth.uid(). Does not accept learner, enrolment or group UUIDs. Auto-enrol writes only into the requested hub''s single eligible open_auto group and is not blocked by unrelated enrolments.';
+  'Resolves the current Auth learner against hub-bound delivery groups. Identity is auth.uid(). Does not accept learner, enrolment or group UUIDs. Automatic create/reactivate writes only into an eligible open_auto group for the requested hub.';
 
 revoke all on function api.resolve_learner_hub_access(text, text)
   from public, anon, authenticated;
