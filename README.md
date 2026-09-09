@@ -144,6 +144,7 @@ Existing hubs retain these contracts:
 - `api.my_attempts`
 - `api.my_responses`
 - `api.my_activity_progress`
+- `api.my_hub_activity_progress(hub_code)`
 - `api.registration_options()`
 - `api.complete_learner_onboarding(...)`
 - `api.submit_attempt(...)`

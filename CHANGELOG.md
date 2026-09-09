@@ -10,6 +10,17 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ## [Unreleased]
 
+### Added
+
+- Phase 1A learner reporting read `api.my_hub_activity_progress(hub_code)`.
+  Hub-scoped completed-attempt progress for the authenticated learner only
+  (`auth.uid()`). Uses the same hub ↔ group binding as
+  `api.my_hub_assignments`. Excludes formative checks and activity drafts.
+  Does not change submit, formative marking, drafts, or
+  `api.my_activity_progress`. Local migration
+  `20260910093000_learner_hub_activity_progress`; do not apply hosted until
+  review.
+
 ### Security
 
 - Learner group authority is no longer client-chosen.
