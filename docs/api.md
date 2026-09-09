@@ -17,6 +17,7 @@ Authenticated learner views:
 - `api.my_attempts`
 - `api.my_responses`
 - `api.my_activity_progress`
+- `api.my_hub_activity_progress(hub_code)`
 
 Authenticated in-progress drafts:
 
@@ -105,6 +106,50 @@ Statuses:
 fields as `api.my_assignments` except `assignment_id`. It filters to groups
 bound to that hub. `api.my_assignments` remains the unscoped union of all
 active enrolments.
+
+### `api.my_hub_activity_progress(p_hub_code)`
+
+Phase 1A learner reporting read. Authenticated, `SECURITY DEFINER`, empty
+`search_path`. Identity is only `auth.uid()` → `learning.current_student_id()`.
+The browser may supply the authored hub code. It must not send learner,
+student, enrolment, assignment or attempt identifiers.
+
+Authority for hub-scoped progress:
+
+```text
+auth.uid()
+  → learning.students
+  → active learning.enrolments
+  → platform.hub_group_links (groups permitted for this hub)
+  → learning.activity_assignments for those groups
+  → completed learning.attempts for the current learner on those assignments
+```
+
+This matches `api.my_hub_assignments`. Course links alone are not sufficient.
+
+Semantics:
+
+- One row per current hub-bound assignment for the learner.
+- Metrics use **completed** `learning.attempts` only.
+- `learning.formative_checks` and `learning.activity_states` are excluded.
+- First/latest ordering matches `api.my_activity_progress`
+  (`received_at`, then `id`).
+- Scores are reported per assigned `activity_version`. Versions are not merged.
+- `improvement` is `latest_score - first_score` (raw).
+- `*_percentage` and `improvement_percentage_points` normalise each attempt by
+  that attempt's own `max_score`.
+- `week_key` / `week_number` / `session_number` come from
+  `learning.activity_delivery` (+ `curriculum_weeks` when linked). Missing
+  delivery context returns nulls; the endpoint still returns progress.
+- Activity titles come from `learning.activities.title` (same catalogue source
+  as `api.my_hub_assignments`), not from a published package JSON join.
+- `completed` is true when `attempt_count > 0`.
+- Assigned activities with zero completed attempts are returned so clients can
+  derive outstanding work (`completed = false`).
+- Does not expose `response_payload`, answer keys, or presentation copy.
+
+Phase 1A explicitly excludes: formative Check history, topic/skill strengths,
+PDF, email, and report snapshots.
 
 Current `api.my_assignments` callers (unscoped compatibility union):
 
