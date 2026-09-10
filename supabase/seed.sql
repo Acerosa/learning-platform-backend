@@ -572,8 +572,8 @@ insert into platform.hub_group_links (hub_id, group_id, active, join_policy)
 select hub.id, learner_group.id, true, mapping.join_policy
 from (
   values
-    ('tlevel-software-development', 'TLEVEL-DSD-Y2', 'open_auto'),
-    ('l2e-exploring-emerging-digital-technologies', 'L2E-DELIVERY-A', 'open_auto'),
+    ('tlevel-software-development', 'TLEVEL-DSD-Y2', 'open_explicit'),
+    ('l2e-exploring-emerging-digital-technologies', 'L2E-DELIVERY-A', 'open_explicit'),
     ('unit-3-cyber-security', 'CYBER-TEST-A', 'open_explicit'),
     ('unit-3-cyber-security', 'CYBER-TEST-QA', 'closed'),
     ('unit-14-software-engineering-for-business', 'UNIT14-TEST-A', 'closed')

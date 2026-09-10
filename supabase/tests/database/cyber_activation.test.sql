@@ -143,7 +143,7 @@ select ok(
       and course.stable_key = 'ocr-level-3-it'
       and learner_group.active
       and learner_group.registration_open
-      and learner_group.registration_key = 'cyber-year-1-test'
+      and learner_group.registration_key = 'nhc-cyber-26'
       and learner_group.year_group = 'Year 1'
   ),
   'Cyber synthetic test group is active with open registration'
@@ -157,7 +157,7 @@ select throws_like(
 );
 select throws_like(
   $$select * from api.complete_learner_onboarding(
-    'Cyber', 'Learner', 'CYBER-001', 'cyber-year-1-test'
+    'Cyber', 'Learner', 'CYBER-001', 'nhc-cyber-26'
   )$$,
   '%permission denied%',
   'anonymous callers cannot complete Cyber onboarding'
@@ -191,7 +191,7 @@ select is(
       'Cyber',
       'Activation',
       'CYBER-ACT-001',
-      'cyber-year-1-test'
+      'nhc-cyber-26'
     )
   ),
   false,
@@ -213,7 +213,7 @@ select is(
     select group_code
     from api.join_learner_hub_group(
       'unit-3-cyber-security',
-      'cyber-year-1-test'
+      'nhc-cyber-26'
     )
   ),
   'CYBER-TEST-A',
@@ -370,7 +370,7 @@ select is(
       'Cyber',
       'Isolation',
       'CYBER-ACT-002',
-      'tlevel-dsd-y2'
+      'nhc-tlevel-26'
     )
   ),
   false,
@@ -382,7 +382,7 @@ select is(
     select group_code
     from api.join_learner_hub_group(
       'unit-3-cyber-security',
-      'cyber-year-1-test'
+      'nhc-cyber-26'
     )
   ),
   'CYBER-TEST-A',

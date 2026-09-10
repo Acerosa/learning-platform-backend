@@ -258,7 +258,7 @@ select is(
 select is(
   (
     select idempotent
-    from api.complete_learner_onboarding('Ada', 'Lovelace', '001234', 'cyber-year-1-test')
+    from api.complete_learner_onboarding('Ada', 'Lovelace', '001234', 'nhc-cyber-26')
   ),
   true,
   'supplying another registration option remains a no-op for enrolment'
