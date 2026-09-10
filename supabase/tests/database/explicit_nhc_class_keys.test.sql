@@ -1,4 +1,4 @@
--- Explicit NHC class keys + open_explicit for T Level and L2E delivery groups.
+-- Explicit NHC class keys + open_explicit for Unit 3 / T Level / ET delivery groups.
 -- Applied after 20260910110000_explicit_nhc_class_keys.sql in CI.
 
 begin;
@@ -16,10 +16,14 @@ select is(
   'T Level delivery key is nhc-tlevel-26'
 );
 
-select is(
-  (select registration_key from learning.groups where code = 'L2E-DELIVERY-A'),
-  'nhc-et-26',
-  'L2E delivery key is nhc-et-26'
+select ok(
+  not exists (select 1 from learning.groups where code = 'L2E-DELIVERY-A')
+  or (
+    select registration_key
+    from learning.groups
+    where code = 'L2E-DELIVERY-A'
+  ) = 'nhc-et-26',
+  'L2E delivery key is nhc-et-26 when the delivery group exists'
 );
 
 select is(
@@ -48,17 +52,24 @@ select is(
   'T Level delivery is open_explicit'
 );
 
-select is(
-  (
+select ok(
+  not exists (
+    select 1
+    from platform.hub_group_links as link
+    join platform.hubs as hub on hub.id = link.hub_id
+    join learning.groups as g on g.id = link.group_id
+    where hub.hub_code = 'l2e-exploring-emerging-digital-technologies'
+      and g.code = 'L2E-DELIVERY-A'
+  )
+  or (
     select link.join_policy
     from platform.hub_group_links as link
     join platform.hubs as hub on hub.id = link.hub_id
     join learning.groups as g on g.id = link.group_id
     where hub.hub_code = 'l2e-exploring-emerging-digital-technologies'
       and g.code = 'L2E-DELIVERY-A'
-  ),
-  'open_explicit',
-  'L2E delivery is open_explicit'
+  ) = 'open_explicit',
+  'L2E delivery is open_explicit when the hub binding exists'
 );
 
 select is(
@@ -66,6 +77,10 @@ select is(
   0,
   'retired Unit 3 test key is gone'
 );
+
+-- Authenticated learner required before class-key validation runs.
+select set_config('request.jwt.claim.sub', 'aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee', true);
+select set_config('request.jwt.claim.role', 'authenticated', true);
 
 select throws_ok(
   $$

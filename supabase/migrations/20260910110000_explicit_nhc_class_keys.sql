@@ -6,18 +6,18 @@
 update learning.groups
 set registration_key = 'nhc-cyber-26'
 where code = 'CYBER-TEST-A'
-  and registration_key = 'cyber-year-1-test';
+  and registration_key is distinct from 'nhc-cyber-26';
 
 -- T Level + Emerging Technologies: delivery keys.
 update learning.groups
 set registration_key = 'nhc-tlevel-26'
 where code = 'TLEVEL-DSD-Y2'
-  and registration_key = 'tlevel-dsd-y2';
+  and registration_key is distinct from 'nhc-tlevel-26';
 
 update learning.groups
 set registration_key = 'nhc-et-26'
 where code = 'L2E-DELIVERY-A'
-  and registration_key = 'l2e-year-1-delivery';
+  and registration_key is distinct from 'nhc-et-26';
 
 -- Flip auto-enrol hubs to explicit JoinClass (same model as Unit 3).
 update platform.hub_group_links as link
