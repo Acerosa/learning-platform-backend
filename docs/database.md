@@ -26,6 +26,11 @@
 - `learning.coding_languages`, `activity_version_languages`
 - `learning.activity_delivery`: curriculum availability metadata.
 - `learning.activity_assignments`: group-specific assigned activity versions.
+  Multiple versions of the same activity key may remain active for
+  version-pinned learner APIs. Reporting selects one authoritative current
+  assignment per group + activity via
+  `learning.current_activity_assignment_id`. See
+  `docs/reporting-current-assignment-membership.md`.
 
 Published activity versions, questions, marking specifications and their
 mappings are immutable. Stable keys and semantic versions allow independently

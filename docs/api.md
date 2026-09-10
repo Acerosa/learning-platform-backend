@@ -129,12 +129,18 @@ This matches `api.my_hub_assignments`. Course links alone are not sufficient.
 
 Semantics:
 
-- One row per current hub-bound assignment for the learner.
-- Metrics use **completed** `learning.attempts` only.
+- One row per **authoritative current** hub-bound assignment for the learner
+  (one group + one logical activity key), selected by
+  `learning.current_activity_assignment_id` among active assignments.
+  Older active versions remain available to version-pinned submit/state APIs
+  but are not returned as current required reporting rows.
+- Metrics use **completed** `learning.attempts` only, for that current
+  assignment.
 - `learning.formative_checks` and `learning.activity_states` are excluded.
 - First/latest ordering matches `api.my_activity_progress`
   (`received_at`, then `id`).
-- Scores are reported per assigned `activity_version`. Versions are not merged.
+- Scores are reported for the current assigned `activity_version` only.
+  Historical versions are not merged and do not inflate required work.
 - `improvement` is `latest_score - first_score` (raw).
 - `*_percentage` and `improvement_percentage_points` normalise each attempt by
   that attempt's own `max_score`.
@@ -147,6 +153,9 @@ Semantics:
 - Assigned activities with zero completed attempts are returned so clients can
   derive outstanding work (`completed = false`).
 - Does not expose `response_payload`, answer keys, or presentation copy.
+
+See `docs/reporting-current-assignment-membership.md` for the current-
+assignment rule.
 
 Phase 1A explicitly excludes: formative Check history, topic/skill strengths,
 PDF, email, and report snapshots.
