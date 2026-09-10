@@ -10,6 +10,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ## [Unreleased]
 
+### Fixed
+
+- `api.ensure_learner_auth_link()` links `auth.uid()` to the unique active
+  unlinked `learning.students` row whose `contact_email` matches the Auth
+  email. Prevents false first-time onboarding / `ONBOARDING_CONFLICT` when a
+  roster learner already exists for that email but was never Auth-linked.
+  Migration `20260910150000_ensure_learner_auth_link`.
+
 ### Added
 
 - Phase 1A learner reporting read `api.my_hub_activity_progress(hub_code)`.
