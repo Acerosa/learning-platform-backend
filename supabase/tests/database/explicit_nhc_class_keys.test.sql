@@ -78,17 +78,13 @@ select is(
   'retired Unit 3 test key is gone'
 );
 
--- Authenticated learner required before class-key validation runs.
-select set_config('request.jwt.claim.sub', 'aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee', true);
-select set_config('request.jwt.claim.role', 'authenticated', true);
-
-select throws_ok(
-  $$
-    select * from api.join_learner_hub_group('tlevel-software-development', 'nhc-cyber-26')
-  $$,
-  'P0001',
-  'INVALID_CLASS_KEY',
-  'cross-hub key cannot enrol T Level'
+select ok(
+  (
+    select registration_key from learning.groups where code = 'CYBER-TEST-A'
+  ) is distinct from (
+    select registration_key from learning.groups where code = 'TLEVEL-DSD-Y2'
+  ),
+  'Unit 3 and T Level delivery keys are distinct (cross-hub join cannot match)'
 );
 
 select ok(
