@@ -21,6 +21,11 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
   `20260910140000_reporting_current_assignment_membership`; do not apply
   hosted until separate review. See
   `docs/reporting-current-assignment-membership.md`.
+- `api.ensure_learner_auth_link()` links `auth.uid()` to the unique active
+  unlinked `learning.students` row whose `contact_email` matches the Auth
+  email. Prevents false first-time onboarding / `ONBOARDING_CONFLICT` when a
+  roster learner already exists for that email but was never Auth-linked.
+  Migration `20260910150000_ensure_learner_auth_link`.
 
 ### Added
 
