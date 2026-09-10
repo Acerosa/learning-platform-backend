@@ -22,10 +22,10 @@ where code = 'L2E-DELIVERY-A'
 -- Flip auto-enrol hubs to explicit JoinClass (same model as Unit 3).
 update platform.hub_group_links as link
 set join_policy = 'open_explicit'
-from platform.hubs as hub
-join learning.groups as learner_group
-  on learner_group.id = link.group_id
+from platform.hubs as hub,
+     learning.groups as learner_group
 where link.hub_id = hub.id
+  and link.group_id = learner_group.id
   and link.active
   and link.join_policy = 'open_auto'
   and (
