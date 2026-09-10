@@ -64,6 +64,14 @@ insert into platform.hubs (
     repeat('b', 64)
   );
 
+insert into platform.hub_course_links (hub_id, course_id, active)
+select hub.id, learner_group.course_id, true
+from platform.hubs as hub
+cross join learning.groups as learner_group
+where hub.hub_code in ('reporting-current-alpha', 'reporting-current-beta')
+  and learner_group.id = '60000000-0000-4000-8000-000000000001'
+on conflict do nothing;
+
 insert into learning.modules (
   id, course_id, stable_key, title, active
 )
@@ -78,7 +86,7 @@ where course.stable_key = 't-level-digital-software-development'
 limit 1;
 
 insert into learning.curriculum_weeks (
-  id, module_id, stable_key, title, week_number, ordinal, active
+  id, module_id, stable_key, title, week_number, sort_order, active
 ) values (
   '36b10000-0000-4000-8000-000000000011',
   '36b10000-0000-4000-8000-000000000001',
@@ -165,8 +173,9 @@ insert into learning.activities (
     true
   );
 
+-- Insert unpublished versions first so questions can be attached.
 insert into learning.activity_versions (
-  id, activity_id, version, content_hash, max_score, question_count, published_at
+  id, activity_id, version, content_hash, max_score, question_count
 ) values
   (
     '36e10000-0000-4000-8000-000000000001',
@@ -174,8 +183,7 @@ insert into learning.activity_versions (
     '1.0.0',
     repeat('1', 64),
     10,
-    1,
-    timestamptz '2026-09-01 10:00:00+00'
+    1
   ),
   (
     '36e10000-0000-4000-8000-000000000002',
@@ -183,8 +191,7 @@ insert into learning.activity_versions (
     '1.1.0',
     repeat('2', 64),
     10,
-    1,
-    timestamptz '2026-09-02 10:00:00+00'
+    1
   ),
   (
     '36e10000-0000-4000-8000-000000000003',
@@ -192,28 +199,8 @@ insert into learning.activity_versions (
     '1.0.0',
     repeat('3', 64),
     5,
-    1,
-    timestamptz '2026-09-01 11:00:00+00'
+    1
   );
-
-insert into learning.activity_delivery (
-  id, activity_version_id, academic_year_id, group_id, curriculum_week_id,
-  week_number, session_number, sort_order, active
-)
-select
-  '36f10000-0000-4000-8000-000000000001',
-  '36e10000-0000-4000-8000-000000000002',
-  academic_year.id,
-  null,
-  '36b10000-0000-4000-8000-000000000011',
-  1,
-  1,
-  1,
-  true
-from learning.academic_years as academic_year
-where academic_year.active
-order by academic_year.code
-limit 1;
 
 insert into learning.questions (
   id, activity_version_id, stable_key, section_key, section_title,
@@ -242,33 +229,64 @@ insert into learning.questions (
     10
   );
 
+update learning.activity_versions
+set published_at = case id
+  when '36e10000-0000-4000-8000-000000000001' then timestamptz '2026-09-01 10:00:00+00'
+  when '36e10000-0000-4000-8000-000000000002' then timestamptz '2026-09-02 10:00:00+00'
+  when '36e10000-0000-4000-8000-000000000003' then timestamptz '2026-09-01 11:00:00+00'
+end
+where id in (
+  '36e10000-0000-4000-8000-000000000001',
+  '36e10000-0000-4000-8000-000000000002',
+  '36e10000-0000-4000-8000-000000000003'
+);
+
+insert into learning.activity_delivery (
+  id, activity_version_id, academic_year_id, group_id, curriculum_week_id,
+  week_number, session_number, sort_order, active
+)
+select
+  '36f10000-0000-4000-8000-000000000001',
+  '36e10000-0000-4000-8000-000000000002',
+  academic_year.id,
+  null,
+  '36b10000-0000-4000-8000-000000000011',
+  1,
+  1,
+  1,
+  true
+from learning.academic_years as academic_year
+where academic_year.active
+order by academic_year.code
+limit 1;
+
 -- Both versions remain active: required for version-pinned learner APIs.
 insert into learning.activity_assignments (
   id, group_id, activity_version_id, required, active
 ) values
   (
-    '36g10000-0000-4000-8000-000000000001',
+    '37010000-0000-4000-8000-000000000001',
     '36c10000-0000-4000-8000-000000000001',
     '36e10000-0000-4000-8000-000000000001',
     true,
     true
   ),
   (
-    '36g10000-0000-4000-8000-000000000002',
+    '37010000-0000-4000-8000-000000000002',
     '36c10000-0000-4000-8000-000000000001',
     '36e10000-0000-4000-8000-000000000002',
     true,
     true
   ),
   (
-    '36g10000-0000-4000-8000-000000000003',
+    '37010000-0000-4000-8000-000000000003',
     '36c10000-0000-4000-8000-000000000001',
     '36e10000-0000-4000-8000-000000000003',
     true,
     true
   ),
   (
-    '36g10000-0000-4000-8000-000000000004',
+    '37010000-0000-4000-8000-000000000004',
     '36c10000-0000-4000-8000-000000000002',
     '36e10000-0000-4000-8000-000000000002',
     true,
@@ -279,14 +297,14 @@ insert into learning.enrolments (
   id, student_id, group_id, joined_on, status
 ) values
   (
-    '36j10000-0000-4000-8000-000000000001',
+    '37110000-0000-4000-8000-000000000001',
     '30000000-0000-4000-8000-000000000001',
     '36c10000-0000-4000-8000-000000000001',
     '2026-09-01',
     'active'
   ),
   (
-    '36j10000-0000-4000-8000-000000000002',
+    '37110000-0000-4000-8000-000000000002',
     '30000000-0000-4000-8000-000000000002',
     '36c10000-0000-4000-8000-000000000002',
     '2026-09-01',
@@ -299,11 +317,11 @@ insert into learning.attempts (
   activity_version_id, attempt_number, status, score, max_score,
   marking_source, evidence_level, submission_hash, received_at, completed_at
 ) values (
-  '36k10000-0000-4000-8000-000000000001',
+  '37210000-0000-4000-8000-000000000001',
   'rc-hist-1',
   '30000000-0000-4000-8000-000000000001',
-  '36j10000-0000-4000-8000-000000000001',
-  '36g10000-0000-4000-8000-000000000001',
+  '37110000-0000-4000-8000-000000000001',
+  '37010000-0000-4000-8000-000000000001',
   '36e10000-0000-4000-8000-000000000001',
   1,
   'completed',
@@ -320,8 +338,8 @@ insert into learning.responses (
   id, attempt_id, question_id, response_payload, awarded_score, max_score,
   is_correct, requires_review, marking_source
 ) values (
-  '36l10000-0000-4000-8000-000000000001',
-  '36k10000-0000-4000-8000-000000000001',
+  '37310000-0000-4000-8000-000000000001',
+  '37210000-0000-4000-8000-000000000001',
   '36110000-0000-4000-8000-000000000001',
   '{"selected":"A"}'::jsonb,
   8,
@@ -336,7 +354,7 @@ select is(
     '36c10000-0000-4000-8000-000000000001',
     '36d10000-0000-4000-8000-000000000001'
   ),
-  '36g10000-0000-4000-8000-000000000002'::uuid,
+  '37010000-0000-4000-8000-000000000002'::uuid,
   'helper selects later-published 1.1.0 as current among active versions'
 );
 
@@ -345,8 +363,8 @@ select is(
     select count(*)::int
     from learning.activity_assignments
     where id in (
-      '36g10000-0000-4000-8000-000000000001',
-      '36g10000-0000-4000-8000-000000000002'
+      '37010000-0000-4000-8000-000000000001',
+      '37010000-0000-4000-8000-000000000002'
     )
       and active
   ),
@@ -358,7 +376,7 @@ select is(
   (
     select count(*)::int
     from learning.attempts
-    where id = '36k10000-0000-4000-8000-000000000001'
+    where id = '37210000-0000-4000-8000-000000000001'
   ),
   1,
   'historical attempt against 1.0.0 remains stored'
@@ -368,7 +386,7 @@ select is(
   (
     select count(*)::int
     from learning.responses
-    where id = '36l10000-0000-4000-8000-000000000001'
+    where id = '37310000-0000-4000-8000-000000000001'
   ),
   1,
   'historical responses against 1.0.0 remain stored'
@@ -424,11 +442,11 @@ insert into learning.attempts (
   marking_source, evidence_level, submission_hash, received_at, completed_at
 ) values
   (
-    '36k10000-0000-4000-8000-000000000002',
+    '37210000-0000-4000-8000-000000000002',
     'rc-cur-1',
     '30000000-0000-4000-8000-000000000001',
-    '36j10000-0000-4000-8000-000000000001',
-    '36g10000-0000-4000-8000-000000000002',
+    '37110000-0000-4000-8000-000000000001',
+    '37010000-0000-4000-8000-000000000002',
     '36e10000-0000-4000-8000-000000000002',
     1,
     'completed',
@@ -441,11 +459,11 @@ insert into learning.attempts (
     timestamptz '2026-09-03 09:05:00+00'
   ),
   (
-    '36k10000-0000-4000-8000-000000000003',
+    '37210000-0000-4000-8000-000000000003',
     'rc-cur-2',
     '30000000-0000-4000-8000-000000000001',
-    '36j10000-0000-4000-8000-000000000001',
-    '36g10000-0000-4000-8000-000000000002',
+    '37110000-0000-4000-8000-000000000001',
+    '37010000-0000-4000-8000-000000000002',
     '36e10000-0000-4000-8000-000000000002',
     2,
     'completed',
@@ -518,21 +536,24 @@ reset role;
 
 -- Newer published version becomes current for reporting without deleting old.
 insert into learning.activity_versions (
-  id, activity_id, version, content_hash, max_score, question_count, published_at
+  id, activity_id, version, content_hash, max_score, question_count
 ) values (
   '36e10000-0000-4000-8000-000000000005',
   '36d10000-0000-4000-8000-000000000001',
   '1.2.0',
   repeat('8', 64),
   10,
-  1,
-  timestamptz '2026-09-04 10:00:00+00'
+  1
 );
+
+update learning.activity_versions
+set published_at = timestamptz '2026-09-04 10:00:00+00'
+where id = '36e10000-0000-4000-8000-000000000005';
 
 insert into learning.activity_assignments (
   id, group_id, activity_version_id, required, active
 ) values (
-  '36g10000-0000-4000-8000-000000000005',
+  '37010000-0000-4000-8000-000000000005',
   '36c10000-0000-4000-8000-000000000001',
   '36e10000-0000-4000-8000-000000000005',
   true,
@@ -544,7 +565,7 @@ select is(
     '36c10000-0000-4000-8000-000000000001',
     '36d10000-0000-4000-8000-000000000001'
   ),
-  '36g10000-0000-4000-8000-000000000005'::uuid,
+  '37010000-0000-4000-8000-000000000005'::uuid,
   'assigning a later-published version replaces current membership selection'
 );
 
