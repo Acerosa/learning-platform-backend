@@ -229,6 +229,19 @@ The submission contract version remains 0.1.0.
 These RPCs are callable before authentication because they expose configuration
 and service availability only.
 
+## Classroom Group Generator
+
+Temporary classroom teams, independent of hubs, courses and `learning.groups`.
+
+Anonymous students may call:
+
+| RPC | Purpose |
+| --- | --- |
+| `api.join_grouping_session(join_code, display_name, client_key)` | Join an open session; returns `participantToken` |
+| `api.my_grouping_status(participant_token)` | Waiting / awaiting assignment / own published group only |
+
+Proposed groups are never returned. Staff manage sessions through `admin_api` (`platform_admin` for MVP). See `docs/admin-api.md`.
+
 ## Readiness diagnostics
 
 Readiness diagnostics are anonymous pre-enrolment checks. They are **not**

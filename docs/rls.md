@@ -120,3 +120,8 @@ Portal browser configuration.
 RLS tests cover anonymous denial, learner isolation, ordinary-teacher denial,
 explicit platform-admin access and absence of direct administrative mutation.
 Any new protected table requires RLS and tests in the same migration/release.
+
+## Classroom Group Generator
+
+`learning.grouping_*` tables enable RLS, revoke direct DML from `anon`/`authenticated`, and allow `platform_admin` SELECT only. Anonymous writes go only through `api.join_grouping_session` / `api.my_grouping_status`. Staff writes go only through `admin_api` / `platform` SECURITY DEFINER RPCs.
+
