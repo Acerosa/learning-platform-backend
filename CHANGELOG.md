@@ -10,6 +10,18 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ## [Unreleased]
 
+### Fixed
+
+- Phase 1A.1 authoritative current assignment membership for reporting.
+  `api.my_hub_activity_progress` returns one row per logical activity key by
+  selecting `learning.current_activity_assignment_id` among active group
+  assignments (prefer non-retired, then latest `published_at`). Historical
+  multi-version assignments stay active for version-pinned submit/state APIs;
+  attempts/responses are not deleted. Local migration
+  `20260910140000_reporting_current_assignment_membership`; do not apply
+  hosted until separate review. See
+  `docs/reporting-current-assignment-membership.md`.
+
 ### Added
 
 - Phase 1A learner reporting read `api.my_hub_activity_progress(hub_code)`.
