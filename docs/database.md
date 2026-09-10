@@ -202,3 +202,12 @@ Core records use UUID primary keys. Cross-repository identities use immutable
 stable text keys. Most protected relationships use `ON DELETE RESTRICT` so
 learner history cannot be silently removed; response rows cascade only with
 their parent attempt.
+
+## Classroom grouping (temporary)
+
+Separate from `learning.groups` (teaching/cohort groups).
+
+- `learning.grouping_sessions` — join code, preferred size, status (`joining`/`proposed`/`published`/`closed`)
+- `learning.grouping_teams` — stable `team_key` plus editable `display_name`
+- `learning.grouping_participants` — display name, participant token, optional client key, soft remove
+

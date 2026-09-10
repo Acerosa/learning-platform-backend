@@ -10,6 +10,17 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ## [Unreleased]
 
+### Added
+
+- Classroom Group Generator domain for temporary classroom teams (not
+  `learning.groups`, not hub/course-bound). Tables
+  `learning.grouping_sessions`, `learning.grouping_teams`,
+  `learning.grouping_participants`; balancing helper
+  `learning.balanced_group_sizes`; anonymous RPCs
+  `api.join_grouping_session` and `api.my_grouping_status`; staff RPCs under
+  `admin_api.*` gated by `platform_admin`. Migration
+  `20260910160000_classroom_group_generator`. Local-only until hosted review.
+
 ### Fixed
 
 - Phase 1A.1 authoritative current assignment membership for reporting.

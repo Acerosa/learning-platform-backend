@@ -232,3 +232,25 @@ same LHDS contract.
 Admin views expose only fields required by the initial read use cases. Response
 payloads are not included in the general attempt view. New PII or evidence
 projections require an explicit purpose and authorisation review.
+
+## Classroom Group Generator
+
+Permission decision (MVP): mutations require an active teacher with `platform_admin`.
+
+Staff RPCs (thin wrappers over `platform.*`):
+
+- `admin_api.create_grouping_session`
+- `admin_api.get_grouping_session`
+- `admin_api.remove_grouping_participant`
+- `admin_api.generate_grouping_teams`
+- `admin_api.move_grouping_participant`
+- `admin_api.rename_grouping_team`
+- `admin_api.publish_grouping_session`
+- `admin_api.assign_late_grouping_participant`
+- `admin_api.rebalance_grouping_session`
+- `admin_api.close_grouping_session`
+
+Read model: `admin_api.grouping_sessions`.
+
+Anonymous browsers cannot execute these RPCs. Generation and publication are separate; students only see assignments after publish.
+
