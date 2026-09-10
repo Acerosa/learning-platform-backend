@@ -9,7 +9,7 @@ insert into platform.hub_group_links (hub_id, group_id, active, join_policy)
 select hub.id, learner_group.id, true, mapping.join_policy
 from (
   values
-    ('tlevel-software-development', 'TLEVEL-DSD-Y2', 'open_auto'),
+    ('tlevel-software-development', 'TLEVEL-DSD-Y2', 'open_explicit'),
     ('unit-3-cyber-security', 'CYBER-TEST-A', 'open_explicit'),
     ('unit-3-cyber-security', 'CYBER-TEST-QA', 'closed'),
     ('unit-14-software-engineering-for-business', 'UNIT14-TEST-A', 'closed')
@@ -18,7 +18,13 @@ join platform.hubs as hub
   on hub.hub_code = mapping.hub_code
 join learning.groups as learner_group
   on learner_group.code = mapping.group_code
-on conflict (hub_id, group_id) do nothing;
+on conflict (hub_id, group_id) do update
+set join_policy = excluded.join_policy,
+    active = excluded.active;
+
+-- Ensure the seeded delivery groups match the explicit-class-keys migration.
+update learning.groups set registration_key = 'nhc-cyber-26' where code = 'CYBER-TEST-A';
+update learning.groups set registration_key = 'nhc-tlevel-26' where code = 'TLEVEL-DSD-Y2';
 
 insert into learning.courses (
   id, stable_key, title, qualification_level, active
@@ -84,7 +90,7 @@ select
   'L2E Gateway Delivery Group A',
   true,
   'Year 1',
-  'l2e-year-1-delivery',
+  'nhc-et-26',
   true,
   false
 from learning.courses as course
@@ -103,12 +109,12 @@ set
   registration_key = excluded.registration_key;
 
 insert into platform.hub_group_links (hub_id, group_id, active, join_policy)
-select hub.id, learner_group.id, true, 'open_auto'
+select hub.id, learner_group.id, true, 'open_explicit'
 from platform.hubs as hub
 join learning.groups as learner_group
   on learner_group.code = 'L2E-DELIVERY-A'
 where hub.hub_code = 'l2e-exploring-emerging-digital-technologies'
-on conflict (hub_id, group_id) do nothing;
+on conflict (hub_id, group_id) do update set join_policy = excluded.join_policy;
 
 insert into auth.users (
   instance_id,
@@ -299,7 +305,7 @@ select
   'L2E Gateway Delivery Group A',
   true,
   'Year 1',
-  'l2e-year-1-delivery',
+  'nhc-et-26',
   true,
   false,
   null
@@ -317,12 +323,12 @@ where course.stable_key = 'gateway-level-2-digital-it-skills'
   );
 
 insert into platform.hub_group_links (hub_id, group_id, active, join_policy)
-select hub.id, learner_group.id, true, 'open_auto'
+select hub.id, learner_group.id, true, 'open_explicit'
 from platform.hubs as hub
 join learning.groups as learner_group
   on learner_group.code = 'L2E-DELIVERY-A'
 where hub.hub_code = 'l2e-exploring-emerging-digital-technologies'
-on conflict (hub_id, group_id) do nothing;
+on conflict (hub_id, group_id) do update set join_policy = excluded.join_policy;
 
 insert into learning.groups (
   id, academic_year_id, course_id, code, name, active, year_group,
@@ -360,7 +366,7 @@ insert into platform.hub_group_links (hub_id, group_id, active, join_policy)
 select hub.id, learner_group.id, true, mapping.join_policy
 from (
   values
-    ('tlevel-software-development', 'TLEVEL-DSD-Y2', 'open_auto'),
+    ('tlevel-software-development', 'TLEVEL-DSD-Y2', 'open_explicit'),
     ('unit-3-cyber-security', 'CYBER-TEST-A', 'open_explicit'),
     ('unit-3-cyber-security', 'CYBER-TEST-QA', 'closed'),
     ('unit-14-software-engineering-for-business', 'UNIT14-TEST-A', 'closed')
@@ -369,7 +375,9 @@ join platform.hubs as hub
   on hub.hub_code = mapping.hub_code
 join learning.groups as learner_group
   on learner_group.code = mapping.group_code
-on conflict (hub_id, group_id) do nothing;
+on conflict (hub_id, group_id) do update
+set join_policy = excluded.join_policy,
+    active = excluded.active;
 
 insert into learning.enrolments (student_id, group_id, joined_on, status)
 select
@@ -485,10 +493,10 @@ select ok(
     join learning.groups as learner_group on learner_group.id = link.group_id
     where hub.hub_code = 'tlevel-software-development'
       and learner_group.code = 'TLEVEL-DSD-Y2'
-      and link.join_policy = 'open_auto'
+      and link.join_policy = 'open_explicit'
       and link.active
   ),
-  'T Level hub is bound only to TLEVEL-DSD-Y2'
+  'T Level hub is bound only to TLEVEL-DSD-Y2 (open_explicit)'
 );
 
 select ok(
@@ -512,9 +520,9 @@ select ok(
     join learning.groups as learner_group on learner_group.id = link.group_id
     where hub.hub_code = 'l2e-exploring-emerging-digital-technologies'
       and learner_group.code = 'L2E-DELIVERY-A'
-      and link.join_policy = 'open_auto'
+      and link.join_policy = 'open_explicit'
   ),
-  'L2E hub is bound to L2E-DELIVERY-A'
+  'L2E hub is bound to L2E-DELIVERY-A (open_explicit)'
 );
 
 select is(
@@ -698,7 +706,7 @@ select is(
       't-level-digital-software-development'
     )
   ),
-  'tlevel-dsd-y2',
+  'nhc-tlevel-26',
   'profile_required returns the single T Level registration key, not a picker list'
 );
 
@@ -721,8 +729,32 @@ select is(
       't-level-digital-software-development'
     )
   ),
+  'no_enrolment',
+  '2/7. profile with no enrolments does not auto-enrol under open_explicit T Level'
+);
+
+select is(
+  (
+    select registration_option
+    from api.resolve_learner_hub_access(
+      'tlevel-software-development',
+      't-level-digital-software-development'
+    )
+  ),
+  'nhc-tlevel-26',
+  '2/7. resolver returns the nhc-tlevel-26 JoinClass key for a profile-only learner'
+);
+
+select is(
+  (
+    select status
+    from api.join_learner_hub_group(
+      'tlevel-software-development',
+      'nhc-tlevel-26'
+    )
+  ),
   'enrolled_created',
-  '2/7. profile with no enrolments and exactly one open_auto T Level group auto-enrols'
+  '2/7. JoinClass with nhc-tlevel-26 enrols the profile-only learner once'
 );
 
 select is(
@@ -734,7 +766,7 @@ select is(
     )
   ),
   'enrolled',
-  '12. existing T Level enrolment is idempotent on a second resolve'
+  '12. existing T Level enrolment is idempotent on a subsequent resolve'
 );
 reset role;
 
@@ -746,7 +778,7 @@ select is(
       and status = 'active'
   ),
   1::bigint,
-  'auto-enrol creates one active T Level enrolment only'
+  'JoinClass creates one active T Level enrolment only'
 );
 
 set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-000000000003';
@@ -802,8 +834,32 @@ select is(
       't-level-digital-software-development'
     )
   ),
+  'no_enrolment',
+  '4. Cyber-enrolled learner opening T Level is no_enrolment under open_explicit'
+);
+
+select is(
+  (
+    select registration_option
+    from api.resolve_learner_hub_access(
+      'tlevel-software-development',
+      't-level-digital-software-development'
+    )
+  ),
+  'nhc-tlevel-26',
+  '4. Cyber enrolment is not used as T Level authority; JoinClass key is surfaced'
+);
+
+select is(
+  (
+    select status
+    from api.join_learner_hub_group(
+      'tlevel-software-development',
+      'nhc-tlevel-26'
+    )
+  ),
   'enrolled_created',
-  '4. Cyber-enrolled learner with one T Level open_auto group is auto-enrolled into T Level'
+  '4. Cyber-enrolled learner joins T Level with the nhc-tlevel-26 class key'
 );
 
 select is(
@@ -815,7 +871,7 @@ select is(
     )
   ),
   'TLEVEL-DSD-Y2',
-  'Cyber enrolment is not used as T Level group authority'
+  '4. Cyber enrolment is not used as T Level group authority after JoinClass'
 );
 
 select ok(
@@ -827,7 +883,7 @@ select ok(
     select 1 from api.my_hub_assignments('tlevel-software-development')
     where activity_key = 'week2-malware-symptoms'
   ),
-  'T Level hub assignments after Cyber auto-enrol exclude Cyber activities'
+  '4. T Level hub assignments after JoinClass exclude Cyber activities'
 );
 
 select is(
@@ -839,7 +895,7 @@ select is(
     )
   ),
   'enrolled',
-  'Cyber-only learner remains enrolled for the Cyber hub after T Level auto-enrol'
+  '4. Cyber-only learner remains enrolled for the Cyber hub after T Level JoinClass'
 );
 reset role;
 
@@ -854,7 +910,7 @@ select is(
       and learner_group.code = 'TLEVEL-DSD-Y2'
   ),
   1::bigint,
-  'Cyber enrolment does not block a legitimate T Level open_auto enrolment'
+  '4. Cyber enrolment does not block a legitimate T Level JoinClass enrolment'
 );
 
 select is(
@@ -868,7 +924,7 @@ select is(
       and learner_group.code = 'CYBER-TEST-A'
   ),
   1::bigint,
-  'T Level auto-enrol leaves the existing Cyber enrolment in place'
+  '4. T Level JoinClass leaves the existing Cyber enrolment in place'
 );
 
 set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-000000000005';
@@ -883,8 +939,32 @@ select is(
       't-level-digital-software-development'
     )
   ),
+  'no_enrolment',
+  '5. L2E-enrolled learner opening T Level is no_enrolment under open_explicit'
+);
+
+select is(
+  (
+    select registration_option
+    from api.resolve_learner_hub_access(
+      'tlevel-software-development',
+      't-level-digital-software-development'
+    )
+  ),
+  'nhc-tlevel-26',
+  '5. L2E enrolment is not used as T Level authority; JoinClass key is surfaced'
+);
+
+select is(
+  (
+    select status
+    from api.join_learner_hub_group(
+      'tlevel-software-development',
+      'nhc-tlevel-26'
+    )
+  ),
   'enrolled_created',
-  '5. L2E-enrolled learner with one T Level open_auto group is auto-enrolled into T Level'
+  '5. L2E-enrolled learner joins T Level with the nhc-tlevel-26 class key'
 );
 
 select is(
@@ -896,7 +976,7 @@ select is(
     )
   ),
   'TLEVEL-DSD-Y2',
-  'L2E enrolment is not used as T Level group authority'
+  '5. L2E enrolment is not used as T Level group authority after JoinClass'
 );
 
 select is(
@@ -908,7 +988,7 @@ select is(
     )
   ),
   'enrolled',
-  'L2E-only learner remains enrolled on the L2E hub after T Level auto-enrol'
+  '5. L2E-only learner remains enrolled on the L2E hub after T Level JoinClass'
 );
 reset role;
 
@@ -923,7 +1003,7 @@ select is(
       and learner_group.code in ('L2E-DELIVERY-A', 'TLEVEL-DSD-Y2')
   ),
   2::bigint,
-  'L2E enrolment does not block a legitimate T Level open_auto enrolment'
+  '5. L2E enrolment does not block a legitimate T Level JoinClass enrolment'
 );
 
 set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-000000000009';
@@ -974,8 +1054,32 @@ select is(
       't-level-digital-software-development'
     )
   ),
+  'no_enrolment',
+  '13. Unit 14 enrolment does not grant T Level access; resolver is no_enrolment under open_explicit'
+);
+
+select is(
+  (
+    select registration_option
+    from api.resolve_learner_hub_access(
+      'tlevel-software-development',
+      't-level-digital-software-development'
+    )
+  ),
+  'nhc-tlevel-26',
+  '13. resolver surfaces the nhc-tlevel-26 JoinClass key to a Unit 14 learner'
+);
+
+select is(
+  (
+    select status
+    from api.join_learner_hub_group(
+      'tlevel-software-development',
+      'nhc-tlevel-26'
+    )
+  ),
   'enrolled_created',
-  '13. Unit 14 enrolment does not block T Level auto-enrol into the bound open_auto group'
+  '13. Unit 14 enrolment does not block a legitimate T Level JoinClass into the bound open_explicit group'
 );
 
 select is(
@@ -987,7 +1091,7 @@ select is(
     )
   ),
   'TLEVEL-DSD-Y2',
-  'Unit 14 enrolment is not used as T Level group authority'
+  '13. Unit 14 enrolment is not used as T Level group authority after JoinClass'
 );
 reset role;
 
@@ -1002,7 +1106,7 @@ select is(
       and learner_group.code in ('UNIT14-TEST-A', 'TLEVEL-DSD-Y2')
   ),
   2::bigint,
-  'Unit 14 enrolment remains after legitimate T Level auto-enrol'
+  '13. Unit 14 enrolment remains after legitimate T Level JoinClass enrolment'
 );
 
 set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-00000000000a';
@@ -1022,6 +1126,9 @@ select is(
 );
 reset role;
 
+-- Synthetic ambiguity fixture: two temporary open_auto T Level groups bound
+-- to the T Level hub, to exercise the resolver ambiguous branch. Restored
+-- afterwards so the rest of the file uses the migrated open_explicit policy.
 insert into learning.groups (
   id, academic_year_id, course_id, code, name, active, year_group,
   registration_key, registration_open
@@ -1043,6 +1150,15 @@ insert into platform.hub_group_links (hub_id, group_id, active, join_policy)
 select hub.id, '61000000-0000-4000-8000-0000000000aa', true, 'open_auto'
 from platform.hubs as hub
 where hub.hub_code = 'tlevel-software-development';
+
+-- Flip the real T Level binding to open_auto only for this ambiguity scenario.
+update platform.hub_group_links as link
+set join_policy = 'open_auto'
+from platform.hubs as hub, learning.groups as learner_group
+where link.hub_id = hub.id
+  and link.group_id = learner_group.id
+  and hub.hub_code = 'tlevel-software-development'
+  and learner_group.code = 'TLEVEL-DSD-Y2';
 
 set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-000000000007';
 set local "request.jwt.claims" = '{"sub":"14000000-0000-4000-8000-000000000007","role":"authenticated"}';
@@ -1075,6 +1191,15 @@ reset role;
 
 delete from platform.hub_group_links
 where group_id = '61000000-0000-4000-8000-0000000000aa';
+
+-- Restore the migrated open_explicit policy for the real T Level binding.
+update platform.hub_group_links as link
+set join_policy = 'open_explicit'
+from platform.hubs as hub, learning.groups as learner_group
+where link.hub_id = hub.id
+  and link.group_id = learner_group.id
+  and hub.hub_code = 'tlevel-software-development'
+  and learner_group.code = 'TLEVEL-DSD-Y2';
 
 update learning.groups
 set registration_open = false
@@ -1159,8 +1284,20 @@ select is(
       't-level-digital-software-development'
     )
   ),
+  'no_enrolment',
+  '11. resolver does not reactivate a withdrawn T Level enrolment under open_explicit'
+);
+
+select is(
+  (
+    select status
+    from api.join_learner_hub_group(
+      'tlevel-software-development',
+      'nhc-tlevel-26'
+    )
+  ),
   'enrolled_reactivated',
-  '11. inactive matching T Level enrolment is reactivated'
+  '11. JoinClass with nhc-tlevel-26 reactivates a matching withdrawn T Level enrolment'
 );
 
 select is(
@@ -1172,7 +1309,7 @@ select is(
     )
   ),
   'enrolled',
-  'reactivated enrolment is idempotent afterwards'
+  '11. reactivated enrolment is idempotent afterwards'
 );
 reset role;
 
@@ -1185,7 +1322,7 @@ select is(
     limit 1
   ),
   'active',
-  'A. inactive T Level open_auto enrolment is restored to active'
+  'A. inactive T Level open_explicit enrolment is restored to active by JoinClass'
 );
 
 set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-00000000000b';
@@ -1212,7 +1349,7 @@ select is(
       'ocr-level-3-it'
     )
   ),
-  'cyber-year-1-test',
+  'nhc-cyber-26',
   'inactive Cyber learner still receives the JoinClass registration key'
 );
 reset role;
@@ -1242,8 +1379,20 @@ select is(
       't-level-digital-software-development'
     )
   ),
+  'no_enrolment',
+  'D. resolver does not enrol an inactive-Cyber learner into T Level under open_explicit'
+);
+
+select is(
+  (
+    select status
+    from api.join_learner_hub_group(
+      'tlevel-software-development',
+      'nhc-tlevel-26'
+    )
+  ),
   'enrolled_created',
-  'D. inactive Cyber enrolment is not T Level authority and does not block T Level open_auto'
+  'D. inactive Cyber enrolment is not T Level authority and does not block T Level JoinClass'
 );
 reset role;
 
@@ -1257,7 +1406,7 @@ select is(
       )
   ),
   'withdrawn',
-  'D. T Level auto-enrol leaves the withdrawn Cyber enrolment unchanged'
+  'D. T Level JoinClass leaves the withdrawn Cyber enrolment unchanged'
 );
 
 set local "request.jwt.claim.sub" = '14000000-0000-4000-8000-00000000000c';

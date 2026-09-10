@@ -106,7 +106,7 @@ select lives_ok(
       'L2E Gateway Delivery Group A',
       true,
       'Year 1',
-      'l2e-year-1-delivery',
+      'nhc-et-26',
       true,
       false,
       null
