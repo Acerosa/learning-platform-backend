@@ -207,7 +207,10 @@ their parent attempt.
 
 Separate from `learning.groups` (teaching/cohort groups).
 
-- `learning.grouping_sessions` — join code, preferred size, status (`joining`/`proposed`/`published`/`closed`)
+- `learning.grouping_sessions` — join code, preferred size, optional
+  `specialist_role_title`, status (`joining`/`proposed`/`published`/`closed`)
 - `learning.grouping_teams` — stable `team_key` plus editable `display_name`
-- `learning.grouping_participants` — display name, participant token, optional client key, soft remove
+- `learning.grouping_participants` — display name, participant token, optional
+  client key, soft remove, optional `role_type`
+  (`project_manager`/`tester`/`specialist`)
 
