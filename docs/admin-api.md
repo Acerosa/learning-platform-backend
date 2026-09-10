@@ -239,18 +239,20 @@ Permission decision (MVP): mutations require an active teacher with `platform_ad
 
 Staff RPCs (thin wrappers over `platform.*`):
 
-- `admin_api.create_grouping_session`
+- `admin_api.create_grouping_session` — optional `p_specialist_role_title`
 - `admin_api.get_grouping_session`
 - `admin_api.remove_grouping_participant`
-- `admin_api.generate_grouping_teams`
+- `admin_api.generate_grouping_teams` — also auto-assigns roles when a specialist title is set
 - `admin_api.move_grouping_participant`
 - `admin_api.rename_grouping_team`
 - `admin_api.publish_grouping_session`
 - `admin_api.assign_late_grouping_participant`
 - `admin_api.rebalance_grouping_session`
 - `admin_api.close_grouping_session`
+- `admin_api.set_grouping_session_specialist_role`
+- `admin_api.set_grouping_participant_role`
 
 Read model: `admin_api.grouping_sessions`.
 
-Anonymous browsers cannot execute these RPCs. Generation and publication are separate; students only see assignments after publish.
+Role model: 1 Project Manager + 1 Tester (2 if group size > 8) + remaining students as the session specialist role title (e.g. Developer, Cyber Security Analyst). Legacy sessions with a null specialist title keep no-role behaviour.
 

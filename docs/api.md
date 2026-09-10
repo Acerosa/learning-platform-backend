@@ -240,6 +240,12 @@ Anonymous students may call:
 | `api.join_grouping_session(join_code, display_name, client_key)` | Join an open session; returns `participantToken` |
 | `api.my_grouping_status(participant_token)` | Waiting / awaiting assignment / own published group only |
 
+When a session has a specialist role title and groups are published, the
+`assigned` payload includes `roleType`, `roleTitle`, `specialistRoleTitle`, and
+`teammates` as `{ displayName, roleType, roleTitle }` objects. Legacy sessions
+without a specialist title omit role fields and keep string teammate names only
+where applicable.
+
 Proposed groups are never returned. Staff manage sessions through `admin_api` (`platform_admin` for MVP). See `docs/admin-api.md`.
 
 ## Readiness diagnostics

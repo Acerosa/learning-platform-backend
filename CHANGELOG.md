@@ -12,6 +12,12 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Classroom Group Generator automatic role assignment. Sessions store an
+  optional `specialist_role_title`; generation assigns `project_manager`,
+  `tester`, and `specialist` seats (2 testers when group size > 8). Staff can
+  override individual roles. Migration `20260910180000_classroom_group_roles`.
+  Local-only until hosted review.
+
 - Classroom Group Generator domain for temporary classroom teams (not
   `learning.groups`, not hub/course-bound). Tables
   `learning.grouping_sessions`, `learning.grouping_teams`,

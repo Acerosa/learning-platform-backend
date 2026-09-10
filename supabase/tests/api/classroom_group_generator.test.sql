@@ -34,7 +34,7 @@ select has_function(
 select has_function(
   'admin_api',
   'create_grouping_session',
-  array['text', 'integer'],
+  array['text', 'integer', 'text'],
   'admin create session RPC exists'
 );
 select has_function(
@@ -69,7 +69,7 @@ select ok(
 select ok(
   not has_function_privilege(
     'anon',
-    'admin_api.create_grouping_session(text,integer)',
+    'admin_api.create_grouping_session(text,integer,text)',
     'EXECUTE'
   ),
   'anonymous clients cannot create grouping sessions'
