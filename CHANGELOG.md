@@ -18,6 +18,15 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
   override individual roles. Migration `20260910180000_classroom_group_roles`.
   Local-only until hosted review.
 
+- Shared staff hub-learning Results RPCs: `admin_api.list_hub_learning_result_filters`,
+  `admin_api.list_hub_learning_results`, `admin_api.summarise_hub_learning_results`,
+  and `admin_api.list_hub_learning_result_evidence`. Hub isolation uses
+  `platform.hub_group_links` and current assignment membership. Scores come
+  only from official completed attempts. Formative checks and activity states
+  are in-progress evidence, not assignment scores. Answer keys are not
+  returned. Migration `20260913180000_admin_hub_learning_results`. Local-only
+  until hosted review.
+
 - Classroom Group Generator domain for temporary classroom teams (not
   `learning.groups`, not hub/course-bound). Tables
   `learning.grouping_sessions`, `learning.grouping_teams`,
