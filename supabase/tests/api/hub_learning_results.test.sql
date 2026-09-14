@@ -39,6 +39,7 @@ select ok(
       and proc.proname in (
         'staff_can_read_hub_results',
         'staff_visible_hub_group_ids',
+        'staff_hub_learning_result_rows',
         'list_hub_learning_result_filters',
         'list_hub_learning_results',
         'summarise_hub_learning_results',
@@ -87,6 +88,14 @@ select ok(
     'EXECUTE'
   ),
   'learners cannot execute the internal hub-results authorisation helper'
+);
+select ok(
+  not has_function_privilege(
+    'authenticated',
+    'learning.staff_hub_learning_result_rows(text,text,text,text,integer,integer,text,text)',
+    'EXECUTE'
+  ),
+  'learners cannot execute the unbounded hub-results helper'
 );
 select ok(
   not has_function_privilege(
@@ -754,6 +763,22 @@ select is(
   ),
   'in_progress:formative:false',
   'formative practice is in progress and is not scored as an assignment'
+);
+
+select ok(
+  (
+    select last_activity_at is not null
+    from admin_api.list_hub_learning_results(
+      'hub-results-alpha',
+      null,
+      'HUB-RES-A',
+      'HUB-RES-S2',
+      null,
+      null,
+      'hub-results-practice'
+    )
+  ),
+  'formative practice contributes to last_activity_at'
 );
 
 select is(

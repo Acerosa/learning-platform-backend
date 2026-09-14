@@ -169,7 +169,7 @@ revoke all on function admin_api.list_hub_learning_result_filters(text)
 grant execute on function admin_api.list_hub_learning_result_filters(text)
   to authenticated;
 
-create or replace function admin_api.list_hub_learning_results(
+create or replace function learning.staff_hub_learning_result_rows(
   p_hub_code text,
   p_course_key text default null,
   p_group_code text default null,
@@ -177,8 +177,7 @@ create or replace function admin_api.list_hub_learning_results(
   p_week_number integer default null,
   p_session_number integer default null,
   p_activity_key text default null,
-  p_completion_status text default null,
-  p_limit integer default 500
+  p_completion_status text default null
 )
 returns table (
   hub_code text,
@@ -216,18 +215,8 @@ security definer
 set search_path = ''
 as $$
 declare
-  v_limit integer;
   v_status text;
 begin
-  if p_hub_code is null or btrim(p_hub_code) = '' then
-    raise exception 'HUB_CODE_REQUIRED';
-  end if;
-
-  if not learning.staff_can_read_hub_results(p_hub_code) then
-    return;
-  end if;
-
-  v_limit := least(greatest(coalesce(p_limit, 500), 1), 1000);
   v_status := nullif(btrim(coalesce(p_completion_status, '')), '');
 
   return query
@@ -256,6 +245,7 @@ begin
       latest_attempt.received_at as attempt_received_at,
       coalesce(attempt_counts.attempt_count, 0) as attempt_count,
       coalesce(formative_counts.formative_check_count, 0) as formative_check_count,
+      formative_counts.last_formative_at as last_formative_at,
       state.status as state_status,
       state.updated_at as state_updated_at,
       state.completed_at as state_completed_at,
@@ -325,7 +315,9 @@ begin
         and attempt.assignment_id = assignment.id
     ) as attempt_counts on true
     left join lateral (
-      select count(*) as formative_check_count
+      select
+        count(*) as formative_check_count,
+        max(formative.created_at) as last_formative_at
       from learning.formative_checks as formative
       where formative.student_id = student.id
         and formative.assignment_id = assignment.id
@@ -424,7 +416,8 @@ begin
       scoped.attempt_completed_at,
       scoped.attempt_received_at,
       scoped.state_updated_at,
-      scoped.state_completed_at
+      scoped.state_completed_at,
+      scoped.last_formative_at
     ) as last_activity_at,
     case
       when scoped.attempt_status = 'completed' then scoped.attempt_completed_at
@@ -440,12 +433,120 @@ begin
         or scoped.state_status is not null then 'in_progress'
       else 'not_started'
     end = v_status
-  )
+  );
+end;
+$$;
+
+comment on function learning.staff_hub_learning_result_rows(text, text, text, text, integer, integer, text, text) is
+  'Unbounded current hub-learning result rows for staff list and summary RPCs. Not granted to clients.';
+
+revoke all on function learning.staff_hub_learning_result_rows(text, text, text, text, integer, integer, text, text)
+  from public, anon, authenticated;
+
+create or replace function admin_api.list_hub_learning_results(
+  p_hub_code text,
+  p_course_key text default null,
+  p_group_code text default null,
+  p_student_number text default null,
+  p_week_number integer default null,
+  p_session_number integer default null,
+  p_activity_key text default null,
+  p_completion_status text default null,
+  p_limit integer default 500
+)
+returns table (
+  hub_code text,
+  course_key text,
+  course_title text,
+  group_code text,
+  group_name text,
+  student_number text,
+  display_name text,
+  assignment_id uuid,
+  activity_key text,
+  activity_title text,
+  activity_version text,
+  week_number integer,
+  week_title text,
+  session_number integer,
+  completion_status text,
+  result_source text,
+  scored boolean,
+  attempt_id uuid,
+  attempt_status text,
+  score numeric,
+  max_score numeric,
+  score_percentage numeric,
+  correct_count bigint,
+  incorrect_count bigint,
+  attempt_count bigint,
+  formative_check_count bigint,
+  last_activity_at timestamptz,
+  completed_at timestamptz
+)
+language plpgsql
+stable
+security definer
+set search_path = ''
+as $$
+declare
+  v_limit integer;
+begin
+  if p_hub_code is null or btrim(p_hub_code) = '' then
+    raise exception 'HUB_CODE_REQUIRED';
+  end if;
+
+  if not learning.staff_can_read_hub_results(p_hub_code) then
+    return;
+  end if;
+
+  v_limit := least(greatest(coalesce(p_limit, 500), 1), 1000);
+
+  return query
+  select
+    result_row.hub_code,
+    result_row.course_key,
+    result_row.course_title,
+    result_row.group_code,
+    result_row.group_name,
+    result_row.student_number,
+    result_row.display_name,
+    result_row.assignment_id,
+    result_row.activity_key,
+    result_row.activity_title,
+    result_row.activity_version,
+    result_row.week_number,
+    result_row.week_title,
+    result_row.session_number,
+    result_row.completion_status,
+    result_row.result_source,
+    result_row.scored,
+    result_row.attempt_id,
+    result_row.attempt_status,
+    result_row.score,
+    result_row.max_score,
+    result_row.score_percentage,
+    result_row.correct_count,
+    result_row.incorrect_count,
+    result_row.attempt_count,
+    result_row.formative_check_count,
+    result_row.last_activity_at,
+    result_row.completed_at
+  from learning.staff_hub_learning_result_rows(
+    p_hub_code,
+    p_course_key,
+    p_group_code,
+    p_student_number,
+    p_week_number,
+    p_session_number,
+    p_activity_key,
+    p_completion_status
+  ) as result_row
   order by
-    scoped.group_code,
-    scoped.display_name,
-    scoped.week_number nulls last,
-    scoped.activity_key
+    result_row.group_code,
+    result_row.display_name,
+    result_row.week_number nulls last,
+    result_row.activity_key
   limit v_limit;
 end;
 $$;
@@ -514,7 +615,7 @@ begin
         2
       )
     end
-  from admin_api.list_hub_learning_results(
+  from learning.staff_hub_learning_result_rows(
     p_hub_code,
     p_course_key,
     p_group_code,
@@ -522,14 +623,13 @@ begin
     p_week_number,
     p_session_number,
     p_activity_key,
-    p_completion_status,
-    1000
+    p_completion_status
   ) as row;
 end;
 $$;
 
 comment on function admin_api.summarise_hub_learning_results(text, text, text, text, integer, integer, text, text) is
-  'Server-side hub result aggregates. Average score uses only genuinely scored completed attempts.';
+  'Server-side hub result aggregates over the full filtered set, not the bounded list page. Average score uses only genuinely scored completed attempts.';
 
 revoke all on function admin_api.summarise_hub_learning_results(text, text, text, text, integer, integer, text, text)
   from public, anon;
