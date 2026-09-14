@@ -115,6 +115,25 @@ The three views above are enough for the Readiness Diagnostic list, detail,
 unit breakdown, and headline counts. Additional RPCs are not required for this
 release.
 
+## Hub learning Results
+
+Staff hub reporting for registered learning hubs (Unit 3, T Level, L2E, Unit 14)
+uses additive `admin_api` RPCs rather than a second warehouse. Hub isolation is
+`platform.hub_group_links`, not `hub_course_links`. Current work uses
+`learning.current_activity_assignment_id`. Current membership is active
+enrolments with `left_on` null.
+
+| RPC | Purpose |
+| --- | --- |
+| `admin_api.list_hub_learning_result_filters(hub_code)` | Cascaded course/group/learner/week/session/activity options |
+| `admin_api.list_hub_learning_results(...)` | One row per current learner × current assignment. Bounded to 500 (max 1000) |
+| `admin_api.summarise_hub_learning_results(...)` | Counts plus average score over scored completed attempts only |
+| `admin_api.list_hub_learning_result_evidence(hub_code, student_number, assignment_id)` | Learner responses and feedback. No marking specs |
+
+Authorisation: `platform_admin`, or a teacher with `learning.teacher_can_access_group` on a hub-bound group. Identity arguments are `hub_code` and `student_number`, never a browser `learner_id`. Execute is granted to `authenticated` only; `anon` is revoked. Internal helpers stay ungranted.
+
+Completion: official completed attempts are `completed`. Formative checks and activity states without an official completion are `in_progress` and are not averaged into scores. Readiness diagnostics remain on `admin_api.diagnostic_*`.
+
 **Query note:** topic/skill/question aggregates join curriculum metadata to
 responses. At larger scale they may need materialised follow-ups; MVP computes
 from authoritative records.
