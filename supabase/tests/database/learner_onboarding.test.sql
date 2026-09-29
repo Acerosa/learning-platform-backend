@@ -269,13 +269,42 @@ select throws_ok(
   'AUTH_ACCOUNT_ALREADY_LINKED',
   'one Auth account cannot create a second learner profile'
 );
-select throws_ok(
-  $$select * from api.complete_learner_onboarding('Augusta', 'Lovelace', '001234', 'synthetic-year-1-a')$$,
-  '23000',
-  'ONBOARDING_CONFLICT',
-  'conflicting repeated onboarding is rejected'
+select is(
+  (
+    select idempotent
+    from api.complete_learner_onboarding('Augusta', 'Lovelace', '001234', 'synthetic-year-1-a')
+  ),
+  true,
+  'a different submitted name for the same linked student number is idempotent'
+);
+select is(
+  (
+    select first_name || ' ' || surname
+    from api.complete_learner_onboarding('Augusta', 'Lovelace', '001234', 'synthetic-year-1-a')
+  ),
+  'Ada Lovelace',
+  'the repeated call resolves to the existing learner identity'
 );
 reset role;
+
+select is(
+  (
+    select count(*)
+    from learning.students as student
+    where student.auth_user_id = '11000000-0000-4000-8000-000000000001'
+  ),
+  1::bigint,
+  'a different submitted name does not create a second learner'
+);
+select is(
+  (
+    select student.first_name || ' ' || student.surname
+    from learning.students as student
+    where student.auth_user_id = '11000000-0000-4000-8000-000000000001'
+  ),
+  'Ada Lovelace',
+  'a different submitted name does not overwrite the stored learner name'
+);
 
 set local "request.jwt.claim.sub" = '11000000-0000-4000-8000-000000000002';
 set local "request.jwt.claims" = '{"sub":"11000000-0000-4000-8000-000000000002","role":"authenticated"}';
