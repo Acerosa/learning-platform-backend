@@ -87,3 +87,24 @@ Before the first hosted deployment from this repository:
 
 Do not blindly run the full extracted history against the existing hosted
 database. Do not manually edit Supabase migration-history tables.
+
+## Knowledge Report history
+
+These hosted versions were applied to `hubwpkrqndorznwzvaer` before the files
+were in `origin/main`. They are recorded here with those exact version numbers.
+Do not rename them, squash them, or add replacement migrations:
+
+- `20260923120000_timed_knowledge_report.sql`
+- `20260924063039_knowledge_report_cohort_review.sql`
+- `20260924180051_knowledge_report_content_review.sql`
+- `20261001154141_knowledge_report_additional_time.sql`
+
+Their function bodies match the deployed definitions. Do not run them against
+the hosted database again.
+
+`20260923120000` replaces `api.save_activity_state` with a return row that
+includes `revision`. Hosted history already introduced that column in
+`20260912145840_activity_state_revision_realtime.sql`. That file is the hosted
+statement, not the local draft named `20260912120000`. A clean reset needs it
+before the Knowledge Report migrations. Do not apply it to the hosted database
+again.
