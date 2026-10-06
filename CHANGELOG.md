@@ -12,6 +12,13 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Week 5 revised catalogue questions are registered on activity version 1.2.0.
+  Publication 0.2.35 replaced learner JSON without a new activity version, so
+  `mark_formative_response` could not see the new classification keys and
+  rejected changed answer specs on the immutable 1.0.0 rows. Migration
+  `20261006160000_week5_revised_question_marking`. Week 5 OCR and Week 4 are
+  unchanged. Previous question rows and learner attempts are kept.
+
 - Classroom Group Generator automatic role assignment. Sessions store an
   optional `specialist_role_title`; generation assigns `project_manager`,
   `tester`, and `specialist` seats (2 testers when group size > 8). Staff can
