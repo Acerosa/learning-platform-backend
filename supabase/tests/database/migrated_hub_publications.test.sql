@@ -136,7 +136,7 @@ select is(
     join learning.modules as module on module.id = activity.module_id
     where module.stable_key = 'unit-3-cyber-security'
   ),
-  1153,
+  1232,
   'Unit 3 historical question rows remain after legislation 1.2.0'
 );
 

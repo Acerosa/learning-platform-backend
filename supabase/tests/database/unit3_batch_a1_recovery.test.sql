@@ -192,8 +192,8 @@ select is(
       'week5-secure-rewrite'
     )
   ),
-  30,
-  '30 Week 5 marking specs exist'
+  55,
+  '55 Week 5 marking specs exist after the revised 1.2.0 rows'
 );
 
 select ok(

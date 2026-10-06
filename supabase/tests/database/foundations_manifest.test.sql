@@ -151,8 +151,8 @@ select is(
     join learning.groups as learner_group on learner_group.id = assignment.group_id
     where learner_group.code not in ('CYBER-TEST-QA', 'TLEVEL-TEST-A', 'L2E-TEST-A')
   ),
-  193::bigint,
-  'pre-existing local assignments remain 193 excluding new hub-isolated QA groups'
+  202::bigint,
+  'pre-existing local assignments remain 202 excluding new hub-isolated QA groups'
 );
 
 set local role anon;

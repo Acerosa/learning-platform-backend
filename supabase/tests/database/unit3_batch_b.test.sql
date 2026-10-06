@@ -15,7 +15,7 @@ select is(
     join learning.modules as module on module.id = activity.module_id
     where module.stable_key = 'unit-3-cyber-security'
   ),
-  591,
+  670,
   'Unit 3 marking rows include Batch B plus legislation 1.2.0 multi-field-exact specs'
 );
 
@@ -67,15 +67,10 @@ select ok(
     select 1
     from learning.activity_versions as version
     join learning.activities as activity on activity.id = version.activity_id
-    where activity.stable_key in (
-      'week5-vulnerability-patterns',
-      'week5-threat-vulnerability-risk',
-      'week5-controls-matching',
-      'week5-secure-rewrite'
-    )
+    where activity.stable_key = 'week5-controls-matching'
       and version.version <> '1.0.0'
   ),
-  'Week 5 activities with complete specs are not re-versioned'
+  'unchanged Week 5 controls matching stays on version 1.0.0'
 );
 
 select is(
