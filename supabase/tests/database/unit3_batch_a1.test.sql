@@ -254,8 +254,8 @@ select is(
       'week5-secure-rewrite'
     )
   ),
-  30,
-  'Week 5 scored items have unambiguous hub marking specs'
+  55,
+  'Week 5 scored items include the revised 1.2.0 marking specs'
 );
 
 select ok(
