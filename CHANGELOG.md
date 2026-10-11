@@ -16,10 +16,12 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
   curriculum package `0.3.26` for
   `l2e-exploring-emerging-digital-technologies` /
   `gateway-level-2-digital-it-skills` from the hub package with Week 4
-  (63 activities). Supersedes `0.3.25`, projects the marking catalogue, and
-  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
-  1–3 remain available; Week 4 remains planned. Prior activity versions are
-  left in place for history. Contract coverage in
+  (63 activities). Supersedes the current published package (`0.3.13` in a
+  fresh apply, or hosted `0.3.25`). Package body only: it does not project
+  the catalogue or assign activity versions, so Week 4 stays planned and
+  learner availability is unchanged. Weeks 1–3 remain available from the
+  existing catalogue. Prior activity versions are left in place for history.
+  Contract coverage in
   `scripts/ops/tests/l2e-catalogue-alignment.test.mjs`.
 
 - Week 5 revised catalogue questions are registered on activity version 1.2.0.
