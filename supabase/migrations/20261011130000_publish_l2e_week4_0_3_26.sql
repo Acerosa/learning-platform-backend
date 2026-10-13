@@ -1,6 +1,8 @@
 -- Publish L2E Week 4 package as immutable 0.3.26 and project catalogue.
 -- Source of truth: Emerging-Digital-Technologies-Hub content package (Weeks 1-4).
 -- Supersedes published 0.3.25. Weeks 1-3 stay available; Week 4 remains planned.
+-- Publishes over any earlier package, including in-repo 0.3.13. Skips when the
+-- live package is already at or beyond 0.3.26 so the Week 5 migration can apply.
 -- Leaves prior catalogue activity versions in place for history and learner progress.
 
 do $$
@@ -39,52 +41,52 @@ begin
       and course_key = 'gateway-level-2-digital-it-skills'
       and status = 'published';
 
-    if v_prev is distinct from '0.3.25' then
-      raise exception
-        using errcode = 'P0001',
-              message = format(
-                'L2E 0.3.26 publication refused: expected published 0.3.25, found %s',
-                coalesce(v_prev, 'none')
-              );
+    if v_prev is not null
+       and string_to_array(v_prev, '.')::int[]
+           >= string_to_array(v_target, '.')::int[] then
+      raise notice
+        'L2E % publication skipped: database already at %',
+        v_target,
+        v_prev;
+    else
+      v_staff_ref := 'PLATFORM-ADMIN-' || upper(replace(v_publisher::text, '-', ''));
+      v_hash := encode(extensions.digest(v_package::text, 'sha256'), 'hex');
+
+      update platform.curriculum_publications
+      set status = 'superseded'
+      where hub_code = 'l2e-exploring-emerging-digital-technologies'
+        and course_key = 'gateway-level-2-digital-it-skills'
+        and status = 'published';
+
+      insert into platform.curriculum_publications (
+        hub_code, course_key, package_version, schema_version, source_package_version,
+        status, package, content_hash, author, reviewer, publication_notes,
+        published_by_auth_user_id, published_by_staff_reference
+      ) values (
+        'l2e-exploring-emerging-digital-technologies',
+        'gateway-level-2-digital-it-skills',
+        v_target,
+        '0.1.0',
+        '0.1.0',
+        'published',
+        v_package,
+        v_hash,
+        'L2E Week 4 publication',
+        'Curriculum review',
+        format('Publish L2E Weeks 1-4 package with Week 4 planned. Previous published version: %s', coalesce(v_prev, 'none')),
+        v_publisher,
+        v_staff_ref
+      )
+      returning id into v_publication_id;
+
+      perform platform.project_curriculum_package(
+        v_package,
+        'l2e-exploring-emerging-digital-technologies',
+        'gateway-level-2-digital-it-skills',
+        v_target,
+        v_publication_id
+      );
     end if;
-
-    v_staff_ref := 'PLATFORM-ADMIN-' || upper(replace(v_publisher::text, '-', ''));
-    v_hash := encode(extensions.digest(v_package::text, 'sha256'), 'hex');
-
-    update platform.curriculum_publications
-    set status = 'superseded'
-    where hub_code = 'l2e-exploring-emerging-digital-technologies'
-      and course_key = 'gateway-level-2-digital-it-skills'
-      and status = 'published';
-
-    insert into platform.curriculum_publications (
-      hub_code, course_key, package_version, schema_version, source_package_version,
-      status, package, content_hash, author, reviewer, publication_notes,
-      published_by_auth_user_id, published_by_staff_reference
-    ) values (
-      'l2e-exploring-emerging-digital-technologies',
-      'gateway-level-2-digital-it-skills',
-      v_target,
-      '0.1.0',
-      '0.1.0',
-      'published',
-      v_package,
-      v_hash,
-      'L2E Week 4 publication',
-      'Curriculum review',
-      format('Publish L2E Weeks 1-4 package with Week 4 planned. Previous published version: %s', coalesce(v_prev, 'none')),
-      v_publisher,
-      v_staff_ref
-    )
-    returning id into v_publication_id;
-
-    perform platform.project_curriculum_package(
-      v_package,
-      'l2e-exploring-emerging-digital-technologies',
-      'gateway-level-2-digital-it-skills',
-      v_target,
-      v_publication_id
-    );
   end if;
 
   -- Assign every published L2E module activity version to the open delivery group.
