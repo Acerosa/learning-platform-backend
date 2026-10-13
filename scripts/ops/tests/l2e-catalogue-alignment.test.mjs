@@ -17,6 +17,14 @@ const PKG_PATH = join(
   ROOT,
   "supabase/data/generated/l2e-expanded-weeks-0.3.13.package.json"
 );
+const WEEK4_PKG_PATH = join(
+  ROOT,
+  "supabase/data/generated/l2e-week4-0.3.26.package.json"
+);
+const WEEK5_PKG_PATH = join(
+  ROOT,
+  "supabase/data/generated/l2e-week5-0.3.28.package.json"
+);
 
 const SERVER_MARKED = new Set([
   "single-choice",
@@ -98,4 +106,50 @@ test("publication rejects package/catalogue mismatch signals in fixture", () => 
   delete block.content.questionId;
   const { issues } = markingManifest(broken);
   assert.ok(issues.some((i) => i.includes("missing questionId")));
+});
+
+test("generated L2E 0.3.26 Week 4 package produces a coherent marking manifest", () => {
+  const pkg = JSON.parse(readFileSync(WEEK4_PKG_PATH, "utf8"));
+  const { issues, keys, activityPairs } = markingManifest(pkg);
+  assert.equal(issues.length, 0, issues.join("\n"));
+  assert.equal(activityPairs.size, 63);
+  assert.equal(pkg.activities.filter((a) => a.id.startsWith("week-4-")).length, 24);
+  assert.deepEqual(
+    pkg.weeks.map((week) => [week.id, week.metadata.status]),
+    [
+      ["week-1", "available"],
+      ["week-2", "available"],
+      ["week-3", "available"],
+      ["week-4", "planned"]
+    ]
+  );
+  assert.ok(keys.has("week-3-local-q:l1"));
+  assert.ok(keys.has("week-4-starter-q1:r1"));
+  assert.ok(keys.has("week-4-starter-q2"));
+  assert.ok(activityPairs.has("week-4-starter@0.1.0"));
+  assert.ok(activityPairs.has("week-4-reflection@0.1.0"));
+});
+
+test("generated L2E 0.3.28 Week 5 package produces a coherent marking manifest", () => {
+  const pkg = JSON.parse(readFileSync(WEEK5_PKG_PATH, "utf8"));
+  const { issues, keys, activityPairs } = markingManifest(pkg);
+  assert.equal(issues.length, 0, issues.join("\n"));
+  assert.equal(activityPairs.size, 95);
+  assert.equal(pkg.version, "0.3.28");
+  assert.equal(pkg.activities.filter((a) => a.id.startsWith("week-5-")).length, 32);
+  assert.deepEqual(
+    pkg.weeks.map((week) => [week.id, week.metadata.status]),
+    [
+      ["week-1", "available"],
+      ["week-2", "available"],
+      ["week-3", "available"],
+      ["week-4", "available"],
+      ["week-5", "available"]
+    ]
+  );
+  assert.ok(keys.has("week-4-starter-q1:r1"));
+  assert.ok(keys.has("week-5-starter-q1"));
+  assert.ok(keys.has("week-5-vr-or-not-q:v1"));
+  assert.ok(activityPairs.has("week-5-starter@0.1.0"));
+  assert.ok(activityPairs.has("week-5-reflection@0.1.0"));
 });
