@@ -18,6 +18,12 @@ const PKG_PATH = join(
   "supabase/data/generated/l2e-expanded-weeks-0.3.13.package.json"
 );
 
+const PKG_PATH_NATURALISE_0334 = join(
+  ROOT,
+  "supabase/data/generated/l2e-naturalise-0.3.34.package.json"
+);
+
+
 const SERVER_MARKED = new Set([
   "single-choice",
   "classification",
@@ -99,3 +105,18 @@ test("publication rejects package/catalogue mismatch signals in fixture", () => 
   const { issues } = markingManifest(broken);
   assert.ok(issues.some((i) => i.includes("missing questionId")));
 });
+
+test("generated L2E 0.3.34 naturalised package produces a coherent marking manifest", () => {
+  const pkg = JSON.parse(readFileSync(PKG_PATH_NATURALISE_0334, "utf8"));
+  assert.equal(pkg.version, "0.3.34");
+  assert.equal((pkg.activities || []).length, 172);
+  const { issues, keys, activityPairs } = markingManifest(pkg);
+  assert.equal(issues.length, 0, issues.join("\n"));
+  assert.equal(keys.size, 458);
+  assert.ok(activityPairs.has("week-2-reflection@0.1.1"));
+  assert.ok(activityPairs.has("week-7-drone-intro@0.1.0"));
+  assert.ok(activityPairs.has("week-8-starter@0.1.0"));
+  assert.ok(keys.has("week-4-ai-q1"));
+  assert.ok(keys.has("week-7-drone-intro-q1"));
+});
+

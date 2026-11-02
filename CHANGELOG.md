@@ -12,6 +12,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- L2E catalogue **0.3.34** publishes naturalised Weeks 1–8 teaching copy from
+  Emerging-Digital-Technologies-Hub PR #38. Activity IDs, marking keys, week
+  availability and L2E-DELIVERY-A assignments are unchanged. Migration
+  `20261102201000_publish_l2e_naturalise_0_3_34`. Previous published version:
+  0.3.33.
+
+### Added
+
 - Week 5 revised catalogue questions are registered on activity version 1.2.0.
   Publication 0.2.35 replaced learner JSON without a new activity version, so
   `mark_formative_response` could not see the new classification keys and
