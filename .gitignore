@@ -21,3 +21,5 @@ supabase/data/generated/*
 !supabase/data/generated/l2e-week4-0.3.26.activity-ids.txt
 !supabase/data/generated/l2e-week5-0.3.28.package.json
 !supabase/data/generated/l2e-week5-0.3.28.activity-ids.txt
+!supabase/data/generated/l2e-week6-0.3.29.package.json
+!supabase/data/generated/l2e-week6-0.3.29.activity-ids.txt

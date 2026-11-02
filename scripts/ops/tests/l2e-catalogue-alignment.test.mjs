@@ -25,6 +25,10 @@ const WEEK5_PKG_PATH = join(
   ROOT,
   "supabase/data/generated/l2e-week5-0.3.28.package.json"
 );
+const WEEK6_PKG_PATH = join(
+  ROOT,
+  "supabase/data/generated/l2e-week6-0.3.29.package.json"
+);
 
 const SERVER_MARKED = new Set([
   "single-choice",
@@ -152,4 +156,29 @@ test("generated L2E 0.3.28 Week 5 package produces a coherent marking manifest",
   assert.ok(keys.has("week-5-vr-or-not-q:v1"));
   assert.ok(activityPairs.has("week-5-starter@0.1.0"));
   assert.ok(activityPairs.has("week-5-reflection@0.1.0"));
+});
+
+test("generated L2E 0.3.29 Week 6 package produces a coherent marking manifest", () => {
+  const pkg = JSON.parse(readFileSync(WEEK6_PKG_PATH, "utf8"));
+  const { issues, keys, activityPairs } = markingManifest(pkg);
+  assert.equal(issues.length, 0, issues.join("\n"));
+  assert.equal(activityPairs.size, 122);
+  assert.equal(pkg.version, "0.3.29");
+  assert.equal(pkg.activities.filter((a) => a.id.startsWith("week-6-")).length, 30);
+  assert.deepEqual(
+    pkg.weeks.map((week) => [week.id, week.metadata.status]),
+    [
+      ["week-1", "available"],
+      ["week-2", "available"],
+      ["week-3", "available"],
+      ["week-4", "available"],
+      ["week-5", "available"],
+      ["week-6", "available"]
+    ]
+  );
+  assert.ok(keys.has("week-5-starter-q1"));
+  assert.ok(keys.has("week-6-starter-q1"));
+  assert.ok(keys.has("week-6-match-uses-q:m1"));
+  assert.ok(activityPairs.has("week-6-starter@0.1.0"));
+  assert.ok(activityPairs.has("week-6-reflection@0.1.0"));
 });
