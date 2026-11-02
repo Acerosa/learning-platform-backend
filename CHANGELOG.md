@@ -12,6 +12,42 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Migration `20261102170000_publish_l2e_week78_0_3_33`: publish immutable
+  curriculum package `0.3.33` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.32` plus hub Weeks 7–8
+  (172 activities). Supersedes `0.3.32`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–8 are available. Prior activity versions are left in place for history.
+
+- Migration `20261102150000_publish_l2e_week6_0_3_29`: publish immutable
+  curriculum package `0.3.29` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.28` plus hub Week 6
+  (122 activities). Supersedes `0.3.28`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–6 are available. Prior activity versions are left in place for history.
+  Contract coverage in `scripts/ops/tests/l2e-catalogue-alignment.test.mjs`.
+
+- Migration `20261013100000_publish_l2e_week5_0_3_28`: publish immutable
+  curriculum package `0.3.28` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.27` plus hub Week 5
+  (95 activities). Supersedes `0.3.27`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–5 are available. Prior activity versions are left in place for history.
+  Contract coverage in `scripts/ops/tests/l2e-catalogue-alignment.test.mjs`.
+
+- Migration `20261011130000_publish_l2e_week4_0_3_26`: publish immutable
+  curriculum package `0.3.26` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from the hub package with Week 4
+  (63 activities). Supersedes `0.3.25`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–3 remain available; Week 4 remains planned. Prior activity versions are
+  left in place for history. Contract coverage in
+  `scripts/ops/tests/l2e-catalogue-alignment.test.mjs`.
+
 - Week 5 revised catalogue questions are registered on activity version 1.2.0.
   Publication 0.2.35 replaced learner JSON without a new activity version, so
   `mark_formative_response` could not see the new classification keys and
@@ -62,6 +98,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Migration `20261102170000_publish_l2e_week78_0_3_33`: publish immutable
+  curriculum package `0.3.33` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.32` plus hub Weeks 7–8
+  (172 activities). Supersedes `0.3.32`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–8 are available. Prior activity versions are left in place for history.
+
 - Phase 1A learner reporting read `api.my_hub_activity_progress(hub_code)`.
   Hub-scoped completed-attempt progress for the authenticated learner only
   (`auth.uid()`). Uses the same hub ↔ group binding as
@@ -84,6 +128,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
   not apply hosted until review.
 
 ### Added
+
+- Migration `20261102170000_publish_l2e_week78_0_3_33`: publish immutable
+  curriculum package `0.3.33` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.32` plus hub Weeks 7–8
+  (172 activities). Supersedes `0.3.32`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–8 are available. Prior activity versions are left in place for history.
 
 - Authoritative hub ↔ group binding `platform.hub_group_links` and learner RPCs
   `api.resolve_learner_hub_access(hub_code, course_key)` and
@@ -120,6 +172,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Migration `20261102170000_publish_l2e_week78_0_3_33`: publish immutable
+  curriculum package `0.3.33` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.32` plus hub Weeks 7–8
+  (172 activities). Supersedes `0.3.32`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–8 are available. Prior activity versions are left in place for history.
+
 - Authenticated in-progress activity drafts: `learning.activity_states` with
   `api.get_activity_state`, `api.save_activity_state`, and
   `api.clear_activity_state`. Server-side resume state is separate from
@@ -148,6 +208,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Migration `20261102170000_publish_l2e_week78_0_3_33`: publish immutable
+  curriculum package `0.3.33` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.32` plus hub Weeks 7–8
+  (172 activities). Supersedes `0.3.32`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–8 are available. Prior activity versions are left in place for history.
+
 - Synthetic QA persona `TLEVEL_DSD_Y2_TEST_LEARNER` joins the existing
   teaching group `TLEVEL-DSD-Y2` (`join_existing_group`) so Week 1
   classification, drag-drop, and short-response can be smoke-tested against
@@ -167,6 +235,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Migration `20261102170000_publish_l2e_week78_0_3_33`: publish immutable
+  curriculum package `0.3.33` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.32` plus hub Weeks 7–8
+  (172 activities). Supersedes `0.3.32`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–8 are available. Prior activity versions are left in place for history.
+
 - Server-authoritative Readiness Diagnostic marking for version `1.1.0` (current
   25-question contract, 24 scorable marks). Specs live in
   `learning.diagnostic_question_marking`. `api.submit_diagnostic_response`
@@ -177,6 +253,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
   exists. See [Diagnostic versioning](docs/diagnostic-versioning.md).
 
 ### Added
+
+- Migration `20261102170000_publish_l2e_week78_0_3_33`: publish immutable
+  curriculum package `0.3.33` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.32` plus hub Weeks 7–8
+  (172 activities). Supersedes `0.3.32`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–8 are available. Prior activity versions are left in place for history.
 
 - One readiness diagnostic sitting per hub, course, diagnostic version, and
   trimmed student ID. `api.start_diagnostic` reuses a `started` sitting
@@ -192,6 +276,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
   is unchanged. No Auth, no `learning.attempts`, no scores.
 
 ### Added
+
+- Migration `20261102170000_publish_l2e_week78_0_3_33`: publish immutable
+  curriculum package `0.3.33` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.32` plus hub Weeks 7–8
+  (172 activities). Supersedes `0.3.32`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–8 are available. Prior activity versions are left in place for history.
 
 - Testing registration of `level-3-it-year-1-readiness` against existing
   course `ocr-level-3-it`. Core contract `0.2.5` is recorded so the hub can
@@ -216,6 +308,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
   exposed only where `platform.hub_course_links` already relates them.
 
 ### Added
+
+- Migration `20261102170000_publish_l2e_week78_0_3_33`: publish immutable
+  curriculum package `0.3.33` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.32` plus hub Weeks 7–8
+  (172 activities). Supersedes `0.3.32`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–8 are available. Prior activity versions are left in place for history.
 
 - `admin_api.inspect_synthetic_qa_learners` and
   `admin_api.inspect_synthetic_qa_auth_user` give the ops provisioner a
@@ -276,6 +376,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Migration `20261102170000_publish_l2e_week78_0_3_33`: publish immutable
+  curriculum package `0.3.33` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.32` plus hub Weeks 7–8
+  (172 activities). Supersedes `0.3.32`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–8 are available. Prior activity versions are left in place for history.
+
 - Optional `api.published_curriculum_package(hub, course, version)` for explicit
   historical/superseded package reads. Two-argument latest-published behaviour
   is unchanged.
@@ -287,12 +395,28 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Migration `20261102170000_publish_l2e_week78_0_3_33`: publish immutable
+  curriculum package `0.3.33` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.32` plus hub Weeks 7–8
+  (172 activities). Supersedes `0.3.32`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–8 are available. Prior activity versions are left in place for history.
+
 - Teacher review mutation `admin_api.review_response` with feedback persistence,
   attempt total recalculation, completed-row review bypass, and audit events.
 - Additive response columns `feedback_summary` and `feedback_next_step`, plus
   `teacher` marking source.
 
 ### Added
+
+- Migration `20261102170000_publish_l2e_week78_0_3_33`: publish immutable
+  curriculum package `0.3.33` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.32` plus hub Weeks 7–8
+  (172 activities). Supersedes `0.3.32`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–8 are available. Prior activity versions are left in place for history.
 
 - Additive `admin_api.responses` staff evidence/marks projection and attempt
   summary fields `requires_review` and `question_count` for Results / Markbook.
@@ -303,6 +427,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
   remains for historical migrations.
 
 ### Added
+
+- Migration `20261102170000_publish_l2e_week78_0_3_33`: publish immutable
+  curriculum package `0.3.33` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.32` plus hub Weeks 7–8
+  (172 activities). Supersedes `0.3.32`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–8 are available. Prior activity versions are left in place for history.
 
 - Learner-safe `api.published_curriculum_package(hub, course)` returning the
   current published canonical teaching package. Drafts, superseded rows, staff
@@ -379,6 +511,14 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 ## [0.1.0] - 2026-08-11
 
 ### Added
+
+- Migration `20261102170000_publish_l2e_week78_0_3_33`: publish immutable
+  curriculum package `0.3.33` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from live `0.3.32` plus hub Weeks 7–8
+  (172 activities). Supersedes `0.3.32`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–8 are available. Prior activity versions are left in place for history.
 
 - Dedicated platform backend repository and local Supabase project identity.
 - Complete 18-migration source history extracted unchanged from the T Level
