@@ -12,6 +12,13 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Unit 3 catalogue **0.2.43** publishes Week 7 LO3 metadata and risk-calculation
+  practice from Emerging Hub PR #111. Activity IDs and marking key identities are
+  unchanged. Migration `20261103150000_publish_unit3_week7_lo3_0_2_43`. Previous
+  published version: 0.2.42.
+
+### Added
+
 - Week 5 revised catalogue questions are registered on activity version 1.2.0.
   Publication 0.2.35 replaced learner JSON without a new activity version, so
   `mark_formative_response` could not see the new classification keys and

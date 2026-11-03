@@ -17,3 +17,5 @@ supabase/data/generated/*
 !supabase/data/generated/seed-tlevel-weeks-1-3-publication.sql
 !supabase/data/generated/l2e-expanded-weeks-0.3.13.package.json
 !supabase/data/generated/l2e-expanded-weeks-0.3.13.activity-ids.txt
+!supabase/data/generated/unit3-week7-lo3-0.2.43.package.json
+!supabase/data/generated/unit3-week7-lo3-0.2.43.activity-ids.txt
