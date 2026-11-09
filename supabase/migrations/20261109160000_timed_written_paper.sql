@@ -1495,6 +1495,128 @@ revoke all on function admin_api.release_timed_paper_results(uuid) from public, 
 grant execute on function admin_api.set_timed_paper_allowance(text, text, uuid, integer) to authenticated;
 grant execute on function admin_api.release_timed_paper_results(uuid) to authenticated;
 
+create or replace function learning.resolve_class_student(
+  p_teacher_id uuid,
+  p_student_number text
+)
+returns uuid
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select student.id
+  from learning.students as student
+  join learning.enrolments as enrolment
+    on enrolment.student_id = student.id
+   and enrolment.status = 'active'
+  join learning.teacher_group_access as access
+    on access.group_id = enrolment.group_id
+   and access.teacher_id = p_teacher_id
+  where student.active
+    and student.student_number = btrim(p_student_number)
+  limit 1;
+$$;
+
+revoke all on function learning.resolve_class_student(uuid, text) from public, anon, authenticated;
+
+create or replace function admin_api.timed_paper_allowance(
+  p_activity_key text,
+  p_activity_version text,
+  p_student_number text
+)
+returns table (
+  extra_seconds integer,
+  standard_duration_seconds integer,
+  total_seconds integer
+)
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_teacher learning.teachers%rowtype;
+  v_student_id uuid;
+  v_version_id uuid;
+  v_spec jsonb;
+  v_standard integer;
+  v_extra integer := 0;
+begin
+  if auth.uid() is null then
+    raise exception using errcode = '28000', message = 'AUTHENTICATION_REQUIRED';
+  end if;
+  select * into v_teacher from learning.teachers where auth_user_id = auth.uid() and active;
+  if not found then
+    raise exception using errcode = '28000', message = 'REVIEW_NOT_AUTHORISED';
+  end if;
+  v_student_id := learning.resolve_class_student(v_teacher.id, p_student_number);
+  if v_student_id is null then
+    raise exception using errcode = '22023', message = 'STUDENT_NOT_FOUND';
+  end if;
+  select version.id into v_version_id
+  from learning.activity_versions as version
+  join learning.activities as activity on activity.id = version.activity_id
+  where activity.stable_key = p_activity_key and version.version = p_activity_version;
+  v_spec := learning.timed_knowledge_report_spec(v_version_id);
+  if coalesce(v_spec ->> 'assessmentType', '') is distinct from 'timed-written-paper' then
+    raise exception using errcode = '22023', message = 'TIMED_PAPER_ALLOWANCE_NOT_SUPPORTED';
+  end if;
+  v_standard := coalesce((v_spec ->> 'durationSeconds')::integer, 0);
+  select allowance.extra_seconds into v_extra
+  from learning.timed_paper_allowances as allowance
+  where allowance.student_id = v_student_id
+    and allowance.activity_version_id = v_version_id;
+  extra_seconds := coalesce(v_extra, 0);
+  standard_duration_seconds := v_standard;
+  total_seconds := v_standard + coalesce(v_extra, 0);
+  return next;
+end;
+$$;
+
+create or replace function admin_api.set_timed_paper_allowance_for_learner(
+  p_activity_key text,
+  p_activity_version text,
+  p_student_number text,
+  p_extra_seconds integer
+)
+returns table (
+  extra_seconds integer,
+  standard_duration_seconds integer,
+  total_seconds integer
+)
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_teacher learning.teachers%rowtype;
+  v_student_id uuid;
+begin
+  if auth.uid() is null then
+    raise exception using errcode = '28000', message = 'AUTHENTICATION_REQUIRED';
+  end if;
+  select * into v_teacher from learning.teachers where auth_user_id = auth.uid() and active;
+  if not found then
+    raise exception using errcode = '28000', message = 'REVIEW_NOT_AUTHORISED';
+  end if;
+  v_student_id := learning.resolve_class_student(v_teacher.id, p_student_number);
+  if v_student_id is null then
+    raise exception using errcode = '22023', message = 'STUDENT_NOT_FOUND';
+  end if;
+  perform admin_api.set_timed_paper_allowance(
+    p_activity_key, p_activity_version, v_student_id, p_extra_seconds
+  );
+  return query
+  select allowance.extra_seconds, allowance.standard_duration_seconds, allowance.total_seconds
+  from admin_api.timed_paper_allowance(p_activity_key, p_activity_version, p_student_number) as allowance;
+end;
+$$;
+
+revoke all on function admin_api.timed_paper_allowance(text, text, text) from public, anon;
+revoke all on function admin_api.set_timed_paper_allowance_for_learner(text, text, text, integer) from public, anon;
+grant execute on function admin_api.timed_paper_allowance(text, text, text) to authenticated;
+grant execute on function admin_api.set_timed_paper_allowance_for_learner(text, text, text, integer) to authenticated;
+
 create or replace function learning.timed_paper_results_hidden(p_attempt_id uuid)
 returns boolean
 language sql
@@ -1576,10 +1698,49 @@ select
   case
     when learning.timed_paper_feedback_visible(attempt.id) then response.feedback_summary
     else null::text
-  end as feedback_summary
+  end as feedback_summary,
+  activity.stable_key as activity_key
 from learning.responses as response
 join learning.attempts as attempt on attempt.id = response.attempt_id
 join learning.questions as question on question.id = response.question_id
+join learning.activity_versions as activity_version on activity_version.id = attempt.activity_version_id
+join learning.activities as activity on activity.id = activity_version.activity_id
 where attempt.student_id = (select learning.current_student_id());
 
 grant select on api.my_responses to authenticated;
+
+create or replace view api.my_attempts
+with (security_invoker = true)
+as
+select
+  attempt.id as attempt_id,
+  attempt.client_attempt_id,
+  activity.stable_key as activity_key,
+  activity_version.version as activity_version,
+  attempt.attempt_number,
+  attempt.status,
+  case
+    when learning.timed_paper_results_hidden(attempt.id) then null::numeric(8,2)
+    else attempt.score
+  end as score,
+  attempt.max_score,
+  case
+    when learning.timed_paper_results_hidden(attempt.id) then null::text
+    else attempt.marking_source
+  end as marking_source,
+  attempt.evidence_level,
+  attempt.client_started_at,
+  attempt.client_completed_at,
+  attempt.source_page,
+  coding_language.stable_key as programming_language,
+  attempt.received_at,
+  attempt.completed_at
+from learning.attempts as attempt
+join learning.activity_versions as activity_version
+  on activity_version.id = attempt.activity_version_id
+join learning.activities as activity on activity.id = activity_version.activity_id
+left join learning.coding_languages as coding_language
+  on coding_language.id = attempt.programming_language_id
+where attempt.student_id = (select learning.current_student_id());
+
+grant select on api.my_attempts to authenticated;

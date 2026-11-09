@@ -613,5 +613,30 @@ select is(
   'reflection is stored with the mini-mock attempt and does not contain a mark'
 );
 
+reset role;
+set local "request.jwt.claim.sub" = '20000000-0000-4000-8000-000000000001';
+set local "request.jwt.claims" = '{"sub":"20000000-0000-4000-8000-000000000001","role":"authenticated"}';
+set local role authenticated;
+
+select is(
+  (
+    select extra_seconds = 300 and standard_duration_seconds = 1200 and total_seconds = 1500
+    from admin_api.set_timed_paper_allowance_for_learner(
+      'u3-lo12-timed-mini-mock', '0.1.0', 'SYNTH-0001', 300
+    )
+  ),
+  true,
+  'a teacher sets extra time from the student number and sees the total duration'
+);
+
+select throws_ok(
+  $$select * from admin_api.timed_paper_allowance(
+      'u3-paper-regression-report', '1.1.0', 'SYNTH-0001'
+    )$$,
+  '22023',
+  'TIMED_PAPER_ALLOWANCE_NOT_SUPPORTED',
+  'the class allowance cannot be read for the knowledge report'
+);
+
 select * from finish();
 rollback;
