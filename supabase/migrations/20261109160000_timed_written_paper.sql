@@ -32,10 +32,17 @@ create table if not exists learning.timed_paper_releases (
   released_at timestamptz not null default pg_catalog.clock_timestamp()
 );
 
+create table if not exists learning.timed_paper_finalisations (
+  attempt_id uuid primary key references learning.attempts (id) on delete restrict,
+  finalised_at timestamptz not null default pg_catalog.clock_timestamp()
+);
+
 alter table learning.timed_paper_allowances enable row level security;
 alter table learning.timed_paper_releases enable row level security;
+alter table learning.timed_paper_finalisations enable row level security;
 revoke all on learning.timed_paper_allowances from public, anon, authenticated;
 revoke all on learning.timed_paper_releases from public, anon, authenticated;
+revoke all on learning.timed_paper_finalisations from public, anon, authenticated;
 
 comment on table learning.timed_paper_allowances is
   'Teacher-set extra seconds for a timed written paper. Not used by the word-count knowledge report.';
@@ -1484,11 +1491,139 @@ begin
   if not found then
     raise exception using errcode = '28000', message = 'REVIEW_NOT_AUTHORISED';
   end if;
+  if not exists (
+    select 1 from learning.timed_paper_finalisations as finalised
+    where finalised.attempt_id = p_attempt_id
+  ) then
+    raise exception using errcode = '22023', message = 'MARKING_NOT_FINALISED';
+  end if;
   insert into learning.timed_paper_releases (attempt_id)
   values (p_attempt_id)
   on conflict (attempt_id) do nothing;
 end;
 $$;
+
+create or replace function learning.timed_paper_marking_status(p_attempt_id uuid)
+returns text
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select case
+    when exists (
+      select 1 from learning.timed_paper_releases as released
+      where released.attempt_id = p_attempt_id
+    ) then 'released'
+    when exists (
+      select 1 from learning.timed_paper_finalisations as finalised
+      where finalised.attempt_id = p_attempt_id
+    ) then 'finalised'
+    else 'in_progress'
+  end;
+$$;
+
+revoke all on function learning.timed_paper_marking_status(uuid) from public, anon, authenticated;
+
+create or replace function admin_api.timed_paper_marking_status(p_attempt_id uuid)
+returns table (marking_status text)
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_teacher learning.teachers%rowtype;
+  v_group_id uuid;
+begin
+  if auth.uid() is null then
+    raise exception using errcode = '28000', message = 'AUTHENTICATION_REQUIRED';
+  end if;
+  select * into v_teacher from learning.teachers where auth_user_id = auth.uid() and active;
+  if not found then
+    raise exception using errcode = '28000', message = 'REVIEW_NOT_AUTHORISED';
+  end if;
+  select assignment.group_id into v_group_id
+  from learning.attempts as attempt
+  join learning.activity_assignments as assignment on assignment.id = attempt.assignment_id
+  where attempt.id = p_attempt_id;
+  if v_group_id is null then
+    raise exception using errcode = '22023', message = 'REVIEW_ATTEMPT_NOT_FOUND';
+  end if;
+  if not platform.current_staff_has_role('platform_admin')
+     and not learning.teacher_can_access_group(v_group_id) then
+    raise exception using errcode = '28000', message = 'REVIEW_NOT_AUTHORISED';
+  end if;
+  marking_status := learning.timed_paper_marking_status(p_attempt_id);
+  return next;
+end;
+$$;
+
+create or replace function admin_api.finalise_timed_paper_marking(p_attempt_id uuid)
+returns table (marking_status text)
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_teacher learning.teachers%rowtype;
+  v_group_id uuid;
+  v_questions integer;
+  v_reviewed integer;
+begin
+  if auth.uid() is null then
+    raise exception using errcode = '28000', message = 'AUTHENTICATION_REQUIRED';
+  end if;
+  select * into v_teacher from learning.teachers where auth_user_id = auth.uid() and active;
+  if not found then
+    raise exception using errcode = '28000', message = 'REVIEW_NOT_AUTHORISED';
+  end if;
+  select assignment.group_id into v_group_id
+  from learning.attempts as attempt
+  join learning.activity_assignments as assignment on assignment.id = attempt.assignment_id
+  where attempt.id = p_attempt_id;
+  if v_group_id is null then
+    raise exception using errcode = '22023', message = 'REVIEW_ATTEMPT_NOT_FOUND';
+  end if;
+  if not platform.current_staff_has_role('platform_admin')
+     and not learning.teacher_can_access_group(v_group_id) then
+    raise exception using errcode = '28000', message = 'REVIEW_NOT_AUTHORISED';
+  end if;
+  if not exists (
+    select 1
+    from learning.attempts as attempt
+    join learning.questions as question on question.activity_version_id = attempt.activity_version_id
+    join learning.question_marking as marking on marking.question_id = question.id
+    where attempt.id = p_attempt_id
+      and coalesce(marking.spec ->> 'assessmentType', '') = 'timed-written-paper'
+  ) then
+    raise exception using errcode = '22023', message = 'TIMED_PAPER_MARKING_NOT_SUPPORTED';
+  end if;
+  select count(*) into v_questions
+  from learning.questions as question
+  join learning.attempts as attempt on attempt.activity_version_id = question.activity_version_id
+  where attempt.id = p_attempt_id;
+  select count(*) into v_reviewed
+  from learning.responses as response
+  where response.attempt_id = p_attempt_id
+    and response.requires_review = false
+    and response.marking_source = 'teacher'
+    and response.awarded_score is not null
+    and nullif(btrim(coalesce(response.feedback_summary, '')), '') is not null;
+  if v_questions = 0 or v_reviewed is distinct from v_questions then
+    raise exception using errcode = '22023', message = 'MARKING_INCOMPLETE';
+  end if;
+  insert into learning.timed_paper_finalisations (attempt_id)
+  values (p_attempt_id)
+  on conflict (attempt_id) do nothing;
+  marking_status := learning.timed_paper_marking_status(p_attempt_id);
+  return next;
+end;
+$$;
+
+revoke all on function admin_api.timed_paper_marking_status(uuid) from public, anon;
+revoke all on function admin_api.finalise_timed_paper_marking(uuid) from public, anon;
+grant execute on function admin_api.timed_paper_marking_status(uuid) to authenticated;
+grant execute on function admin_api.finalise_timed_paper_marking(uuid) to authenticated;
 
 revoke all on function admin_api.set_timed_paper_allowance(text, text, uuid, integer) from public, anon;
 revoke all on function admin_api.release_timed_paper_results(uuid) from public, anon;

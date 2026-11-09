@@ -340,9 +340,70 @@ set local "request.jwt.claim.sub" = '20000000-0000-4000-8000-000000000001';
 set local "request.jwt.claims" = '{"sub":"20000000-0000-4000-8000-000000000001","role":"authenticated"}';
 set local role authenticated;
 
+select throws_ok(
+  $$select admin_api.finalise_timed_paper_marking(attempt_id) from paper_mark$$,
+  '22023',
+  'MARKING_INCOMPLETE',
+  'incomplete marking cannot be finalised'
+);
+
+select throws_ok(
+  $$select admin_api.release_timed_paper_results(attempt_id) from paper_mark$$,
+  '22023',
+  'MARKING_NOT_FINALISED',
+  'results cannot be released before marking is finalised'
+);
+
+reset role;
+
+create temp table paper_rest (response_id uuid);
+grant all on table paper_rest to authenticated;
+insert into paper_rest (response_id)
+select response.id
+from learning.responses as response
+join learning.questions as question on question.id = response.question_id
+where question.stable_key like 'u3-lo12-timed-mini-mock:mm-%'
+  and question.stable_key <> 'u3-lo12-timed-mini-mock:mm-1';
+
+set local "request.jwt.claim.sub" = '20000000-0000-4000-8000-000000000001';
+set local "request.jwt.claims" = '{"sub":"20000000-0000-4000-8000-000000000001","role":"authenticated"}';
+set local role authenticated;
+
+select lives_ok(
+  $$select admin_api.review_response(response_id, 1, null, 'Marked for the paper.', null) from paper_rest$$,
+  'the remaining questions are marked with the existing review'
+);
+
+select is(
+  (
+    select marking_status = 'finalised'
+    from admin_api.finalise_timed_paper_marking((select attempt_id from paper_mark))
+  ),
+  true,
+  'finalising the completed script is stored'
+);
+
+select is(
+  (
+    select marking_status = 'finalised'
+    from admin_api.timed_paper_marking_status((select attempt_id from paper_mark))
+  ),
+  true,
+  'finalisation is still there for a later read'
+);
+
 select lives_ok(
   $$select admin_api.release_timed_paper_results(attempt_id) from paper_mark$$,
-  'the teacher releases the result'
+  'the teacher releases the result after finalisation'
+);
+
+select is(
+  (
+    select marking_status = 'released'
+    from admin_api.timed_paper_marking_status((select attempt_id from paper_mark))
+  ),
+  true,
+  'release stays separate from finalisation'
 );
 
 reset role;
