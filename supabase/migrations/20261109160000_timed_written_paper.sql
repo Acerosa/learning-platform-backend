@@ -120,8 +120,14 @@ begin
     if v_key = p_timing_question_key then
       v_seen := true;
     end if;
-    if v_expired and pg_catalog.jsonb_typeof(v_state -> 'responses' -> v_key) = 'string' then
-      v_text := v_state -> 'responses' ->> v_key;
+    -- Expiry locks every question on the paper, including questions that do not
+    -- carry the duration specification. Unsaved questions stay blank.
+    if v_expired then
+      if pg_catalog.jsonb_typeof(v_state -> 'responses' -> v_key) = 'string' then
+        v_text := v_state -> 'responses' ->> v_key;
+      else
+        v_text := '';
+      end if;
     elsif pg_catalog.jsonb_typeof(v_item -> 'response_payload') = 'string' then
       v_text := coalesce(v_item ->> 'response_payload', '');
     else
@@ -187,7 +193,8 @@ begin
       'phase', v_phase,
       'assessmentType', 'timed-written-paper',
       'standardDurationSeconds', v_duration,
-      'serverNow', v_now
+      'serverNow', v_now,
+      'authoritativeStartedAt', v_started
     )
   );
 end;
@@ -370,6 +377,29 @@ begin
         and version.published_at is null
       on conflict (question_id) do nothing;
     end loop;
+
+    if v_year_id is not null then
+      if not exists (
+        select 1 from learning.activity_delivery as delivery
+        where delivery.activity_version_id = v_version_id
+          and delivery.academic_year_id = v_year_id
+          and delivery.group_id is null
+      ) then
+        insert into learning.activity_delivery (
+          activity_version_id, academic_year_id, curriculum_week_id,
+          week_number, session_number, sort_order, active
+        ) values (v_version_id, v_year_id, null, null, null, 0, true);
+      end if;
+      insert into learning.activity_assignments (
+        id, group_id, activity_version_id, required, active
+      )
+      select
+        platform.curriculum_catalogue_id('assignment', learner_group.code || ':' || v_activity_id || ':' || v_activity_version),
+        learner_group.id, v_version_id, true, true
+      from learning.groups as learner_group
+      where learner_group.course_id = v_course_id and learner_group.active
+      on conflict (group_id, activity_version_id) do update set active = true;
+    end if;
 
     update learning.activity_versions
     set published_at = clock_timestamp()
@@ -657,6 +687,10 @@ begin
   );
 
   v_payload := learning.sanitize_activity_state_payload(p_state) - 'knowledgeReportPhase';
+  v_spec := learning.timed_knowledge_report_spec(v_target.activity_version_id);
+  if coalesce(v_spec ->> 'assessmentType', '') = 'timed-written-paper' then
+    v_payload := v_payload - 'startedAt';
+  end if;
   if octet_length(v_payload::text) > 131072 then
     raise exception using errcode = '22023', message = 'INVALID_ACTIVITY_STATE';
   end if;
@@ -681,7 +715,9 @@ begin
 
   if found then
     v_payload := v_payload - 'knowledgeReportPhase';
-    v_spec := learning.timed_knowledge_report_spec(v_target.activity_version_id);
+    if coalesce(v_spec ->> 'assessmentType', '') = 'timed-written-paper' then
+      v_payload := v_payload - 'startedAt';
+    end if;
     if v_spec is not null and (
       v_existing.status = 'completed'
       or exists (
@@ -799,9 +835,6 @@ begin
   from learning.activity_state_row(v_student_id, v_target.activity_version_id);
 end;
 $$;
-
-
-drop function if exists api.get_activity_state(text, text);
 
 
 create or replace function learning.knowledge_report_phase_overlay(
@@ -1233,9 +1266,167 @@ begin
     p_hub_code,
     p_course_key,
     p_package_version
+  ) + platform.project_unscheduled_activities(
+    p_package,
+    p_hub_code,
+    p_course_key,
+    p_package_version
   );
 end;
 $$;
+
+create or replace function platform.project_unscheduled_activities(
+  p_package jsonb,
+  p_hub_code text,
+  p_course_key text,
+  p_package_version text
+)
+returns integer
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_course_id uuid;
+  v_module_id uuid;
+  v_year_id uuid;
+  v_activity jsonb;
+  v_block jsonb;
+  v_activity_id text;
+  v_activity_version text;
+  v_question_key text;
+  v_activity_row_id uuid;
+  v_version_id uuid;
+  v_ordinal integer;
+  v_count integer := 0;
+  v_questions jsonb;
+begin
+  select course.id into v_course_id
+  from learning.courses as course
+  where course.stable_key = p_course_key and course.active;
+  if v_course_id is null then
+    raise exception using errcode = '22023', message = 'COURSE_NOT_FOUND';
+  end if;
+  select module.id into v_module_id
+  from learning.modules as module
+  where module.course_id = v_course_id and module.stable_key = p_hub_code;
+  if v_module_id is null then
+    raise exception using errcode = '22023', message = 'COURSE_NOT_FOUND';
+  end if;
+  select academic_year.id into v_year_id
+  from learning.academic_years as academic_year
+  where academic_year.active
+  order by academic_year.code
+  limit 1;
+
+  for v_activity in
+    select value from jsonb_array_elements(coalesce(p_package -> 'activities', '[]'::jsonb))
+  loop
+    if coalesce(v_activity -> 'metadata' ->> 'cataloguePlacement', '') is distinct from 'unscheduled' then
+      continue;
+    end if;
+    if jsonb_typeof(v_activity -> 'metadata' -> 'knowledgeReport') = 'object' then
+      raise exception using errcode = '22023', message = 'CATALOGUE_PROJECTION_FAILED';
+    end if;
+    v_activity_id := v_activity ->> 'id';
+    v_activity_version := coalesce(v_activity ->> 'version', '');
+    if v_activity_id is null or v_activity_version !~ '^[0-9]+\.[0-9]+\.[0-9]+$' then
+      raise exception using errcode = '22023', message = 'CATALOGUE_PROJECTION_FAILED';
+    end if;
+    v_questions := '[]'::jsonb;
+    v_ordinal := 0;
+    for v_block in
+      select value from jsonb_array_elements(coalesce(v_activity -> 'blocks', '[]'::jsonb))
+    loop
+      if coalesce(v_block ->> 'type', '') not in ('short-response', 'reflection') then
+        continue;
+      end if;
+      v_question_key := v_block -> 'content' ->> 'questionId';
+      if v_question_key is null or v_question_key !~ '^[A-Za-z0-9._:-]+$' then
+        raise exception using errcode = '22023', message = 'CATALOGUE_PROJECTION_FAILED';
+      end if;
+      v_ordinal := v_ordinal + 1;
+      v_questions := v_questions || jsonb_build_array(jsonb_build_object(
+        'stableKey', v_question_key,
+        'ordinal', v_ordinal
+      ));
+    end loop;
+    if v_ordinal < 1 then
+      raise exception using errcode = '22023', message = 'CATALOGUE_PROJECTION_FAILED';
+    end if;
+    v_activity_row_id := platform.curriculum_catalogue_id('activity', v_activity_id);
+    insert into learning.activities (id, module_id, stable_key, title, activity_type, git_path, active)
+    values (
+      v_activity_row_id, v_module_id, v_activity_id,
+      coalesce(v_activity -> 'metadata' ->> 'title', v_activity_id),
+      'practice', 'content/activities/' || v_activity_id, true
+    )
+    on conflict (stable_key) do update set title = excluded.title, active = true;
+    select activity.id into v_activity_row_id from learning.activities as activity where activity.stable_key = v_activity_id;
+    v_version_id := platform.curriculum_catalogue_id('version', v_activity_id || ':' || v_activity_version);
+    insert into learning.activity_versions (id, activity_id, version, content_hash, max_score, question_count, published_at)
+    values (
+      v_version_id, v_activity_row_id, v_activity_version,
+      encode(extensions.digest(convert_to(v_activity_id || ':' || v_activity_version || ':' || v_questions::text, 'UTF8'), 'sha256'), 'hex'),
+      v_ordinal, v_ordinal, null
+    )
+    on conflict (activity_id, version) do nothing;
+    select version.id into v_version_id
+    from learning.activity_versions as version
+    where version.activity_id = v_activity_row_id and version.version = v_activity_version;
+    for v_block in select value from jsonb_array_elements(v_questions)
+    loop
+      insert into learning.questions (
+        id, activity_version_id, stable_key, section_key, section_title,
+        question_type, analytics_title, ordinal, max_score
+      )
+      select
+        platform.curriculum_catalogue_id('question', v_activity_id || ':' || v_activity_version || ':' || (v_block ->> 'stableKey')),
+        v_version_id, v_block ->> 'stableKey', 'practice', 'Practice', 'text', v_block ->> 'stableKey',
+        (v_block ->> 'ordinal')::integer, 1
+      where exists (
+        select 1 from learning.activity_versions as version
+        where version.id = v_version_id and version.published_at is null
+      )
+      on conflict (activity_version_id, stable_key) do nothing;
+      insert into learning.question_marking (question_id, spec)
+      select question.id, jsonb_build_object('mode', 'completion')
+      from learning.questions as question
+      join learning.activity_versions as version on version.id = question.activity_version_id
+      where question.activity_version_id = v_version_id
+        and question.stable_key = v_block ->> 'stableKey'
+        and version.published_at is null
+      on conflict (question_id) do nothing;
+    end loop;
+    if v_year_id is not null then
+      if not exists (
+        select 1 from learning.activity_delivery as delivery
+        where delivery.activity_version_id = v_version_id
+          and delivery.academic_year_id = v_year_id and delivery.group_id is null
+      ) then
+        insert into learning.activity_delivery (
+          activity_version_id, academic_year_id, curriculum_week_id,
+          week_number, session_number, sort_order, active
+        ) values (v_version_id, v_year_id, null, null, null, 0, true);
+      end if;
+      insert into learning.activity_assignments (id, group_id, activity_version_id, required, active)
+      select
+        platform.curriculum_catalogue_id('assignment', learner_group.code || ':' || v_activity_id || ':' || v_activity_version),
+        learner_group.id, v_version_id, false, true
+      from learning.groups as learner_group
+      where learner_group.course_id = v_course_id and learner_group.active
+      on conflict (group_id, activity_version_id) do update set active = true;
+    end if;
+    update learning.activity_versions
+    set published_at = clock_timestamp()
+    where id = v_version_id and published_at is null;
+    v_count := v_count + 1;
+  end loop;
+  return v_count;
+end;
+$$;
+
+revoke all on function platform.project_unscheduled_activities(jsonb, text, text, text) from public, anon, authenticated;
 
 
 
@@ -1327,7 +1518,8 @@ as $$
   );
 $$;
 
-revoke all on function learning.timed_paper_results_hidden(uuid) from public, anon, authenticated;
+revoke all on function learning.timed_paper_results_hidden(uuid) from public, anon;
+grant execute on function learning.timed_paper_results_hidden(uuid) to authenticated;
 
 create or replace function learning.timed_paper_feedback_visible(p_attempt_id uuid)
 returns boolean
@@ -1352,7 +1544,8 @@ as $$
   );
 $$;
 
-revoke all on function learning.timed_paper_feedback_visible(uuid) from public, anon, authenticated;
+revoke all on function learning.timed_paper_feedback_visible(uuid) from public, anon;
+grant execute on function learning.timed_paper_feedback_visible(uuid) to authenticated;
 
 create or replace view api.my_responses
 with (security_invoker = true)
@@ -1363,12 +1556,27 @@ select
   question.stable_key as question_key,
   question.section_key,
   response.response_payload,
-  case when learning.timed_paper_results_hidden(attempt.id) then null else response.awarded_score end as awarded_score,
+  case
+    when learning.timed_paper_results_hidden(attempt.id) then null::numeric(8,2)
+    else response.awarded_score
+  end as awarded_score,
   response.max_score,
-  case when learning.timed_paper_results_hidden(attempt.id) then null else response.is_correct end as is_correct,
-  case when learning.timed_paper_results_hidden(attempt.id) then null else response.marking_source end as marking_source,
-  case when learning.timed_paper_results_hidden(attempt.id) then null else response.marked_at end as marked_at,
-  case when learning.timed_paper_feedback_visible(attempt.id) then response.feedback_summary else null end as feedback_summary
+  case
+    when learning.timed_paper_results_hidden(attempt.id) then null::boolean
+    else response.is_correct
+  end as is_correct,
+  case
+    when learning.timed_paper_results_hidden(attempt.id) then null::text
+    else response.marking_source
+  end as marking_source,
+  case
+    when learning.timed_paper_results_hidden(attempt.id) then null::timestamptz
+    else response.marked_at
+  end as marked_at,
+  case
+    when learning.timed_paper_feedback_visible(attempt.id) then response.feedback_summary
+    else null::text
+  end as feedback_summary
 from learning.responses as response
 join learning.attempts as attempt on attempt.id = response.attempt_id
 join learning.questions as question on question.id = response.question_id
