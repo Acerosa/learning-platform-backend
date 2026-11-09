@@ -652,6 +652,44 @@ select is(
 
 select is(
   (
+    select state -> 'responses' -> 'u3-lo12-answer-writing:aw-1' ->> 'original'
+    from api.save_activity_state(
+      'u3-lo12-answer-writing', '0.1.0',
+      jsonb_build_object('responses', jsonb_build_object(
+        'u3-lo12-answer-writing:aw-1', jsonb_build_object(
+          'original', 'LATE LOCAL RECONNECTED',
+          'revised', 'Confidentiality, because the shared login exposes files.',
+          'guidanceViewed', true
+        )
+      ), 'completed', false),
+      clock_timestamp()
+    )
+  ),
+  'LATE LOCAL RECONNECTED',
+  'the later answer is stored before an older request returns'
+);
+
+select is(
+  (
+    select state -> 'responses' -> 'u3-lo12-answer-writing:aw-1' ->> 'original'
+    from api.save_activity_state(
+      'u3-lo12-answer-writing', '0.1.0',
+      jsonb_build_object('responses', jsonb_build_object(
+        'u3-lo12-answer-writing:aw-1', jsonb_build_object(
+          'original', 'STALE OVERWRITE',
+          'revised', 'This older request must not replace the later answer.',
+          'guidanceViewed', true
+        )
+      ), 'completed', false),
+      clock_timestamp() - interval '2 minutes'
+    )
+  ),
+  'LATE LOCAL RECONNECTED',
+  'an older save response does not replace a newer answer'
+);
+
+select is(
+  (
     select state ->> 'relatedActivityKey' = 'u3-lo12-timed-mini-mock'
       and state -> 'responses' ->> 'u3-lo12-reflection:topic' = 'Threats and vulnerabilities.'
       and state -> 'responses' ->> 'u3-lo12-reflection:revise' = 'Impacts and legal issues.'
@@ -697,6 +735,40 @@ select throws_ok(
   '22023',
   'TIMED_PAPER_ALLOWANCE_NOT_SUPPORTED',
   'the class allowance cannot be read for the knowledge report'
+);
+
+select is(
+  (
+    select count(*)
+    from admin_api.class_learners() as learner
+    where learner.student_number = 'SYNTH-0001'
+  ),
+  1::bigint,
+  'a teacher can search a learner in an authorised class'
+);
+
+select is(
+  (
+    select count(*)
+    from admin_api.class_learners() as learner
+    where learner.student_number = 'SYNTH-0002'
+  ),
+  0::bigint,
+  'a teacher cannot search a learner from another class'
+);
+
+set local "request.jwt.claim.sub" = '20000000-0000-4000-8000-000000000003';
+set local "request.jwt.claims" = '{"sub":"20000000-0000-4000-8000-000000000003","role":"authenticated"}';
+set local role authenticated;
+
+select is(
+  (
+    select count(*) = 2
+    from admin_api.class_learners() as learner
+    where learner.student_number in ('SYNTH-0001', 'SYNTH-0002')
+  ),
+  true,
+  'a platform administrator without a class keeps the wider learner list'
 );
 
 select * from finish();

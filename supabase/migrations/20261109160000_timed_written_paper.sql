@@ -1630,6 +1630,67 @@ revoke all on function admin_api.release_timed_paper_results(uuid) from public, 
 grant execute on function admin_api.set_timed_paper_allowance(text, text, uuid, integer) to authenticated;
 grant execute on function admin_api.release_timed_paper_results(uuid) to authenticated;
 
+create or replace function admin_api.class_learners()
+returns table (
+  student_number text,
+  display_name text
+)
+language plpgsql
+stable
+security definer
+set search_path = ''
+as $$
+declare
+  v_teacher_id uuid;
+  v_has_class boolean;
+begin
+  if auth.uid() is null then
+    raise exception using errcode = '28000', message = 'AUTHENTICATION_REQUIRED';
+  end if;
+  select teacher.id into v_teacher_id
+  from learning.teachers as teacher
+  where teacher.auth_user_id = auth.uid()
+    and teacher.active
+  limit 1;
+  if v_teacher_id is null then
+    raise exception using errcode = '28000', message = 'REVIEW_NOT_AUTHORISED';
+  end if;
+  select exists (
+    select 1
+    from learning.teacher_group_access as access
+    where access.teacher_id = v_teacher_id
+      and access.revoked_at is null
+  ) into v_has_class;
+  if v_has_class then
+    return query
+    select distinct student.student_number, student.display_name
+    from learning.students as student
+    join learning.enrolments as enrolment
+      on enrolment.student_id = student.id
+     and enrolment.status = 'active'
+    join learning.teacher_group_access as access
+      on access.group_id = enrolment.group_id
+     and access.teacher_id = v_teacher_id
+     and access.revoked_at is null
+    where student.active
+    order by student.display_name, student.student_number;
+    return;
+  end if;
+  if platform.current_staff_has_role('platform_admin') then
+    return query
+    select student.student_number, student.display_name
+    from learning.students as student
+    where student.active
+    order by student.display_name, student.student_number;
+    return;
+  end if;
+  raise exception using errcode = '28000', message = 'REVIEW_NOT_AUTHORISED';
+end;
+$$;
+
+revoke all on function admin_api.class_learners() from public, anon;
+grant execute on function admin_api.class_learners() to authenticated;
+
 create or replace function learning.resolve_class_student(
   p_teacher_id uuid,
   p_student_number text
