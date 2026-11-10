@@ -12,6 +12,16 @@ MVP baseline: hub registration, Week 1 catalogue publication, and evidence-only
 
 ### Added
 
+- Migration `20261011130000_publish_l2e_week4_0_3_26`: publish immutable
+  curriculum package `0.3.26` for
+  `l2e-exploring-emerging-digital-technologies` /
+  `gateway-level-2-digital-it-skills` from the hub package with Week 4
+  (63 activities). Supersedes `0.3.25`, projects the marking catalogue, and
+  assigns published L2E module activity versions to `L2E-DELIVERY-A`. Weeks
+  1–3 remain available; Week 4 remains planned. Prior activity versions are
+  left in place for history. Contract coverage in
+  `scripts/ops/tests/l2e-catalogue-alignment.test.mjs`.
+
 - Week 5 revised catalogue questions are registered on activity version 1.2.0.
   Publication 0.2.35 replaced learner JSON without a new activity version, so
   `mark_formative_response` could not see the new classification keys and
