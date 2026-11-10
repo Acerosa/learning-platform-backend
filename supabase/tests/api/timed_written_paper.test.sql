@@ -148,7 +148,10 @@ select lives_ok(
           'u3-lo12-timed-mini-mock:mm-4', 'four',
           'u3-lo12-timed-mini-mock:mm-5', 'five'
         )
-      )
+      ),
+      null,
+      null,
+      0
     )
   $$,
   'the first save starts one sitting for all five answers'
@@ -172,7 +175,10 @@ select is(
           'u3-lo12-timed-mini-mock:mm-4', 'four',
           'u3-lo12-timed-mini-mock:mm-5', 'five'
         )
-      )
+      ),
+      null,
+      null,
+      1
     )
   ),
   true,
@@ -195,7 +201,8 @@ set local role authenticated;
 
 select is(
   (
-    select state -> 'responses' ->> 'u3-lo12-timed-mini-mock:mm-1' = 'one'
+    select save_outcome = 'locked'
+      and state -> 'responses' ->> 'u3-lo12-timed-mini-mock:mm-1' = 'one'
       and state -> 'responses' ->> 'u3-lo12-timed-mini-mock:mm-2' = 'two'
       and state -> 'responses' ->> 'u3-lo12-timed-mini-mock:mm-3' = 'three'
       and state -> 'responses' ->> 'u3-lo12-timed-mini-mock:mm-4' = 'four'
@@ -423,14 +430,15 @@ select is(
 
 select is(
   (
-    select state -> 'responses' ->> 'u3-lo12-timed-mini-mock:mm-1'
+    select save_outcome = 'locked'
+      and state -> 'responses' ->> 'u3-lo12-timed-mini-mock:mm-1' = 'one'
     from api.save_activity_state(
       'u3-lo12-timed-mini-mock',
       '0.1.0',
       jsonb_build_object('responses', jsonb_build_object('u3-lo12-timed-mini-mock:mm-1', 'rewritten'))
     )
   ),
-  'one',
+  true,
   'a released result cannot be rewritten by the learner'
 );
 
@@ -459,6 +467,18 @@ set local "request.jwt.claim.sub" = '10000000-0000-4000-8000-000000000002';
 set local "request.jwt.claims" = '{"sub":"10000000-0000-4000-8000-000000000002","role":"authenticated"}';
 set local role authenticated;
 
+select throws_ok(
+  $$select api.save_activity_state(
+      'u3-lo12-timed-mini-mock', '0.1.0',
+      jsonb_build_object('responses', jsonb_build_object(
+        'u3-lo12-timed-mini-mock:mm-1', 'bypass'
+      ))
+    )$$,
+  '22023',
+  'REVISION_REQUIRED',
+  'a timed paper cannot be created without a revision'
+);
+
 select lives_ok(
   $$select api.save_activity_state(
       'u3-lo12-timed-mini-mock', '0.1.0',
@@ -468,9 +488,165 @@ select lives_ok(
         'u3-lo12-timed-mini-mock:mm-3', 'b3',
         'u3-lo12-timed-mini-mock:mm-4', 'b4',
         'u3-lo12-timed-mini-mock:mm-5', 'b5'
-      ))
+      )),
+      null, null, 0
     )$$,
   'a second student can start a separate sitting'
+);
+
+reset role;
+
+create temp table revision_guard (
+  started_at timestamptz,
+  revision bigint,
+  attempts integer
+);
+grant all on table revision_guard to authenticated;
+insert into revision_guard (started_at, revision, attempts)
+select draft.started_at, draft.revision, (
+  select count(*)::integer
+  from learning.attempts as attempt
+  where attempt.student_id = draft.student_id
+    and attempt.activity_version_id = draft.activity_version_id
+)
+from learning.activity_states as draft
+join learning.activity_versions as version on version.id = draft.activity_version_id
+join learning.activities as activity on activity.id = version.activity_id
+where activity.stable_key = 'u3-lo12-timed-mini-mock'
+  and draft.student_id = '30000000-0000-4000-8000-000000000002';
+
+set local "request.jwt.claim.sub" = '10000000-0000-4000-8000-000000000002';
+set local "request.jwt.claims" = '{"sub":"10000000-0000-4000-8000-000000000002","role":"authenticated"}';
+set local role authenticated;
+
+select is(
+  (
+    select save_outcome = 'saved'
+      and revision = 2
+      and state -> 'responses' ->> 'u3-lo12-timed-mini-mock:mm-5' = 'newer'
+    from api.save_activity_state(
+      'u3-lo12-timed-mini-mock', '0.1.0',
+      jsonb_build_object('responses', jsonb_build_object(
+        'u3-lo12-timed-mini-mock:mm-1', 'b1',
+        'u3-lo12-timed-mini-mock:mm-5', 'newer'
+      )),
+      null, null, 1
+    )
+  ),
+  true,
+  'a matching revision saves the timed paper and returns the new revision'
+);
+
+select is(
+  (
+    select save_outcome = 'conflict'
+      and revision = 2
+      and started_at = (select started_at from revision_guard)
+      and state -> 'responses' ->> 'u3-lo12-timed-mini-mock:mm-5' = 'newer'
+    from api.save_activity_state(
+      'u3-lo12-timed-mini-mock', '0.1.0',
+      jsonb_build_object('responses', jsonb_build_object(
+        'u3-lo12-timed-mini-mock:mm-5', 'stale overwrite'
+      )),
+      null, null, 1
+    )
+  ),
+  true,
+  'a stale revision cannot overwrite a newer answer or the deadline'
+);
+
+select is(
+  (
+    select save_outcome = 'saved'
+      and revision = 3
+      and state -> 'responses' ->> 'u3-lo12-timed-mini-mock:mm-5' = 'first winner'
+    from api.save_activity_state(
+      'u3-lo12-timed-mini-mock', '0.1.0',
+      jsonb_build_object('responses', jsonb_build_object(
+        'u3-lo12-timed-mini-mock:mm-5', 'first winner'
+      )),
+      null, null, 2
+    )
+  ),
+  true,
+  'the first of two saves against one revision succeeds'
+);
+
+select is(
+  (
+    select save_outcome = 'conflict'
+      and revision = 3
+      and state -> 'responses' ->> 'u3-lo12-timed-mini-mock:mm-5' = 'first winner'
+    from api.save_activity_state(
+      'u3-lo12-timed-mini-mock', '0.1.0',
+      jsonb_build_object('responses', jsonb_build_object(
+        'u3-lo12-timed-mini-mock:mm-5', 'second writer'
+      )),
+      null, null, 2
+    )
+  ),
+  true,
+  'two saves cannot both succeed against the same revision'
+);
+
+select throws_ok(
+  $$select api.save_activity_state(
+      'u3-lo12-timed-mini-mock', '0.1.0',
+      jsonb_build_object('responses', jsonb_build_object(
+        'u3-lo12-timed-mini-mock:mm-5', 'omitted revision'
+      ))
+    )$$,
+  '22023',
+  'REVISION_REQUIRED',
+  'omitting the revision cannot bypass a timed paper'
+);
+
+reset role;
+
+select is(
+  (
+    select draft.state_payload -> 'responses' ->> 'u3-lo12-timed-mini-mock:mm-5' = 'first winner'
+      and draft.revision = 3
+      and draft.started_at = (select started_at from revision_guard)
+      and (
+        select count(*)::integer
+        from learning.attempts as attempt
+        where attempt.student_id = draft.student_id
+          and attempt.activity_version_id = draft.activity_version_id
+      ) = (select attempts from revision_guard)
+    from learning.activity_states as draft
+    join learning.activity_versions as version on version.id = draft.activity_version_id
+    join learning.activities as activity on activity.id = version.activity_id
+    where activity.stable_key = 'u3-lo12-timed-mini-mock'
+      and draft.student_id = '30000000-0000-4000-8000-000000000002'
+  ),
+  true,
+  'a rejected save does not change the payload, deadline, or attempt count'
+);
+
+set local "request.jwt.claim.sub" = '10000000-0000-4000-8000-000000000002';
+set local "request.jwt.claims" = '{"sub":"10000000-0000-4000-8000-000000000002","role":"authenticated"}';
+set local role authenticated;
+
+select is(
+  (
+    select save_outcome = 'saved'
+      and revision = 4
+      and state -> 'responses' ->> 'u3-lo12-timed-mini-mock:mm-5' = 'b5'
+    from api.save_activity_state(
+      'u3-lo12-timed-mini-mock', '0.1.0',
+      jsonb_build_object('responses', jsonb_build_object(
+        'u3-lo12-timed-mini-mock:mm-1', 'b1',
+        'u3-lo12-timed-mini-mock:mm-2', 'b2',
+        'u3-lo12-timed-mini-mock:mm-3', 'b3',
+        'u3-lo12-timed-mini-mock:mm-4', 'b4',
+        'u3-lo12-timed-mini-mock:mm-5', 'b5'
+      )),
+      null, null, 3
+    )
+  ),
+  true,
+  'the sitting can continue from the revision returned after the conflict'
 );
 
 reset role;
@@ -511,7 +687,8 @@ select is(
         'u3-lo12-timed-mini-mock:mm-3', 'b3',
         'u3-lo12-timed-mini-mock:mm-4', 'b4',
         'u3-lo12-timed-mini-mock:mm-5', 'b5-extra'
-      ))
+      )),
+      null, null, 4
     )
   ),
   'b5-extra',
