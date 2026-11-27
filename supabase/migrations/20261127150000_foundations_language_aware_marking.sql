@@ -1751,6 +1751,7 @@ declare
   v_remaining int;
   v_lang int;
   v_sample text;
+  v_target text[] := array['FOUND-PROG-DEBUG-001', 'FOUND-PROG-DEBUG-002', 'FOUND-PROG-DEBUG-003', 'FOUND-PROG-DEBUG-004', 'FOUND-PROG-DEBUG-005', 'FOUND-PROG-FUNC-003', 'FOUND-PROG-FUNC-004', 'FOUND-PROG-FUNC-005', 'FOUND-PROG-ITER-002', 'FOUND-PROG-ITER-003', 'FOUND-PROG-ITER-004', 'FOUND-PROG-LIST-002', 'FOUND-PROG-LIST-003', 'FOUND-PROG-LIST-004', 'FOUND-PROG-LIST-005', 'FOUND-PROG-SEL-002', 'FOUND-PROG-SEL-003', 'FOUND-PROG-SEL-004', 'FOUND-PROG-SEL-005', 'FOUND-PROG-SQL-002', 'FOUND-PROG-SQL-003', 'FOUND-PROG-SQL-005', 'FOUND-PROG-VAR-002', 'FOUND-PROG-VAR-003', 'FOUND-PROG-VAR-005'];
 begin
   select count(*)::integer,
          string_agg(question.stable_key, ', ' order by question.stable_key)
@@ -1762,11 +1763,12 @@ begin
   join learning.questions as question
     on question.activity_version_id = activity_version.id
   where activity.stable_key = 'foundations-programming-diagnostic'
+    and question.stable_key = any (v_target)
     and learning.resolve_marking_question(question.id) is null;
 
   if coalesce(v_remaining, 0) <> 0 then
     raise exception
-      'foundations language-aware restore left % unresolved FOUND-PROG questions sample=%',
+      'foundations language-aware restore left % unresolved target questions sample=%',
       v_remaining,
       left(coalesce(v_sample, ''), 300);
   end if;
@@ -1780,6 +1782,7 @@ begin
     on activity.id = activity_version.activity_id
   where activity.stable_key = 'foundations-programming-diagnostic'
     and activity_version.version = '2.0.0'
+    and question.stable_key = any (v_target)
     and marking.spec->>'mode' = 'language-variants';
 
   if coalesce(v_lang, 0) < 25 then

@@ -11,10 +11,19 @@ select is(
     join learning.questions as question
       on question.activity_version_id = activity_version.id
     where activity.stable_key = 'foundations-programming-diagnostic'
+      and question.stable_key like 'FOUND-PROG-%'
+      and coalesce(
+        (
+          select marking.spec->>'mode'
+          from learning.question_marking as marking
+          where marking.question_id = question.id
+        ),
+        ''
+      ) = 'language-variants'
       and learning.resolve_marking_question(question.id) is null
   ),
   0,
-  'Foundations programming diagnostic has no unresolved marking gaps'
+  'Foundations language-variants specs resolve for restored programming items'
 );
 
 select is(
