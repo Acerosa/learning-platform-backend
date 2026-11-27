@@ -38,3 +38,26 @@ T Level / L2E unresolved counts unchanged by this fallback (separate gaps).
 Migration `20261127120000_resolve_unbound_catalogue_marking.sql` adds a
 fail-closed fallback: if exact-version and fingerprint rules miss, use the
 **single** published marking spec for the same activity + question key.
+
+## Production deployment
+
+- Applied: hosted version `20261127103555` / name `resolve_unbound_catalogue_marking`
+- Repository file: `20261127120000_resolve_unbound_catalogue_marking.sql`
+- Rollback: `rollback_resolve_unbound_catalogue_marking.sql` (not executed)
+
+### Post-fix unresolved counts
+
+| Hub | Questions | Unresolved after |
+| --- | ---: | ---: |
+| Unit 3 | 668 | **6** (was 301) |
+| T Level | 888 | 127 (unchanged; mostly missing specs) |
+| L2E | 496 | 4 |
+| Unit 14 | 96 | 0 |
+
+### Marking smoke (production, no student writes)
+
+Week 7 `week7-session1-retrieval` / `1.0.0` / `S1R1`:
+- option `a` → `is_correct=true`, `requires_review=false`, score 1
+- option `b` → `is_correct=false`, `requires_review=false`
+
+Phase B curriculum RPC still returns expected published versions with stored learner packages.
