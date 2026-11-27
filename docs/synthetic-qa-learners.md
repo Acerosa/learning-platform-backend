@@ -113,12 +113,21 @@ Archive old test evidence: leave rows in place. Filter staff views with
 
 ## Authenticated acceptance
 
-Recovery closure requires browser-verified synthetic QA. See
+Production authenticated QA is documented in
 [docs/audits/qa-acceptance/AUTHENTICATED_QA_PLAN.md](audits/qa-acceptance/AUTHENTICATED_QA_PLAN.md)
-for the production inventory, staff account plan, enrolment-drift notes, and:
+(personas, enrolment drift withdrawal, staff QA `platform_admin`, browser
+checklist, reporting isolation).
 
 ```bash
+npm run provision:synthetic-qa -- --dry-run
+npm run check:synthetic-qa
 npm run accept:authenticated-qa
 ```
 
-Do not create production Auth users until that plan is explicitly approved.
+Acceptance authenticates with the publishable/anon key only. Unset or ignore
+`SUPABASE_SERVICE_ROLE_KEY` for that command. Store learner and staff secrets
+only in gitignored `.env` (`*_TEST_EMAIL` / `*_TEST_PASSWORD`, `STAFF_QA_*`).
+
+T Level browser marking uses `TLEVEL_DSD_Y2_TEST_LEARNER` because the hub
+enrolment gate currently accepts only `TLEVEL-DSD-Y2`. Unit 3 accepts
+`CYBER-TEST-QA` for the exclusive Unit 3 persona.

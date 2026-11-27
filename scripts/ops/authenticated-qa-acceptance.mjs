@@ -19,6 +19,17 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
 export const STAFF_EMAIL_ENV = ["STAFF_QA_EMAIL", "ADMIN_QA_EMAIL"];
 export const STAFF_PASSWORD_ENV = ["STAFF_QA_PASSWORD", "ADMIN_QA_PASSWORD"];
 
+/** Node < 22 supabase-js realtime requires a WebSocket transport; acceptance never uses realtime. */
+class OpsNoopWebSocket {
+  close() {}
+  send() {}
+  addEventListener() {}
+  removeEventListener() {}
+  dispatchEvent() {
+    return false;
+  }
+}
+
 function loadLocalEnv(env) {
   const path = join(ROOT, ".env");
   if (!existsSync(path)) return { ...env };
@@ -94,10 +105,12 @@ export function collectAcceptanceEnv(env, personas = PERSONAS) {
 
   return {
     supabaseUrl: envValue(env, "SUPABASE_URL") || envValue(env, "NEXT_PUBLIC_SUPABASE_URL"),
+    // Prefer legacy JWT anon for supabase-js session Auth; fall back to publishable key.
     publishableKey:
-      envValue(env, "SUPABASE_PUBLISHABLE_KEY")
+      envValue(env, "SUPABASE_ANON_KEY")
+      || envValue(env, "SUPABASE_PUBLISHABLE_KEY")
       || envValue(env, "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY")
-      || envValue(env, "SUPABASE_ANON_KEY"),
+      || envValue(env, "NEXT_PUBLIC_SUPABASE_ANON_KEY"),
     learners: present,
     missingLearners,
     staff,
@@ -139,7 +152,7 @@ export async function signInLearner(client, { email, password }) {
 
 export async function fetchLearnerContext(client) {
   const profile = await client.schema("api").from("my_profile").select("*").maybeSingle();
-  const enrolments = await client.schema("api").from("my_enrolments").select("group_code,status,hub_code");
+  const enrolments = await client.schema("api").from("my_enrolments").select("group_code,status,group_name");
   return {
     profileError: profile.error?.message || null,
     enrolmentsError: enrolments.error?.message || null,
@@ -209,8 +222,16 @@ export async function runAcceptance({
     return results;
   }
 
+  // Acceptance must authenticate with the publishable/anon key only.
+  // Strip any service-role material loaded from .env so it cannot be used by mistake.
+  if (merged.SUPABASE_SERVICE_ROLE_KEY) {
+    delete merged.SUPABASE_SERVICE_ROLE_KEY;
+    log("Note: SUPABASE_SERVICE_ROLE_KEY ignored for authenticated acceptance (publishable/anon Auth only).");
+  }
+
   const client = createClientFn(plan.supabaseUrl, plan.publishableKey, {
-    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+    realtime: { transport: OpsNoopWebSocket }
   });
 
   results.status = "RAN";
@@ -248,14 +269,35 @@ export async function runAcceptance({
 
   if (plan.staff) {
     const signed = await signInLearner(client, plan.staff);
-    results.staff = {
+    const staffEntry = {
       email: maskEmail(plan.staff.email),
       auth: signed.code,
       userId: maskId(signed.userId),
-      notes: signed.ok
-        ? ["Staff Auth OK — complete Admin Portal / Group Generator browser checklist."]
-        : ["Staff sign-in failed."]
+      roles: [],
+      notes: []
     };
+    if (!signed.ok) {
+      staffEntry.notes.push("Staff sign-in failed.");
+    } else {
+      const { data: ctxRows, error: ctxErr } = await client
+        .schema("admin_api")
+        .from("current_staff_context")
+        .select("active_roles,display_name,active")
+        .limit(1);
+      const row = Array.isArray(ctxRows) ? ctxRows[0] : null;
+      const roles = Array.isArray(row?.active_roles) ? row.active_roles : [];
+      staffEntry.roles = roles;
+      if (ctxErr) {
+        staffEntry.notes.push(`Staff context read failed: ${ctxErr.message}`);
+      } else if (!roles.includes("platform_admin")) {
+        staffEntry.notes.push("Staff Auth OK but platform_admin role missing from current_staff_context.");
+      } else {
+        staffEntry.notes.push(
+          "Staff Auth + platform_admin OK — complete Admin Portal / Group Generator browser checklist."
+        );
+      }
+    }
+    results.staff = staffEntry;
     await client.auth.signOut().catch(() => {});
   }
 
@@ -265,7 +307,10 @@ export async function runAcceptance({
     for (const note of row.notes) log(`    - ${note}`);
   }
   if (results.staff) {
-    log(`  STAFF: auth=${results.staff.auth} user=${results.staff.userId}`);
+    const roleLabel = Array.isArray(results.staff.roles) && results.staff.roles.length
+      ? results.staff.roles.join(",")
+      : "none";
+    log(`  STAFF: auth=${results.staff.auth} roles=${roleLabel} user=${results.staff.userId}`);
     for (const note of results.staff.notes) log(`    - ${note}`);
   }
   log("  Browser checklist remains mandatory for feedback visibility:");
