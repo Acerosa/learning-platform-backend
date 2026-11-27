@@ -28,7 +28,8 @@ Every null-correct formative check also has `requires_review=true`, matching the
 ## Recovery options for learners
 
 - Formative checks are append-only practice. Learners can check answers again after coverage restore; new checks use restored specs where available.
-- Foundations programming-diagnostic language/code items still rely on hub-local banks when learner packages strip keys (hub PR #60).
+- Foundations programming-diagnostic language/code items now have server `language-variants` specs (hosted `20261127122144`). New `submit_attempt` submissions are marked by selected language. Hub-local banks remain for intentional client formative UX only.
+- Historical null/`requires_review` rows are unchanged; re-checking creates new formative checks rather than rewriting history.
 
 ## Remediation proposal (requires separate approval)
 
@@ -36,3 +37,4 @@ Every null-correct formative check also has `requires_review=true`, matching the
 2. Optionally produce a staff-only report of activity keys / date ranges with elevated `requires_review` rates for tutor follow-up.
 3. If grade-bearing assessment responses were affected, approve a targeted correction plan per course before any update.
 4. Preserve existing attempt/response/progress rows unless an approved correction script is reviewed.
+5. Foundations language-aware restore does **not** by itself require historical grade changes; distinguish intentional manual-review records from past unresolved-spec failures in any approved report.

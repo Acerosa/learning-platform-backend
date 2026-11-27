@@ -14,6 +14,7 @@
 | `20261127120000_resolve_unbound_catalogue_marking.sql` | `20261127103555` | PR #68 |
 | `20261127130000_restore_published_marking_coverage.sql` | `20261127111520` | PR #69 |
 | `20261127140000_publish_time_marking_coverage_validation.sql` | `20261127112542` | PR #70 |
+| `20261127150000_foundations_language_aware_marking.sql` | `20261127122144` | Foundations language-variants |
 
 Hosted timestamps differ from repository filenames because MCP `apply_migration` assigns its own version clock. Repository filenames remain the source of truth for ordering in git.
 
