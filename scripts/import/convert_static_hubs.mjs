@@ -160,80 +160,91 @@ function convertMcq(activityId, item, index) {
 
 function convertQuestion(activityId, item, index) {
   const type = item.type || (item.correctIndex != null || item.options ? "single" : "text");
+
+  // Language-aware programming items must be converted before the MCQ branch.
+  // They do not carry options, so nesting them under item.options caused empty
+  // single-choice projection and lost authoritative language marking keys.
+  if (["predict-output", "code-gap", "line-select", "code-order", "code-editor"].includes(type)) {
+    return block(`${activityId}-q-${item.id || index + 1}`, "code-editor", {
+      formative: true,
+      questionId: namespacedQuestionId(activityId, item, index).questionId,
+      sourceQuestionId: namespacedQuestionId(activityId, item, index).sourceQuestionId,
+      prompt: item.prompt || "",
+      languages: item.languages,
+      feedback: item.feedback || {},
+      skill: item.skill,
+      sourceType: type,
+      starterCode: item.starterCode,
+      code: item.code,
+      accepted: item.accepted,
+      rules: item.rules,
+      answers: item.answers,
+      answer: item.answer,
+      items: item.items,
+      editorRows: item.editorRows,
+      hints: item.hints,
+      caseSensitive: item.caseSensitive
+    });
+  }
+
+  if (type === "matching" || (type !== "single" && type !== "mcq" && type !== "multiple" && item.rows && item.options)) {
+    const options = item.options || [];
+    const rows = item.rows || [];
+    const answers = item.answer || item.answers || {};
+    return block(`${activityId}-q-${index + 1}-${item.id}`, "classification", {
+      formative: true,
+      questionId: namespacedQuestionId(activityId, item, index).questionId,
+      sourceQuestionId: namespacedQuestionId(activityId, item, index).sourceQuestionId,
+      prompt: item.prompt || "",
+      categories: options.map((option) => ({
+        id: String(option.value || option.id),
+        label: option.label || option.text || String(option.value || option.id)
+      })),
+      items: rows.map((row) => ({
+        id: String(row.id),
+        text: row.label || row.text || row.id,
+        correctCategoryId: String(answers[row.id] || "")
+      })),
+      feedback: item.feedback || {},
+      skill: item.skill,
+      sourceType: "matching",
+      rows,
+      options,
+      answer: answers
+    });
+  }
+
+  if (type === "order") {
+    return block(`${activityId}-q-${index + 1}-${item.id}`, "short-response", {
+      formative: true,
+      questionId: namespacedQuestionId(activityId, item, index).questionId,
+      sourceQuestionId: namespacedQuestionId(activityId, item, index).sourceQuestionId,
+      prompt: item.prompt || "",
+      items: item.items || item.options || [],
+      answer: item.answer || item.answers,
+      feedback: item.feedback || {},
+      skill: item.skill,
+      sourceType: "order"
+    });
+  }
+
+  if (type === "text") {
+    return block(`${activityId}-q-${item.id || index + 1}`, "short-response", {
+      formative: true,
+      questionId: namespacedQuestionId(activityId, item, index).questionId,
+      sourceQuestionId: namespacedQuestionId(activityId, item, index).sourceQuestionId,
+      prompt: item.prompt || "",
+      accepted: item.accepted || item.answer,
+      feedback: item.feedback || {},
+      skill: item.skill,
+      sourceType: "text",
+      answerLabel: item.answerLabel
+    });
+  }
+
   if (type === "single" || type === "mcq" || type === "multiple" || item.options) {
-    if (type === "matching") {
-      const options = item.options || [];
-      const rows = item.rows || [];
-      const answers = item.answer || item.answers || {};
-      return block(`${activityId}-q-${index + 1}-${item.id}`, "classification", {
-        formative: true,
-        questionId: namespacedQuestionId(activityId, item, index).questionId,
-        sourceQuestionId: namespacedQuestionId(activityId, item, index).sourceQuestionId,
-        prompt: item.prompt || "",
-        categories: options.map((option) => ({
-          id: String(option.value || option.id),
-          label: option.label || option.text || String(option.value || option.id)
-        })),
-        items: rows.map((row) => ({
-          id: String(row.id),
-          text: row.label || row.text || row.id,
-          correctCategoryId: String(answers[row.id] || "")
-        })),
-        feedback: item.feedback || {},
-        skill: item.skill,
-        sourceType: "matching",
-        rows,
-        options,
-        answer: answers
-      });
-    }
-    if (type === "order") {
-      return block(`${activityId}-q-${index + 1}-${item.id}`, "short-response", {
-        formative: true,
-        questionId: namespacedQuestionId(activityId, item, index).questionId,
-        sourceQuestionId: namespacedQuestionId(activityId, item, index).sourceQuestionId,
-        prompt: item.prompt || "",
-        items: item.items || item.options || [],
-        answer: item.answer || item.answers,
-        feedback: item.feedback || {},
-        skill: item.skill,
-        sourceType: "order"
-      });
-    }
     if (type === "multiple") {
       return convertMcq(activityId, { ...item, type: "single" }, index);
-    }
-    if (["predict-output", "code-gap", "line-select", "code-order", "code-editor"].includes(type)) {
-      return block(`${activityId}-q-${item.id || index + 1}`, "code-editor", {
-        formative: true,
-        questionId: namespacedQuestionId(activityId, item, index).questionId,
-    sourceQuestionId: namespacedQuestionId(activityId, item, index).sourceQuestionId,
-        prompt: item.prompt || "",
-        languages: item.languages,
-        feedback: item.feedback || {},
-        skill: item.skill,
-        sourceType: type,
-        starterCode: item.starterCode,
-        code: item.code,
-        accepted: item.accepted,
-        rules: item.rules,
-        items: item.items,
-        editorRows: item.editorRows,
-        hints: item.hints
-      });
-    }
-    if (type === "text") {
-      return block(`${activityId}-q-${item.id || index + 1}`, "short-response", {
-        formative: true,
-        questionId: namespacedQuestionId(activityId, item, index).questionId,
-    sourceQuestionId: namespacedQuestionId(activityId, item, index).sourceQuestionId,
-        prompt: item.prompt || "",
-        accepted: item.accepted || item.answer,
-        feedback: item.feedback || {},
-        skill: item.skill,
-        sourceType: "text",
-        answerLabel: item.answerLabel
-      });
     }
     return convertMcq(activityId, item, index);
   }
