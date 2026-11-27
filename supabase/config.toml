@@ -73,7 +73,7 @@ sql_paths = [
   "./data/generated/seed-unit14-publication.sql",
   "./data/generated/seed-unit3-publication.sql",
   "./data/generated/seed-tlevel-publication.sql",
-  "./data/generated/seed-backfill-learner-packages.sql"
+  "./data/seed/backfill-learner-packages.sql"
 ]
 
 [db.network_restrictions]
