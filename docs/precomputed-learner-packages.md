@@ -74,6 +74,9 @@ Do not rely on curriculum version bumps alone to refresh sanitisation.
 | `20261127110200` | Idempotent backfill of existing publications |
 | `20261127110300` | Public RPC prefers stored package; diagnostic view |
 
+Local resets also run `supabase/data/seed/backfill-learner-packages.sql` after
+publication seed inserts (seeds execute after migrations).
+
 Hosted application must use targeted migration apply for these versions only.
 Do not `supabase db push` against production.
 

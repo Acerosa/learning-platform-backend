@@ -40,7 +40,7 @@ Staff `package` remains authoritative. Learner package is derived only.
 | `20261127110200` | `backfill_curriculum_learner_packages.sql` |
 | `20261127110300` | `published_curriculum_uses_learner_package.sql` |
 
-Local seed follow-up: `supabase/data/generated/seed-backfill-learner-packages.sql`
+Local seed follow-up: `supabase/data/seed/backfill-learner-packages.sql`
 (publication seeds run after migrations).
 
 ## Regression tests
