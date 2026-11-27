@@ -632,14 +632,18 @@ Content Library. Published packages remain immutable.
 Phase 5 is operational validation of the Platform 1.0 candidate. It does not
 add a second architecture.
 
-| Gate | Status 2026-08-18 |
+| Gate | Status 2026-11-27 |
 | --- | --- |
 | Hosted database (`hubwpkrqndorznwzvaer`, RR NHC Hub) | Applied through Supabase MCP `apply_migration` / `execute_sql` |
-| Learner hubs load `data-curriculum-source=published` | Unit 3, T Level, Unit 14 verified |
+| Learner hubs load `data-curriculum-source=published` | Unit 3, T Level, Unit 14, L2E verified |
+| Precomputed learner packages (`lp.strip.v2`) | All published rows backfilled; sanitisation enforced |
+| Marking coverage (published) | 0 unresolved across four hubs; Foundations language-variants live |
+| Publish-time `MARKING_COVERAGE_INVALID` | Active; failed publish rolls back to previous curriculum |
+| Pages deployment health checks | Core `@learning-platform/core/deployment-health` + hub post-deploy smokes |
 | Teaching-content publish without Git | Pipeline exists; live packages already served from Postgres |
 | Content Library + Composition schema | Hosted; RLS and EXECUTE grants hardened |
-| Hosted Admin Phase 4 UI | **Not on GitHub Pages** — local Admin still uncommitted |
-| Hosted Library → Compose → Publish loop | **Not proven** — library tables empty; Admin UI missing |
+| Hosted Admin Phase 4 UI | Deployed Admin Pages; staff diagnostics for curriculum/marking health |
+| Authenticated learner/staff browser QA | Requires synthetic QA credentials (see `docs/synthetic-qa-learners.md`) |
 
 Ordinary teaching-copy changes still must not require Git commits, GitHub
 Actions or GitHub Pages. Application-code changes (Admin modules, hub
@@ -648,4 +652,22 @@ runtime, Core) still deploy through GitHub.
 Hosted schema changes use **Supabase MCP** `apply_migration` / `execute_sql`
 on project `hubwpkrqndorznwzvaer`. Local CLI (`supabase db reset`,
 `supabase test db`) validates; it does not deploy. See
-[Release process](release-process.md) and [Operations](operations.md).
+[Release process](release-process.md),
+[Disaster recovery](runbooks/DISASTER_RECOVERY.md), and
+[Migration history aliases](audits/marking-coverage-recovery/MIGRATION_HISTORY_RECONCILIATION.md).
+
+## Deployment architecture (verified)
+
+- Hubs and Admin deploy via **GitHub Actions → GitHub Pages** (`build_type:
+  workflow`), not legacy branch/docs roots.
+- Production HTML must reference compiled JavaScript assets with a JavaScript
+  MIME type and must not reference undeployed TypeScript sources.
+- Post-deploy health checks (Core `deployment-health`) verify boot, MIME,
+  curriculum retrieval, expected versions, and `data-curriculum-source=published`
+  with bounded retries for Pages propagation. HTML HTTP 200 alone is never a
+  healthy verdict.
+- Public health endpoints use only the publishable Supabase key. Answer keys,
+  staff packages and learner PII are not exposed.
+- Staff operational checks for missing learner packages, outdated sanitisation
+  versions, marking gaps and fingerprint issues stay on `admin_api` /
+  Central Admin.

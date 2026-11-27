@@ -20,8 +20,10 @@ Database migration timestamps are independent from package/release versions.
 6. Security, privacy and RLS changes are reviewed.
 7. `CHANGELOG.md` and contract versions are updated.
 8. Migration and rollback plans are documented.
-9. Hosted migration history is reconciled.
-10. Deployment is explicitly approved.
+9. Hosted migration history is reconciled (alias inventory; do not delete hosted rows).
+10. Publication validation includes marking coverage (`MARKING_COVERAGE_INVALID`).
+11. Pages post-deploy health checks pass where the target is an application Pages site.
+12. Deployment is explicitly approved for production-affecting changes.
 
 ## Deployment separation
 
