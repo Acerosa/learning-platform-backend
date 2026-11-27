@@ -92,9 +92,13 @@ Learner hubs (use the persona that the hub enrolment gate accepts):
 7. Explanatory feedback text
 8. Short-response / matching / classification where assigned
 9. Permitted retries
-10. Progress persistence (finish activity; soft navigation where possible)
-11. Session restoration after reload (hub Auth storage)
+10. Progress persistence (finish activity; soft navigation where possible) — verify **independently** of auth restore
+11. Session restoration after reload (hub Auth storage) — use same-tab `location.reload()` **without** clearing cookies/localStorage/sessionStorage; do **not** treat a new isolated automation context or storage-clearing navigate as a product defect
 12. Sign-out
+
+### Session reload methodology (closure finding)
+
+Full-page reload that appeared to “clear” the session under browser automation was an **automation artefact** (context/storage cleared) while soft SPA navigation retained the session. Controlled same-origin reload with storage intact restores Core hub-scoped Auth keys (`sb-<ref>-auth-token--<hubCode>`) and Admin’s unsuffixed key. Cross-hub key isolation is intentional.
 
 Foundations language-aware marking (temporary exclusive assignment or teaching-group assignment required):
 
@@ -134,6 +138,8 @@ Group Generator:
 - Keep QA accounts available; disable with `admin_api.set_synthetic_qa_learner_active(persona, false)` when idle
 - Run `npm run check:synthetic-qa` and `npm run accept:authenticated-qa` before significant releases
 
-## 8. Known hub gate note
+## 8. Known hub gate notes
 
 Unit 3 accepts `CYBER-TEST-QA`. The T Level hub hard-codes `ACCEPTED_GROUP_CODES = ['TLEVEL-DSD-Y2']`, so browser marking for the exclusive `TLEVEL-TEST-A` persona remains blocked until that hub allowlist is extended (mirroring Unit 3). Use `TLEVEL_DSD_Y2_TEST_LEARNER` for production browser marking until then.
+
+L2E hub hard-codes `ACCEPTED_GROUP_CODES = ['L2E-DELIVERY-A']`, so exclusive `L2E-TEST-A` can authenticate but Check-answer stays behind the join-class gate until the allowlist is extended (maintenance item; API formative checks remain valid).
