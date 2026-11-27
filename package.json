@@ -7,6 +7,7 @@
     "provision:synthetic-qa": "node scripts/ops/provision-synthetic-qa-learners.mjs",
     "check:synthetic-qa": "node scripts/ops/provision-synthetic-qa-learners.mjs --check",
     "ops:provision-synthetic-qa": "node scripts/ops/provision-synthetic-qa-learners.mjs",
+    "accept:authenticated-qa": "node scripts/ops/authenticated-qa-acceptance.mjs",
     "check:feedback-coverage": "node scripts/import/audit-feedback-coverage.mjs",
     "check:pages-health": "node scripts/ops/run-pages-health.mjs",
     "check:curriculum-marking-health": "node scripts/ops/check-curriculum-marking-health.mjs"
