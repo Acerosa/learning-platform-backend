@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../..");
-const DEFAULT_CORE_REF = process.env.LP_CORE_HEALTH_REF || "v0.2.28";
+const DEFAULT_CORE_REF = process.env.LP_CORE_HEALTH_REF || "v0.2.29";
 const CONFIG = resolve(__dirname, "pages-health-targets.json");
 
 async function exists(path) {

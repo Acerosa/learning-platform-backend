@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: Acerosa/learning-platform-core
-          ref: v0.2.28
+          ref: v0.2.29
           path: learning-platform-core
 
       - name: Set up Node.js
