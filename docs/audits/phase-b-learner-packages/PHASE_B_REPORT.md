@@ -1,8 +1,9 @@
 # Phase B — Precomputed learner curriculum packages
 
-**Status:** Pre-production verification complete locally + read-only production inspection. **Not applied to production. Not merged.**  
+**Status:** **Deployed to production and verified.** See `PRODUCTION_DEPLOYMENT_RESULTS.md`.  
 **Branch:** `feat/precomputed-learner-curriculum-packages`  
-**Base:** `main` @ `71127d3` (Phase A merged)
+**Base:** `main` @ `71127d3` (Phase A merged)  
+**Production deploy tip:** `bddc6b91bdbba507c0dc5c44d73feff8c5d8c561`
 
 ## Root cause
 
@@ -93,23 +94,20 @@ Reported separately. Payloads smaller than rich 408 (~0.49 / ~0.98 MiB). DB medi
 
 These are **verified local** results, not production load tests.
 
-## Production curriculum equivalence (read-only)
+## Production curriculum equivalence (verified)
 
-Project `hubwpkrqndorznwzvaer`. Phase B columns **not** present (expected).
-Phase A `learner_curriculum_package` MD5s captured for post-backfill assertion:
+Project `hubwpkrqndorznwzvaer`. After stages 1–4, all four published hubs match
+pre-captured Phase A learner MD5s; API packages equal stored learner packages.
 
-| Hub | Version | Acts | Staff bytes | Expected learner MD5 | Expected learner bytes |
-| --- | --- | ---: | ---: | --- | ---: |
-| Unit 14 | 0.2.14 | 24 | 35361 | `2ae5bae4212343eeacb1f316bff49efc` | 100553 |
-| Unit 3 | 0.2.45 | 132 | 238026 | `a745eabf45cda0d41d8d7c112503195c` | 741365 |
-| L2E | 0.3.39 | 172 | 182803 | `a4384600a8a4badfe9bdd5c0a2b80e4e` | 591517 |
-| T Level | 0.4.47 | 408 | 253566 | `882cebc4141ba81729e3fe4abb44de53` | 961645 |
+| Hub | Version | Acts | Learner MD5 | Equals Phase A |
+| --- | --- | ---: | --- | --- |
+| Unit 14 | 0.2.14 | 24 | `2ae5bae4212343eeacb1f316bff49efc` | yes |
+| Unit 3 | 0.2.45 | 132 | `a745eabf45cda0d41d8d7c112503195c` | yes |
+| L2E | 0.3.39 | 172 | `a4384600a8a4badfe9bdd5c0a2b80e4e` | yes |
+| T Level | 0.4.47 | 408 | `882cebc4141ba81729e3fe4abb44de53` | yes |
 
-Canonical stored vs Phase A equivalence on production packages can only be
-asserted **after** migration stage 3, using
-`production_equivalence_procedure.sql` section B (transactional; no content export).
-
-Estimated added storage ≈ sum of expected learner bytes ≈ **2.3 MiB**.
+Storage: ≈ **673 kB** published learner columns; ≈ **26 MB** across all 180
+historical publications (compressed column sizes).
 
 ## Backfill / migration safety
 
@@ -146,17 +144,18 @@ remove columns).
 - Dedicated: `precomputed_learner_curriculum_packages.test.sql` (31)
 - Rollout: `docs/audits/phase-b-learner-packages/PRODUCTION_ROLLOUT.md`
 
-## Production plan
+## Production deployment
 
-See `PRODUCTION_ROLLOUT.md`. Do **not** use unrestricted `supabase db push`.
-Do **not** apply unrelated migrations. Account for known hosted migration-history
-discrepancies by recording only the four Phase B versions when applied.
+Executed per `PRODUCTION_ROLLOUT.md`. Results: `PRODUCTION_DEPLOYMENT_RESULTS.md`.
 
-## Remaining risks
+Hosted versions: `20261127101530`, `20261127101533`, `20261127101536`,
+`20261127101858` (names match repo; timestamps differ from filenames).
 
-1. Production stored≡Phase A equivalence is **procedurally ready** but not yet
-   executed (requires approved deployment of stages 1–3).
-2. Local 1000/2000 benches use compact templates (staff 4 MiB limit); production
-   T Level–scale density is covered by the 408 rich fixture (~2.6 MiB response).
-3. Hosted migration history drift — apply only Phase B files; do not reconcile
-   unrelated pending migrations in this change.
+Production T Level anon RPC median ≈ **379 ms**; DB stored path ≈ **0 ms**.
+
+## Remaining risks / limitations
+
+1. Hosted migration timestamps differ from repository filenames (documented).
+2. Production classroom concurrency not load-tested; local 30×408 remains the
+   concurrency acceptance evidence.
+3. Local 1000/2000 benches use compact templates under the staff 4 MiB limit.
