@@ -1,0 +1,39 @@
+Output format is aligned.
+=== STORAGE OVERHEAD ===
+                 hub_code                  | package_version | activities | staff_bytes | learner_bytes | learner_pct_of_staff 
+-------------------------------------------+-----------------+------------+-------------+---------------+----------------------
+ tlevel-software-development               | 0.2.0           |          5 |       37710 |         36617 |                 97.1
+ unit-14-software-engineering-for-business | 0.2.0           |         24 |       35338 |         32467 |                 91.9
+ unit-3-cyber-security                     | 0.2.0           |         76 |      166979 |        166224 |                 99.5
+(3 rows)
+
+=== RETRIEVAL vs RECONSTRUCT (7 samples) ===
+CREATE TABLE
+DO
+  kind   |                    hub                    | activities | min_ms | median_ms | p95_ms | max_ms 
+---------+-------------------------------------------+------------+--------+-----------+--------+--------
+ api     | tlevel-software-development               |          5 |      0 |         0 |      2 |      3
+ phase_a | tlevel-software-development               |          5 |     28 |        29 |     38 |     42
+ stored  | tlevel-software-development               |          5 |      0 |         0 |      1 |      1
+ api     | unit-14-software-engineering-for-business |         24 |      0 |         0 |      0 |      0
+ phase_a | unit-14-software-engineering-for-business |         24 |     19 |        20 |     20 |     20
+ stored  | unit-14-software-engineering-for-business |         24 |      0 |         0 |      0 |      0
+ api     | unit-3-cyber-security                     |         76 |      0 |         0 |      0 |      0
+ phase_a | unit-3-cyber-security                     |         76 |     76 |        80 |     93 |     97
+ stored  | unit-3-cyber-security                     |         76 |      0 |         0 |      0 |      0
+(9 rows)
+
+=== SYNTHETIC PUBLISH+RETRIEVE ===
+CREATE TABLE
+DO
+ activities | pub_min | pub_med | pub_max | stored_min | stored_med | stored_max | a_min | a_med | a_max | learner_bytes 
+------------+---------+---------+---------+------------+------------+------------+-------+-------+-------+---------------
+        100 |      98 |     100 |     109 |          0 |          1 |          1 |    98 |   101 |   120 |        652473
+        250 |     243 |     246 |     327 |          0 |          0 |          0 |   243 |   247 |   269 |       1634837
+        408 |     395 |     424 |     450 |          1 |          1 |          1 |   395 |   399 |   454 |       2687885
+        500 |     480 |     488 |     501 |          1 |          1 |          1 |   482 |   488 |   493 |       3304297
+       1000 |     997 |    1034 |    1168 |          1 |          2 |          2 |   985 |  1067 |  1089 |       6572549
+       2000 |    2036 |    2154 |    2546 |          3 |          3 |          3 |  2079 |  2127 |  2279 |      13165273
+(6 rows)
+
+=== CONCURRENCY API (largest published) ===

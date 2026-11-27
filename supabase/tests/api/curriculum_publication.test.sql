@@ -293,6 +293,28 @@ select is(
   'an authorised administrator can publish a valid snapshot'
 );
 
+reset role;
+select ok(
+  (
+    select
+      learner_package is not null
+      and learner_package_sanitisation_version = platform.learner_package_sanitisation_version()
+      and learner_package = platform.learner_curriculum_package(
+        package,
+        package_version,
+        source_package_version
+      )
+      and learner_package::text !~ 'correctOptionId|teacher-note'
+    from platform.curriculum_publications
+    where hub_code = 'unit-3-cyber-security'
+      and package_version = '0.3.0'
+  ),
+  'publication stores a Phase-A-equivalent learner_package without protected keys'
+);
+set local "request.jwt.claim.sub" = '20000000-0000-4000-8000-000000000003';
+set local "request.jwt.claims" = '{"sub":"20000000-0000-4000-8000-000000000003","role":"authenticated"}';
+set local role authenticated;
+
 select is(
   (
     select idempotent

@@ -1,0 +1,6 @@
+n=1 wall=106 min=10 med=10 p95=10 max=10 ok=1/1 err=0
+n=5 wall=117 min=2 med=3 p95=4 max=4 ok=5/5 err=0
+n=10 wall=208 min=2 med=10 p95=38 max=38 ok=10/10 err=0
+n=20 wall=376 min=2 med=7 p95=38.4 max=39 ok=20/20 err=0
+n=30 wall=564 min=2 med=7 p95=32.5 max=38 ok=30/30 err=0
+n=50 wall=1039 min=2 med=6 p95=45.0 max=55 ok=50/50 err=0
