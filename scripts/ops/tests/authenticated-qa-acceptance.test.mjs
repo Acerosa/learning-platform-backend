@@ -57,7 +57,16 @@ test("runAcceptance skips without printing credential material", async () => {
   });
   assert.equal(results.status, "SKIPPED");
   assert.ok(results.blockers.length >= 1);
-  assert.ok(browserChecklist().length >= 8);
+  const checklist = browserChecklist();
+  assert.ok(checklist.length >= 8);
+  assert.ok(
+    checklist.some((item) => /location\.reload without clearing storage/i.test(item)),
+    "checklist must distinguish same-tab reload from isolated automation contexts"
+  );
+  assert.ok(
+    checklist.some((item) => /Progress restoration after reload/i.test(item)),
+    "checklist must require progress restore independent of auth"
+  );
   const joined = lines.join("\n");
   assert.match(joined, /SKIPPED/);
   assert.doesNotMatch(joined, /service_role|eyJ[A-Za-z0-9_-]{10,}/i);

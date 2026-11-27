@@ -108,3 +108,11 @@ includes `revision`. Hosted history already introduced that column in
 statement, not the local draft named `20260912120000`. A clean reset needs it
 before the Knowledge Report migrations. Do not apply it to the hosted database
 again.
+
+## Admin learners synthetic column grant (PR #80)
+
+| Repository file | Hosted version |
+| --- | --- |
+| `20261127160000_grant_students_synthetic_columns_for_admin_learners.sql` | `20261127144141` (`grant_students_synthetic_columns_for_admin_learners`) |
+
+Least-privilege column SELECT only (`is_synthetic`, `synthetic_purpose`) for `authenticated`. Rollback is a compensating `REVOKE` of those column grants via a new forward migration — see `docs/audits/marking-coverage-recovery/MIGRATION_HISTORY_RECONCILIATION.md`.

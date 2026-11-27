@@ -1,80 +1,124 @@
 # Final authenticated production acceptance report
 
 **Date:** 2026-11-27  
-**Backend tip at start of exercise:** PR #79 merged at `3fa25c7`  
-**Recommendation:** Formal recovery closure for essential authenticated production workflows — **approved to close**, with separate remaining work listed below.
+**Backend tip (closure):** `99e1432` (PR #80 merged into `main`)  
+**Recommendation:** **Formal recovery closure approved.** Session reload “failure” is an automation artefact, not an application defect. PR #80 is merged with production SQL aligned.
 
-## Provisioning
+## Provisioning (unchanged from completed exercise)
 
 | Item | Result |
 | --- | --- |
 | Synthetic identities reused | All five catalogue personas — Auth **REUSE** (metadata PASS) |
 | Synthetic identities created | None for learners |
 | Staff Auth | Created/reused `STAFF_QA_ADMIN` with synthetic staff metadata |
-| Staff roles | `STAFF-QA-ADMIN` teacher + **`platform_admin`** (required for Admin Portal MVP / Group Generator create) |
-| Synthetic enrolment drift | **5 unintended active enrolments withdrawn** (rows preserved): UNIT3←TLEVEL-DSD-Y2; TLEVEL←TLEVEL-DSD-Y2; L2E←CYBER-TEST-A + L2E-DELIVERY-A; DSD-Y2←L2E-DELIVERY-A |
+| Staff roles | `STAFF-QA-ADMIN` teacher + **`platform_admin`** |
+| Synthetic enrolment drift | **5 unintended active enrolments withdrawn** (rows preserved) |
 | Final isolation | Each fixture persona has exactly one active enrolment (intended group) |
-| Remaining limitations | Extra synthetic `QA-L2E-DELIVERY` (not in fixtures) left unchanged; T Level hub UI does not unlock exclusive `TLEVEL-TEST-A` |
+| Remaining limitations | Extra synthetic `QA-L2E-DELIVERY` left unchanged; T Level / L2E hub UI allowlists do not unlock exclusive `TLEVEL-TEST-A` / `L2E-TEST-A` |
 
 Credentials stored only in gitignored `.env`. Not printed in logs/PRs.
 
-## Acceptance results
-
-| Area | Classification |
-| --- | --- |
-| Automated `accept:authenticated-qa` (5 learners + staff) | **PASS — production verified** |
-| Learner Auth + intended-group isolation | **PASS — production verified** |
-| Staff Auth + `platform_admin` context | **PASS — production verified** |
-| Unit 3 browser sign-in / enrolment (`CYBER-TEST-QA`) | **PASS — production verified** |
-| T Level browser sign-in / enrolment (`TLEVEL-DSD-Y2`) | **PASS — production verified** |
-| Incorrect + correct feedback rendered in browser (`.lp-feedback`) | **PASS — production verified** (Week 1 ex-01) |
-| API formative wrong/right (Unit 3, T Level exclusive, Unit 14, L2E, DSD Y2 classification) | **PASS — production verified** |
-| Foundations language-aware marking (Py/JS/C#, mismatch fail-closed) | **PASS — production verified** (temporary exclusive assignment; restored after) |
-| Progress finish + soft-path activity state | **PASS — production verified** (finish activity on ex-01) |
-| Session restoration after full page reload | **BLOCKED / limited** — full `browser_navigate` reload cleared session in automation; soft SPA path retained session. Not classified PASS. |
-| Admin Portal auth, dashboard, People (post-fix), Group Generator module | **PASS — production verified** |
-| Admin People pre-fix | **FAIL — confirmed defect** then fixed (see Technical delivery) |
-| Group Generator E2E (create → QR → join ×6 → generate → publish → learner visibility → close) | **PASS — production verified** |
-| Learner cannot read admin learners rows | **PASS — production verified** (0 rows under learner JWT) |
-| Reporting isolation | **PASS — production verified** with caveat: `is_synthetic` filterable; defaults include synthetic in People directory (appropriate for QA inspection). No cohort contamination RLS change introduced. |
-| Permission / exclusive group boundaries | **PASS — production verified** |
-| Unit 14 / L2E full browser feedback walkthrough | **PASS — API production verified**; browser feedback DOM check focused on T Level (Unit 3 sign-in verified) |
-
-## Technical delivery
-
-| Item | Detail |
-| --- | --- |
-| Defect | `admin_api.learners` failed for `platform_admin` with `permission denied for table students` because `is_synthetic` / `synthetic_purpose` lacked column SELECT for `authenticated` while the view is `security_invoker` |
-| Fix | Migration `20261127160000_grant_students_synthetic_columns_for_admin_learners.sql` — least-privilege column grants |
-| Harness | `authenticated-qa-acceptance.mjs`: Node 20 noop WebSocket; prefer anon JWT; ignore service-role; staff context via view; correct `my_enrolments` columns |
-| Docs | Updated `AUTHENTICATED_QA_PLAN.md`, `synthetic-qa-learners.md` |
-| Regression | Ops unit tests for acceptance harness (5/5) |
-| CI / PR | Backend PR for migration + harness + docs (this delivery) |
-| Production deploy | Migration applied to production via Supabase; People page re-verified live |
-
-## Security and integrity
+## 1. PR #80 merge status
 
 | Check | Result |
 | --- | --- |
-| Genuine learners | **92** unchanged vs baseline |
-| Genuine active enrolments | **93** unchanged vs baseline |
-| Synthetic active enrolments | **6** (5 fixtures + `QA-L2E-DELIVERY`) |
-| Synthetic enrolments match intended config | Yes for five fixtures |
-| Temporary Group Generator session | Closed |
-| Temporary Foundations exclusive assignment | Deactivated; `exclusive_smoke` restored |
+| CI (Repository Validation, Ops Script Tests, Database Tests, GitGuardian) | **SUCCESS** |
+| Merge | **MERGED** at `2026-11-27T14:54:48Z` |
+| Merge commit | `99e1432cdbf741d335735d46719413d49cec8302` |
+| Hosted migration | `grant_students_synthetic_columns_for_admin_learners` → version **`20261127144141`** |
+| Repo migration | `supabase/migrations/20261127160000_grant_students_synthetic_columns_for_admin_learners.sql` |
+| Column grants | `authenticated` SELECT on `is_synthetic`, `synthetic_purpose` only; `created_at` SELECT remains **false**; `anon` synthetic SELECT **false** |
+| Staff `admin_api.learners` | Rows visible for `platform_admin` |
+| Learner JWT `admin_api.learners` | **0 rows** |
+| Unintended access | No table-wide SELECT; RLS + view predicate unchanged; learning schema not exposed via public REST beyond existing contracts |
+| Production ↔ repo | SQL matches; hosted version clock differs from filename (documented) |
+
+## 2. Page-reload session restoration — root cause
+
+| Classification | **Automation artefact** (not an application defect) |
+| --- | --- |
+| Architecture | Core `createSupabaseClient`: `persistSession: true`, `autoRefreshToken: true`, hub-scoped `storageKey` via `createAuthStorageKey` → `sb-<ref>-auth-token--<hubCode>`; Admin uses unsuffixed `sb-<ref>-auth-token` |
+| Misleading signal | Cursor/Playwright `browser_navigate` / new isolated context / CDP storage clears can drop auth keys while soft SPA navigation retains them |
+| Controlled evidence | Same-tab `location.reload()` **without** clearing cookies/localStorage/sessionStorage restores session on T Level, Unit 3, Admin |
+| Cross-hub | Hub storage keys intentionally isolate sessions; navigating Unit 3 → Unit 14 requires that hub’s own sign-in (expected) |
+| App defect? | **No** — no Core/hub persistence fix required; do not extend session lifetimes |
+
+## 3. Authentication persistence by application
+
+| Application | Sign-in | Soft SPA | Full reload (storage intact) | Same-origin tab | Explicit sign-out |
+| --- | --- | --- | --- | --- | --- |
+| T Level hub | PASS | PASS | PASS | PASS (async restore) | PASS (prior) |
+| Unit 3 hub | PASS | PASS | PASS | — | PASS |
+| Unit 14 hub | PASS | PASS | — | — | — |
+| L2E hub | PASS (signed in) | — | — | — | PASS |
+| Central Admin Portal | PASS | PASS | PASS | PASS | — |
+| Group Generator | PASS (prior E2E) | — | — | — | — |
+
+Closing/reopening the browser for persistent sessions is supported by `persistSession: true` + localStorage; not re-exercised as a multi-hour browser restart in this closure pass. Token refresh remains Core `autoRefreshToken: true`. Invalid/expired sessions continue to fail closed via existing Auth + hub recovery paths (Core unit coverage).
+
+## 4. Progress restoration (independent of auth)
+
+| Hub / activity | Auth after reload | Progress / feedback after reload |
+| --- | --- | --- |
+| T Level week-1 ex-01 | PASS | PASS (prior controlled reload) |
+| Unit 3 `week2-malware-symptoms` | PASS | PASS — `.lp-feedback` Correct + selected option restored after `location.reload()` |
+
+Auth restore alone was **not** treated as proof of progress restore.
+
+## 5. Browser feedback verification
+
+| Hub | Incorrect `.lp-feedback` | Correct `.lp-feedback` | Notes |
+| --- | --- | --- | --- |
+| T Level (DSD Y2) | PASS (prior) | PASS (prior) | Teaching-group path |
+| Unit 3 | PASS | PASS | Malware symptoms |
+| Unit 14 | PASS | PASS | Week 1 baseline |
+| L2E | Sign-in PASS; Check blocked by hub allowlist | — | Hub `ACCEPTED_GROUP_CODES = ['L2E-DELIVERY-A']` rejects exclusive `L2E-TEST-A` (same class as T Level exclusive allowlist). API formative wrong/right remains **PASS** |
+
+## 6. Additional fixes / PRs
+
+| Item | Status |
+| --- | --- |
+| Application auth/progress code changes | **None required** |
+| PR #80 (migration + harness + docs) | Merged |
+| This closure docs / checklist / migration mapping | Follow-up PR on `docs/final-recovery-closure` |
+
+## 7. Regression / CI
+
+| Suite | Result |
+| --- | --- |
+| PR #80 CI | All required checks SUCCESS |
+| Ops `authenticated-qa-acceptance` unit tests | 5/5 (prior); checklist regression extended in closure PR |
+| Core auth persistence / hub-session recovery | Existing unit tests retain coverage; no defect fix |
+| Production marking gaps | **0** (`admin_api.published_marking_coverage_gaps`) |
+| Sanitisation | Published curriculum remains **`lp.strip.v2`** |
+
+## 8. Production deployment verification
+
+- Migration `grant_students_synthetic_columns_for_admin_learners` present on hosted project as `20261127144141`.
+- Admin People / Group Generator remain reachable for Staff QA after reload.
+- Learner JWT still cannot enumerate admin learners.
+- No genuine learner records modified in this closure pass.
+
+## 9. Security and data integrity
+
+| Check | Result |
+| --- | --- |
+| Genuine learners / enrolments | Unchanged vs prior baseline (no genuine writes) |
+| Synthetic fixtures | Five intended active enrolments; withdrawn drift preserved |
+| RLS / enrolment isolation / marking security | Not weakened |
+| Column grants least privilege | Confirmed (synthetic columns only) |
 | Credentials in source control | No |
-| Marking coverage gaps | **0** unresolved (`published_marking_coverage_gaps`) |
-| Sanitisation | Published packages on **`lp.strip.v2`** (4 publications) |
-| Marking security / fingerprint / RLS / publication validation | Not weakened |
 
-## Remaining separate work
+## 10. Remaining independent maintenance (not recovery blockers)
 
-- Historical marking remediation (out of scope)
-- Broad migration-history reconciliation (out of scope)
-- Optional: extend T Level hub `ACCEPTED_GROUP_CODES` to include `TLEVEL-TEST-A` (mirror Unit 3) for exclusive-persona browser marking
-- Optional: Admin UI default filter to hide synthetic from cohort stats while keeping an explicit “include QA” toggle
-- Hardening session persistence verification under full page reload automation
+1. **T Level exclusive QA group allowlist** — extend hub `ACCEPTED_GROUP_CODES` to include `TLEVEL-TEST-A` (mirror Unit 3) for exclusive-persona browser marking.
+2. **L2E exclusive QA group allowlist** — same pattern: hub currently unlocks only `L2E-DELIVERY-A`, so `L2E-TEST-A` can sign in but cannot Check-answer in UI.
+3. **Cohort-report synthetic learner filter** — default-hide synthetic in genuine cohort stats with explicit “include QA” toggle. If synthetics are confirmed to distort genuine cohort statistics, treat as a **reporting defect**, not cosmetic UX.
+4. Broader reporting UX improvements (optional).
+5. Historical marking remediation and broad migration-history reconciliation remain **out of scope**.
 
 ## Closure recommendation
 
-Essential authenticated production workflows required for recovery closure are verified. **Recommend formal recovery closure.** Track the optional T Level exclusive-group hub allowlist and reporting UI filter as follow-up improvements, not blockers.
+Session restoration is resolved as a **non-application** automation artefact with controlled reload evidence. PR #80 has passed CI and merged with production alignment. Essential authenticated production workflows remain verified.
+
+**Recommend formal recovery closure.** Do not reopen completed recovery work without evidence of a regression.

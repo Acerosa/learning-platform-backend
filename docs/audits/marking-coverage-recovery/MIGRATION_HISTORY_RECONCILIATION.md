@@ -15,8 +15,15 @@
 | `20261127130000_restore_published_marking_coverage.sql` | `20261127111520` | PR #69 |
 | `20261127140000_publish_time_marking_coverage_validation.sql` | `20261127112542` | PR #70 |
 | `20261127150000_foundations_language_aware_marking.sql` | `20261127122144` | Foundations language-variants |
+| `20261127160000_grant_students_synthetic_columns_for_admin_learners.sql` | `20261127144141` | PR #80 — column SELECT for `admin_api.learners` |
 
 Hosted timestamps differ from repository filenames because MCP `apply_migration` assigns its own version clock. Repository filenames remain the source of truth for ordering in git.
+
+### PR #80 grant mapping and rollback
+
+- **Purpose:** Least-privilege `GRANT SELECT (is_synthetic, synthetic_purpose) ON learning.students TO authenticated` so `security_invoker` view `admin_api.learners` works for `platform_admin` without table-wide SELECT.
+- **Verify production:** `has_column_privilege('authenticated','learning.students','is_synthetic','SELECT')` / `synthetic_purpose` → true; `created_at` → false; `anon` synthetic → false; learner JWT returns 0 `admin_api.learners` rows.
+- **Rollback (compensating forward migration only):** `REVOKE SELECT (is_synthetic, synthetic_purpose) ON learning.students FROM authenticated;` — restores the pre-#80 People failure for staff; do not drop columns or rewrite RLS. Prefer a new dated migration over editing history.
 
 ## Did migration drift cause missing marking specs?
 
