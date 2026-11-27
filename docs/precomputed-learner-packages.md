@@ -53,7 +53,9 @@ allows only:
 
 ## Sanitisation regeneration
 
-Current version: `lp.strip.v1` (`platform.learner_package_sanitisation_version()`).
+Current version: `lp.strip.v2` (`platform.learner_package_sanitisation_version()`).
+`lp.strip.v2` also removes nested language-variant `answers` / `rules` / `answer`
+keys used by Foundations programming items.
 
 When strip rules change:
 

@@ -19,8 +19,8 @@ select has_column(
 
 select is(
   platform.learner_package_sanitisation_version(),
-  'lp.strip.v1',
-  'sanitisation version constant is stable'
+  'lp.strip.v2',
+  'sanitisation version constant is lp.strip.v2 (language answer keys stripped)'
 );
 
 select ok(
