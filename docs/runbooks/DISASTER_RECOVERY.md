@@ -51,8 +51,38 @@ Practical recovery steps for the hosted Supabase project `hubwpkrqndorznwzvaer` 
 - Marking restore: reverse function definitions from prior migrations; do not bulk-delete marking without a reviewed list
 - Publication validation failures automatically keep the previous published curriculum (transactional abort)
 
-## Monitoring gaps to close
+## Monitoring and health checks
 
-- Automated post-deploy smoke (MIME, boot, curriculum version) across hubs
+### GitHub Pages deployment health
+
+Shared tooling lives in `@learning-platform/core` (`deployment-health` /
+`lp-pages-health`). Fleet config and wrappers:
+
+- `scripts/ops/pages-health-targets.json` — hubs + Central Admin Portal
+- `scripts/ops/run-pages-health.mjs` — local/CI runner
+- `.github/workflows/pages-health.yml` — scheduled lightweight HTTP+RPC fleet check
+
+Checks cover workflow Pages source, compiled JS assets, JavaScript MIME types,
+forbidden TypeScript source refs, boot/white-page (optional Playwright), anon
+curriculum retrieval, expected versions, and unexpected bundled fallback.
+HTML 200 alone never counts as healthy. Documentation-only Pages targets must
+be marked `kind: "docs-only"` and are skipped.
+
+### Curriculum / marking operational diagnostics (staff-only)
+
+```bash
+LP_SUPABASE_URL=... \
+LP_SUPABASE_PUBLISHABLE_KEY=... \
+LP_STAFF_ACCESS_TOKEN=... \
+node scripts/ops/check-curriculum-marking-health.mjs
+```
+
+Uses `admin_api.publications_missing_learner_packages`,
+`admin_api.published_marking_coverage_gaps`, and
+`admin_api.published_marking_coverage_summary` (no answer keys). Keep anon
+statement timeout unchanged when investigating curriculum timeouts.
+
+## Remaining monitoring gaps
+
 - Alert on elevated formative `requires_review` rates
 - Scheduled migration alias drift report
