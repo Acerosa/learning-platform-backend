@@ -110,3 +110,15 @@ Archive old test evidence: leave rows in place. Filter staff views with
 | T Level teaching group (`TLEVEL-DSD-Y2`) | inspect probe `week-1-lesson-1-ex-07`; learner receives the group's normal Week 1 set, not an exclusive allowlist |
 | Unit 14 | `week-1-variables-and-data-types` |
 | L2E | published Week 1 Check-answer set (`week-1-welcome` … `week-1-exit-ticket`; primary `week-1-knowledge-check`) |
+
+## Authenticated acceptance
+
+Recovery closure requires browser-verified synthetic QA. See
+[docs/audits/qa-acceptance/AUTHENTICATED_QA_PLAN.md](audits/qa-acceptance/AUTHENTICATED_QA_PLAN.md)
+for the production inventory, staff account plan, enrolment-drift notes, and:
+
+```bash
+npm run accept:authenticated-qa
+```
+
+Do not create production Auth users until that plan is explicitly approved.
