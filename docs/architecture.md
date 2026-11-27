@@ -418,11 +418,39 @@ publication count, and total usage for any library item before editing.
 `platform_admin`/`curriculum_admin`. Learner hubs receive only the final
 published curriculum package — no composition metadata is exposed.
 
+### Marking architecture (verified)
+
+- **Server authority:** `learning.score_submitted_item` / `learning.mark_evidence_response`
+  mark through `learning.question_marking` specs. Client `awarded_score` /
+  `is_correct` are not authoritative for persisted attempts.
+- **Registration:** Publication projects catalogue questions and registers
+  marking specs from staff package blocks. Missing automatic specs fail
+  `platform.assert_package_marking_coverage` (`MARKING_COVERAGE_INVALID`) and
+  roll back the publish transaction so the previous published curriculum stays
+  active.
+- **Fingerprints:** `structure_fingerprint` / `published_question_fingerprint`
+  bind specs to activity version + question key. Unbound catalogue resolve
+  prefers a unique automatic published spec and fails closed on ambiguity.
+- **Language-specific variants:** Mode `language-variants` selects by
+  `learning.marking_programming_language` (set from `api.submit_attempt`'s
+  programming language) or payload `programmingLanguage`. Variants are exact
+  accepted outputs or code `required`/`prohibited` regex rules via
+  `platform.posix_js_pattern`. No unrestricted code execution. Missing or
+  unknown language fails closed (`requires_review`). Cross-language answers
+  are not accepted without an authoritative variant.
+- **Learner packages:** Precomputed `learner_package` uses sanitisation version
+  `lp.strip.v2`, stripping nested `answers` / `rules` / `answer` keys.
+  Foundations hub banks may still mark formatively in the browser; persisted
+  scores use server marking.
+- **Diagnostics:** `admin_api.published_marking_coverage_gaps` and
+  `admin_api.published_marking_coverage_summary` are staff-only and do not
+  expose answer keys.
+
 ### Known architectural debt
 
-- Existing formative activities may submit client-derived correctness and
-  marks. The backend validates ranges and consistency and derives totals, but
-  fully server-authoritative marking needs a stronger marking contract.
+- Some formative UIs still show client-side correctness for immediate feedback;
+  persisted assessment attempts remain server-marked. Keep protected keys out of
+  learner packages; do not treat public formative banks as grade authority.
 - Curriculum metadata does not yet implement every LHDS lifecycle and learning
   outcome field.
 - Administrative writes other than hub register/update, curriculum
