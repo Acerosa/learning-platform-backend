@@ -1,6 +1,7 @@
 -- Phase B stage 4: public curriculum RPC reads precomputed learner packages.
--- Compatibility fallback reconstructs only when learner_package is missing.
--- COALESCE short-circuits so normal retrieval does not call Phase A builders.
+-- Stored packages are used only when learner_package_sanitisation_version matches
+-- the current platform.learner_package_sanitisation_version(). Otherwise the RPC
+-- rebuilds with Phase A rules so outdated sanitisation cannot leak restricted keys.
 
 create or replace function api.published_curriculum_package(
   p_hub_code text,
@@ -97,14 +98,17 @@ begin
   source_package_version := v_publication.source_package_version;
   published_at := v_publication.published_at;
   content_hash := v_publication.content_hash;
-  package := coalesce(
-    v_publication.learner_package,
-    platform.learner_curriculum_package(
+  if v_publication.learner_package is not null
+     and v_publication.learner_package_sanitisation_version
+       is not distinct from platform.learner_package_sanitisation_version() then
+    package := v_publication.learner_package;
+  else
+    package := platform.learner_curriculum_package(
       v_publication.package,
       v_publication.package_version,
       v_publication.source_package_version
-    )
-  );
+    );
+  end if;
   return next;
 end;
 $$;
@@ -142,9 +146,9 @@ grant execute on function api.published_curriculum_package(text, text)
   to anon, authenticated;
 
 comment on function api.published_curriculum_package(text, text, text) is
-  'Public teaching package for a hub, course and optional package version. Prefers precomputed learner_package; falls back to Phase A construction only when missing. Never returns drafts, staff publication fields or learning.question_marking.';
+  'Public teaching package for a hub, course and optional package version. Uses precomputed learner_package only when sanitisation_version matches the current rules; otherwise rebuilds with Phase A. Never returns drafts, staff publication fields or learning.question_marking.';
 comment on function api.published_curriculum_package(text, text) is
-  'Public current published teaching package for a hub and course. Prefers precomputed learner_package. Never returns drafts, superseded rows, staff publication fields or learning.question_marking.';
+  'Public current published teaching package for a hub and course. Uses a current-version precomputed learner_package when present. Never returns drafts, superseded rows, staff publication fields or learning.question_marking.';
 
 create or replace view admin_api.publications_missing_learner_packages
 with (security_invoker = true)

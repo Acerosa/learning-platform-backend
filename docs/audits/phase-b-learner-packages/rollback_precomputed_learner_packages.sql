@@ -13,8 +13,12 @@
 \ir production_before_published_curriculum_package_2arg.sql
 
 -- Recreate staff history view without Phase B columns if the protect restore
--- left the table columns intact (expected).
-create or replace view admin_api.curriculum_publications
+-- left the table columns intact (expected). DROP first: CREATE OR REPLACE
+-- cannot remove columns that Phase B added to the view.
+drop view if exists admin_api.publications_missing_learner_packages;
+drop view if exists admin_api.curriculum_publications;
+
+create view admin_api.curriculum_publications
 with (security_invoker = true)
 as
 select
@@ -40,8 +44,6 @@ where (select platform.current_staff_has_any_role(
 revoke all on admin_api.curriculum_publications
   from public, anon, authenticated;
 grant select on admin_api.curriculum_publications to authenticated;
-
-drop view if exists admin_api.publications_missing_learner_packages;
 
 revoke all on function platform.publish_curriculum(text, text, text, text, text, text, jsonb, text, text, text)
   from public, anon, authenticated;

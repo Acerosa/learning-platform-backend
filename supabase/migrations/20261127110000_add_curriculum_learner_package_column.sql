@@ -37,6 +37,23 @@ comment on column platform.curriculum_publications.learner_package is
 comment on column platform.curriculum_publications.learner_package_sanitisation_version is
   'Sanitisation rule version used to generate learner_package. Bump and regenerate when strip rules change.';
 
+create or replace function platform.learner_package_sanitisation_version()
+returns text
+language sql
+immutable
+set search_path = ''
+as $$
+  select 'lp.strip.v1'::text;
+$$;
+
+revoke all on function platform.learner_package_sanitisation_version()
+  from public, anon, authenticated;
+grant execute on function platform.learner_package_sanitisation_version()
+  to authenticated;
+
+comment on function platform.learner_package_sanitisation_version() is
+  'Current learner-package sanitisation rule version. Bump when strip_learner_answer_keys rules change, then regenerate stored learner packages. Read-only constant; granted to authenticated for staff diagnostics.';
+
 create or replace function platform.protect_curriculum_publication()
 returns trigger
 language plpgsql
@@ -72,6 +89,8 @@ begin
   end if;
 
   -- Narrow backfill / sanitisation regeneration: only derived learner fields.
+  -- The stored learner package must equal the current Phase A derivation so
+  -- arbitrary JSON (including protected keys) cannot enter through this path.
   if new.id = old.id
      and new.hub_code = old.hub_code
      and new.course_key = old.course_key
@@ -90,7 +109,13 @@ begin
      and new.published_at = old.published_at
      and new.learner_package is not null
      and jsonb_typeof(new.learner_package) = 'object'
-     and nullif(btrim(coalesce(new.learner_package_sanitisation_version, '')), '') is not null
+     and new.learner_package_sanitisation_version
+       is not distinct from platform.learner_package_sanitisation_version()
+     and new.learner_package = platform.learner_curriculum_package(
+       old.package,
+       old.package_version,
+       old.source_package_version
+     )
      and (
        new.learner_package is distinct from old.learner_package
        or new.learner_package_sanitisation_version
@@ -107,7 +132,7 @@ revoke all on function platform.protect_curriculum_publication()
   from public, anon, authenticated;
 
 comment on function platform.protect_curriculum_publication() is
-  'Blocks destructive publication edits. Allows published→superseded status transitions and derived learner_package backfill/regeneration only.';
+  'Blocks destructive publication edits. Allows published→superseded status transitions and derived learner_package backfill/regeneration only when the payload equals the current Phase A learner package for the staff package.';
 
 create or replace view admin_api.curriculum_publications
 with (security_invoker = true)

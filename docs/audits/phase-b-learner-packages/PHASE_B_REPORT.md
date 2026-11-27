@@ -1,15 +1,15 @@
 # Phase B — Precomputed learner curriculum packages
 
-**Status:** Implemented and tested locally. **Not applied to production.**  
+**Status:** Pre-production verification complete locally + read-only production inspection. **Not applied to production. Not merged.**  
 **Branch:** `feat/precomputed-learner-curriculum-packages`  
 **Base:** `main` @ `71127d3` (Phase A merged)
 
-## Root cause of remaining concurrency issue
+## Root cause
 
-Phase A still reconstructed and sanitised curriculum JSON on every anonymous
-request. Under ≥6 simultaneous cold T Level fetches, work overlapped enough to
-exceed the 3s anon timeout. Classroom use needs O(1) retrieval of a stored
-learner-safe package.
+Phase A reconstructed and sanitised curriculum JSON on every anonymous request.
+Under simultaneous cold T Level fetches, work overlapped enough to exceed the
+3s anon timeout. Classroom use needs O(1) retrieval of a stored learner-safe
+package.
 
 ## Schema
 
@@ -23,11 +23,14 @@ Staff `package` remains authoritative. Learner package is derived only.
 ## Function changes
 
 - `platform.protect_curriculum_publication` — allow derived-field backfill/regen
-- `platform.publish_curriculum` — generate + store learner package in insert txn
-- `platform.set_session_visibility` — same for patch publications
+  **only when** `learner_package` equals current Phase A output and
+  `learner_package_sanitisation_version` equals `lp.strip.v1`
+- `platform.publish_curriculum` / `platform.set_session_visibility` — store
+  learner package in the same transaction as publication
 - `platform.learner_package_sanitisation_version()` → `lp.strip.v1`
 - `platform.regenerate_curriculum_learner_packages(...)` — platform-admin regen
-- `api.published_curriculum_package` (2- and 3-arg) — `coalesce(learner_package, Phase A)`
+- `api.published_curriculum_package` — uses stored package **only** when
+  sanitisation version matches; otherwise rebuilds with Phase A
 - Views: `admin_api.curriculum_publications` (+ presence/version),  
   `admin_api.publications_missing_learner_packages`
 
@@ -41,66 +44,119 @@ Staff `package` remains authoritative. Learner package is derived only.
 | `20261127110300` | `published_curriculum_uses_learner_package.sql` |
 
 Local seed follow-up: `supabase/data/seed/backfill-learner-packages.sql`
-(publication seeds run after migrations).
+(wired in `supabase/config.toml`; publication seeds run after migrations).
 
-## Regression tests
+## Sanitisation version enforcement
 
-- Full suite: **64 files / 1684 PASS** (local)
-- New: `precomputed_learner_curriculum_packages.test.sql` (25)
-- Extended: `curriculum_publication.test.sql` asserts publish-time learner package
+| Scenario | Behaviour |
+| --- | --- |
+| Valid package + current version | Serve stored `learner_package` |
+| Missing learner package | Phase A rebuild |
+| Missing sanitisation version | Pairing CHECK rejects package without version; API still rebuilds if version mismatches |
+| Outdated sanitisation version | Phase A rebuild (poisoned/outdated payload not served) |
+| Rules changed after publication | Bump constant + regenerate; until regen, API rebuilds |
+| Regeneration failure | Trigger rejects non-equivalent payloads; API still rebuilds safely |
 
-## Local benchmarks (verified)
+Performance: version check is a text equality on an already-fetched row.
+Matching path avoids Phase A reconstruction (DB median ~2–3 ms local).
 
-Environment: local Docker Supabase. Packages are **seed-sized** (5 / 24 / 76
-activities), not production 408/132/172/24. Figures are local evidence only.
+## Security / immutability
 
-| Path | Largest local (76 act) median |
-| --- | ---: |
-| Stored learner_package read | ~0 ms |
-| Phase A reconstruct | ~80 ms |
-| API `published_curriculum_package` | ~0 ms |
+- Staff packages remain immutable (DELETE/UPDATE blocked)
+- Derived-field exception requires exact Phase A equivalence + current version
+- Arbitrary JSON / protected keys cannot enter via the derived-field path
+- Unauthorised roles cannot modify learner packages
+- Diagnostic view exposes presence/version only under staff role checks; never staff package body to anon
+- Negative regression tests cover forged version, poisoned package, role denial
 
-Synthetic generation vs stored read:
+## Representative concurrency (local public RPC)
 
-| Activities | Publish/gen median | Stored read median |
-| ---: | ---: | ---: |
-| 408 | ~424 ms | ~1 ms |
-| 1000 | ~1034 ms | ~2 ms |
-| 2000 | ~2154 ms | ~3 ms |
+Environment: local Docker Supabase, anon JWT, existing **3s** statement timeout
+(not increased). Calls go through PostgREST `api.published_curriculum_package`.
 
-Concurrency (local API, largest published seed package):
+**408-activity package (rich tiled seed activities; classroom acceptance size)**  
+Response ≈ 2.61 MiB. DB exec median **2 ms**. Stored = Phase A MD5 equal.
 
-| N | Result |
-| ---: | --- |
-| 1–50 | all OK, no statement timeouts |
+| Workers | Min | Med | P95 | Max | Errors | Timeouts | Integrity |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| 1 | 42 | 45 | 47 | 47 | 0 | 0 | OK |
+| 5 | 60 | 111 | 149 | 161 | 0 | 0 | OK |
+| 10 | 96 | 245 | 472 | 490 | 0 | 0 | OK |
+| 20 | 158 | 383 | 518 | 530 | 0 | 0 | OK |
+| 30 | 70 | 517 | 738 | 784 | 0 | 0 | OK |
+| 50 | 122 | 945 | 1313 | 1361 | 0 | 0 | OK |
 
-**Assumption:** production T Level (408 activities, ~1 MB learner JSON) will also
-avoid reconstruction timeouts once backfilled; confirm on staging before prod.
+**Acceptance:** 30 simultaneous cold requests for 408 activities — **PASS** (0 timeouts).
 
-## Security
+**1000 / 2000 activities (compact nested templates under 4 MiB staff limit)**  
+Reported separately. Payloads smaller than rich 408 (~0.49 / ~0.98 MiB). DB median 2–3 ms. All worker levels 1–50: **0 errors, 0 timeouts, integrity OK**. See `representative_concurrency.txt`.
 
-- Reuses Phase A strip rules only (no divergent sanitiser)
-- Structural protected-key checks in Phase B tests
-- Table still revoked from anon; staff SELECT unchanged
-- Public API still returns learner-safe package only
-- Sanitisation bump + `regenerate_curriculum_learner_packages` documented
+These are **verified local** results, not production load tests.
 
-## Production plan (not executed)
+## Production curriculum equivalence (read-only)
 
-1. Apply `20261127110000` … `20261127110300` only (targeted, not `db push`)
-2. Confirm hosted versions recorded
-3. Confirm four published hubs have learner packages + matching Phase A hashes
-4. Smoke anon RPC + browser Weeks 1–7
-5. Keep rollback script ready
+Project `hubwpkrqndorznwzvaer`. Phase B columns **not** present (expected).
+Phase A `learner_curriculum_package` MD5s captured for post-backfill assertion:
 
-## Rollback
+| Hub | Version | Acts | Staff bytes | Expected learner MD5 | Expected learner bytes |
+| --- | --- | ---: | ---: | --- | ---: |
+| Unit 14 | 0.2.14 | 24 | 35361 | `2ae5bae4212343eeacb1f316bff49efc` | 100553 |
+| Unit 3 | 0.2.45 | 132 | 238026 | `a745eabf45cda0d41d8d7c112503195c` | 741365 |
+| L2E | 0.3.39 | 172 | 182803 | `a4384600a8a4badfe9bdd5c0a2b80e4e` | 591517 |
+| T Level | 0.4.47 | 408 | 253566 | `882cebc4141ba81729e3fe4abb44de53` | 961645 |
 
-`docs/audits/phase-b-learner-packages/rollback_precomputed_learner_packages.sql`  
-Restores Phase A functions; leaves columns unused.
+Canonical stored vs Phase A equivalence on production packages can only be
+asserted **after** migration stage 3, using
+`production_equivalence_procedure.sql` section B (transactional; no content export).
 
-## Outstanding risks
+Estimated added storage ≈ sum of expected learner bytes ≈ **2.3 MiB**.
 
-1. Production concurrency with real 408-activity payload not load-tested here
-2. Seed files still insert staff-only rows; local seed backfill required
-3. Hosted migration history drift remains; apply Phase B versions carefully
-4. NOT NULL constraint on learner_package deferred until after prod backfill verification
+## Backfill / migration safety
+
+- Order: 10000 → 10100 → 10200 → 10300
+- Stage 3 uses advisory lock shared with publish; concurrent publishes serialise
+- Retry-safe; null/outdated rows reprocessed
+- Publications during/after stage 2 store learner packages at publish time
+- No maintenance window required for the four current hubs
+- Interrupted before stage 4: Phase A API remains; columns unused — safe
+- Recovery: re-run remaining migrations; backfill is idempotent
+
+## Seed consistency
+
+- `supabase/config.toml` includes `./data/seed/backfill-learner-packages.sql`
+- Fresh `supabase db reset` + seed → 0 missing learner packages; all equal Phase A
+- Missing packages detectable via `admin_api.publications_missing_learner_packages`
+- No duplicated strip logic in seed (calls `learner_curriculum_package`)
+
+## Extended rollback (local verified)
+
+1. Phase B present → publish Unit 14 `9.9.77` with learner package  
+2. Public API returns safe package  
+3. Rollback restores Phase A functions; new publication still accessible via Phase A  
+4. Attempts / marking / publication history preserved  
+5. Reapply Phase B → 0 equivalence failures; API OK  
+6. Interrupted stage-4 recovery: Phase A API works; reapplying 10300 restores gate  
+
+Rollback script drops Phase B views before recreate (CREATE OR REPLACE cannot
+remove columns).
+
+## Tests / CI
+
+- Full local suite: **64 files / 1690 PASS**
+- Dedicated: `precomputed_learner_curriculum_packages.test.sql` (31)
+- Rollout: `docs/audits/phase-b-learner-packages/PRODUCTION_ROLLOUT.md`
+
+## Production plan
+
+See `PRODUCTION_ROLLOUT.md`. Do **not** use unrestricted `supabase db push`.
+Do **not** apply unrelated migrations. Account for known hosted migration-history
+discrepancies by recording only the four Phase B versions when applied.
+
+## Remaining risks
+
+1. Production stored≡Phase A equivalence is **procedurally ready** but not yet
+   executed (requires approved deployment of stages 1–3).
+2. Local 1000/2000 benches use compact templates (staff 4 MiB limit); production
+   T Level–scale density is covered by the 408 rich fixture (~2.6 MiB response).
+3. Hosted migration history drift — apply only Phase B files; do not reconcile
+   unrelated pending migrations in this change.

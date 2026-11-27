@@ -1,23 +1,7 @@
 -- Phase B stage 2: generate and store learner packages at publication time.
 -- Reuses platform.learner_curriculum_package (Phase A). Both staff and learner
 -- packages are written in the same transaction for every publication entry point.
-
-create or replace function platform.learner_package_sanitisation_version()
-returns text
-language sql
-immutable
-set search_path = ''
-as $$
-  select 'lp.strip.v1'::text;
-$$;
-
-revoke all on function platform.learner_package_sanitisation_version()
-  from public, anon, authenticated;
-grant execute on function platform.learner_package_sanitisation_version()
-  to authenticated;
-
-comment on function platform.learner_package_sanitisation_version() is
-  'Current learner-package sanitisation rule version. Bump when strip_learner_answer_keys rules change, then regenerate stored learner packages. Read-only constant; granted to authenticated for staff diagnostics.';
+-- Sanitisation version helper is created in 20261127110000.
 
 create or replace function platform.regenerate_curriculum_learner_packages(
   p_hub_code text default null,

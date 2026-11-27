@@ -1,7 +1,7 @@
 -- Phase B: precomputed learner packages at publication time.
 
 begin;
-select plan(25);
+select plan(31);
 
 select has_column(
   'platform',
@@ -299,6 +299,39 @@ select throws_ok(
   'staff package remains immutable'
 );
 
+select throws_ok(
+  $$
+    update platform.curriculum_publications
+    set learner_package = '{"activities":[],"correctOptionId":"leak"}'::jsonb,
+        learner_package_sanitisation_version = platform.learner_package_sanitisation_version()
+    where id = (
+      select id
+      from platform.curriculum_publications
+      where status = 'published'
+      limit 1
+    )
+  $$,
+  '22023',
+  'PUBLISHED_CURRICULUM_IMMUTABLE',
+  'arbitrary learner_package JSON with protected keys is rejected'
+);
+
+select throws_ok(
+  $$
+    update platform.curriculum_publications
+    set learner_package_sanitisation_version = 'lp.strip.forged'
+    where id = (
+      select id
+      from platform.curriculum_publications
+      where status = 'published'
+      limit 1
+    )
+  $$,
+  '22023',
+  'PUBLISHED_CURRICULUM_IMMUTABLE',
+  'forged sanitisation versions are rejected'
+);
+
 select lives_ok(
   $$
     update platform.curriculum_publications as publication
@@ -307,34 +340,94 @@ select lives_ok(
         publication.package,
         publication.package_version,
         publication.source_package_version
-      ) || jsonb_build_object('_phaseBProbe', true),
+      ),
       learner_package_sanitisation_version = platform.learner_package_sanitisation_version()
     where publication.id = (
       select id
       from platform.curriculum_publications
       where status = 'published'
+        and (
+          learner_package is distinct from platform.learner_curriculum_package(
+            package,
+            package_version,
+            source_package_version
+          )
+          or learner_package_sanitisation_version
+            is distinct from platform.learner_package_sanitisation_version()
+        )
       limit 1
     )
   $$,
-  'narrow learner_package regeneration update is permitted'
+  'canonical Phase A learner_package regeneration update is permitted'
 );
 
--- Restore the probed publication to the canonical Phase A output.
-update platform.curriculum_publications as publication
+-- Outdated sanitisation version must not be served; API rebuilds with current rules.
+-- Temporarily disable the protect trigger only to install a poisoned fixture.
+alter table platform.curriculum_publications disable trigger protect_curriculum_publication;
+update platform.curriculum_publications
 set
-  learner_package = platform.learner_curriculum_package(
-    publication.package,
-    publication.package_version,
-    publication.source_package_version
+  learner_package = '{"activities":[{"id":"poison","correctOptionId":"A"}],"schema":"lp.content.package"}'::jsonb,
+  learner_package_sanitisation_version = 'lp.strip.outdated'
+where package_version = '0.0.99';
+alter table platform.curriculum_publications enable trigger protect_curriculum_publication;
+
+select ok(
+  (
+    select
+      not pg_temp.has_protected_keys(package)
+      and package->'activities'->0->>'id' = 'fallback-act'
+    from api.published_curriculum_package(
+      'unit-14-software-engineering-for-business',
+      'ocr-level-3-it',
+      '0.0.99'
+    )
   ),
-  learner_package_sanitisation_version = platform.learner_package_sanitisation_version()
-where publication.learner_package ? '_phaseBProbe';
+  'outdated sanitisation version forces Phase A rebuild instead of serving poisoned package'
+);
+
+-- Pairing constraint: learner_package cannot exist without a sanitisation version.
+alter table platform.curriculum_publications disable trigger protect_curriculum_publication;
+select throws_like(
+  $$
+    update platform.curriculum_publications
+    set
+      learner_package = '{"activities":[{"id":"poison-null","correctOptionId":"A"}]}'::jsonb,
+      learner_package_sanitisation_version = null
+    where package_version = '0.0.99'
+  $$,
+  '%curriculum_publication_learner_sanitisation_present%',
+  'learner_package without sanitisation version is rejected by pairing constraint'
+);
+alter table platform.curriculum_publications enable trigger protect_curriculum_publication;
 
 select throws_ok(
   $$select * from platform.regenerate_curriculum_learner_packages(null, null, false)$$,
   '28000',
   'AUTHENTICATION_REQUIRED',
   'regenerate requires authentication'
+);
+
+set local role authenticated;
+select throws_like(
+  $$
+    update platform.curriculum_publications
+    set learner_package = '{}'::jsonb
+    where status = 'published'
+  $$,
+  '%permission denied%',
+  'authenticated role cannot update learner_package directly'
+);
+reset role;
+
+select ok(
+  not exists (
+    select 1
+    from information_schema.columns
+    where table_schema = 'admin_api'
+      and table_name = 'publications_missing_learner_packages'
+      and column_name in ('package', 'learner_package')
+  ),
+  'diagnostic view does not expose staff or learner package bodies'
 );
 
 select is(
