@@ -1,0 +1,24 @@
+=== PACKAGE 408 version=9.0.408 meta={"equal": true, "activities": 408, "learner_md5": "5c8d1662d57ad669925ec83685017bad", "phase_a_md5": "5c8d1662d57ad669925ec83685017bad", "staff_bytes": 874431, "learner_bytes": 870298, "staff_text_bytes": 2647788, "learner_text_bytes": 2613773} ===
+db_exec_ms={"min": 2, "median": 2, "p95": 2, "max": 2}
+n_act=408 workers=1 min=42 med=45 p95=47 max=47 bytes=2614070 errors=0 timeouts=0 integrity=True calls=3
+n_act=408 workers=5 min=60 med=111 p95=149 max=161 bytes=2614070 errors=0 timeouts=0 integrity=True calls=15
+n_act=408 workers=10 min=96 med=245 p95=472 max=490 bytes=2614070 errors=0 timeouts=0 integrity=True calls=30
+n_act=408 workers=20 min=158 med=383 p95=518 max=530 bytes=2614070 errors=0 timeouts=0 integrity=True calls=40
+n_act=408 workers=30 min=70 med=517 p95=738 max=784 bytes=2614070 errors=0 timeouts=0 integrity=True calls=60
+n_act=408 workers=50 min=122 med=945 p95=1313 max=1361 bytes=2614070 errors=0 timeouts=0 integrity=True calls=100
+=== PACKAGE 1000 version=9.0.1000 meta={"equal": true, "activities": 1000, "learner_md5": "abeb7232ae86bec77a74417ecc657af8", "phase_a_md5": "abeb7232ae86bec77a74417ecc657af8", "staff_bytes": 25575, "learner_bytes": 21117, "staff_text_bytes": 596849, "learner_text_bytes": 490959} ===
+db_exec_ms={"min": 2, "median": 2, "p95": 2, "max": 2}
+n_act=1000 workers=1 min=15 med=34 p95=41 max=41 bytes=491257 errors=0 timeouts=0 integrity=True calls=3
+n_act=1000 workers=5 min=19 med=37 p95=78 max=80 bytes=491257 errors=0 timeouts=0 integrity=True calls=15
+n_act=1000 workers=10 min=37 med=77 p95=1024 max=1030 bytes=491257 errors=0 timeouts=0 integrity=True calls=30
+n_act=1000 workers=20 min=42 med=102 p95=135 max=135 bytes=491257 errors=0 timeouts=0 integrity=True calls=40
+n_act=1000 workers=30 min=46 med=153 p95=234 max=258 bytes=491257 errors=0 timeouts=0 integrity=True calls=60
+n_act=1000 workers=50 min=39 med=212 p95=290 max=300 bytes=491257 errors=0 timeouts=0 integrity=True calls=100
+=== PACKAGE 2000 version=9.0.2000 meta={"equal": true, "activities": 2000, "learner_md5": "95c41044922fad13eca93275fbee807a", "phase_a_md5": "95c41044922fad13eca93275fbee807a", "staff_bytes": 47590, "learner_bytes": 38857, "staff_text_bytes": 1189849, "learner_text_bytes": 976959} ===
+db_exec_ms={"min": 2, "median": 3, "p95": 3, "max": 4}
+n_act=2000 workers=1 min=16 med=17 p95=18 max=18 bytes=977257 errors=0 timeouts=0 integrity=True calls=3
+n_act=2000 workers=5 min=25 med=51 p95=102 max=108 bytes=977257 errors=0 timeouts=0 integrity=True calls=15
+n_act=2000 workers=10 min=34 med=84 p95=125 max=136 bytes=977257 errors=0 timeouts=0 integrity=True calls=30
+n_act=2000 workers=20 min=55 med=168 p95=225 max=230 bytes=977257 errors=0 timeouts=0 integrity=True calls=40
+n_act=2000 workers=30 min=79 med=215 p95=300 max=317 bytes=977257 errors=0 timeouts=0 integrity=True calls=60
+n_act=2000 workers=50 min=65 med=290 p95=1055 max=1161 bytes=977257 errors=0 timeouts=0 integrity=True calls=100

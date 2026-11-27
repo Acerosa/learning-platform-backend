@@ -7,11 +7,15 @@ never receive Draft or Review states.
 ```text
 Admin Draft → Review → Approved → local Published snapshot
         → admin_api.publish_curriculum
-            → platform.curriculum_publications (canonical package)
+            → platform.curriculum_publications
+                (canonical staff package + derived learner_package)
             → delivery catalogue projection
                 → api.published_curriculum (metadata)
-                → api.published_curriculum_package (teaching package)
+                → api.published_curriculum_package (precomputed teaching package)
 ```
+
+See `docs/precomputed-learner-packages.md` for Phase B storage, backfill,
+sanitisation regeneration and rollback details.
 
 There is no GitHub automation and no write into learner repositories. A
 GitHub Pages redeploy is not required for normal curriculum publication.
@@ -35,11 +39,13 @@ Rejected: `draft`, `ready-for-review`, `in-review`, and any other status.
 
 | Object | Role |
 | --- | --- |
-| `platform.curriculum_publications` | Canonical immutable package snapshots |
-| `platform.publish_curriculum` | Authoritative mutation |
+| `platform.curriculum_publications` | Canonical immutable package snapshots plus derived `learner_package` |
+| `platform.publish_curriculum` | Authoritative mutation (stores staff + learner packages) |
 | `platform.project_curriculum_package` | Idempotent catalogue projection |
+| `platform.regenerate_curriculum_learner_packages` | Admin regeneration after sanitisation rule changes |
 | `admin_api.publish_curriculum` | Browser-safe wrapper |
-| `admin_api.curriculum_publications` | Staff history (no package body) |
+| `admin_api.curriculum_publications` | Staff history (no package bodies; learner-package presence only) |
+| `admin_api.publications_missing_learner_packages` | Staff diagnostic for missing/outdated learner packages |
 | `admin_api.curriculum_drafts` | Staff draft metadata (no package body) |
 | `admin_api.save_curriculum_draft` | Create/update staff draft with revision checks |
 | `admin_api.get_curriculum_draft` | Load a staff draft including package body |
@@ -66,8 +72,10 @@ assignment catalogue.
 - returns that package version for the hub/course when it exists, including
   superseded historical rows
 - with a null/blank version behaves as the two-argument latest-published read
+- prefers the stored `learner_package`; falls back to Phase A construction only
+  when that column is null
 - rejects unknown or unlinked hub/course values
-- never returns drafts, in-review snapshots or superseded packages
+- never returns drafts, in-review snapshots as the current package
 - omits teacher-note blocks and staff publication fields
 - never joins or exposes `learning.question_marking`
 - is callable by `anon` and `authenticated` because teaching content is already
