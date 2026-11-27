@@ -1,0 +1,66 @@
+name: Pages deployment health
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      require_browser:
+        description: "Install Playwright and require browser boot checks"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-health-fleet
+  cancel-in-progress: true
+
+jobs:
+  fleet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out backend
+        uses: actions/checkout@v7
+
+      - name: Check out Core health tooling
+        uses: actions/checkout@v7
+        with:
+          repository: Acerosa/learning-platform-core
+          ref: v0.2.28
+          path: learning-platform-core
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      - name: Optional Playwright
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.require_browser == 'true' }}
+        working-directory: learning-platform-core
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Run fleet Pages health checks
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LP_SUPABASE_URL: https://hubwpkrqndorznwzvaer.supabase.co
+          LP_SUPABASE_PUBLISHABLE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
+          EXPECTED_TLEVEL_CURRICULUM_VERSION: ${{ vars.EXPECTED_TLEVEL_CURRICULUM_VERSION }}
+          EXPECTED_UNIT3_CURRICULUM_VERSION: ${{ vars.EXPECTED_UNIT3_CURRICULUM_VERSION }}
+          EXPECTED_L2E_CURRICULUM_VERSION: ${{ vars.EXPECTED_L2E_CURRICULUM_VERSION }}
+          EXPECTED_UNIT14_CURRICULUM_VERSION: ${{ vars.EXPECTED_UNIT14_CURRICULUM_VERSION }}
+        run: |
+          ARGS=(--config scripts/ops/pages-health-targets.json --attempts 6 --delay-ms 10000)
+          if [ "${{ github.event_name == 'workflow_dispatch' && inputs.require_browser == 'true' }}" = "true" ]; then
+            ARGS+=(--require-browser)
+          else
+            ARGS+=(--skip-browser)
+          fi
+          node learning-platform-core/dist/deployment-health.mjs "${ARGS[@]}"

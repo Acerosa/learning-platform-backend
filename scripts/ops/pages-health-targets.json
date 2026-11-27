@@ -1,0 +1,99 @@
+{
+  "supabaseUrl": "https://hubwpkrqndorznwzvaer.supabase.co",
+  "publishableKeyEnv": "LP_SUPABASE_PUBLISHABLE_KEY",
+  "retries": {
+    "attempts": 6,
+    "delayMs": 10000
+  },
+  "targets": [
+    {
+      "name": "tlevel-software-development-hub",
+      "kind": "learner-hub",
+      "baseUrl": "https://acerosa.github.io/tlevel-software-development-hub/",
+      "repository": "Acerosa/tlevel-software-development-hub",
+      "pages": {
+        "expectedSource": "workflow",
+        "basePath": "/tlevel-software-development-hub/"
+      },
+      "curriculum": {
+        "hubCode": "tlevel-software-development",
+        "courseKey": "t-level-digital-software-development",
+        "expectedPackageVersionEnv": "EXPECTED_TLEVEL_CURRICULUM_VERSION",
+        "minActivityCount": 100,
+        "requirePublishedSource": true
+      }
+    },
+    {
+      "name": "unit-3-Cyber-Security-Hub",
+      "kind": "learner-hub",
+      "baseUrl": "https://acerosa.github.io/unit-3-Cyber-Security-Hub/",
+      "repository": "Acerosa/unit-3-Cyber-Security-Hub",
+      "pages": {
+        "expectedSource": "workflow",
+        "basePath": "/unit-3-Cyber-Security-Hub/"
+      },
+      "curriculum": {
+        "hubCode": "unit-3-cyber-security",
+        "courseKey": "ocr-level-3-it",
+        "expectedPackageVersionEnv": "EXPECTED_UNIT3_CURRICULUM_VERSION",
+        "minActivityCount": 50,
+        "requirePublishedSource": true
+      }
+    },
+    {
+      "name": "Emerging-Digital-Technologies-Hub",
+      "kind": "learner-hub",
+      "baseUrl": "https://acerosa.github.io/Emerging-Digital-Technologies-Hub/",
+      "repository": "Acerosa/Emerging-Digital-Technologies-Hub",
+      "pages": {
+        "expectedSource": "workflow",
+        "basePath": "/Emerging-Digital-Technologies-Hub/"
+      },
+      "curriculum": {
+        "hubCode": "l2e-exploring-emerging-digital-technologies",
+        "courseKey": "gateway-level-2-digital-it-skills",
+        "expectedPackageVersionEnv": "EXPECTED_L2E_CURRICULUM_VERSION",
+        "minActivityCount": 100,
+        "requirePublishedSource": true
+      }
+    },
+    {
+      "name": "unit-14-software-engineering-for-business-hub",
+      "kind": "learner-hub",
+      "baseUrl": "https://acerosa.github.io/unit-14-software-engineering-for-business-hub/",
+      "repository": "Acerosa/unit-14-software-engineering-for-business-hub",
+      "pages": {
+        "expectedSource": "workflow",
+        "basePath": "/unit-14-software-engineering-for-business-hub/"
+      },
+      "curriculum": {
+        "hubCode": "unit-14-software-engineering-for-business",
+        "courseKey": "ocr-level-3-it",
+        "expectedPackageVersionEnv": "EXPECTED_UNIT14_CURRICULUM_VERSION",
+        "minActivityCount": 10,
+        "requirePublishedSource": true
+      }
+    },
+    {
+      "name": "learning-platform-admin",
+      "kind": "admin-portal",
+      "baseUrl": "https://acerosa.github.io/learning-platform-admin/",
+      "repository": "Acerosa/learning-platform-admin",
+      "pages": {
+        "expectedSource": "workflow",
+        "basePath": "/learning-platform-admin/"
+      },
+      "curriculum": {
+        "enabled": false
+      },
+      "boot": {
+        "rootSelector": "#root",
+        "readySelectors": [
+          "main",
+          "[data-testid]",
+          "body"
+        ]
+      }
+    }
+  ]
+}
