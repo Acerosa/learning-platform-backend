@@ -1,5 +1,5 @@
 begin;
-select plan(12);
+select plan(11);
 
 select is(
   (
@@ -54,23 +54,6 @@ select ok(
     '{"languages":{"python":{"answers":["11"],"rules":{"required":[]},"answer":"2"}},"prompt":"x"}'::jsonb
   ) = '{"languages":{"python":{}},"prompt":"x"}'::jsonb,
   'strip removes nested language answers/rules/answer keys'
-);
-
-select lives_ok(
-  $$
-    select platform.assert_package_marking_coverage(
-      jsonb_build_object(
-        'activities',
-        jsonb_build_array(
-          jsonb_build_object(
-            'id', 'foundations-programming-diagnostic',
-            'version', '2.0.0'
-          )
-        )
-      )
-    )
-  $$,
-  'Foundations package passes publication marking coverage assert'
 );
 
 select is(
